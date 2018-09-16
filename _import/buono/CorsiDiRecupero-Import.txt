@@ -1,0 +1,589 @@
+codice=MATEMATICA_1
+materia_codice=Mate materia_descrizione=Matematica materia_id=23
+aula=FIS1
+docente=Ianes docente_id=39 profilo_docente_id=39
+giorno=4-set numeroGiorno=4 dateMySql=2018-08-04 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=5-set numeroGiorno=5 dateMySql=2018-08-05 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=6-set numeroGiorno=6 dateMySql=2018-08-06 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=7-set numeroGiorno=7 dateMySql=2018-08-07 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=10-set numeroGiorno=10 dateMySql=2018-08-10 orario=9:45-11:25 inizia_alle=9:45:00
+classe=1LOS nome_cognome=Frasnelli Silvia cognome=Frasnelli nome=Silvia
+classe=1LOS nome_cognome=Lleshi Florida cognome=Lleshi nome=Florida
+classe=1LOS nome_cognome=Tonfolini Sara cognome=Tonfolini nome=Sara
+classe=1LISA nome_cognome=Bazzanella Giulio cognome=Bazzanella nome=Giulio
+classe=1LISA nome_cognome=Fellin Sebastiano cognome=Fellin nome=Sebastiano
+classe=1LISA nome_cognome=Guarnieri Alessandro cognome=Guarnieri nome=Alessandro
+classe=1LISA nome_cognome=Panizza Stefano cognome=Panizza nome=Stefano
+classe=1LISA nome_cognome=Torresani Matteo cognome=Torresani nome=Matteo
+classe=1LISB nome_cognome=Gianasi Gabriel cognome=Gianasi nome=Gabriel
+classe=1LISB nome_cognome=Giovannini Elisa cognome=Giovannini nome=Elisa
+classe=1LISC nome_cognome=Banzi Stefano cognome=Banzi nome=Stefano
+classe=1LISC nome_cognome=Bonetti Angelica cognome=Bonetti nome=Angelica
+codice=INGLESE_1
+materia_codice=Ing-T materia_descrizione=Lingua Inglese materia_id=19
+aula=ING4
+docente=Scapin docente_id=72 profilo_docente_id=72
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=13:30-15:10 inizia_alle=13:30:00
+classe=1LISA nome_cognome=Bazzanella Giulio cognome=Bazzanella nome=Giulio
+classe=1LISA nome_cognome=Fellin Sebastiano cognome=Fellin nome=Sebastiano
+classe=1LISA nome_cognome=Guarnieri Alessandro cognome=Guarnieri nome=Alessandro
+classe=1LISB nome_cognome=Giordano Angelica cognome=Giordano nome=Angelica
+classe=1LISB nome_cognome=Giovannini Elisa cognome=Giovannini nome=Elisa
+classe=1LISC nome_cognome=Brugnara Natasha cognome=Brugnara nome=Natasha
+classe=1LISC nome_cognome=Villotti Luca cognome=Villotti nome=Luca
+classe=1LES nome_cognome=Battaini Clara cognome=Battaini nome=Clara
+classe=1LES nome_cognome=Borghesi Pablo cognome=Borghesi nome=Pablo
+classe=1LES nome_cognome=Grazioli Arianna cognome=Grazioli nome=Arianna
+classe=1LES nome_cognome=Tommasini Sharon cognome=Tommasini nome=Sharon
+classe=1LES nome_cognome=Tonon Andrea cognome=Tonon nome=Andrea
+classe=1LES nome_cognome=Troka Ilaria cognome=Troka nome=Ilaria
+classe=TR LES nome_cognome=Mantini Giovanni cognome=Mantini nome=Giovanni
+codice=TEDESCO_1
+materia_codice=Ted-T materia_descrizione=Lingua Tedesca materia_id=20
+aula=TED1
+docente=Maranzi docente_id=48 profilo_docente_id=48
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=14:00-15:40 inizia_alle=14:00:00
+classe=1LOS nome_cognome=Endrizzi Anna cognome=Endrizzi nome=Anna
+classe=1LISA nome_cognome=Fellin Sebastiano cognome=Fellin nome=Sebastiano
+classe=1LES nome_cognome=Battaini Clara cognome=Battaini nome=Clara
+classe=1LES nome_cognome=Dello-russo Irene cognome=Dello-russo nome=Irene
+classe=1LES nome_cognome=Tonon Andrea cognome=Tonon nome=Andrea
+classe=1ITE nome_cognome=Cappelletti Simone cognome=Cappelletti nome=Simone
+classe=1ITE nome_cognome=Faggiani Giovanni cognome=Faggiani nome=Giovanni
+codice=ITALIANO_1
+materia_codice=Ita materia_descrizione=Lingua e Letteratura Italiana materia_id=17
+aula=ITA1
+docente=Tommasini docente_id=87 profilo_docente_id=87
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=14:00-15:40 inizia_alle=14:00:00
+classe=1LES nome_cognome=Borghesi Pablo cognome=Borghesi nome=Pablo
+classe=1LES nome_cognome=Grazioli Arianna cognome=Grazioli nome=Arianna
+classe=1LES nome_cognome=Moser Fernandez Jose\' Maria cognome=Moser nome=Fernandez Jose\' Maria
+classe=1LES nome_cognome=Troka Ilaria cognome=Troka nome=Ilaria
+codice=FISICA_1
+materia_codice=Fis-T materia_descrizione=Scienze Integrate (Fisica) materia_id=31
+aula=FIS1
+docente=Ianes docente_id=39 profilo_docente_id=39
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=8:00-9:40 inizia_alle=8:00:00
+classe=1LOS nome_cognome=Frasnelli Silvia cognome=Frasnelli nome=Silvia
+classe=1LOS nome_cognome=Tonfolini Sara cognome=Tonfolini nome=Sara
+classe=1LISB nome_cognome=Gianasi Gabriel cognome=Gianasi nome=Gabriel
+classe=1LISB nome_cognome=Giordano Angelica cognome=Giordano nome=Angelica
+classe=1LISB nome_cognome=Giovannini Elisa cognome=Giovannini nome=Elisa
+classe=1LISC nome_cognome=Banzi Stefano cognome=Banzi nome=Stefano
+codice=MATEMATICA_2 - corso PON
+materia_codice=Mate materia_descrizione=Matematica materia_id=23
+aula=MAT3
+docente=Pagliacci docente_id=59 profilo_docente_id=59
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=8:15-11:15 inizia_alle=8:15:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=8:15-11:15 inizia_alle=8:15:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=8:15-11:15 inizia_alle=8:15:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=8:15-11:15 inizia_alle=8:15:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=8:15-11:15 inizia_alle=8:15:00
+giorno=11-Sep numeroGiorno=11 dateMySql=2018-09-11 orario=8:15-11:15 inizia_alle=8:15:00
+giorno=12-Sep numeroGiorno=12 dateMySql=2018-09-12 orario=13.20-16.20 inizia_alle=13.20:00
+giorno=14-Sep numeroGiorno=14 dateMySql=2018-09-14 orario=13.20-16.20 inizia_alle=13.20:00
+giorno=17-Sep numeroGiorno=17 dateMySql=2018-09-17 orario=14:00-17:00 inizia_alle=14:00:00
+giorno=18-Sep numeroGiorno=18 dateMySql=2018-09-18 orario=14:00-17:00 inizia_alle=14:00:00
+classe=1LES nome_cognome=Borghesi Pablo cognome=Borghesi nome=Pablo
+classe=1LES nome_cognome=Dello-russo Irene cognome=Dello-russo nome=Irene
+classe=1LES nome_cognome=Ghezzi Giorgia cognome=Ghezzi nome=Giorgia
+classe=1LES nome_cognome=Grazioli Arianna cognome=Grazioli nome=Arianna
+classe=1LES nome_cognome=Tonon Andrea cognome=Tonon nome=Andrea
+classe=1LES nome_cognome=Troka Ilaria cognome=Troka nome=Ilaria
+classe=TR LES nome_cognome=Mantini Giovanni cognome=Mantini nome=Giovanni
+classe=1ITE nome_cognome=Battan Vivien cognome=Battan nome=Vivien
+classe=1ITE nome_cognome=Noldin Amos cognome=Noldin nome=Amos
+classe=1ITE nome_cognome=Piragic David cognome=Piragic nome=David
+classe=TR ITE nome_cognome=Marra Giada cognome=Marra nome=Giada
+classe=1ITTA nome_cognome=Andreolli Nicola cognome=Andreolli nome=Nicola
+classe=1ITTA nome_cognome=Rrushi Nertila cognome=Rrushi nome=Nertila
+classe=1ITTB nome_cognome=Cano Ruiz Joel cognome=Cano nome=Ruiz Joel
+classe=1ITTB nome_cognome=Maiorca Matteo cognome=Maiorca nome=Matteo
+classe=1ITTB nome_cognome=Pederzolli Giacomo cognome=Pederzolli nome=Giacomo
+classe=1ITTB nome_cognome=Segheir Salahedine cognome=Segheir nome=Salahedine
+classe=TR ITT nome_cognome=Nardon Davide cognome=Nardon nome=Davide
+codice=INGLESE_2
+materia_codice=Ing-T materia_descrizione=Lingua Inglese materia_id=19
+aula=ING3
+docente=Osti docente_id=58 profilo_docente_id=58
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=14:00-15:40 inizia_alle=14:00:00
+classe=1ITE nome_cognome=Dalfovo Nicol cognome=Dalfovo nome=Nicol
+classe=1ITTA nome_cognome=Andreolli Nicola cognome=Andreolli nome=Nicola
+classe=1ITTA nome_cognome=Gregori Alessandro cognome=Gregori nome=Alessandro
+classe=1ITTA nome_cognome=Rizzardi Davide cognome=Rizzardi nome=Davide
+classe=1ITTB nome_cognome=Cano Ruiz Joel cognome=Cano nome=Ruiz Joel
+classe=1ITTB nome_cognome=Maiorca Matteo cognome=Maiorca nome=Matteo
+classe=1ITTB nome_cognome=Pederzolli Giacomo cognome=Pederzolli nome=Giacomo
+classe=1ITTB nome_cognome=Tomoiaga Denis Robert cognome=Tomoiaga nome=Denis Robert
+codice=ECONOMIA AZIENDALE_1
+materia_codice=Ec.Az materia_descrizione=Economia Aziendale materia_id=7
+aula=LAB EC. AZ
+docente=Nicolussi docente_id=54 profilo_docente_id=54
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=9:45-11:25 inizia_alle=9:45:00
+classe=1ITE nome_cognome=Bompasso Salvatore Francesco cognome=Bompasso nome=Salvatore Francesco
+classe=1ITE nome_cognome=Cappelletti Simone cognome=Cappelletti nome=Simone
+classe=1ITE nome_cognome=Dalfovo Nicol cognome=Dalfovo nome=Nicol
+classe=1ITE nome_cognome=Stenico Sara cognome=Stenico nome=Sara
+classe=TR ITE nome_cognome=Berto\' Giacomo*** cognome=Berto\' nome=Giacomo***
+classe=TR AFM nome_cognome=Filippi Manuel*** cognome=Filippi nome=Manuel***
+codice=STORIA_1
+materia_codice=Sto materia_descrizione=Storia materia_id=36
+aula=ITA2
+docente=Corradini docente_id=11 profilo_docente_id=11
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=13:30-15:10 inizia_alle=13:30:00
+classe=1LISA nome_cognome=Guarnieri Alessandro cognome=Guarnieri nome=Alessandro
+classe=1LISA nome_cognome=Panizza Stefano cognome=Panizza nome=Stefano
+classe=1ITE nome_cognome=Cappelletti Simone cognome=Cappelletti nome=Simone
+classe=1ITE nome_cognome=Noldin Amos cognome=Noldin nome=Amos
+classe=1ITTA nome_cognome=Ndiaye Ibrahima Souleymane cognome=Ndiaye nome=Ibrahima Souleymane
+codice=FISICA_2
+materia_codice=Fis-T materia_descrizione=Scienze Integrate (Fisica) materia_id=31
+aula=FIS1
+docente=Ianes docente_id=39 profilo_docente_id=39
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=11:30-13:10 inizia_alle=11:30:00
+classe=1ITTA nome_cognome=Gregori Alessandro cognome=Gregori nome=Alessandro
+classe=1ITTB nome_cognome=Maiorca Matteo cognome=Maiorca nome=Matteo
+classe=1ITTB nome_cognome=Segheir Salahedine cognome=Segheir nome=Salahedine
+classe=TR ITT nome_cognome=Nardon Davide cognome=Nardon nome=Davide
+classe=1ITE nome_cognome=Piragic David cognome=Piragic nome=David
+codice=MATEMATICA_3
+materia_codice=Mate materia_descrizione=Matematica materia_id=23
+aula=MAT6
+docente=Moratelli docente_id=51 profilo_docente_id=51
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=11:30-13:10 inizia_alle=11:30:00
+classe=TR LOS4 nome_cognome=Rampanelli Angela*** cognome=Rampanelli nome=Angela***
+classe=1LOS4 nome_cognome=Borzaga Leonardo cognome=Borzaga nome=Leonardo
+classe=1LOS4 nome_cognome=Castellan Bruno cognome=Castellan nome=Bruno
+classe=2LOS nome_cognome=Salvadori Sara cognome=Salvadori nome=Sara
+classe=2LISA nome_cognome=Bottamedi Federica cognome=Bottamedi nome=Federica
+classe=2LISA nome_cognome=Girardi Arianna cognome=Girardi nome=Arianna
+classe=2LISA nome_cognome=Tait Mario cognome=Tait nome=Mario
+classe=2LISA nome_cognome=Telch Federico cognome=Telch nome=Federico
+classe=2LISB nome_cognome=Floriani Sofia cognome=Floriani nome=Sofia
+classe=2LISB nome_cognome=Gasperat Paolo cognome=Gasperat nome=Paolo
+classe=2LISB nome_cognome=Gorni Sabrina cognome=Gorni nome=Sabrina
+classe=2LISB nome_cognome=Iachemet Gabriele cognome=Iachemet nome=Gabriele
+classe=2LISB nome_cognome=Marinelli Alessio cognome=Marinelli nome=Alessio
+classe=2LISB nome_cognome=Valentinotti Alessio cognome=Valentinotti nome=Alessio
+classe=TR LIS nome_cognome=Zadra Nicole cognome=Zadra nome=Nicole
+classe=LIS nome_cognome=Rossi Martina*** cognome=Rossi nome=Martina***
+codice=TEDESCO_2
+materia_codice=Ted-T materia_descrizione=Lingua Tedesca materia_id=20
+aula=TED2
+docente=Onorino docente_id=57 profilo_docente_id=57
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=8:00-9:40 inizia_alle=8:00:00
+classe=2LES nome_cognome=Hila Jessica cognome=Hila nome=Jessica
+classe=2LES nome_cognome=Santoro Tania cognome=Santoro nome=Tania
+classe=2ITE nome_cognome=Berti Alessandro cognome=Berti nome=Alessandro
+classe=2ITE nome_cognome=Guarracino Emily cognome=Guarracino nome=Emily
+classe=TR-LES nome_cognome=Perlot Sara cognome=Perlot nome=Sara
+classe=2ITT nome_cognome=Calovi Mattia cognome=Calovi nome=Mattia
+classe=2ITT nome_cognome=El-harda Oissim cognome=El-harda nome=Oissim
+classe=2ITT nome_cognome=Lombardi Diego cognome=Lombardi nome=Diego
+codice=ITALIANO_2
+materia_codice=Ita materia_descrizione=Lingua e Letteratura Italiana materia_id=17
+aula=ITA7
+docente=Del Dot docente_id=22 profilo_docente_id=22
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=14:00-15:40 inizia_alle=14:00:00
+classe=2LES nome_cognome=Santoro Silvia cognome=Santoro nome=Silvia
+classe=2LES nome_cognome=Viola Samantha cognome=Viola nome=Samantha
+classe=2LES nome_cognome=Zadra Anna Maria cognome=Zadra nome=Anna Maria
+classe=TR-LES nome_cognome=Perlot Sara cognome=Perlot nome=Sara
+classe=2ITE nome_cognome=Spiro Enea cognome=Spiro nome=Enea
+classe=TR AFM nome_cognome=Filippi Manuel cognome=Filippi nome=Manuel
+codice=FISICA_3
+materia_codice=Fis-T materia_descrizione=Scienze Integrate (Fisica) materia_id=31
+aula=FIS1
+docente=Ianes docente_id=39 profilo_docente_id=39
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=14:00-15:40 inizia_alle=14:00:00
+classe=1LOS4 nome_cognome=Borzaga Leonardo cognome=Borzaga nome=Leonardo
+classe=1LOS4 nome_cognome=Castellan Bruno cognome=Castellan nome=Bruno
+classe=1LOS4 nome_cognome=Lorenzi Massimiliano cognome=Lorenzi nome=Massimiliano
+classe=TR LOS4 nome_cognome=Rampanelli Angela*** cognome=Rampanelli nome=Angela***
+classe=2LOS nome_cognome=Salvadori Sara cognome=Salvadori nome=Sara
+classe=2LISA nome_cognome=Bottamedi Federica cognome=Bottamedi nome=Federica
+classe=2LISA nome_cognome=Girardi Arianna cognome=Girardi nome=Arianna
+classe=2LISA nome_cognome=Mucha Shpend cognome=Mucha nome=Shpend
+classe=2LISB nome_cognome=Caset Sabrina cognome=Caset nome=Sabrina
+classe=2LISB nome_cognome=Floriani Sofia cognome=Floriani nome=Sofia
+classe=2LISB nome_cognome=Gorni Sabrina cognome=Gorni nome=Sabrina
+classe=2ITT nome_cognome=Franzoi Lorenzo cognome=Franzoi nome=Lorenzo
+classe=2ITT nome_cognome=Giacomuzzi Filippo cognome=Giacomuzzi nome=Filippo
+classe=2ITT nome_cognome=Inama Eleonora cognome=Inama nome=Eleonora
+classe=2ITT nome_cognome=Salvaterra Loris cognome=Salvaterra nome=Loris
+codice=MATEMATICA_4
+materia_codice=Mate materia_descrizione=Matematica materia_id=23
+aula=MAT1
+docente=Casavecchia docente_id=8 profilo_docente_id=8
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=11:30-13:10 inizia_alle=11:30:00
+classe=2LES nome_cognome=Foniqi Djellze cognome=Foniqi nome=Djellze
+classe=2LES nome_cognome=Gashi Blerta cognome=Gashi nome=Blerta
+classe=2LES nome_cognome=Hila Jessica cognome=Hila nome=Jessica
+classe=2LES nome_cognome=Miftari Arbenita cognome=Miftari nome=Arbenita
+classe=2LES nome_cognome=Santoro Silvia cognome=Santoro nome=Silvia
+classe=2LES nome_cognome=Spaneshi Joana cognome=Spaneshi nome=Joana
+classe=2ITE nome_cognome=Ciancimino Asia cognome=Ciancimino nome=Asia
+classe=2ITE nome_cognome=Consoli Nicola cognome=Consoli nome=Nicola
+classe=2ITE nome_cognome=Guarracino Emily cognome=Guarracino nome=Emily
+classe=2ITE nome_cognome=Rampazzo Denis cognome=Rampazzo nome=Denis
+classe=2ITE nome_cognome=Sandri Federico cognome=Sandri nome=Federico
+classe=2ITT nome_cognome=Franzoi Lorenzo cognome=Franzoi nome=Lorenzo
+classe=2ITT nome_cognome=Inama Eleonora cognome=Inama nome=Eleonora
+classe=2ITT nome_cognome=Lombardi Diego cognome=Lombardi nome=Diego
+classe=2ITT nome_cognome=Sissoko Arouna cognome=Sissoko nome=Arouna
+codice=INGLESE_3
+materia_codice=Ing-T materia_descrizione=Lingua Inglese materia_id=19
+aula=ING1
+docente=Dalbosco docente_id=17 profilo_docente_id=17
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=9:45-11:25 inizia_alle=9:45:00
+classe=2LISB nome_cognome=Valentinotti Alessio cognome=Valentinotti nome=Alessio
+classe=2LES nome_cognome=Spaneshi Joana cognome=Spaneshi nome=Joana
+classe=2LES nome_cognome=Zadra Anna Maria cognome=Zadra nome=Anna Maria
+classe=2ITE nome_cognome=Di_serio Aaron cognome=Di_serio nome=Aaron
+classe=TR-LES nome_cognome=Perlot Sara cognome=Perlot nome=Sara
+codice=STORIA_2
+materia_codice=Sto materia_descrizione=Storia materia_id=36
+aula=ITA7
+docente=Franzoi docente_id=31 profilo_docente_id=31
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=9:45-11:25 inizia_alle=9:45:00
+classe=2LES nome_cognome=Santoro Tania cognome=Santoro nome=Tania
+classe=2LES nome_cognome=Viola Samantha cognome=Viola nome=Samantha
+classe=2ITE nome_cognome=Sandri Federico cognome=Sandri nome=Federico
+classe=2ITE nome_cognome=Spiro Enea cognome=Spiro nome=Enea
+classe=2ITT nome_cognome=Giacomuzzi Filippo cognome=Giacomuzzi nome=Filippo
+codice=ECONOMIA AZIENDALE_1
+materia_codice=Ec.Az materia_descrizione=Economia Aziendale materia_id=7
+aula=LAB EC.AZ.
+docente=Nicolussi docente_id=54 profilo_docente_id=54
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=9:45-11:25 inizia_alle=9:45:00
+classe=1ITE nome_cognome=Bompasso Salvatore Francesco cognome=Bompasso nome=Salvatore Francesco
+classe=1ITE nome_cognome=Cappelletti Simone cognome=Cappelletti nome=Simone
+classe=1ITE nome_cognome=Dalfovo Nicol cognome=Dalfovo nome=Nicol
+classe=1ITE nome_cognome=Stenico Sara cognome=Stenico nome=Sara
+classe=TR ITE nome_cognome=Berto\' Giacomo*** cognome=Berto\' nome=Giacomo***
+classe=TR AFM nome_cognome=Filippi Manuel*** cognome=Filippi nome=Manuel***
+codice=MATEMATICA_5
+materia_codice=Mate materia_descrizione=Matematica materia_id=23
+aula=MAT6
+docente=Moratelli docente_id=51 profilo_docente_id=51
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=9:45-11:25 inizia_alle=9:45:00
+classe=3LOS nome_cognome=Gavazza Marco cognome=Gavazza nome=Marco
+classe=3LOS nome_cognome=Giuliani Edoardo cognome=Giuliani nome=Edoardo
+classe=3LOS nome_cognome=Tait Leonardo cognome=Tait nome=Leonardo
+classe=3LOS nome_cognome=Wegher Chiara cognome=Wegher nome=Chiara
+classe=3LISA nome_cognome=Ilou Miriam cognome=Ilou nome=Miriam
+classe=3LISA nome_cognome=Selber Salvadori Elia cognome=Selber nome=Salvadori Elia
+classe=3LISB nome_cognome=Bolech Alessia cognome=Bolech nome=Alessia
+classe=3LISB nome_cognome=Bottamedi Nicolas cognome=Bottamedi nome=Nicolas
+classe=3LISB nome_cognome=Busana Samuel cognome=Busana nome=Samuel
+classe=3LISB nome_cognome=Donini Andrea cognome=Donini nome=Andrea
+classe=3LISB nome_cognome=Gadotti Alessandro cognome=Gadotti nome=Alessandro
+classe=3LISB nome_cognome=Pedot Simone cognome=Pedot nome=Simone
+classe=3LISB nome_cognome=Ugolini Gianna cognome=Ugolini nome=Gianna
+classe=TR LIS nome_cognome=Mazzucchi Marco cognome=Mazzucchi nome=Marco
+classe=3LISA nome_cognome=Garzetti Matilde* cognome=Garzetti nome=Matilde*
+classe=3LISA nome_cognome=Pedron Mattia* cognome=Pedron nome=Mattia*
+codice=TEDESCO_3
+materia_codice=Ted-T materia_descrizione=Lingua Tedesca materia_id=20
+aula=TED2
+docente=Onorino docente_id=57 profilo_docente_id=57
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=11:30-13:10 inizia_alle=11:30:00
+classe=3LISA nome_cognome=Giacalone Vincenzo cognome=Giacalone nome=Vincenzo
+classe=3LISA nome_cognome=Grisenti Thomas cognome=Grisenti nome=Thomas
+classe=3LISB nome_cognome=Bottamedi Nicolas cognome=Bottamedi nome=Nicolas
+classe=3LES nome_cognome=Borga Anna cognome=Borga nome=Anna
+classe=3LES nome_cognome=Campestrini Davide cognome=Campestrini nome=Davide
+classe=3LES nome_cognome=Hafili Khaoula cognome=Hafili nome=Khaoula
+classe=3LES nome_cognome=Toggi Alessia cognome=Toggi nome=Alessia
+classe=3LES nome_cognome=Tonidandel Marianna cognome=Tonidandel nome=Marianna
+classe=3AFM nome_cognome=Paoli Elisabetta cognome=Paoli nome=Elisabetta
+classe=3LISA nome_cognome=Garzetti Matilde* cognome=Garzetti nome=Matilde*
+codice=FISICA_4
+materia_codice=Fis-T materia_descrizione=Scienze Integrate (Fisica) materia_id=31
+aula=MAT4
+docente=Brugnara docente_id=4 profilo_docente_id=4
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=8:00-9:40 inizia_alle=8:00:00
+classe=3LOS nome_cognome=Giuliani Edoardo cognome=Giuliani nome=Edoardo
+classe=3LOS nome_cognome=Santini Massimo cognome=Santini nome=Massimo
+classe=3LISA nome_cognome=Conti Luca cognome=Conti nome=Luca
+classe=3LISA nome_cognome=Grisenti Thomas cognome=Grisenti nome=Thomas
+classe=3LISA nome_cognome=Ilou Miriam cognome=Ilou nome=Miriam
+classe=3LISA nome_cognome=Selber Salvadori Elia cognome=Selber nome=Salvadori Elia
+classe=3LISB nome_cognome=Coster Comi Elena cognome=Coster nome=Comi Elena
+classe=3LISB nome_cognome=Ugolini Gianna cognome=Ugolini nome=Gianna
+classe=TR LIS nome_cognome=Mazzucchi Marco cognome=Mazzucchi nome=Marco
+classe=3LISA nome_cognome=Garzetti Matilde* cognome=Garzetti nome=Matilde*
+codice=ECONOMIA AZIENDALE_2
+materia_codice=Ec.Az materia_descrizione=Economia Aziendale materia_id=7
+aula=LAB EC. AZ
+docente=Nicolussi docente_id=54 profilo_docente_id=54
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=8:00-9:40 inizia_alle=8:00:00
+classe=3AFM nome_cognome=Nadeem Kainat cognome=Nadeem nome=Kainat
+classe=3AFM nome_cognome=Paoli Elisabetta cognome=Paoli nome=Elisabetta
+codice=MATEMATICA_6
+materia_codice=Mate materia_descrizione=Matematica materia_id=23
+aula=MAT5
+docente=Comai docente_id=10 profilo_docente_id=10
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=9:45-11:25 inizia_alle=9:45:00
+classe=3LES nome_cognome=Borga Anna cognome=Borga nome=Anna
+classe=3LES nome_cognome=Namane Maroua cognome=Namane nome=Maroua
+classe=3AFM nome_cognome=Colombini Martina cognome=Colombini nome=Martina
+classe=3AFM nome_cognome=Paoli Elisabetta cognome=Paoli nome=Elisabetta
+classe=3CM nome_cognome=Bonomi Thomas cognome=Bonomi nome=Thomas
+classe=3TL nome_cognome=Agyabeng Harrigan cognome=Agyabeng nome=Harrigan
+classe=3TL nome_cognome=Bargan Mircea Bogdan cognome=Bargan nome=Mircea Bogdan
+classe=3TL nome_cognome=Segheir Amine cognome=Segheir nome=Amine
+classe=3TL nome_cognome=Zeni Martin cognome=Zeni nome=Martin
+codice=INGLESE_4
+materia_codice=Ing-T materia_descrizione=Lingua Inglese materia_id=19
+aula=ING1
+docente=Dalbosco docente_id=17 profilo_docente_id=17
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=14:00-15:40 inizia_alle=14:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=14:00-15:40 inizia_alle=14:00:00
+classe=3LISA nome_cognome=Giacalone Vincenzo cognome=Giacalone nome=Vincenzo
+classe=3LISA nome_cognome=Grisenti Thomas cognome=Grisenti nome=Thomas
+classe=3LISB nome_cognome=Marcon Michele cognome=Marcon nome=Michele
+classe=3AFM nome_cognome=Devigili Giorgia cognome=Devigili nome=Giorgia
+classe=3TL nome_cognome=Bargan Mircea Bogdan cognome=Bargan nome=Mircea Bogdan
+classe=TR LIS nome_cognome=Mazzucchi Marco cognome=Mazzucchi nome=Marco
+classe=3LISA nome_cognome=Paternoster Mattia* cognome=Paternoster nome=Mattia*
+classe=3AFM nome_cognome=Pasolli Silvia* cognome=Pasolli nome=Silvia*
+codice=ITALIANO_3
+materia_codice=Ita materia_descrizione=Lingua e Letteratura Italiana materia_id=17
+aula=ITA5
+docente=Caroli docente_id=7 profilo_docente_id=7
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=8:00-9:40 inizia_alle=8:00:00
+classe=3LISA nome_cognome=Menapace Davide cognome=Menapace nome=Davide
+classe=3LES nome_cognome=Facci Barbara cognome=Facci nome=Barbara
+classe=3TL nome_cognome=Bargan Mircea Bogdan cognome=Bargan nome=Mircea Bogdan
+classe=3TL nome_cognome=Zeni Martin cognome=Zeni nome=Martin
+classe=4 TL nome_cognome=Menegatti Nicola cognome=Menegatti nome=Nicola
+classe=3LISA nome_cognome=Paternoster Mattia* cognome=Paternoster nome=Mattia*
+classe=3LISA nome_cognome=Pedron Mattia* cognome=Pedron nome=Mattia*
+codice=MATEMATICA_7
+materia_codice=Mate materia_descrizione=Matematica materia_id=23
+aula=MAT5
+docente=Zambonato docente_id=91 profilo_docente_id=91
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=11:30-13:10 inizia_alle=11:30:00
+classe=4LES nome_cognome=Devigili Sabrin cognome=Devigili nome=Sabrin
+classe=4LES nome_cognome=Pilati Arianna cognome=Pilati nome=Arianna
+classe=4AFM nome_cognome=Girardi Giulio cognome=Girardi nome=Giulio
+classe=4AFM nome_cognome=Zatelli Martina cognome=Zatelli nome=Martina
+classe=4 TL nome_cognome=Singh Balraj cognome=Singh nome=Balraj
+classe=4 TL nome_cognome=Toscani Daniele cognome=Toscani nome=Daniele
+classe=4LOS nome_cognome=Cova Tiziano Silvio* cognome=Cova nome=Tiziano Silvio*
+codice=TEDESCO_4
+materia_codice=Ted-T materia_descrizione=Lingua Tedesca materia_id=20
+aula=TED1
+docente=Maranzi docente_id=48 profilo_docente_id=48
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=11-Sep numeroGiorno=11 dateMySql=2018-09-11 orario=9:45-11:25 inizia_alle=9:45:00
+classe=4LES nome_cognome=Agostini Sara cognome=Agostini nome=Sara
+classe=4LES nome_cognome=Campagnolo Valentina cognome=Campagnolo nome=Valentina
+classe=4LES nome_cognome=Pilati Arianna cognome=Pilati nome=Arianna
+classe=4LES nome_cognome=Ridolfi Alice cognome=Ridolfi nome=Alice
+classe=4LES nome_cognome=Segheir Meriem cognome=Segheir nome=Meriem
+classe=4LES nome_cognome=Zenoniani Giorgia cognome=Zenoniani nome=Giorgia
+classe=4AFM nome_cognome=Zatelli Martina cognome=Zatelli nome=Martina
+codice=ECONOMIA AZIENDALE_3
+materia_codice=Ec.Az materia_descrizione=Economia Aziendale materia_id=7
+aula=EC. AZ1
+docente=Buffi docente_id=5 profilo_docente_id=5
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=8:00-9:40 inizia_alle=8:00:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=8:00-9:40 inizia_alle=8:00:00
+classe=4AFM nome_cognome=Bhuiyan Mohammed Omar Hossain cognome=Bhuiyan nome=Mohammed Omar Hossain
+classe=4AFM nome_cognome=Gasperat Francesco cognome=Gasperat nome=Francesco
+classe=4AFM nome_cognome=Girardi Giulio cognome=Girardi nome=Giulio
+classe=4AFM nome_cognome=Guida Vincenzo cognome=Guida nome=Vincenzo
+classe=4AFM nome_cognome=Maggiore Daria cognome=Maggiore nome=Daria
+classe=4AFM nome_cognome=Sallata Albana cognome=Sallata nome=Albana
+classe=4AFM nome_cognome=Zatelli Martina cognome=Zatelli nome=Martina
+classe=4AFM nome_cognome=Zeni Nicole cognome=Zeni nome=Nicole
+classe=4AFM nome_cognome=Zeni Elisa*** cognome=Zeni nome=Elisa***
+codice=INGLESE_5
+materia_codice=Ing-T materia_descrizione=Lingua Inglese materia_id=19
+aula=ING2
+docente=Spina docente_id=80 profilo_docente_id=80
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=9:45-11:25 inizia_alle=9:45:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=9:45-11:25 inizia_alle=9:45:00
+classe=4LOS nome_cognome=Guadagnini Helena cognome=Guadagnini nome=Helena
+classe=4LOS nome_cognome=Malferrari Giada cognome=Malferrari nome=Giada
+classe=4LOS nome_cognome=Marinconz Samuele cognome=Marinconz nome=Samuele
+classe=4LOS nome_cognome=Zadra Anna cognome=Zadra nome=Anna
+classe=4AFM nome_cognome=Maggiore Daria cognome=Maggiore nome=Daria
+classe=4AFM nome_cognome=Zeni Elisa*** cognome=Zeni nome=Elisa***
+classe=4LOS nome_cognome=Cova Tiziano Silvio* cognome=Cova nome=Tiziano Silvio*
+codice=FISICA 5
+materia_codice=Fis-T materia_descrizione=Scienze Integrate (Fisica) materia_id=31
+aula=MAT4
+docente=Brugnara docente_id=4 profilo_docente_id=4
+giorno=4-Sep numeroGiorno=4 dateMySql=2018-09-04 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=5-Sep numeroGiorno=5 dateMySql=2018-09-05 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=6-Sep numeroGiorno=6 dateMySql=2018-09-06 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=7-Sep numeroGiorno=7 dateMySql=2018-09-07 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=10-Sep numeroGiorno=10 dateMySql=2018-09-10 orario=11:30-13:10 inizia_alle=11:30:00
+classe=4LOS nome_cognome=Guadagnini Helena cognome=Guadagnini nome=Helena
+classe=4LOS nome_cognome=Malferrari Giada cognome=Malferrari nome=Giada
+classe=4LOS nome_cognome=Marinconz Samuele cognome=Marinconz nome=Samuele
+classe=4LOS nome_cognome=Ress Giorgia cognome=Ress nome=Giorgia
+classe=4LOS nome_cognome=Cova Tiziano Silvio* cognome=Cova nome=Tiziano Silvio*
+classe=4LOS nome_cognome=Zadra Anna* cognome=Zadra nome=Anna*
+classe=4LS nome_cognome=Tanel Silvia* cognome=Tanel nome=Silvia*
+codice=COSMOLOGIA_1
+materia_codice=Fis-T materia_descrizione=Scienze Integrate (Fisica) materia_id=31
+aula=ATRIO
+docente=Scapin docente_id=72 profilo_docente_id=72
+giorno=18-Aug numeroGiorno=18 dateMySql=2018-08-18 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=19-Aug numeroGiorno=19 dateMySql=2018-08-19 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=20-Aug numeroGiorno=20 dateMySql=2018-08-20 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=21-Aug numeroGiorno=21 dateMySql=2018-08-21 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=22-Aug numeroGiorno=22 dateMySql=2018-08-22 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=23-Aug numeroGiorno=23 dateMySql=2018-08-23 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=24-Aug numeroGiorno=24 dateMySql=2018-08-24 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=25-Aug numeroGiorno=25 dateMySql=2018-08-25 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=26-Aug numeroGiorno=26 dateMySql=2018-08-26 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=27-Aug numeroGiorno=27 dateMySql=2018-08-27 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=28-Aug numeroGiorno=28 dateMySql=2018-08-28 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=29-Aug numeroGiorno=29 dateMySql=2018-08-29 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=30-Aug numeroGiorno=30 dateMySql=2018-08-30 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=1-Sep numeroGiorno=1 dateMySql=2018-09-01 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=2-Sep numeroGiorno=2 dateMySql=2018-09-02 orario=11:30-13:10 inizia_alle=11:30:00
+giorno=3-Sep numeroGiorno=3 dateMySql=2018-09-03 orario=11:30-13:10 inizia_alle=11:30:00
+classe=4LOS nome_cognome=Guadagnini Helena cognome=Guadagnini nome=Helena
+classe=4LOS nome_cognome=Malferrari Giada cognome=Malferrari nome=Giada
+classe=4LOS nome_cognome=Marinconz Samuele cognome=Marinconz nome=Samuele
+classe=4LOS nome_cognome=Ress Giorgia cognome=Ress nome=Giorgia
+classe=4LOS nome_cognome=Cova Tiziano Silvio* cognome=Cova nome=Tiziano Silvio*
+classe=4LOS nome_cognome=Zadra Anna* cognome=Zadra nome=Anna*
+classe=4LS nome_cognome=Tanel Silvia* cognome=Tanel nome=Silvia*
+codice=EURISTICA_1
+materia_codice=Mate materia_descrizione=Matematica materia_id=23
+aula=ATRIO
+docente=Scapin docente_id=72 profilo_docente_id=72
+giorno=18-Aug numeroGiorno=18 dateMySql=2018-08-18 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=19-Aug numeroGiorno=19 dateMySql=2018-08-19 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=20-Aug numeroGiorno=20 dateMySql=2018-08-20 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=21-Aug numeroGiorno=21 dateMySql=2018-08-21 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=22-Aug numeroGiorno=22 dateMySql=2018-08-22 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=23-Aug numeroGiorno=23 dateMySql=2018-08-23 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=24-Aug numeroGiorno=24 dateMySql=2018-08-24 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=25-Aug numeroGiorno=25 dateMySql=2018-08-25 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=26-Aug numeroGiorno=26 dateMySql=2018-08-26 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=27-Aug numeroGiorno=27 dateMySql=2018-08-27 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=28-Aug numeroGiorno=28 dateMySql=2018-08-28 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=29-Aug numeroGiorno=29 dateMySql=2018-08-29 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=30-Aug numeroGiorno=30 dateMySql=2018-08-30 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=1-Sep numeroGiorno=1 dateMySql=2018-09-01 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=2-Sep numeroGiorno=2 dateMySql=2018-09-02 orario=9:30-11:10 inizia_alle=9:30:00
+giorno=3-Sep numeroGiorno=3 dateMySql=2018-09-03 orario=9:30-11:10 inizia_alle=9:30:00
+classe=1LOS nome_cognome=Endrizzi Anna cognome=Endrizzi nome=Anna
+classe=1LISA nome_cognome=Fellin Sebastiano cognome=Fellin nome=Sebastiano
+classe=1LES nome_cognome=Battaini Clara cognome=Battaini nome=Clara
+classe=1LES nome_cognome=Dello-russo Irene cognome=Dello-russo nome=Irene
+classe=1LES nome_cognome=Tonon Andrea cognome=Tonon nome=Andrea
+classe=1ITE nome_cognome=Cappelletti Simone cognome=Cappelletti nome=Simone
+classe=1ITE nome_cognome=Faggiani Giovanni cognome=Faggiani nome=Giovanni
