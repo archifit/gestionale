@@ -94,13 +94,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="update_viaggio_data_partenza" class="col-sm-2 control-label">Data</label>
-                    <div class="col-sm-6"><input type="text" id="update_viaggio_data_paretnza" placeholder="Data" class="form-control"/></div>
-                </div>
+                    <label for="update_viaggio_data_partenza" class="col-sm-2 control-label">Dal</label>
+                    <div class="col-sm-4"><input type="text" id="update_viaggio_data_partenza" placeholder="Data" class="form-control"/></div>
 
-                <div class="form-group">
-                    <label for="update_viaggio_data_rientro" class="col-sm-2 control-label">Data</label>
-                    <div class="col-sm-6"><input type="text" id="update_viaggio_data_rientro" placeholder="Data" class="form-control"/></div>
+                    <label for="update_viaggio_data_rientro" class="col-sm-2 control-label">Al</label>
+                    <div class="col-sm-4"><input type="text" id="update_viaggio_data_rientro" placeholder="Data" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
@@ -161,7 +159,16 @@
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
 
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green.css">
+<!-- timejs -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>
+
+<!-- flatpickr -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.js"></script>
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/l10n/it.js"></script>
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/themes/material_red.css">
+
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green-2.css">
 
 <!-- Custom JS file -->
 <script type="text/javascript" src="js/scriptViaggio.js"></script>

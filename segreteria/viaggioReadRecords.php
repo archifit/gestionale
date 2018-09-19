@@ -29,8 +29,8 @@
 				WHERE viaggio.anno_scolastico_id = $__anno_scolastico_corrente_id
 				";
 
-	if( $ancheChiusi) {
-		$query .= "AND viaggio.stato = true ";
+	if( ! $ancheChiusi) {
+		// $query .= "AND NOT viaggio.stato = chiuso ";
 	}
 	$query .= "order by viaggio_data_partenza DESC, docente_cognome ASC,docente_nome ASC";
 info($query);

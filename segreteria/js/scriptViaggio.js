@@ -92,14 +92,15 @@ function viaggioGetDetails(id) {
 		function (data, status) {
 			// PARSE json data
 			var viaggio = JSON.parse(data);
+			console.log(viaggio);
 			// setting existing values to the modal popup fields
 			$("#update_protocollo").val(viaggio.protocollo);
 			var data_partenza_str = viaggio.data_partenza;
 			var data_rientro_str = viaggio.data_rientro;
 			var data_partenza = Date.parseExact(data_partenza_str, 'yyyy-MM-dd');
 			var data_rientro = Date.parseExact(data_rientro_str, 'yyyy-MM-dd');
-			$("#update_data_partenza").val(data_partenza.toString('d/M/yyyy'));
-			$("#update_data_rientro").val(data_rientro.toString('d/M/yyyy'));
+//			$("#update_data_partenza").val(data_partenza.toString('d/M/yyyy'));
+//			$("#update_data_rientro").val(data_rientro.toString('d/M/yyyy'));
 			update_data_partenza_pickr.setDate(data_partenza);
 			update_data_rientro_pickr.setDate(data_rientro);
 			$('#update_docente_incaricato').selectpicker('val', viaggio.docente_id);
@@ -156,28 +157,61 @@ function viaggioUpdateDetails() {
 $(document).ready(function () {
 	data_partenza_pickr = flatpickr("#data_partenza", {
 		locale: {
-					firstDayOfWeek: 1
-				},
+			firstDayOfWeek: 1
+		},
 		dateFormat: 'j/n/Y'
 	});
 	data_rientro_pickr = flatpickr("#data_rientro", {
 		locale: {
-					firstDayOfWeek: 1
-				},
+			firstDayOfWeek: 1
+		},
 		dateFormat: 'j/n/Y'
 	});
 	update_data_partenza_pickr = flatpickr("#update_data_partenza", {
 		locale: {
-					firstDayOfWeek: 1
-				},
+			firstDayOfWeek: 1
+		},
 		dateFormat: 'j/n/Y'
 	});
 	update_data_rientro_pickr = flatpickr("#update_data_rientro", {
 		locale: {
-					firstDayOfWeek: 1
-				},
+			firstDayOfWeek: 1
+		},
 		dateFormat: 'j/n/Y'
 	});
+
+	ora_partenza_pickr = flatpickr("#ora_partenza", {
+	    enableTime: true,
+	    noCalendar: true,
+	    dateFormat: "H:i",
+	    time_24hr: true,
+	    static: true
+	});
+
+	ora_rientro_pickr = flatpickr("#ora_rientro", {
+	    enableTime: true,
+	    noCalendar: true,
+	    dateFormat: "H:i",
+	    time_24hr: true,
+	    static: true
+	});
+
+	update_ora_partenza_pickr = flatpickr("#update_ora_partenza", {
+	    enableTime: true,
+	    noCalendar: true,
+	    dateFormat: "H:i",
+	    time_24hr: true,
+	    static: true
+	});
+
+	update_ora_rientro_pickr = flatpickr("#update_ora_rientro", {
+	    enableTime: true,
+	    noCalendar: true,
+	    dateFormat: "H:i",
+	    time_24hr: true,
+	    static: true
+	});
+
 	flatpickr.localize(flatpickr.l10ns.it);
 
     viaggioReadRecords(); // calling function

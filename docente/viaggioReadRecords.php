@@ -217,7 +217,7 @@ info($query);
 			$data .= '
 		<button onclick="viaggioGetDetails('.$row['viaggio_id'].')" class="btn btn-info"><span class="glyphicon glyphicon-pencil"> Modifica</button>';
 			$data .= '
-		<button onclick="viaggioInoltra('.$row['viaggio_id'].')" class="btn btn-info"><span class="glyphicon glyphicon-pencil"> Inoltra</button>';
+		<button onclick="viaggioInoltra('.$row['viaggio_id'].')" class="btn btn-warning"><span class="glyphicon glyphicon-log-out"> Inoltra Richiesta</button>';
 		}
 
 		if ($row['viaggio_stato'] === 'assegnato') {

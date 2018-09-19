@@ -82,49 +82,47 @@
 				<h4 class="modal-title" id="myModalLabel">Nuovo Incarico</h4>
 			</div>
 			<div class="panel-body">
-
+			<form class="form-horizontal">
                 <div class="form-group">
-                    <label for="protocollo">Protocollo</label>
-                    <input type="text" id="protocollo" placeholder="protocollo" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="protocollo">Protocollo</label>
+                    <div class="col-sm-8"><input type="text" id="protocollo" placeholder="protocollo" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="data_partenza">Data partenza</label></br>
-					<input type="text" value="21/8/2018" id="data_partenza" placeholder="data partenza" class="form-control" />
-                </div>
+                    <label class="col-sm-2 control-label" for="data_partenza">Dal</label>
+					<div class="col-sm-4"><input type="text" value="21/8/2018" id="data_partenza" placeholder="data partenza" class="form-control" /></div>
 
-                <div class="form-group">
-                    <label for="data_rientro">Data rientro</label></br>
-					<input type="text" value="21/8/2018" id="data_rientro" placeholder="data rientro" class="form-control" />
+
+                    <label class="col-sm-2 control-label" for="data_rientro">Al</label>
+					<div class="col-sm-4"><input type="text" value="21/8/2018" id="data_rientro" placeholder="data rientro" class="form-control" /></div>
                 </div>
 
                 <div class="form-group docente_incaricato_selector">
-                    <label for="docente_incaricato">Docente</label></br>
-					<select id="docente_incaricato" name="docente_incaricato" class="docente_incaricato selectpicker" data-style="btn-success" data-live-search="true"
+                    <label class="col-sm-2 control-label" for="docente_incaricato">Docente</label>
+					<div class="col-sm-8"><select id="docente_incaricato" name="docente_incaricato" class="docente_incaricato selectpicker" data-style="btn-success" data-live-search="true"
 					data-noneSelectedText="seleziona..." data-width="70%" >
 <?php echo $docenteOptionList ?>
-					</select>
+					</select></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="destinazione">Destinazione</label>
-                    <input type="text" id="destinazione" placeholder="destinazione" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="destinazione">Destinazione</label>
+                    <div class="col-sm-8"><input type="text" id="destinazione" placeholder="destinazione" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="classe">Classe</label>
-                    <input type="text" id="classe" placeholder="classe" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="classe">Classe</label>
+                    <div class="col-sm-8"><input type="text" id="classe" placeholder="classe" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="ora_partenza">Ora partenza</label>
-                    <input type="text" id="ora_partenza" placeholder="ora_partenza" class="form-control"/>
-                </div>
+                    <label class="col-sm-2 control-label" for="ora_partenza">Partenza</label>
+                    <div class="col-sm-4"><input type="text" id="ora_partenza" placeholder="ora partenza" class="form-control"/></div>
 
-                <div class="form-group">
-                    <label for="ora_rientro">Ora rientro</label>
-                    <input type="text" id="ora_rientro" placeholder="ora_rientro" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="ora_rientro">Rientro</label>
+                    <div class="col-sm-4"><input type="text" id="ora_rientro" placeholder="ora rientro" class="form-control"/></div>
                 </div>
+			</form>
 
             </div>
             <div class="modal-footer">
@@ -148,61 +146,59 @@
 				<h4 class="modal-title" id="updateMyModalLabel">Aggiorna Incarico</h4>
 			</div>
 			<div class="panel-body">
+			<form class="form-horizontal">
 
                 <div class="form-group">
-                    <label for="update_protocollo">Protocollo</label>
-                    <input type="text" id="update_protocollo" placeholder="protocollo" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="update_protocollo">Protocollo</label>
+                    <div class="col-sm-8"><input type="text" id="update_protocollo" placeholder="protocollo" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="update_data_partenza">Data partenza</label></br>
-					<input type="text" value="21/8/2018" id="update_data_partenza" placeholder="data" class="form-control" />
-                </div>
+                    <label class="col-sm-2 control-label" for="update_data_partenza">Dal</label>
+					<div class="col-sm-4"><input type="text" value="21/8/2018" id="update_data_partenza" placeholder="data" class="form-control" /></div>
 
-                <div class="form-group">
-                    <label for="update_data_rientro">Data rientro</label></br>
-					<input type="text" value="21/8/2018" id="update_data_rientro" placeholder="data" class="form-control" />
+                    <label class="col-sm-2 control-label" for="update_data_rientro">Al</label>
+					<div class="col-sm-4"><input type="text" value="21/8/2018" id="update_data_rientro" placeholder="data" class="form-control" /></div>
                 </div>
 
                 <div class="form-group docente_incaricato_selector">
-                    <label for="update_docente_incaricato">Docente</label></br>
-					<select id="update_docente_incaricato" name="update_docente_incaricato" class="update_docente_incaricato selectpicker" data-style="btn-success" data-live-search="true"
+                    <label class="col-sm-2 control-label" for="update_docente_incaricato">Docente</label>
+					<div class="col-sm-8"><select id="update_docente_incaricato" name="update_docente_incaricato" class="update_docente_incaricato selectpicker" data-style="btn-success" data-live-search="true"
 					data-noneSelectedText="seleziona..." data-width="70%" >
 <?php echo $docenteOptionList ?>
-					</select>
+					</select></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="update_destinazione">Destinazione</label>
-                    <input type="text" id="update_destinazione" placeholder="destinazione" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="update_destinazione">Destinazione</label>
+                    <div class="col-sm-8"><input type="text" id="update_destinazione" placeholder="destinazione" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="update_classe">Classe</label>
-                    <input type="text" id="update_classe" placeholder="classe" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="update_classe">Classe</label>
+                    <div class="col-sm-8"><input type="text" id="update_classe" placeholder="classe" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="update_ora_partenza">Ora partenza</label>
-                    <input type="text" id="update_ora_partenza" placeholder="ora_partenza" class="form-control"/>
-                </div>
+                    <label class="col-sm-2 control-label" for="update_ora_partenza">Partenza</label>
+                    <div class="col-sm-4"><input type="text" id="update_ora_partenza" placeholder="ora_partenza" class="form-control"/></div>
 
-                <div class="form-group">
-                    <label for="update_ora_rientro">Ora rientro</label>
-                    <input type="text" id="update_ora_rientro" placeholder="ora_rientro" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="update_ora_rientro">Rientro</label>
+                    <div class="col-sm-4"><input type="text" id="update_ora_rientro" placeholder="ora_rientro" class="form-control"/></div>
                 </div>
 
                 <div class="form-group stato_selector">
-                    <label for="update_stato">Stato</label></br>
-					<select id="update_stato" name="update_stato" class="update_stato selectpicker" data-live-search="true"
+                    <label class="col-sm-2 control-label" for="update_stato">Stato</label></br>
+					<div class="col-sm-8"><select id="update_stato" name="update_stato" class="update_stato selectpicker" data-live-search="true"
 					data-noneSelectedText="seleziona..." data-width="50%" >
 						<option data-content="<span class='label label-info'>assegnato</span>">assegnato</option>
 						<option data-content="<span class='label label-success'>accettato</span>">accettato</option>
 						<option data-content="<span class='label label-warning'>effettuato</span>">effettuato</option>
 						<option data-content="<span class='label label-primary'>chiuso</span>">chiuso</option>
 						<option data-content="<span class='label label-danger'>annullato</span>">annullato</option>
-					</select>
+					</select></div>
                 </div>
+			</form>
             </div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>

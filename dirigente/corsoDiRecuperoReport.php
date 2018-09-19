@@ -3,7 +3,7 @@
 <head>
 <?php
 	require_once '../common/header-session.php';
-	ruoloRichiesto('segreteria','dirigente');
+	ruoloRichiesto('segreteria','segreteria-didattica','dirigente');
 ?>
 	<title>Corsi di Recupero</title>
 	<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">
