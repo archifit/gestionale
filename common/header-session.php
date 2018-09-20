@@ -12,9 +12,6 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Log\Log;
 use Joomla\CMS\Uri\Uri;
 
-// favicon ref
-echo '<link rel="icon" href="../favicon.ico" />';
-
 function redirect($url) {
 	global $__application_base_path;
 	$landing = $__application_base_path . $url;

@@ -30,6 +30,7 @@ function docenteAddRecord() {
         matricola: matricola,
 		attivo: attivo
     }, function (data, status) {
+    	console.log(data);
         // close the popup
         $("#add_new_record_modal").modal("hide");
 

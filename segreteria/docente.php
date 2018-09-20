@@ -152,90 +152,84 @@
 <!-- // Modal - Update docente details -->
 
 <!-- Modal - Update profilo details -->
-<div class="modal fade" id="update_profilo_modal" tabindex="-1" role="dialog" aria-labelledby="myModalProfiloLabel">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="update_profilo_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalProfiloLabel">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-body">
+			<div class="panel panel-danger">
+			<div class="panel-heading">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalProfiloLabel">Aggiorna Profilo</h4>
             </div>
-            <div class="modal-body">
+            <div class="panel-body">
+			<form class="form-horizontal">
 
                 <div class="form-group">
-                    <label for="update_nome">Docente</label>
-                    <input type="text" id="profilo_cognome_e_nome" placeholder="cognome e nome" class="form-control" readonly />
+                    <label class="col-sm-2 control-label" for="update_nome">Docente</label>
+                    <div class="col-sm-8"><input type="text" id="profilo_cognome_e_nome" placeholder="cognome e nome" class="form-control" readonly /></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="update_cognome">Classe di concorso</label>
-                    <input type="text" id="profilo_classe_di_concorso" placeholder="classe di concorso" class="form-control"/>
+                    <label class="col-sm-3 control-label" for="profilo_classe_di_concorso">Classe di concorso</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_classe_di_concorso" placeholder="classe di concorso" class="form-control"/></div>
+
+                    <label class="col-sm-3 control-label" for="profilo_tipo_di_contratto">Tipo di contratto</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_tipo_di_contratto" placeholder="tipo di contratto" class="form-control"/></div>
+                </div>
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="profilo_giorni_di_servizio">gg di Servizio</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_giorni_di_servizio" placeholder="giorni di servizio" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_di_cattedra">Ore di cattedra</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_di_cattedra" placeholder="ore di cattedra" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_eccedenti">Eccedenti</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_eccedenti" placeholder="ore eccedenti" class="form-control"/></div>
+                </div>
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_70_con_studenti">70 con studenti</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_70_con_studenti" placeholder="ore dovute 70 con studenti" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_70_funzionali">70 funzionali</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_70_funzionali" placeholder="ore dovute 70 funzionali" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_40">40</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_40" placeholder="ore dovute 40" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="update_email">Tipo di contratto</label>
-                    <input type="text" id="profilo_tipo_di_contratto" placeholder="tipo di contratto" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_supplenze">Supplenze</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_supplenze" placeholder="ore dovute supplenze" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_aggiornamento">Aggiornamento</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_aggiornamento" placeholder="ore dovute aggiornamento" class="form-control"/></div>
                 </div>
+                <hr>
 
                 <div class="form-group">
-                    <label for="update_username">Giorni di Servizio</label>
-                    <input type="text" id="profilo_giorni_di_servizio" placeholder="giorni di servizio" class="form-control"/>
+                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_totale_con_studenti">Con Studenti</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_totale_con_studenti" placeholder="ore dovute totale con studenti" class="form-control" readonly /></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_totale_funzionali">Funzionali</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_totale_funzionali" placeholder="ore dovute totale funzionali" class="form-control" readonly /></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_totale">Totale</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_totale" placeholder="ore dovute totale" class="form-control" readonly /></div>
                 </div>
 
-                <div class="form-group">
-                    <label for="update_username">Ore di cattedra</label>
-                    <input type="text" id="profilo_ore_di_cattedra" placeholder="ore di cattedra" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="update_username">Ore eccedenti</label>
-                    <input type="text" id="profilo_ore_eccedenti" placeholder="ore eccedenti" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="update_username">Ore dovute 70 con studenti</label>
-                    <input type="text" id="profilo_ore_dovute_70_con_studenti" placeholder="ore dovute 70 con studenti" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="update_username">Ore dovute 70 funzionali</label>
-                    <input type="text" id="profilo_ore_dovute_70_funzionali" placeholder="ore dovute 70 funzionali" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="update_username">Ore dovute 40</label>
-                    <input type="text" id="profilo_ore_dovute_40" placeholder="ore dovute 40" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="update_username">Ore dovute totale</label>
-                    <input type="text" id="profilo_ore_dovute_totale" placeholder="ore dovute totale" class="form-control" readonly />
-                </div>
-
-                <div class="form-group">
-                    <label for="update_username">Ore dovute supplenze</label>
-                    <input type="text" id="profilo_ore_dovute_supplenze" placeholder="ore dovute supplenze" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="update_username">Ore dovute aggiornamento</label>
-                    <input type="text" id="profilo_ore_dovute_aggiornamento" placeholder="ore dovute aggiornamento" class="form-control"/>
-                </div>
-
-                <div class="form-group">
-                    <label for="update_username">Ore dovute totale con studenti</label>
-                    <input type="text" id="profilo_ore_dovute_totale_con_studenti" placeholder="ore dovute totale con studenti" class="form-control" readonly />
-                </div>
-
-                <div class="form-group">
-                    <label for="update_username">Ore dovute totale funzionali</label>
-                    <input type="text" id="profilo_ore_dovute_totale_funzionali" placeholder="ore dovute totale funzionali" class="form-control" readonly />
-                </div>
+			</form>
 
             </div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
 				<button type="button" class="btn btn-primary" onclick="profiloUpdateDetails()" >Salva</button>
 				<input type="hidden" id="hidden_profilo_id">
+			</div>
+			</div>
 			</div>
         </div>
     </div>
