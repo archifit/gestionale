@@ -85,16 +85,32 @@
 			<form class="form-horizontal">
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="protocollo">Protocollo</label>
-                    <div class="col-sm-8"><input type="text" id="protocollo" placeholder="protocollo" class="form-control"/></div>
+                    <div class="col-sm-4"><input type="text" id="protocollo" placeholder="protocollo" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="tipo_viaggio">Tipo</label>
+					<div class="col-sm-4">
+						<select id="tipo_viaggio" name="tipo_viaggio" class="tipo_viaggio selectpicker" data-live-search="true" data-noneSelectedText="seleziona..." >
+						<option value="Visita Guidata" selected >Visita Guidata</option>
+						<option value="Uscita Formativa" >Uscita Formativa</option>
+						<option value="Viaggio di Istruzione" >Viaggio di Istruzione</option>
+						</select>
+					</div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="data_partenza">Dal</label>
 					<div class="col-sm-4"><input type="text" value="21/8/2018" id="data_partenza" placeholder="data partenza" class="form-control" /></div>
 
-
                     <label class="col-sm-2 control-label" for="data_rientro">Al</label>
 					<div class="col-sm-4"><input type="text" value="21/8/2018" id="data_rientro" placeholder="data rientro" class="form-control" /></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="ora_partenza">Partenza</label>
+                    <div class="col-sm-4"><input type="text" id="ora_partenza" placeholder="ora partenza" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="ora_rientro">Rientro</label>
+                    <div class="col-sm-4"><input type="text" id="ora_rientro" placeholder="ora rientro" class="form-control"/></div>
                 </div>
 
                 <div class="form-group docente_incaricato_selector">
@@ -113,14 +129,6 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="classe">Classe</label>
                     <div class="col-sm-8"><input type="text" id="classe" placeholder="classe" class="form-control"/></div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="ora_partenza">Partenza</label>
-                    <div class="col-sm-4"><input type="text" id="ora_partenza" placeholder="ora partenza" class="form-control"/></div>
-
-                    <label class="col-sm-2 control-label" for="ora_rientro">Rientro</label>
-                    <div class="col-sm-4"><input type="text" id="ora_rientro" placeholder="ora rientro" class="form-control"/></div>
                 </div>
 			</form>
 
@@ -150,7 +158,16 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="update_protocollo">Protocollo</label>
-                    <div class="col-sm-8"><input type="text" id="update_protocollo" placeholder="protocollo" class="form-control"/></div>
+                    <div class="col-sm-4"><input type="text" id="update_protocollo" placeholder="protocollo" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="update_tipo_viaggio">Tipo</label>
+					<div class="col-sm-4">
+						<select id="update_tipo_viaggio" name="update_tipo_viaggio" class="update_tipo_viaggio selectpicker" data-live-search="true" data-noneSelectedText="seleziona..." >
+						<option value="Visita Guidata" selected >Visita Guidata</option>
+						<option value="Uscita Formativa" >Uscita Formativa</option>
+						<option value="Viaggio di Istruzione" >Viaggio di Istruzione</option>
+						</select>
+					</div>
                 </div>
 
                 <div class="form-group">
@@ -159,6 +176,14 @@
 
                     <label class="col-sm-2 control-label" for="update_data_rientro">Al</label>
 					<div class="col-sm-4"><input type="text" value="21/8/2018" id="update_data_rientro" placeholder="data" class="form-control" /></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="update_ora_partenza">Partenza</label>
+                    <div class="col-sm-4"><input type="text" id="update_ora_partenza" placeholder="ora_partenza" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="update_ora_rientro">Rientro</label>
+                    <div class="col-sm-4"><input type="text" id="update_ora_rientro" placeholder="ora_rientro" class="form-control"/></div>
                 </div>
 
                 <div class="form-group docente_incaricato_selector">
@@ -177,14 +202,6 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="update_classe">Classe</label>
                     <div class="col-sm-8"><input type="text" id="update_classe" placeholder="classe" class="form-control"/></div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="update_ora_partenza">Partenza</label>
-                    <div class="col-sm-4"><input type="text" id="update_ora_partenza" placeholder="ora_partenza" class="form-control"/></div>
-
-                    <label class="col-sm-2 control-label" for="update_ora_rientro">Rientro</label>
-                    <div class="col-sm-4"><input type="text" id="update_ora_rientro" placeholder="ora_rientro" class="form-control"/></div>
                 </div>
 
                 <div class="form-group stato_selector">

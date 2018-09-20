@@ -13,6 +13,7 @@
 							<th>Destinazione</th>
 							<th>Stato</th>
 							<th>Modifica</th>
+							<th>Stampa</th>
 						</tr>';
 
 	$query = "	SELECT
@@ -72,6 +73,9 @@ info($query);
 			<td>
 			<button onclick="viaggioGetDetails('.$row['viaggio_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 			<button onclick="viaggioDelete('.$row['viaggio_id'].', \''.$row['viaggio_data_partenza'].'\', \''.$row['viaggio_destinazione'].'\')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+			</td>
+			<td>
+			<button onclick="viaggioStampaNomina('.$row['viaggio_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-save-file"></button>
 			</td>
 			</tr>';
 		}

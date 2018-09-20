@@ -1,6 +1,6 @@
 <?php
 	if(isset($_POST['nome']) && isset($_POST['cognome']) && isset($_POST['email'])) {
-		// include Database connection file 
+		// include Database connection file
 	    require_once '../common/header-session.php';
 	    require_once '../common/connect.php';
 
@@ -15,11 +15,9 @@
 		if (!$result = mysqli_query($con, $query)) {
 			exit(mysqli_error($con));
 		}
-		
+
 		// trova l'id inserito
 		$last_id = $con->insert_id;
-		echo "id=".$last_id;
-		echo "query=".$query;
 
 		// insert del profilo
 		$query = "INSERT INTO profilo_docente(anno_scolastico_id, docente_id) VALUES('$__anno_scolastico_corrente_id', '$last_id')";

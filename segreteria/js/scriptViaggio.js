@@ -15,6 +15,7 @@ $('#ancheChiusiCheckBox').change(function() {
 function viaggioAddRecord() {
     // get values
     var protocollo = $("#protocollo").val();
+    var tipo_viaggio = $("#tipo_viaggio").val();
     var data_partenza_str = $("#data_partenza").val();
     var data_rientro_str = $("#data_rientro").val();
 	var data_partenza_date = Date.parseExact(data_partenza_str, 'd/M/yyyy');
@@ -28,6 +29,7 @@ function viaggioAddRecord() {
     // Add record
     $.post("viaggioAddRecord.php", {
         protocollo: protocollo,
+        tipo_viaggio: tipo_viaggio,
         data_partenza: data_partenza_date.toString('yyyy-MM-dd'),
         data_rientro: data_rientro_date.toString('yyyy-MM-dd'),
 		data_nomina: Date.today().toString('yyyy-MM-dd'),
@@ -95,6 +97,7 @@ function viaggioGetDetails(id) {
 			console.log(viaggio);
 			// setting existing values to the modal popup fields
 			$("#update_protocollo").val(viaggio.protocollo);
+			$('#update_tipo_viaggio').selectpicker('val', viaggio.tipo_viaggio);
 			var data_partenza_str = viaggio.data_partenza;
 			var data_rientro_str = viaggio.data_rientro;
 			var data_partenza = Date.parseExact(data_partenza_str, 'yyyy-MM-dd');
@@ -123,6 +126,7 @@ function viaggioUpdateDetails() {
 	var data_partenza_date = Date.parseExact(data_partenza_str, 'd/M/yyyy');
 	var data_rientro_date = Date.parseExact(data_rientro_str, 'd/M/yyyy');
     var protocollo = $("#update_protocollo").val();
+    var tipo_viaggio = $("#update_tipo_viaggio").val();
     var docente_incaricato_id = $("#update_docente_incaricato").val();
     var classe = $("#update_classe").val();
     var destinazione = $("#update_destinazione").val();
@@ -137,6 +141,7 @@ function viaggioUpdateDetails() {
 	$.post("viaggioUpdateDetails.php", {
 		viaggio_id: viaggio_id,
         protocollo: protocollo,
+        tipo_viaggio: tipo_viaggio,
         data_partenza: data_partenza,
         data_rientro: data_rientro,
         docente_incaricato_id: docente_incaricato_id,
@@ -151,6 +156,12 @@ function viaggioUpdateDetails() {
             // reload records
             viaggioReadRecords();		}
     );
+}
+
+//Get details for update
+function viaggioStampaNomina(id) {
+	var url = 'nomina.php?viaggio_id=' + id;
+	window.open(url, "_blank");
 }
 
 // Read records on page load
