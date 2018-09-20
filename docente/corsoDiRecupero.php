@@ -2,7 +2,9 @@
 <html>
 <head>
 <?php
-	require_once '../common/header-session.php';
+require_once '../common/header-session.php';
+require_once '../common/header-common.php';
+ruoloRichiesto('segreteria-docenti','segreteria-didattica','dirigente','docente');
 ?>
 	<title>Corsi di Recupero</title>
 </head>
@@ -21,14 +23,17 @@
 		<div class="col-md-3">
 			<h4><span class="glyphicon glyphicon-repeat"></span>&ensp;Corsi di Recupero</h4>
 		</div>
-		<div class="col-md-3 text-center">
+		<div class="col-md-2 text-center">
+			<a href="<?php echo $__application_base_path; ?>/docente/corsoDiRecuperoReportStudenti.php" class="btn btn-default btn-warning" role="button"><span class="glyphicon glyphicon-repeat"></span>&ensp;Risultati </a>
+		</div>
+		<div class="col-md-2 text-center">
 			<a href="<?php echo $__application_base_path; ?>/docente/corsoDiRecuperoVoti.php" class="btn btn-default btn-success" role="button"><span class="glyphicon glyphicon-repeat"></span>&ensp;Voti </a>
 		</div>
-		<div class="col-md-3 text-center">
+		<div class="col-md-2 text-center">
 			<label for="soloOggiCheckBox" class=""> Solo Corsi di Oggi </label>
 			<input type="checkbox" class="checkbox-inline pull-right" data-toggle="toggle" data-size="small" data-onstyle="success" id="soloOggiCheckBox" checked="checked" >
 		</div>
-		<div class="col-md-3 text-right">
+		<div class="col-md-2 text-right">
 			<label for="soloFirmatiCheckBox" class=""> Mostra anche già Firmati </label>
 			<input type="checkbox" class="checkbox-inline pull-right" data-toggle="toggle" data-size="small" data-onstyle="warning" id="soloFirmatiCheckBox" >
 		</div>

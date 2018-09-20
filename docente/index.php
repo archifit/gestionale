@@ -3,6 +3,8 @@
 <head>
 <?php
 	require_once '../common/header-session.php';
+	require_once '../common/header-common.php';
+	ruoloRichiesto('segreteria-docenti','dirigente','docente');
 ?>
 	<title>Piano Orario</title>
 	<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">

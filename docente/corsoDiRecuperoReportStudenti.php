@@ -7,15 +7,17 @@ require_once '../common/header-common.php';
 ruoloRichiesto('segreteria-didattica','dirigente','docente');
 ?>
 	<title>Report Corsi di Recupero</title>
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/print_static.css">
+<!--  <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/print_static.css"> -->
 </head>
 
 <body >
+<?php
+	require_once '../common/header-docente.php';
+	require_once '../common/connect.php';
+?>
 
-
-<div id="body">
-<div id="content">
-<div class="page" style="font-size: 7pt">
+<div class="container-fluid" style="margin-top:60px">
+<div class="panel panel-primary">
 
 <?php
 require_once '../common/connect.php';
@@ -40,13 +42,21 @@ if(mysqli_num_rows($result) > 0) {
 	$resultArrayClasse = $result->fetch_all(MYSQLI_ASSOC);
 	foreach($resultArrayClasse as $row_classe) {
 		$classe = $row_classe['studente_per_corso_di_recupero_classe'];
-		$data .= "
-		<table style=\"width: 100%;\" class=\"header\">
-		<tr>
-		<td><h1 style=\"text-align: center\">Classe $classe</h1></td>
-		</tr>
-		</table>
-";
+		$data .= '
+<div class="panel panel-success">
+<div class="panel-heading container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 text-center">
+			<h4>'.$classe.'</h4>
+		</div>
+		<div class="col-md-4 text-right">
+		</div>
+	</div>
+</div>
+<div class="panel-body">
+';
 		$query = "	SELECT
 						studente_per_corso_di_recupero.cognome AS studente_per_corso_di_recupero_cognome,
 						studente_per_corso_di_recupero.nome AS studente_per_corso_di_recupero_nome,
@@ -83,21 +93,31 @@ if(mysqli_num_rows($result) > 0) {
 		}
 		if(mysqli_num_rows($result) > 0) {
 			$data .= '
-						<table class="corso_report_items">
-							<tr><td colspan="6"><h2>Corsi di Recupero</h2></td></tr>
-							<tbody>
-								<tr>
-									<th>Studente</th>
-									<th>Materia</th>
-									<th>Voto Sett</th>
-									<th>Voto Nov</th>
-									<th>Docente</th>
-								</tr>
-
+		<div class="table-wrapper">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<th>Studente</th>
+					<th>Materia</th>
+					<th>Voto Sett</th>
+					<th>Voto Nov</th>
+					<th>passato</th>
+					<th>Docente</th>
+				</thead>
 ';
 			$resultArrayStudente = $result->fetch_all(MYSQLI_ASSOC);
 			$classname = "";
 			foreach($resultArrayStudente as $row_studente) {
+				$passatoMarker = '';
+				if ($row_studente['studente_per_corso_di_recupero_passato']) {
+					$passatoMarker = '<span class=\'label label-success\'>passato</span>';
+				} else if (isset($row_studente['studente_per_corso_di_recupero_passato']) && $row_studente['studente_per_corso_di_recupero_passato'] == 0){
+					$passatoMarker = '<span class=\'label label-danger\'>non passato</span>';
+				}
+				$esente = (!empty($row_studente['studente_per_corso_di_recupero_serve_voto'])) && $row_studente['studente_per_corso_di_recupero_serve_voto'] == 1;
+				if ($esente) {
+					$passatoMarker = '<span class=\'label label-info\'>esente</span>';
+				}
+
 				$classname = ($classname==="even_row") ? "odd_row" : "even_row";
 				$data .= '
 								<tr class="'.$classname.'">
@@ -105,6 +125,7 @@ if(mysqli_num_rows($result) > 0) {
 									<td>'.$row_studente['materia_nome'].'</td>
 									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_settembre'].'</td>
 									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_novembre'].'</td>
+									<td class="col-md-1 text-center">'.$passatoMarker.'</td>
 									<td>'.$row_studente['docente_cognome'].' '.$row_studente['docente_nome'].'</td>
 								</tr>
 ';
@@ -112,9 +133,15 @@ if(mysqli_num_rows($result) > 0) {
 			$data .= '
 							</tbody>
 						</table>
-<div style="page-break-after: always;"></div>
+<div style="page-break-after: always;">
+</div>
+</div>
+</div>
 ';
 		}
+		$data .= '
+</div>
+';
 	}
 }
 echo $data;
@@ -123,5 +150,16 @@ echo $data;
 </div>
 </div>
 </div>
+
+<!-- Bootstrap, jquery etc (css + js) -->
+<?php
+	require_once '../common/style.php';
+?>
+
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
+
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green.css">
+
 </body>
 </html>
