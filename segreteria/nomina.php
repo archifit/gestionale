@@ -46,6 +46,13 @@
 	} else if ($row['viaggio_tipo_viaggio'] === 'Viaggio di Istruzione') {
 		$tipoViaggio = "il viaggio d'istruzione";
 	}
+
+	$oldLocale = setlocale(LC_TIME, 'ita', 'it_IT');
+	$dataNomina = utf8_encode( strftime("%d %B %Y", strtotime($row['viaggio_data_nomina'])));
+	setlocale(LC_TIME, $oldLocale);
+	echo '<title>';
+	echo 'nomina prot '.str_replace('/','-',$row['viaggio_protocollo']).' '.$row['docente_cognome'].' '.$row['docente_nome'].' - '.$row['viaggio_destinazione'];
+	echo '</title>';
 ?>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type">
 	<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/template-nomina.css">
@@ -70,7 +77,7 @@
 						<span class="c9">Prot. n&deg; <?php echo $row['viaggio_protocollo']; ?></span>
 					</p></td>
 				<td class="c2" colspan="1" rowspan="1"><p class="c6 c14">
-						<span class="c4">Mezzolombardo, <?php echo $row['viaggio_data_nomina']; ?></span>
+						<span class="c4">Mezzolombardo, <?php echo $dataNomina; ?></span>
 					</p></td>
 			</tr>
 		</tbody>
