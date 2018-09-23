@@ -14,6 +14,7 @@
 							<th>Stato</th>
 							<th>Modifica</th>
 							<th>Stampa</th>
+							<th>Email</th>
 						</tr>';
 
 	$query = "	SELECT
@@ -63,19 +64,24 @@ info($query);
 				default:
 					$statoMarker = '<span class="label label-danger">sconosciuto</span>';
 			}
+			$oldLocale = setlocale(LC_TIME, 'ita', 'it_IT');
+			$dataPartenza = utf8_encode( strftime("%d %B %Y", strtotime($row['viaggio_data_partenza'])));
+			setlocale(LC_TIME, $oldLocale);
 			$data .= '<tr>
-			<td>'.$row['viaggio_data_partenza'].'</td>
+			<td>'.$dataPartenza.'</td>
 			<td>'.$row['docente_nome'].' '.$row['docente_cognome'].'</td>
 			<td>'.$row['viaggio_destinazione'].'</td>
 			<td>'.$statoMarker.'</td>
 			';
 	$data .='
-			<td>
+			<td class="text-center">
 			<button onclick="viaggioGetDetails('.$row['viaggio_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 			<button onclick="viaggioDelete('.$row['viaggio_id'].', \''.$row['viaggio_data_partenza'].'\', \''.$row['viaggio_destinazione'].'\')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
 			</td>
 			<td>
 			<button onclick="viaggioStampaNomina('.$row['viaggio_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-save-file"></button>
+			</td>
+			<td>
 			<button onclick="viaggioNominaEmail('.$row['viaggio_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-envelope"></button>
 			</td>
 			</tr>';

@@ -85,36 +85,12 @@ debug($row['viaggio_destinazione']);
 <div id="collapse'.$counter.'" class="panel-collapse collapse  collapse '.$collapsed.'">
 <div class="panel-body">
 ';
+			$oldLocale = setlocale(LC_TIME, 'ita', 'it_IT');
+			$dataNomina = utf8_encode( strftime("%d %B %Y", strtotime($row['viaggio_data_nomina'])));
+			$dataPartenza = utf8_encode( strftime("%d %B %Y", strtotime($row['viaggio_data_partenza'])));
+			$dataRientro = utf8_encode( strftime("%d %B %Y", strtotime($row['viaggio_data_rientro'])));
+			setlocale(LC_TIME, $oldLocale);
 			$data .= '
-	<div class="col-md-6">
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="data">Dal:</label>
-				<div class="col-sm-9">
-					<p class="form-control-static">'.$row['viaggio_data_partenza'].'</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="data">Al:</label>
-				<div class="col-sm-9">
-					<p class="form-control-static">'.$row['viaggio_data_rientro'].'</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="partenza">Partenza:</label>
-				<div class="col-sm-9">
-					<p class="form-control-static">'.$row['viaggio_ora_partenza'].'</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="rientro">Rientro:</label>
-				<div class="col-sm-9">
-					<p class="form-control-static">'.$row['viaggio_ora_rientro'].'</p>
-				</div>
-			</div>
-		</form>
-	</div>
-	<div class="col-md-6">
 		<form class="form-horizontal">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="data">Destinazione:</label>
@@ -128,8 +104,29 @@ debug($row['viaggio_destinazione']);
 					<p class="form-control-static">'.$row['viaggio_classe'].'</p>
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="data">Dal:</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">'.$dataPartenza.'</p>
+				</div>
+				<label class="control-label col-sm-2" for="data">Al:</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">'.$dataRientro.'</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="partenza">Partenza:</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">'.$row['viaggio_ora_partenza'].'</p>
+				</div>
+				<label class="control-label col-sm-2" for="rientro">Rientro:</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">'.$row['viaggio_ora_rientro'].'</p>
+				</div>
+			</div>
 		</form>
-	</div>
+		<form class="form-horizontal">
+		</form>
 ';
 	$data .= '
 	<div class="col-md-12">
