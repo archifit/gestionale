@@ -19,6 +19,7 @@
     <div class="row">
         <div class="col-md-12">
 <?php
+
 	$query = "	SELECT
 					corso_di_recupero.id AS corso_di_recupero_id,
 					corso_di_recupero.codice AS corso_di_recupero_codice,
@@ -77,6 +78,7 @@
                     <th>id</th>
                     <th>Studente</th>
                     <th>Voto settembre</th>
+                    <th>Docente settembre</th>
                     <th>Voto novembre</th>
                     <th>Docente novembre</th>
                     <th>Passato</th>
@@ -89,11 +91,20 @@
 							studente_per_corso_di_recupero.nome AS studente_per_corso_di_recupero_nome,
 							studente_per_corso_di_recupero.classe AS studente_per_corso_di_recupero_classe,
 							studente_per_corso_di_recupero.voto_settembre AS studente_per_corso_di_recupero_voto_settembre,
+							studente_per_corso_di_recupero.docente_voto_settembre_id AS studente_per_corso_di_recupero_docente_voto_settembre_id,
 							studente_per_corso_di_recupero.voto_novembre AS studente_per_corso_di_recupero_voto_novembre,
 							studente_per_corso_di_recupero.docente_voto_novembre_id AS studente_per_corso_di_recupero_docente_voto_novembre_id,
 							studente_per_corso_di_recupero.passato AS studente_per_corso_di_recupero_passato,
-							studente_per_corso_di_recupero.serve_voto AS studente_per_corso_di_recupero_serve_voto
+							studente_per_corso_di_recupero.serve_voto AS studente_per_corso_di_recupero_serve_voto,
+							docente_set.nome AS docente_set_nome,
+							docente_set.cognome AS docente_set_cognome,
+							docente_nov.nome AS docente_nov_nome,
+							docente_nov.cognome AS docente_nov_cognome
 						FROM studente_per_corso_di_recupero studente_per_corso_di_recupero
+						LEFT JOIN docente docente_set
+						ON studente_per_corso_di_recupero.docente_voto_settembre_id = docente_set.id
+						LEFT JOIN docente docente_nov
+						ON studente_per_corso_di_recupero.docente_voto_novembre_id = docente_nov.id
 						WHERE
 							studente_per_corso_di_recupero.corso_di_recupero_id = $corso_di_recupero_id
 						ORDER BY
@@ -130,6 +141,8 @@
     							<td></td>';
     	        	$data .= '
     							<td></td>';
+    	        	$data .= '
+    							<td></td>';
     	        } else {
     	        	$votoSettembre = $studenteRow['studente_per_corso_di_recupero_voto_settembre'];
     	        	$votoSettembreOptionList = '				<select  class="votoSettembre selectpicker" data-noneSelectedText="seleziona..." data-width="50%" ><option value="0"></option>';
@@ -151,6 +164,15 @@
     	        	$votoSettembreOptionList .= '</select>';
     	        	$data .= '
     							<td>'.$votoSettembreOptionList.'</td>';
+    	        	$docenteSettembre = $studenteRow['docente_set_cognome'].' '.$studenteRow['docente_set_nome'];
+    	        	$data .= '
+    							<td>
+								'.$docenteSettembre;
+    	        	if (haRuolo('segreteria-didattica')) {
+    	        		$data .= '<button onclick="votoDocenteSelect('.$studenteRow['studente_per_corso_di_recupero_id'].')" class="btnVotoDocenteSelect btn btn-warning btn-xs"><span class="glyphicon glyphicon-education"></button>';
+    	        	}
+    	        	$data .= '
+    	        				</td>';
     	        	$data .= '
     							<td></td>';
     	        	$data .= '
@@ -184,11 +206,76 @@
 		}
 	}
 
+	$data.='<input type="hidden" id="studente_per_corso_di_recupero_id">';
+
+	// didattica oppure docente?
+	if (haRuolo('segreteria-didattica')) {
+		$data.='<input type="hidden" id="hidden_docente_id" value="-1">';
+	} else {
+		$data.='<input type="hidden" id="hidden_docente_id" value="'.$__docente_id.'">';
+		$data.='<input type="hidden" id="hidden_docente_cognomenome" value="'.$__docente_cognome.' '.$__docente_nome.'">';
+	}
 	//-------------------------------------------------------------
 	echo $data;
 ?>
         </div>
     </div>
+
+<?php
+
+// prepara l'elenco dei docenti
+	$docenteOptionList = '				<option value="0"></option>';
+	$query = "	SELECT * FROM docente
+					WHERE docente.attivo = true
+					ORDER BY docente.cognome, docente.nome ASC
+					;";
+	if (!$result = mysqli_query($con, $query)) {
+		exit(mysqli_error($con));
+	}
+	if(mysqli_num_rows($result) > 0) {
+		$resultArray = $result->fetch_all(MYSQLI_ASSOC);
+		$counter = 0;
+		foreach($resultArray as $row) {
+			$docenteOptionList .= '
+					<option value="'.$row['id'].'">'.$row['cognome'].' '.$row['nome'].'</option>
+				';
+		}
+	}
+
+?>
+
+<!-- Bootstrap Modals -->
+<!-- Modal - set docente -->
+<div class="modal fade" id="select_docente_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-danger">
+			<div class="panel-heading">
+				<h4 class="modal-title" id="myModalLabel">Docente</h4>
+			</div>
+			<div class="panel-body">
+			<form class="form-horizontal">
+                <div class="form-group docente_voto_selector">
+                    <label class="col-sm-2 control-label" for="docente_voto">Docente</label>
+					<div class="col-sm-8"><select id="docente_voto" name="docente_voto" class="docente_voto selectpicker" data-style="btn-success" data-live-search="true"
+					data-noneSelectedText="seleziona..." data-width="70%" >
+<?php echo $docenteOptionList ?>
+					</select></div>
+                </div>
+            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-primary" onclick="corsoVotoSetDocente()">Salva</button>
+            </div>
+			</div>
+			</div>
+        </div>
+    </div>
+</div>
+<!-- // Modal - set docente -->
+
 </div>
 
 <!-- Bootstrap, jquery etc (css + js) -->

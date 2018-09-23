@@ -67,16 +67,20 @@ if(mysqli_num_rows($result) > 0) {
 						studente_per_corso_di_recupero.serve_voto AS studente_per_corso_di_recupero_serve_voto,
 						corso_di_recupero.codice AS corso_di_recupero_codice,
 						materia.nome AS materia_nome,
-						docente.nome AS docente_nome,
-						docente.cognome AS docente_cognome
+						docente_set.nome AS docente_set_nome,
+						docente_set.cognome AS docente_set_cognome,
+						docente_nov.nome AS docente_nov_nome,
+						docente_nov.cognome AS docente_nov_cognome
 					FROM
 						studente_per_corso_di_recupero
 					INNER JOIN corso_di_recupero corso_di_recupero
 					ON studente_per_corso_di_recupero.corso_di_recupero_id = corso_di_recupero.id
 					INNER JOIN materia materia
 					ON corso_di_recupero.materia_id = materia.id
-					INNER JOIN docente docente
-					ON corso_di_recupero.docente_id = docente.id
+					LEFT JOIN docente docente_set
+					ON studente_per_corso_di_recupero.docente_voto_settembre_id = docente_set.id
+					LEFT JOIN docente docente_nov
+					ON studente_per_corso_di_recupero.docente_voto_novembre_id = docente_nov.id
 					WHERE
 						corso_di_recupero.anno_scolastico_id = '$__anno_scolastico_corrente_id'
 					AND
@@ -87,7 +91,7 @@ if(mysqli_num_rows($result) > 0) {
 						studente_per_corso_di_recupero.nome ASC
 					;
 			";
-		info($query);
+		debug($query);
 		if (!$result = mysqli_query($con, $query)) {
 			exit(mysqli_error($con));
 		}
@@ -98,10 +102,11 @@ if(mysqli_num_rows($result) > 0) {
 				<thead>
 					<th>Studente</th>
 					<th>Materia</th>
-					<th>Voto Sett</th>
-					<th>Voto Nov</th>
 					<th>passato</th>
-					<th>Docente</th>
+					<th>Voto Sett</th>
+					<th>Docente Set</th>
+					<th>Voto Nov</th>
+					<th>Docente Nov</th>
 				</thead>
 ';
 			$resultArrayStudente = $result->fetch_all(MYSQLI_ASSOC);
@@ -123,10 +128,11 @@ if(mysqli_num_rows($result) > 0) {
 								<tr class="'.$classname.'">
 									<td>'.$row_studente['studente_per_corso_di_recupero_cognome'].' '.$row_studente['studente_per_corso_di_recupero_nome'].'</td>
 									<td>'.$row_studente['materia_nome'].'</td>
-									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_settembre'].'</td>
-									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_novembre'].'</td>
 									<td class="col-md-1 text-center">'.$passatoMarker.'</td>
-									<td>'.$row_studente['docente_cognome'].' '.$row_studente['docente_nome'].'</td>
+									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_settembre'].'</td>
+									<td>'.$row_studente['docente_set_cognome'].' '.$row_studente['docente_set_nome'].'</td>
+									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_novembre'].'</td>
+									<td>'.$row_studente['docente_nov_cognome'].' '.$row_studente['docente_nov_nome'].'</td>
 								</tr>
 ';
 			}

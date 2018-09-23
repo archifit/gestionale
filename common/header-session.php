@@ -34,6 +34,17 @@ function ruoloRichiesto(...$ruoli) {
 	redirect("/error/unauthorized.php");
 }
 
+function haRuolo($ruolo) {
+	global $__utente_ruolo;
+	if (empty($__utente_ruolo)) {
+		return false;
+	}
+	if ($__utente_ruolo === $ruolo) {
+		return true;
+	}
+	return false;
+}
+
 function console_log($message, $data = "") {
 	echo '<script>';
 	$page = basename ( $_SERVER ['PHP_SELF'] );
@@ -178,7 +189,7 @@ $ruolo_dirigente = ($__utente_ruolo === 'dirigente');
 $ruolo_segreteria = ($__utente_ruolo === 'segreteria');
 $ruolo_docente = ($__utente_ruolo === 'docente');
 
-if (empty ( $session->get ( 'docente_id' ) ) && $session->has ( 'utente_ruolo' ) && $session->get ( 'utente_ruolo' ) === "docente") {
+if (empty ( $session->get ( 'docente_id' ) ) && $session->has ( 'utente_ruolo' ) && ($session->get ( 'utente_ruolo' ) === "docente" || $session->get ( 'utente_ruolo' ) === "segreteria-didattica")) {
 	debug ( 'manca in sessione docente_id' );
 	require_once '../common/connect.php';
 	$query = "SELECT * FROM docente WHERE docente.username = '$__username'";

@@ -65,7 +65,7 @@
 		$resultArray = $result->fetch_all(MYSQLI_ASSOC);
 		foreach($resultArray as $row) {
 			$docenteOptionList .= '
-				<option value="'.$row['id'].'" data-subtext="'.$row['username'].'">'.$row['nome'].' '.$row['cognome'].'</option>
+				<option value="'.$row['id'].'" >'.$row['cognome'].' '.$row['nome'].'</option>
 			';
 		}
 	}
