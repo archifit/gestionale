@@ -164,6 +164,16 @@ function viaggioStampaNomina(id) {
 	window.open(url, "_blank");
 }
 
+function viaggioNominaEmail(viaggio_id) {
+	$.post("viaggioNominaEmail.php", {
+		viaggio_id: viaggio_id
+		},
+		function (data, status) {
+			alert(data);
+		}
+    );
+}
+
 // Read records on page load
 $(document).ready(function () {
 	data_partenza_pickr = flatpickr("#data_partenza", {

@@ -208,6 +208,7 @@ if (empty ( $session->get ( 'docente_id' ) ) && $session->has ( 'utente_ruolo' )
 		$session->set ( 'docente_id', $row ['id'] );
 		$session->set ( 'docente_nome', $row ['nome'] );
 		$session->set ( 'docente_cognome', $row ['cognome'] );
+		$session->set ( 'docente_email', $row ['email'] );
 	} else {
 		warning ( "user $__username not found!" );
 		$response ['status'] = 200;
@@ -220,6 +221,7 @@ if (empty ( $session->get ( 'docente_id' ) ) && $session->has ( 'utente_ruolo' )
 $__docente_id = $session->get ( 'docente_id' );
 $__docente_nome = $session->get ( 'docente_nome' );
 $__docente_cognome = $session->get ( 'docente_cognome' );
+$__docente_email = $session->get ( 'docente_email' );
 
 debug ( '__username=' . $__username );
 debug ( '__anno_scolastico_corrente_id=' . $__anno_scolastico_corrente_id );
@@ -232,6 +234,7 @@ debug ( '__utente_ruolo=' . $__utente_ruolo );
 debug ( '__docente_id=' . $__docente_id );
 debug ( '__docente_nome=' . $__docente_nome );
 debug ( '__docente_cognome=' . $__docente_cognome );
+debug ( '__docente_email=' . $__docente_email );
 
 // console_log("anno scolastico=", $session->get('anno_scolastico_corrente_anno'));
 // $mainframe = JFactory::getApplication('site');

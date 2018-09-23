@@ -89,13 +89,13 @@ debug($row['viaggio_destinazione']);
 	<div class="col-md-6">
 		<form class="form-horizontal">
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="data">Data partenza:</label>
+				<label class="control-label col-sm-2" for="data">Dal:</label>
 				<div class="col-sm-9">
 					<p class="form-control-static">'.$row['viaggio_data_partenza'].'</p>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-2" for="data">Data rientro:</label>
+				<label class="control-label col-sm-2" for="data">Al:</label>
 				<div class="col-sm-9">
 					<p class="form-control-static">'.$row['viaggio_data_rientro'].'</p>
 				</div>

@@ -49,6 +49,8 @@
 
 	$oldLocale = setlocale(LC_TIME, 'ita', 'it_IT');
 	$dataNomina = utf8_encode( strftime("%d %B %Y", strtotime($row['viaggio_data_nomina'])));
+	$dataPartenza = utf8_encode( strftime("%d %B %Y", strtotime($row['viaggio_data_partenza'])));
+	$dataRientro = utf8_encode( strftime("%d %B %Y", strtotime($row['viaggio_data_rientro'])));
 	setlocale(LC_TIME, $oldLocale);
 	echo '<title>';
 	echo 'nomina prot '.str_replace('/','-',$row['viaggio_protocollo']).' '.$row['docente_cognome'].' '.$row['docente_nome'].' - '.$row['viaggio_destinazione'];
@@ -125,10 +127,10 @@
 		<span class="c5">TENUTO CONTO </span><span class="c1">che <?php echo $tipoViaggio; ?> a <?php echo $row['viaggio_destinazione']; ?> sar&agrave; effettuato/a per le classi <?php echo $row['viaggio_classe']; ?></span>
 	</p>
 	<p class="c3">
-		<span class="c1">con partenza da Mezzolombardo alle ore <?php echo $row['viaggio_ora_partenza']; ?> del <?php echo $row['viaggio_data_partenza']; ?></span>
+		<span class="c1">con partenza da Mezzolombardo alle ore <?php echo $row['viaggio_ora_partenza']; ?> del <?php echo $dataPartenza; ?></span>
 	</p>
 	<p class="c3">
-		<span class="c1">e ritorno a Mezzolombardo alle ore <?php echo $row['viaggio_ora_rientro']; ?> del <?php echo $row['viaggio_data_rientro']; ?></span>
+		<span class="c1">e ritorno a Mezzolombardo alle ore <?php echo $row['viaggio_ora_rientro']; ?> del <?php echo $dataRientro; ?></span>
 	</p>
 	<p class="c3">
 		<span class="c5">TENUTO CONTO</span><span class="c1">&nbsp;che si autorizza l&#39;impegno FUIS, ovvero si prevede il riconoscimento delle ore nella misura prevista dalle vigenti disposizioni contrattuali, per complessivi n&deg; 1 accompagnatori</span>

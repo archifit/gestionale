@@ -76,6 +76,7 @@ info($query);
 			</td>
 			<td>
 			<button onclick="viaggioStampaNomina('.$row['viaggio_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-save-file"></button>
+			<button onclick="viaggioNominaEmail('.$row['viaggio_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-envelope"></button>
 			</td>
 			</tr>';
 		}
