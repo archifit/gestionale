@@ -16,8 +16,10 @@ function viaggioAddRecord() {
     // get values
     var protocollo = $("#protocollo").val();
     var tipo_viaggio = $("#tipo_viaggio").val();
+    var data_nomina_str = $("#data_nomina").val();
     var data_partenza_str = $("#data_partenza").val();
     var data_rientro_str = $("#data_rientro").val();
+	var data_nomina_date = Date.parseExact(data_nomina_str, 'd/M/yyyy');
 	var data_partenza_date = Date.parseExact(data_partenza_str, 'd/M/yyyy');
 	var data_rientro_date = Date.parseExact(data_rientro_str, 'd/M/yyyy');
     var docente_incaricato_id = $("#docente_incaricato").val();
@@ -30,9 +32,9 @@ function viaggioAddRecord() {
     $.post("viaggioAddRecord.php", {
         protocollo: protocollo,
         tipo_viaggio: tipo_viaggio,
+        data_nomina: data_nomina_date.toString('yyyy-MM-dd'),
         data_partenza: data_partenza_date.toString('yyyy-MM-dd'),
         data_rientro: data_rientro_date.toString('yyyy-MM-dd'),
-		data_nomina: Date.today().toString('yyyy-MM-dd'),
         docente_incaricato_id: docente_incaricato_id,
         destinazione: destinazione,
         classe: classe,
@@ -63,6 +65,7 @@ function viaggioReadRecords() {
 }
 
 function viaggioNuovo() {
+	data_nomina_pickr.setDate(Date.today().toString('d/M/yyyy'));
 	data_partenza_pickr.setDate(Date.today().toString('d/M/yyyy'));
 	data_rientro_pickr.setDate(Date.today().toString('d/M/yyyy'));
 	// Open modal popup
@@ -84,6 +87,18 @@ function viaggioDelete(id, data_partenza, destinazione) {
     }
 }
 
+function getDateFromId(id) {
+    var data_str = $(id).val();
+	var data_date = Date.parseExact(data_str, 'd/M/yyyy');
+	var data = data_date.toString('yyyy-MM-dd');
+	return data;
+}
+
+function setDateToPickr(pickr, data_str) {
+	var data_nomina = Date.parseExact(data_str, 'yyyy-MM-dd');
+	pickr.setDate(data_nomina);
+}
+
 // Get details for update
 function viaggioGetDetails(id) {
 	// Add viaggio ID to the hidden field for future usage
@@ -98,12 +113,15 @@ function viaggioGetDetails(id) {
 			// setting existing values to the modal popup fields
 			$("#update_protocollo").val(viaggio.protocollo);
 			$('#update_tipo_viaggio').selectpicker('val', viaggio.tipo_viaggio);
+			var data_nomina_str = viaggio.data_nomina;
 			var data_partenza_str = viaggio.data_partenza;
 			var data_rientro_str = viaggio.data_rientro;
+			var data_nomina = Date.parseExact(data_nomina_str, 'yyyy-MM-dd');
 			var data_partenza = Date.parseExact(data_partenza_str, 'yyyy-MM-dd');
 			var data_rientro = Date.parseExact(data_rientro_str, 'yyyy-MM-dd');
 //			$("#update_data_partenza").val(data_partenza.toString('d/M/yyyy'));
 //			$("#update_data_rientro").val(data_rientro.toString('d/M/yyyy'));
+			update_data_nomina_pickr.setDate(data_nomina);
 			update_data_partenza_pickr.setDate(data_partenza);
 			update_data_rientro_pickr.setDate(data_rientro);
 			$('#update_docente_incaricato').selectpicker('val', viaggio.docente_id);
@@ -121,8 +139,10 @@ function viaggioGetDetails(id) {
 // Update details
 function viaggioUpdateDetails() {
     // get values
+    var data_nomina_str = $("#update_data_nomina").val();
     var data_partenza_str = $("#update_data_partenza").val();
     var data_rientro_str = $("#update_data_rientro").val();
+	var data_nomina_date = Date.parseExact(data_nomina_str, 'd/M/yyyy');
 	var data_partenza_date = Date.parseExact(data_partenza_str, 'd/M/yyyy');
 	var data_rientro_date = Date.parseExact(data_rientro_str, 'd/M/yyyy');
     var protocollo = $("#update_protocollo").val();
@@ -136,12 +156,14 @@ function viaggioUpdateDetails() {
 
     // get hidden field value
     var viaggio_id = $("#hidden_viaggio_id").val();
+	var data_nomina = data_nomina_date.toString('yyyy-MM-dd');
 	var data_partenza = data_partenza_date.toString('yyyy-MM-dd');
 	var data_rientro = data_rientro_date.toString('yyyy-MM-dd');
 	$.post("viaggioUpdateDetails.php", {
 		viaggio_id: viaggio_id,
         protocollo: protocollo,
         tipo_viaggio: tipo_viaggio,
+        data_nomina: data_nomina,
         data_partenza: data_partenza,
         data_rientro: data_rientro,
         docente_incaricato_id: docente_incaricato_id,
@@ -176,6 +198,12 @@ function viaggioNominaEmail(viaggio_id) {
 
 // Read records on page load
 $(document).ready(function () {
+	data_nomina_pickr = flatpickr("#data_nomina", {
+		locale: {
+			firstDayOfWeek: 1
+		},
+		dateFormat: 'j/n/Y'
+	});
 	data_partenza_pickr = flatpickr("#data_partenza", {
 		locale: {
 			firstDayOfWeek: 1
@@ -183,6 +211,12 @@ $(document).ready(function () {
 		dateFormat: 'j/n/Y'
 	});
 	data_rientro_pickr = flatpickr("#data_rientro", {
+		locale: {
+			firstDayOfWeek: 1
+		},
+		dateFormat: 'j/n/Y'
+	});
+	update_data_nomina_pickr = flatpickr("#update_data_nomina", {
 		locale: {
 			firstDayOfWeek: 1
 		},

@@ -83,6 +83,12 @@
 			</div>
 			<div class="panel-body">
 			<form class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="data_nomina">Data</label>
+					<div class="col-sm-4"><input type="text" value="21/8/2018" id="data_nomina" placeholder="data" class="form-control" /></div>
+                </div>
+
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="protocollo">Protocollo</label>
                     <div class="col-sm-4"><input type="text" id="protocollo" placeholder="protocollo" class="form-control"/></div>
@@ -155,6 +161,11 @@
 			</div>
 			<div class="panel-body">
 			<form class="form-horizontal">
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="update_data_nomina">Data</label>
+					<div class="col-sm-4"><input type="text" value="21/8/2018" id="update_data_nomina" placeholder="data" class="form-control" /></div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="update_protocollo">Protocollo</label>

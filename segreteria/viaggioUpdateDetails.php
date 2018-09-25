@@ -7,6 +7,7 @@
 		$viaggio_id = $_POST['viaggio_id'];
 		$protocollo = $_POST['protocollo'];
 		$tipo_viaggio = $_POST['tipo_viaggio'];
+		$data_nomina = $_POST['data_nomina'];
 		$data_partenza = $_POST['data_partenza'];
 		$data_rientro = $_POST['data_rientro'];
 		$docente_incaricato_id = $_POST['docente_incaricato_id'];
@@ -17,7 +18,7 @@
 		$stato = $_POST['stato'];
 
 		// Update viaggio details
-		$query = "UPDATE viaggio SET protocollo = '$protocollo', tipo_viaggio = '$tipo_viaggio', data_partenza = '$data_partenza', data_rientro = '$data_rientro', docente_id = '$docente_incaricato_id', classe = '$classe', destinazione = '$destinazione', ora_partenza = '$ora_partenza', ora_rientro = '$ora_rientro', stato = '$stato' WHERE id = '$viaggio_id'";
+		$query = "UPDATE viaggio SET protocollo = '$protocollo', tipo_viaggio = '$tipo_viaggio', data_nomina = '$data_nomina', data_partenza = '$data_partenza', data_rientro = '$data_rientro', docente_id = '$docente_incaricato_id', classe = '$classe', destinazione = '$destinazione', ora_partenza = '$ora_partenza', ora_rientro = '$ora_rientro', stato = '$stato' WHERE id = '$viaggio_id'";
 		info($query);
 		if (!$result = mysqli_query($con, $query)) {
 			exit(mysqli_error($con));
