@@ -63,7 +63,7 @@
 	<div>
 		<p class="c7">
 			<span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 642.82px; height: 136.00px;">
-				<img alt="" src="<?php echo $__application_base_path; ?>/img/intestazione.png" style="width: 642.82px; height: 136.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title="">
+				<img alt="" src="<?php echo $__application_base_path; ?>/img/intestazione.png" style="width: 642.82px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title="">
 			</span>
 		</p>
 	</div>
