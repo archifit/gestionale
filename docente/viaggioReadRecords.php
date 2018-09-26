@@ -63,11 +63,14 @@ debug($row['viaggio_destinazione']);
 				case "effettuato":
 					$statoMarker = '<span class="label label-warning">effettuato</span>';
 					break;
-				case "annullato":
-					$statoMarker = '<span class="label label-danger">annullato</span>';
+				case "rimborsato":
+					$statoMarker = '<span class="label label-primary">rimborsato</span>';
 					break;
 				case "chiuso":
-					$statoMarker = '<span class="label label-primary">chiuso</span>';
+					$statoMarker = '<span class="label label-danger">chiuso</span>';
+					break;
+				case "annullato":
+					$statoMarker = '<span class="label label-danger">annullato</span>';
 					break;
 				default:
 					$statoMarker = '<span class="label label-danger">sconosciuto</span>';
@@ -187,26 +190,23 @@ info($query);
 		</table>
 	</div>
 	</div>
-	<div class="col-md-12">
     <hr>
-        <div class="form-group">
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="viaggio_ore_richieste">ore richieste:</label>
-				<div class="col-sm-2">
-					<p class="form-control-static">'.$row['viaggio_ore_richieste'].'</p>
-				</div>
-                <label for="viaggio_richiesta_fuis" class="col-sm-4 control-label">Indennità forfettaria</label>';
-				$data .= '<td class="col-sm-1 text-center"><input type="checkbox" disabled data-toggle="toggle" data-onstyle="primary" id="viaggio_richiesta_fuis" ';
-				if ($row['viaggio_richiesta_fuis']) {
-					$data .= 'checked ';
-				}
-				$data .= '></td>
+		<div class="form-horizontal">
+			<label class="control-label col-sm-3" for="viaggio_ore_richieste">ore di recupero:</label>
+			<div class="col-sm-1">
+				<p class="form-control-static">'.$row['viaggio_ore_richieste'].'</p>
+			</div>
+			<div class="col-sm-4 text-center"><h4 class="form-control-static" id="lab" ><Strong><u>Oppure</u></Strong></h4></div>
+			<label for="viaggio_richiesta_fuis" class="col-sm-3 control-label">Indennità forfettaria</label>';
+			$data .= '<td class="col-sm-1 text-center"><input type="checkbox" disabled data-toggle="toggle" data-onstyle="primary" id="viaggio_richiesta_fuis" ';
+			if ($row['viaggio_richiesta_fuis']) {
+				$data .= 'checked ';
+			}
+			$data .= '></td>
 					</tr>
 					';
-				$data .= '
-            </div>
-        </div>
-    </div>
+			$data .= '
+		</div>
     </div>
 <div class="panel-footer text-center">';
 

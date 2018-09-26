@@ -12,9 +12,10 @@
 							<th>Docente</th>
 							<th>Destinazione</th>
 							<th>Stato</th>
-							<th>Modifica</th>
-							<th>Stampa</th>
-							<th>Email</th>
+							<th class="text-center">Modifica</th>
+							<th class="text-center">Stampa</th>
+							<th class="text-center">Email</th>
+							<th class="text-center">Rimborso</th>
 						</tr>';
 
 	$query = "	SELECT
@@ -55,11 +56,14 @@ info($query);
 				case "effettuato":
 					$statoMarker = '<span class="label label-warning">effettuato</span>';
 					break;
-				case "annullato":
-					$statoMarker = '<span class="label label-danger">annullato</span>';
+				case "rimborsato":
+					$statoMarker = '<span class="label label-primary">rimborsato</span>';
 					break;
 				case "chiuso":
-					$statoMarker = '<span class="label label-primary">chiuso</span>';
+					$statoMarker = '<span class="label label-danger">chiuso</span>';
+					break;
+				case "annullato":
+					$statoMarker = '<span class="label label-danger">annullato</span>';
 					break;
 				default:
 					$statoMarker = '<span class="label label-danger">sconosciuto</span>';
@@ -78,11 +82,14 @@ info($query);
 			<button onclick="viaggioGetDetails('.$row['viaggio_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 			<button onclick="viaggioDelete('.$row['viaggio_id'].', \''.$row['viaggio_data_partenza'].'\', \''.$row['viaggio_destinazione'].'\')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
 			</td>
-			<td>
+			<td class="text-center">
 			<button onclick="viaggioStampaNomina('.$row['viaggio_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-save-file"></button>
 			</td>
-			<td>
+			<td class="text-center">
 			<button onclick="viaggioNominaEmail('.$row['viaggio_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-envelope"></button>
+			</td>
+			<td class="text-center">
+			<button onclick="viaggioRimborso('.$row['viaggio_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-usd"></button>
 			</td>
 			</tr>';
 		}

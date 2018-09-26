@@ -264,6 +264,16 @@ $(document).ready(function () {
 
 	flatpickr.localize(flatpickr.l10ns.it);
 
+	$('#update_viaggio_richiesta_fuis').change(function() {
+		if(this.checked) {
+			$("#update_viaggio_ore_richieste").val(0);
+		}
+	});
+
+	$('#update_viaggio_ore_richieste').change(function() {
+		$( "#update_viaggio_richiesta_fuis" ).prop( "checked", false );
+	});
+	
     viaggioReadRecords();
 });
 

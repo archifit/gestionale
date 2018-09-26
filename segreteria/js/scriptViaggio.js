@@ -80,7 +80,6 @@ function viaggioDelete(id, data_partenza, destinazione) {
                 id: id
             },
             function (data, status) {
-                // reload by using viaggioReadRecords();
                 viaggioReadRecords();
             }
         );
@@ -175,7 +174,6 @@ function viaggioUpdateDetails() {
 		},
 		function (data, status) {
 			$("#update_record_modal").modal("hide");
-            // reload records
             viaggioReadRecords();		}
     );
 }
@@ -193,6 +191,96 @@ function viaggioNominaEmail(viaggio_id) {
 		function (data, status) {
 			alert(data);
 		}
+    );
+}
+
+function viaggioRimborso(id) {
+	// Add viaggio ID to the hidden field for future usage
+	$("#hidden_rimborso_viaggio_id").val(id);
+	$.post("viaggioReadDetailsComplete.php", {
+			id: id
+		},
+		function (data, status) {
+			// PARSE json data
+			console.log(data);
+			var spesaViaggioArray = JSON.parse(data);
+			console.log(spesaViaggioArray);
+			totaleRimborso = 0;
+			// setting existing values to the modal popup fields
+			// $("#update_protocollo").val(viaggio.protocollo);
+			$("#rimborso_destinazione").text(spesaViaggioArray[0].viaggio_destinazione);
+			$("#rimborso_classe").text(spesaViaggioArray[0].viaggio_classe);
+
+			var data_nomina_str = spesaViaggioArray[0].viaggio_data_nomina;
+			var data_partenza_str = spesaViaggioArray[0].viaggio_data_partenza;
+			var data_rientro_str = spesaViaggioArray[0].viaggio_data_rientro;
+			var data_nomina = Date.parseExact(data_nomina_str, 'yyyy-MM-dd');
+			var data_partenza = Date.parseExact(data_partenza_str, 'yyyy-MM-dd');
+			var data_rientro = Date.parseExact(data_rientro_str, 'yyyy-MM-dd');
+			$("#rimborso_data_partenza").text(data_partenza.toLocaleDateString("it-IT", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
+			$("#rimborso_data_rientro").text(data_rientro.toLocaleDateString("it-IT", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
+
+			$("#rimborso_ore_richieste").text(spesaViaggioArray[0].viaggio_ore_richieste);
+			$("#rimborso_richiesta_fuis").prop('defaultValue', spesaViaggioArray[0].viaggio_richiesta_fuis);
+
+			// svuota il tbody della tabella spese;
+			$('#rimborso_spese_table tbody').empty();
+			var markup = '';
+			spesaViaggioArray.forEach(function(spesa) {
+				if (spesa.spesa_viaggio_id !== null) {
+					markup = markup + 
+					"<tr>" +
+					"<td>" + spesa.spesa_viaggio_id + "</td>" +
+					"<td class=\"col-md-2\">" + spesa.spesa_viaggio_data + "</td>" +
+					"<td class=\"col-md-3\">" + spesa.spesa_viaggio_tipo + "</td>" +
+					"<td style=\"white-space: pre-wrap;\" >" + spesa.spesa_viaggio_note + "</td>" +
+					"<td class=\"col-md-2 text-right\">" + spesa.spesa_viaggio_importo + "</td>" +
+					"<td class=\"col-md-2 text-center\">";
+					if (spesa.spesa_viaggio_validato) {
+						totaleRimborso = totaleRimborso + parseFloat(spesa.spesa_viaggio_importo);
+					} else {
+						markup = markup + "<div onclick=\"viaggioAccettaSpesa('" + spesa.spesa_viaggio_id + "')\" class=\"btn btn-success btn-xs\"><span class=\"glyphicon glyphicon-thumbs-up\"></div>&nbsp;";
+					}
+					markup = markup + "</td>" +
+							"</tr>";
+				}
+			});
+			markup = markup + 
+			"<tr>"+
+			"<td></td><td colspan=\"3\" class=\"text-center\"><strong>Rimborso dovuto:</strong></td>" +
+			"<td class=\"text-right\"><strong>" + totaleRimborso.toLocaleString('it', {minimumFractionDigits : 2, maximumFractionDigits : 2}) + "</strong></td>" +
+			"</tr>";
+			$('#rimborso_spese_table > tbody:last-child').append(markup);
+			$('#rimborso_spese_table td:nth-child(1),th:nth-child(1)').hide(); // nasconde la prima colonna con l'id
+		}
+    );
+	// Open modal popup
+	$("#rimborso_viaggio_modal").modal("show");
+}
+
+function viaggioAccettaSpesa(spesa_viaggio_id) {
+	$.post("viaggioAccettaSpesa.php", {
+		spesa_viaggio_id: spesa_viaggio_id
+		},
+		function (data, status) {
+		    var viaggio_id = $("#hidden_rimborso_viaggio_id").val();
+			viaggioRimborso(viaggio_id);
+	    });
+}
+
+var totaleRimborso = 0;
+
+function viaggioRimborsato() {
+    var viaggio_id = $("#hidden_rimborso_viaggio_id").val();
+
+    $.post("../docente/viaggioCambiaStato.php", {
+		viaggio_id: viaggio_id,
+    	nuovo_stato: "rimborsato"
+        },
+        function (data, status) {
+			$("#rimborso_viaggio_modal").modal("hide");
+        	viaggioReadRecords();
+        }
     );
 }
 

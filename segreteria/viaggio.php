@@ -222,7 +222,8 @@
 						<option data-content="<span class='label label-info'>assegnato</span>">assegnato</option>
 						<option data-content="<span class='label label-success'>accettato</span>">accettato</option>
 						<option data-content="<span class='label label-warning'>effettuato</span>">effettuato</option>
-						<option data-content="<span class='label label-primary'>chiuso</span>">chiuso</option>
+						<option data-content="<span class='label label-primary'>rimborsato</span>">rimborsato</option>
+						<option data-content="<span class='label label-danger'>chiuso</span>">chiuso</option>
 						<option data-content="<span class='label label-danger'>annullato</span>">annullato</option>
 					</select></div>
                 </div>
@@ -238,7 +239,75 @@
         </div>
     </div>
 </div>
-<!-- // Modal - Update viaggio details -->
+
+<!-- // Modal - RIMBORSO -->
+<div class="modal fade" id="rimborso_viaggio_modal" data-backdrop="static" tabindex="3" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-info">
+			<div class="panel-heading">
+				<h4 class="modal-title" id="myModalLabel">Rimborso spese viaggio</h4>
+			</div>
+			<div class="panel-body">
+			<form class="form-horizontal">
+                <div class="form-group">
+                    <label for="rimborso_destinazione" class="col-sm-2 control-label">Destinazione</label>
+                    <div class="col-sm-4"><p class="form-control-static" id="rimborso_destinazione" ></p></div>
+
+                    <label for="rimborso_classe" class="col-sm-2 control-label">Classe</label>
+                    <div class="col-sm-4"><p class="form-control-static" id="rimborso_classe" ></p></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rimborso_data_partenza" class="col-sm-2 control-label">Dal</label>
+                    <div class="col-sm-4"><p class="form-control-static" id="rimborso_data_partenza" ></p></div>
+
+                    <label for="rimborso_data_rientro" class="col-sm-2 control-label">Al</label>
+                    <div class="col-sm-4"><p class="form-control-static" id="rimborso_data_rientro" ></p></div>
+                </div>
+<hr>
+                <div class="form-group">
+                    <label for="rimborso_spese_table">Spese</label>
+					<div class="table-wrapper">
+					<table class="table table-bordered table-striped" id="rimborso_spese_table">
+						<thead>
+						<tr>
+							<th>id</th>
+							<th>data</th>
+							<th>tipo</th>
+							<th>note</th>
+							<th class="text-right">importo</th>
+							<th class="text-center"></th>
+						</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					</div>
+                </div>
+<hr>
+
+                <div class="form-group">
+                    <label for="rimborso_ore_richieste" class="col-sm-3 control-label">ore di recupero (max 8)</label>
+                    <div class="col-sm-2"><p class="form-control-static" id="rimborso_ore_richieste" ></p></div>
+                    <div class="col-sm-3"><h4 class="form-control-static" id="lab" ><Strong><u>Oppure</u></Strong></h4></div>
+                    <label for="rimborso_richiesta_fuis" class="col-sm-3 control-label">Indennità forfettaria</label>
+                    <div class="col-sm-1 "><input type="checkbox" id="rimborso_richiesta_fuis" ></div>
+                </div>
+
+			</form>
+            </div>
+			<div class="panel-footer text-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+				<button type="button" class="btn btn-success" onclick="viaggioRimborsato()" >Rimborsato</button>
+				<input type="hidden" id="hidden_rimborso_viaggio_id">
+			</div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 
