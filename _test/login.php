@@ -34,7 +34,7 @@
 </head>
     <body>
     	<div class="login-form">
-    		<form action="check.php" method="post">
+    		<form action="login-check.php" method="post">
     			<h2 class="text-center">Log in</h2>
     			<div class="form-group">
     				<input type="text" name="user" class="form-control" placeholder="Username" required="required">
@@ -46,6 +46,7 @@
     				<button type="submit" class="btn btn-primary btn-block">Log in</button>
     			</div>
 <?php
+// normalmente arrivo qui da un'altra pagina che mi ha ridiretto e voglio alla fine tornare su quella
 echo '<input type="hidden" name="location" value="';
 if(isset($_GET['location'])) {
     echo htmlspecialchars($_GET['location']);

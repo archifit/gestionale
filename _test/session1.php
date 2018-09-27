@@ -1,7 +1,14 @@
 <?php
 // Start Session
 session_start();
-session_set_cookie_params ( 30 );
+
+// cerca il base path della applicazione
+define ( 'APPLICATION_NAME', 'gestionale' );
+
+$uriBasePath = $_SERVER['REQUEST_URI'];
+$toSearch = '/' . APPLICATION_NAME;
+$__application_base_path = substr ( $uriBasePath, 0, strpos ( $uriBasePath, $toSearch ) + strlen ( $toSearch ) );
+die($__application_base_path);
 echo $_SESSION['MESSAGE'];
 // Show banner
 echo '<b>Session Support Checker</b><hr />';

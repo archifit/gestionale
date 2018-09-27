@@ -10,7 +10,12 @@ require_once 'checkSession.php';
 <body >
 	<h2>landing</h2>
 <?php
-	echo $_username;
+echo $__username.'</br>';
+echo _Session::get('__username').'</br>';
+echo _Session::get('__application_base_path').'</br>';
+$session = new _Session();
+echo $session->get('__application_base_path').'</br>';
+
 ?>
 </body>
 </html>
