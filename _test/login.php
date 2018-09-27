@@ -34,7 +34,7 @@
 </head>
     <body>
     	<div class="login-form">
-    		<form action="check.php" method="post">
+    		<form action="login-check.php" method="post">
     			<h2 class="text-center">Log in</h2>
     			<div class="form-group">
     				<input type="text" name="user" class="form-control" placeholder="Username" required="required">
