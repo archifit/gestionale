@@ -1,7 +1,11 @@
 <?php
+
+require_once 'path.php';
+
 // funzione di trasformazione della password in hash
 function passwordHash($p) {
-	return $p;
+    return md5($p);
+	// return $p;
 }
 
 // dovrei arrivare qui sempre con un location set: lo memorizzo
@@ -72,10 +76,10 @@ if (!empty($passwordDaDb)) {
 	}
 }
 
-// la password non la ho sul dn locale: la controllo dal sito
+// la password non la ho sul db locale: la controllo dal sito
 require_once 'login-verify.php';
 
-// se sono tornato indietro significa che la password era corretta: la registro sul db locale
+// se sono tornato indietro significa che la password era corretta: la registro sul db locale (e' comunque un md5)
 $query = "UPDATE utente SET password='$_passwordHash' WHERE username = '$_user'";
 
 if (!$result = mysqli_query($con, $query)) {
@@ -89,9 +93,9 @@ session_start();
 
 // per problemi di sessione joomla, sono costretto a ridirigere su una pagina di supporto che faccia il redirect
 if($redirect !== '') {
-	header("Location: login-support.php?u=". $_user . "&p=" . $_password . "&r=" . $redirect);
+	header('Location: '. $__application_common_path .'/login-support.php?u='. $_user . "&p=" . $_password . "&r=" . $redirect);
 } else {
-	header("Location: login.php?p=0");
+	header('Location: '. $__application_common_path .'/login.php?p=0');
 }
 exit();
 ?>
