@@ -1,11 +1,10 @@
 <?php
-require_once 'path.php';
-require_once $__common_include_path.'/_Session.php';
+require_once __DIR__ . '__Util.php';
 
 // start session
 if (session_status() == PHP_SESSION_NONE) {
 	// session_set_cookie_params ( 60 * 60 * 24 * 365 * 10 ); // 10 anni
-	session_set_cookie_params ( 10 );
+	session_set_cookie_params ( DURATA_SESSIONE );
 	session_start();
 }
 
@@ -29,7 +28,7 @@ if (empty ( $__username )) {
 
 if (! $session->has ( 'anno_scolastico_corrente_anno' )) {
     debug ( 'manca in sessione anno_scolastico_corrente_anno' );
-    require_once '../common/connect.php';
+    require_once '../common/connect.php';  // TODO: Adjust
     $query = "SELECT * FROM anno_scolastico_corrente";
     debug ( $query );
     // console_log_data("query=", $query);
@@ -60,7 +59,7 @@ $__anno_scolastico_scorso_id = $session->get ( 'anno_scolastico_scorso_id' );
 
 if (! $session->has ( 'utente_id' )) {
     debug ( 'manca in sessione utente_id' );
-    require_once '../common/connect.php';
+    require_once '../common/connect.php'; // TODO: Adjust
     $query = "SELECT * FROM utente WHERE utente.username = '$__username'";
     debug ( $query );
     // console_log_data("query=", $query);
@@ -80,7 +79,7 @@ if (! $session->has ( 'utente_id' )) {
         header ( 'gestionale/common/error.php?message=utente non trovato: ' . $__username );
         exit ();
     }
-    
+
     $session->set ( 'utente_id', $row ['id'] );
     $session->set ( 'utente_nome', $row ['nome'] );
     $session->set ( 'utente_cognome', $row ['cognome'] );
@@ -93,13 +92,15 @@ $__utente_id = $session->get ( 'utente_id' );
 $__utente_nome = $session->get ( 'utente_nome' );
 $__utente_cognome = $session->get ( 'utente_cognome' );
 $__utente_ruolo = $session->get ( 'utente_ruolo' );
+
+// TODO: rimuovere in nuova gestione permessi
 $ruolo_dirigente = ($__utente_ruolo === 'dirigente');
 $ruolo_segreteria = ($__utente_ruolo === 'segreteria');
 $ruolo_docente = ($__utente_ruolo === 'docente');
 
-if (empty ( $session->get ( 'docente_id' ) ) && $session->has ( 'utente_ruolo' ) && ($session->get ( 'utente_ruolo' ) === "docente" || $session->get ( 'utente_ruolo' ) === "segreteria-didattica")) {
+if (!$session->has ( 'docente_id' ) && $session->has ( 'utente_ruolo' ) && ($session->get ( 'utente_ruolo' ) === "docente" || $session->get ( 'utente_ruolo' ) === "segreteria-didattica")) {
     debug ( 'manca in sessione docente_id' );
-    require_once '../common/connect.php';
+    require_once '../common/connect.php'; // TODO: Adjust
     $query = "SELECT * FROM docente WHERE docente.username = '$__username'";
     debug ( $query );
     // console_log_data("query=", $query);
@@ -112,7 +113,7 @@ if (empty ( $session->get ( 'docente_id' ) ) && $session->has ( 'utente_ruolo' )
         // prende solo la prima ed unica riga
         $row = mysqli_fetch_assoc ( $result );
         // console_log("docente: ", $row);
-        
+
         $session->set ( 'docente_id', $row ['id'] );
         $session->set ( 'docente_nome', $row ['nome'] );
         $session->set ( 'docente_cognome', $row ['cognome'] );

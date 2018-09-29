@@ -1,7 +1,7 @@
 <?php
-require_once '../_test/path.php'; // TODO: Cambiare!!
-require_once $__common_include_path.'/_Session.php';
-require_once $__common_include_path.'/_Log.php';
+require_once __DIR__ . '/path.php';
+require_once __DIR__ . '/__Session.php';
+require_once __DIR__ . '/__Log.php';
 
 
 function redirect($url) {

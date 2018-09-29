@@ -1,6 +1,6 @@
 <?php
 
-require_once 'path.php';
+require_once __DIR__ . 'path.php';
 
 // funzione di trasformazione della password in hash
 function passwordHash($p) {
@@ -31,12 +31,12 @@ $_passwordHash = passwordHash($_password);
 
 // start della session
 if (session_status() == PHP_SESSION_NONE) {
-	session_set_cookie_params ( 10 );
+	session_set_cookie_params ( DURATA_SESSIONE );
 	session_start();
 }
 
 // controlla prima sul db locale
-require_once '../common/connect.php';
+require_once '../common/connect.php'; // TODO: Adjust
 $query = "SELECT password FROM utente WHERE username = '$_user'";
 
 if (!$result = mysqli_query($con, $query)) {

@@ -1,7 +1,7 @@
 <?php
-require_once $__common_include_path.'/__Environment.php';
+require_once __DIR__ . '/__Environment.php';
 if (defined('__production_environment')) {
-    
+
     function console_log($message, $data = "") {
     }
     function console_log_data($message, $data = "") {
@@ -15,7 +15,7 @@ if (defined('__production_environment')) {
     function error($message) {
     }
 } else if (defined('__test_environment') || defined('__development_environment')) {
-    
+
     function console_log($message, $data = "") {
     }
     function console_log_data($message, $data = "") {
