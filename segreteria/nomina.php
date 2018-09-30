@@ -2,7 +2,9 @@
 <head>
 <?php
 	require_once '../common/header-session.php';
+	ruoloRichiesto('dirigente','segreteria-docenti');
 	require_once '../common/connect.php';
+
 	$viaggio_id = $_GET["viaggio_id"];
 	$query = "
 				SELECT

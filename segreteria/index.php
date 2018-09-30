@@ -8,6 +8,7 @@
 <?php
 	require_once '../common/header-session.php';
 	require_once '../common/header-segreteria.php';
+	ruoloRichiesto('dirigente','segreteria-docenti');
 ?>
 
 <!-- Content Section -->

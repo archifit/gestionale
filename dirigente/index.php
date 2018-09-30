@@ -7,6 +7,7 @@
 <body >
 <?php
 	require_once '../common/header-session.php';
+	ruoloRichiesto('dirigente');
 	require_once '../common/header-dirigente.php';
 ?>
 

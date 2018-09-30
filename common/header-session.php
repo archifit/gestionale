@@ -1,11 +1,16 @@
 <?php
+
+require __DIR__ . '/checkSession.php';
+
+if (1 == false) {
+
 /**
 
  @Package Joomla.Site
  @subpackage mod_random_image
  @copyright Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
  @license GNU General Public License version 2 or later; see LICENSE.txt
- */
+
 
 // import namespace
 use Joomla\CMS\Factory;
@@ -239,4 +244,7 @@ debug ( '__docente_email=' . $__docente_email );
 // console_log("anno scolastico=", $session->get('anno_scolastico_corrente_anno'));
 // $mainframe = JFactory::getApplication('site');
 // $mainframe->logout( $user_id );
+ */
+
+}
 ?>

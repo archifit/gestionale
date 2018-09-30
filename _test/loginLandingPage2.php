@@ -4,7 +4,7 @@
 <?php
 require_once '../_test/checkSession.php';
 ?>
-	<title>Landing Page</title>
+	<title>Landing Page 2</title>
 </head>
 
 <body >
@@ -14,7 +14,7 @@ echo $__username.'</br>';
 echo $session->get('__username').'</br>';
 echo $session->get('__application_base_path').'</br>';
 echo $session->get('__application_base_path').'</br>';
-echo ( '__username=' . $__username ).'</br>';
+echo ( '2! __username=' . $__username ).'</br>';
 echo ( '__anno_scolastico_corrente_id=' . $__anno_scolastico_corrente_id ).'</br>';
 echo ( '__anno_scolastico_corrente_anno=' . $__anno_scolastico_corrente_anno ).'</br>';
 echo ( '__anno_scolastico_scorso_id=' . $__anno_scolastico_scorso_id ).'</br>';
@@ -27,9 +27,6 @@ echo ( '__docente_nome=' . $__docente_nome ).'</br>';
 echo ( '__docente_cognome=' . $__docente_cognome ).'</br>';
 echo ( '__docente_email=' . $__docente_email ).'</br>';
 
-echo '
-<a href='.$__application_base_path.'/_test/logout.php><span class="glyphicon glyphicon-log-out"></span>Logout</a>
-';
 ?>
 </body>
 </html>

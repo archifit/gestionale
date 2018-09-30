@@ -23,6 +23,7 @@
 		</ul>
 		<ul class="nav navbar-nav navbar-right top-navbar-nav">
 			<li><a><span class=""></span><?php echo $__utente_nome.' '.$__utente_cognome ?></a></li>
+			<li><?php echo '<a href='.$__application_base_path.'/common/logout.php?base=dirigente><span class="glyphicon glyphicon-log-out"></span></a>'; ?></li>
 		</ul>
 	</div>
 </nav>

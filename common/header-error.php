@@ -18,6 +18,7 @@
 <?php
 	if (! empty($__utente_nome)) {
 		echo "<li><a><span class=\"\"></span>$__utente_nome $__utente_cognome </a></li>";
+		echo '<li><a href='.$__application_base_path.'/common/logout.php?base=docente><span class="glyphicon glyphicon-log-out"></span></a></li>';
 	}
 ?>
 		</ul>

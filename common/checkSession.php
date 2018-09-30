@@ -3,7 +3,6 @@ require_once __DIR__ . '/__Util.php';
 
 // start session
 if (session_status() == PHP_SESSION_NONE) {
-	// session_set_cookie_params ( 60 * 60 * 24 * 365 * 10 ); // 10 anni
 	session_set_cookie_params ( DURATA_SESSIONE );
 	session_start();
 }
