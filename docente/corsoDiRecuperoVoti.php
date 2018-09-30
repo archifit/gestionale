@@ -76,12 +76,14 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <th>id</th>
-                    <th>Studente</th>
-                    <th>Voto settembre</th>
-                    <th>Docente settembre</th>
-                    <th>Voto novembre</th>
-                    <th>Docente novembre</th>
-                    <th>Passato</th>
+                    <th class="col-sm-2">Studente</th>
+                    <th class="col-sm-1">Voto settembre</th>
+                    <th class="col-sm-1">Data settembre</th>
+                    <th class="col-sm-2">Docente settembre</th>
+                    <th class="col-sm-1">Voto novembre</th>
+                    <th class="col-sm-1">Data novembre</th>
+                    <th class="col-sm-2">Docente novembre</th>
+                    <th class="col-sm-1">Passato</th>
                 </thead>
 ';
 
@@ -91,8 +93,10 @@
 							studente_per_corso_di_recupero.nome AS studente_per_corso_di_recupero_nome,
 							studente_per_corso_di_recupero.classe AS studente_per_corso_di_recupero_classe,
 							studente_per_corso_di_recupero.voto_settembre AS studente_per_corso_di_recupero_voto_settembre,
+							studente_per_corso_di_recupero.data_voto_settembre AS studente_per_corso_di_recupero_data_voto_settembre,
 							studente_per_corso_di_recupero.docente_voto_settembre_id AS studente_per_corso_di_recupero_docente_voto_settembre_id,
 							studente_per_corso_di_recupero.voto_novembre AS studente_per_corso_di_recupero_voto_novembre,
+							studente_per_corso_di_recupero.data_voto_novembre AS studente_per_corso_di_recupero_data_voto_novembre,
 							studente_per_corso_di_recupero.docente_voto_novembre_id AS studente_per_corso_di_recupero_docente_voto_novembre_id,
 							studente_per_corso_di_recupero.passato AS studente_per_corso_di_recupero_passato,
 							studente_per_corso_di_recupero.serve_voto AS studente_per_corso_di_recupero_serve_voto,
@@ -143,6 +147,10 @@
     							<td></td>';
     	        	$data .= '
     							<td></td>';
+    	        	$data .= '
+    							<td></td>';
+    	        	$data .= '
+    							<td></td>';
     	        } else {
     	        	$votoSettembre = $studenteRow['studente_per_corso_di_recupero_voto_settembre'];
     	        	$votoSettembreOptionList = '				<select  class="votoSettembre selectpicker" data-noneSelectedText="seleziona..." data-width="50%" ><option value="0"></option>';
@@ -164,6 +172,12 @@
     	        	$votoSettembreOptionList .= '</select>';
     	        	$data .= '
     							<td>'.$votoSettembreOptionList.'</td>';
+    	        	$dataSettembre = strftime("%d/%m/%Y", strtotime($studenteRow['studente_per_corso_di_recupero_data_voto_settembre']));
+    	        	if (empty($studenteRow['studente_per_corso_di_recupero_data_voto_settembre'])) {
+    	        		$dataSettembre = date('d/m/Y');
+    	        	}
+    	        	$data .= '
+    							<td><input type="text" placeholder="Data" class="form-control dataVotoSettembre" value="'.$dataSettembre.'" /></td>';
     	        	$docenteSettembre = $studenteRow['docente_set_cognome'].' '.$studenteRow['docente_set_nome'];
     	        	$data .= '
     							<td>
@@ -173,6 +187,8 @@
     	        	}
     	        	$data .= '
     	        				</td>';
+    	        	$data .= '
+    							<td></td>';
     	        	$data .= '
     							<td></td>';
     	        	$data .= '
@@ -289,6 +305,15 @@
 
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
+
+<!-- timejs -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>
+
+<!-- flatpickr -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.js"></script>
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/l10n/it.js"></script>
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/themes/material_red.css">
 
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green.css">
 

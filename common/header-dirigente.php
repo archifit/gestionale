@@ -22,6 +22,7 @@
 			<a href="<?php echo $__application_base_path; ?>/dirigente/sostituzioni.php" class="btn btn-default navbar-btn btn-danger" role="button"><span class="glyphicon glyphicon-retweet"></span>&ensp;Sostituzioni </a>
 		</ul>
 		<ul class="nav navbar-nav navbar-right top-navbar-nav">
+			<li><a href="http://www.martinomartini.eu/help/gestionale/html/Gestionale.html" target="_blank" ><span class="glyphicon glyphicon-question-sign"></span></a></li>
 			<li><a><span class=""></span><?php echo $__utente_nome.' '.$__utente_cognome ?></a></li>
 			<li><?php echo '<a href='.$__application_base_path.'/common/logout.php?base=dirigente><span class="glyphicon glyphicon-log-out"></span></a>'; ?></li>
 		</ul>

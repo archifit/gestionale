@@ -24,7 +24,18 @@ function registraDocenteSettembre(studente_per_corso_di_recupero_id, docente_id,
 		},
 		function (data, status) {
 			// scrive il nome del docente
-			$('td:nth-child(4)', $(__this).parents('tr')).text(docente_incaricato_cognomenome);
+			$('td:nth-child(5)', $(__this).parents('tr')).text(docente_incaricato_cognomenome);
+		}
+	);
+}
+function registraDataVoto(studente_per_corso_di_recupero_id, value, dbFieldName){
+	$.post("corsoDiRecuperoRegistraDataVoto.php", {
+		studente_per_corso_di_recupero_id: studente_per_corso_di_recupero_id,
+		dbFieldName: dbFieldName,
+		value: value
+		},
+		function (data, status) {
+			console.log(data);
 		}
 	);
 }
@@ -44,7 +55,7 @@ function corsoVotoSetDocente() {
     
     // scrive il nome docente aggiornato nella tabella
     var docente_voto_cognomenome = $("#docente_voto option:selected").text();
-    $('td:nth-child(4)', $(trSelected).parents('tr')).html(docente_voto_cognomenome + '<button onclick="votoDocenteSelect('+studente_per_corso_di_recupero_id+')" class="btnVotoDocenteSelect btn btn-warning btn-xs"><span class="glyphicon glyphicon-education"></button>');
+    $('td:nth-child(5)', $(trSelected).parents('tr')).html(docente_voto_cognomenome + '<button onclick="votoDocenteSelect('+studente_per_corso_di_recupero_id+')" class="btnVotoDocenteSelect btn btn-warning btn-xs"><span class="glyphicon glyphicon-education"></button>');
 	
 	// serve solo a memorizzare il TR dove si trova il bottone per aggiornare poi il nome docente (bisogna reinserirlo!)
 	$(".btnVotoDocenteSelect").on('click', function(e){
@@ -60,11 +71,34 @@ function corsoVotoSetDocente() {
 var trSelected;
 
 $(document).ready(function () {
+	dataVotoSettembre_pickr = flatpickr(".dataVotoSettembre", {
+		onChange: function(selectedDates, dateStr, instance) {
+			// difficile da ricavare: da instance il tr che lo contiene
+			var element = instance.input.parentElement.parentElement;
+			var studente_per_corso_di_recupero_id = $('td:first', element).text();
+			var data_voto_date = Date.parseExact(dateStr, 'd/M/yyyy');
+			var data = data_voto_date.toString('yyyy-MM-dd');
+			instance.close();
+			registraDataVoto(studente_per_corso_di_recupero_id, data,'data_voto_settembre');
+	    },
+		locale: {
+			firstDayOfWeek: 1
+		},
+		dateFormat: 'j/n/Y'
+	});
+
 	// serve solo a memorizzare il TR dove si trova il bottone per aggiornare poi il nome docente
 	$(".btnVotoDocenteSelect").on('click', function(e){
 		var studente_per_corso_di_recupero_id = $('td:first', $(this).parents('tr')).text();
 		  trSelected = this;
 		});
+	$(".btnVotoDocenteSelect").on('change', function(e){
+		var data = this.value;
+		var studente_per_corso_di_recupero_id = $('td:first', $(this).parents('tr')).text();
+		alert('data='+data+ 'id='+studente_per_corso_di_recupero_id);
+	});
+
+	flatpickr.localize(flatpickr.l10ns.it);
 
 	$(".votoSettembre").on('change', function(e){
 		var voto = this.value;

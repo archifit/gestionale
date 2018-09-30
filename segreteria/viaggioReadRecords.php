@@ -7,6 +7,7 @@
 
 	// Design initial table header
 	$data = '<div class="table-wrapper"><table class="table table-bordered table-striped table-green">
+						<thead>
 						<tr>
 							<th>Data</th>
 							<th>Docente</th>
@@ -16,7 +17,8 @@
 							<th class="text-center">Stampa</th>
 							<th class="text-center">Email</th>
 							<th class="text-center">Rimborso</th>
-						</tr>';
+						</tr>
+						</thead>';
 
 	$query = "	SELECT
 					viaggio.id AS viaggio_id,
