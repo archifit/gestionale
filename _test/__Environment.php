@@ -1,5 +1,5 @@
 <?php
-define ( '__production_environment', '__production_environment' );
+define ( '__development_environment', '__development_environment' );
 
 if (defined('__production_environment')) {
 	define ( 'DURATA_SESSIONE', 60 * 60 * 24 * 365 ); // un anno
