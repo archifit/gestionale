@@ -64,12 +64,18 @@ $headers .= "X-Mailer: PHP " . phpversion();
 
 // Corpi del messaggio nei due formati testo e HTML
 $text_msg = "Incarico";
+
+$connection = 'http';
+if (defined('__https')) {
+    $connection = 'https';
+}
+$url = "$connection://$_SERVER[HTTP_HOST]".$__application_base_path . '/docente/viaggio.php';
 $html_msg = '
 <html><body>
 Gentile '.$row['docente_nome'].' '.$row['docente_cognome'].'
 <p>in data '.$dataNomina.' il Dirigente Scolastico le ha conferito l&rsquo;incarico di accompagnatore degli studenti durante '.$tipoViaggio.' a <b>'.$row['viaggio_destinazione'].'</b> del giorno <b>'.$dataPartenza.'</b></p>
 <p>La preghiamo di confermare al pi&ugrave; presto la sua disponibilit&agrave; confermando sul sito di
-<a href=\'http://localhost/joomla/gestionale/docente/viaggio.php\'>accettare l&rsquo;incarico</a></p>
+<a href=\''.$url.'\'>accettare l&rsquo;incarico</a></p>
 <p>gestionale martini</p>
 </body></html>
 ';
