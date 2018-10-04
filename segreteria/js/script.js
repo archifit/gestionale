@@ -12,11 +12,67 @@ $('#testCheckBox').change(function() {
 });
 
 function ricalcola() {
+	var profilo_tipo_di_contratto = $("#profilo_tipo_di_contratto").val();
 	var profilo_giorni_di_servizio = $("#profilo_giorni_di_servizio").val();
 	var profilo_ore_di_cattedra = $("#profilo_ore_di_cattedra").val();
+	var profilo_ore_eccedenti = 0;
+	
+	// cattedra + 18 ore, 33 eccedenti
 	if (profilo_ore_di_cattedra > 18) {
+		 profilo_ore_eccedenti = 33;
 		$("#profilo_ore_eccedenti").val("33");
+		profilo_ore_di_cattedra = 18;
 	}
+	$("#profilo_ore_eccedenti").val(profilo_ore_eccedenti);
+
+	// calcola lo standard di 300 gg con 18 ore di cattedra rispetto ai giorni di servizio e ore effettive
+	var coefficente = (profilo_giorni_di_servizio * profilo_ore_di_cattedra) / (18 * 300);
+
+	// NB: Per evitare somme di errori decimali, calcola prima il totale (80, 40, 70)
+	var totale_80 = Math.round(coefficente * 80);
+	var totale_40 = Math.round(coefficente * 40);
+	var totale_70 = Math.round(coefficente * 70);
+	// scale le ore eccedenti
+	if (profilo_ore_eccedenti > 0) {
+		totale_70 = Math.round(coefficente * 70 - (profilo_ore_eccedenti / 300 * profilo_giorni_di_servizio));
+	}
+	// se breve, le 70 diventano 0
+	if (profilo_tipo_di_contratto.toUpperCase() === "BREVE") {
+		totale_70 = 0;
+	}
+	
+	// le 80 non devono sommare ad 80, tanto ci sono anche min e max
+	$("#profilo_ore_80_collegio_docenti").val(Math.round(coefficente * 8));
+	$("#profilo_ore_80_udienze").val(Math.round(coefficente * 8));
+	$("#profilo_ore_80_aggiornamento").val(Math.round(coefficente * 10));
+	$("#profilo_ore_80_dipartimenti_min").val(Math.round(coefficente * 12));
+	$("#profilo_ore_80_dipartimenti_max").val(Math.round(coefficente * 24));
+	$("#profilo_ore_80_consigli_di_classe").val(Math.round(coefficente * 30));
+
+	// le 40 si
+	var profilo_ore_40_sostituzioni = Math.round(coefficente * 12);
+	var profilo_ore_40_con_studenti = Math.round(coefficente * 18);
+	// il resto in aggiornamento
+	var profilo_ore_40_aggiornamento = totale_40 - profilo_ore_40_sostituzioni - profilo_ore_40_con_studenti;
+	$("#profilo_ore_40_sostituzioni").val(profilo_ore_40_sostituzioni);
+	$("#profilo_ore_40_con_studenti").val(profilo_ore_40_con_studenti);
+	$("#profilo_ore_40_aggiornamento").val(profilo_ore_40_aggiornamento);
+
+	// le 70 anche
+	var profilo_ore_70_funzionali = Math.round(coefficente * 30);
+	// il resto con studenti
+	var profilo_ore_70_con_studenti = totale_70 - profilo_ore_70_funzionali;
+	$("#profilo_ore_70_funzionali").val(profilo_ore_70_funzionali);
+	$("#profilo_ore_70_con_studenti").val(profilo_ore_70_con_studenti);
+
+	if (profilo_tipo_di_contratto.toUpperCase() === "BREVE") {
+		$("#profilo_ore_70_funzionali").val(0);
+		$("#profilo_ore_70_con_studenti").val(0);
+	}
+
+	$("#profilo_ore_80_totale").val(totale_80);
+	$("#profilo_ore_40_totale").val(totale_40);
+	$("#profilo_ore_70_totale").val(totale_70);
 }
 
 // Add record

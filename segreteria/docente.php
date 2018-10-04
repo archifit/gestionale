@@ -162,7 +162,7 @@
                 <h4 class="modal-title" id="myModalProfiloLabel">Aggiorna Profilo</h4>
             </div>
             <div class="panel-body">
-			<form class="form-horizontal">
+			<div class="form-horizontal">
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="update_nome">Docente</label>
@@ -245,7 +245,7 @@
                     <div class="col-sm-2"><input type="text" id="profilo_ore_70_totale" placeholder="tot 70" class="form-control" readonly /></div>
                 </div>
 
-			</form>
+			</div>
 
             </div>
 			<div class="panel-footer text-center">
