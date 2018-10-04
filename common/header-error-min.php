@@ -69,7 +69,7 @@ if (! empty ( $__utente_nome )) {
 	echo "<li><a><span class=\"\"></span>echo $__utente_nome.' '.$__utente_cognome </a></li>";
 }
 ?>
-			<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			<li><?php echo '<a href='.$__application_base_path.'/common/logout.php?base=segreteria><span class="glyphicon glyphicon-log-out"></span></a>'; ?></li>
 		</ul>
 	</div>
 </nav>

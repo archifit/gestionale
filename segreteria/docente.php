@@ -166,65 +166,89 @@
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label" for="update_nome">Docente</label>
-                    <div class="col-sm-8"><input type="text" id="profilo_cognome_e_nome" placeholder="cognome e nome" class="form-control" readonly /></div>
+                    <div class="col-sm-5"><input type="text" id="profilo_cognome_e_nome" placeholder="cognome e nome" class="form-control" readonly /></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_tipo_di_contratto">Contratto</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_tipo_di_contratto" placeholder="contratto" class="form-control"/></div>
+
+					<button onclick="ricalcola()" class="btn btn-danger"><span class="glyphicon glyphicon-calendar"></span></button>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label" for="profilo_classe_di_concorso">Classe di concorso</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_classe_di_concorso" placeholder="classe di concorso" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_giorni_di_servizio">gg Servizio</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_giorni_di_servizio" placeholder="servizio" class="form-control"/></div>
 
-                    <label class="col-sm-3 control-label" for="profilo_tipo_di_contratto">Tipo di contratto</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_tipo_di_contratto" placeholder="tipo di contratto" class="form-control"/></div>
-                </div>
-                <hr>
-
-                <div class="form-group">
-                    <label class="col-sm-2 control-label" for="profilo_giorni_di_servizio">gg di Servizio</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_giorni_di_servizio" placeholder="giorni di servizio" class="form-control"/></div>
-
-                    <label class="col-sm-2 control-label" for="profilo_ore_di_cattedra">Ore di cattedra</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_di_cattedra" placeholder="ore di cattedra" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_di_cattedra">ore Cattedra</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_di_cattedra" placeholder="cattedra" class="form-control"/></div>
 
                     <label class="col-sm-2 control-label" for="profilo_ore_eccedenti">Eccedenti</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_eccedenti" placeholder="ore eccedenti" class="form-control"/></div>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_eccedenti" placeholder="ore" class="form-control"/></div>
                 </div>
+
                 <hr>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_70_con_studenti">70 con studenti</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_70_con_studenti" placeholder="ore dovute 70 con studenti" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_collegio_docenti">Collegio Doc (8)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_collegio_docenti" placeholder="cd" class="form-control"/></div>
 
-                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_70_funzionali">70 funzionali</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_70_funzionali" placeholder="ore dovute 70 funzionali" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_udienze">Udienze Gen (8)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_udienze" placeholder="udienze" class="form-control"/></div>
 
-                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_40">40</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_40" placeholder="ore dovute 40" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_aggiornamento">Aggiorn. (10)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_aggiornamento" placeholder="agg" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_supplenze">Supplenze</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_supplenze" placeholder="ore dovute supplenze" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_dipartimenti_min">Dip min (12)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_dipartimenti_min" placeholder="Dip min" class="form-control"/></div>
 
-                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_aggiornamento">Aggiornamento</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_aggiornamento" placeholder="ore dovute aggiornamento" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_dipartimenti_max">Dip Max (24)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_dipartimenti_max" placeholder="Dip Max" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_consigli_di_classe">CDC (30)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_consigli_di_classe" placeholder="cdc" class="form-control"/></div>
                 </div>
+
                 <hr>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_totale_con_studenti">Con Studenti</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_totale_con_studenti" placeholder="ore dovute totale con studenti" class="form-control" readonly /></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_40_sostituzioni">Sostituzioni (12)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_40_sostituzioni" placeholder="sost" class="form-control"/></div>
 
-                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_totale_funzionali">Funzionali</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_totale_funzionali" placeholder="ore dovute totale funzionali" class="form-control" readonly /></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_40_con_studenti">con Stud. (18)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_40_con_studenti" placeholder="stud" class="form-control"/></div>
 
-                    <label class="col-sm-2 control-label" for="profilo_ore_dovute_totale">Totale</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_dovute_totale" placeholder="ore dovute totale" class="form-control" readonly /></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_40_aggiornamento">Aggiorn. (10)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_40_aggiornamento" placeholder="Agg" class="form-control"/></div>
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="profilo_ore_70_funzionali">Funzionali (30)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_70_funzionali" placeholder="funz" class="form-control"/></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_70_con_studenti">con Stud. (40)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_70_con_studenti" placeholder="stud" class="form-control"/></div>
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_totale">Tot. 80</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_totale" placeholder="tot 80" class="form-control" readonly /></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_40_totale">Tot. 40</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_40_totale" placeholder="tot 40" class="form-control" readonly /></div>
+
+                    <label class="col-sm-2 control-label" for="profilo_ore_70_totale">Tot. 70</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_70_totale" placeholder="tot 70" class="form-control" readonly /></div>
                 </div>
 
 			</form>
 
             </div>
-			<div class="modal-footer">
+			<div class="panel-footer text-center">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
 				<button type="button" class="btn btn-primary" onclick="profiloUpdateDetails()" >Salva</button>
 				<input type="hidden" id="hidden_profilo_id">

@@ -3,6 +3,10 @@ require_once __DIR__ . '/path.php';
 require_once __DIR__ . '/__Session.php';
 require_once __DIR__ . '/__Log.php';
 
+function escapePost($parameter) {
+    global $con;
+    return mysqli_real_escape_string($con, $_POST[$parameter]);
+}
 
 function redirect($url) {
     global $__application_base_path;

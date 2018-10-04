@@ -11,6 +11,10 @@ $('#testCheckBox').change(function() {
     }
 });
 
+function ricalcola() {
+	
+}
+
 // Add record
 function docenteAddRecord() {
     // get values
