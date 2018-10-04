@@ -12,7 +12,11 @@ $('#testCheckBox').change(function() {
 });
 
 function ricalcola() {
-	
+	var profilo_giorni_di_servizio = $("#profilo_giorni_di_servizio").val();
+	var profilo_ore_di_cattedra = $("#profilo_ore_di_cattedra").val();
+	if (profilo_ore_di_cattedra > 18) {
+		$("#profilo_ore_eccedenti").val("33");
+	}
 }
 
 // Add record
