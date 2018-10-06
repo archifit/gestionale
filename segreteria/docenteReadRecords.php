@@ -13,7 +13,6 @@
 							<th>Email</th>
 							<th>Username</th>
 							<th>Matricola</th>
-							<th>Dovute</th>
 							<th>Attivo</th>
 							<th>Profilo</th>
 							<th>Modifica</th>
@@ -21,16 +20,12 @@
 
 	$query = "	SELECT
 					docente.id AS local_docente_id,
-					profilo_docente.id AS local_profilo_docente_id,
-					docente.*, profilo_docente.*
+					docente.*
 				FROM docente
-				INNER JOIN profilo_docente
-				ON docente.id = profilo_docente.docente_id
-				WHERE profilo_docente.anno_scolastico_id = $__anno_scolastico_corrente_id
 				";
 
 	if( $soloAttivi) {
-		$query .= "AND docente.attivo = true ";
+		$query .= "WHERE docente.attivo = true ";
 	}
 	$query .= "order by cognome,nome";
 
@@ -48,7 +43,6 @@
 			<td>'.$row['email'].'</td>
 			<td>'.$row['username'].'</td>
 			<td>'.$row['matricola'].'</td>
-			<td>'.$row['ore_dovute_totale'].'</td>
 			';
 
 			$data .= '<td class="text-center"><input type="checkbox" disabled data-toggle="toggle" data-onstyle="primary" id="attivo" ';
@@ -61,11 +55,11 @@
 
 	if ($row['attivo'] == 1) {
 		$data .='
-				<button onclick="profiloGetDetails(\''.$row['cognome'].'\',\''.$row['nome'].'\',\''.$row['local_profilo_docente_id'].'\')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-cog"></button>
+				<button onclick="profiloGetDetails(\''.$row['local_docente_id'].'\')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-cog"></button>
 				</td>';
 	} else {
 		$data .='
-				<button onclick="profiloGetDetails(\''.$row['cognome'].'\',\''.$row['nome'].'\',\''.$row['local_docente_id'].'\')" class="btn btn-info btn-xs disabed" disabled="disabled" ><span class="glyphicon glyphicon-cog"></button>
+				<button onclick="profiloGetDetails(\''.$row['local_docente_id'].'\')" class="btn btn-info btn-xs disabed" disabled="disabled" ><span class="glyphicon glyphicon-cog"></button>
 				</td>';
 	}
 	$data .='

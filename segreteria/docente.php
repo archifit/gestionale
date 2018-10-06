@@ -188,14 +188,14 @@
                 <hr>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="profilo_ore_80_collegio_docenti">Collegio Doc (8)</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_collegio_docenti" placeholder="cd" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_collegi_docenti">Collegio Doc (8)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_collegi_docenti" placeholder="cd" class="form-control"/></div>
 
-                    <label class="col-sm-2 control-label" for="profilo_ore_80_udienze">Udienze Gen (8)</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_udienze" placeholder="udienze" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_udienze_generali">Udienze Gen (8)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_udienze_generali" placeholder="udienze" class="form-control"/></div>
 
-                    <label class="col-sm-2 control-label" for="profilo_ore_80_aggiornamento">Aggiorn. (10)</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_aggiornamento" placeholder="agg" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_80_aggiornamento_facoltativo">Aggiorn. (10)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_80_aggiornamento_facoltativo" placeholder="agg" class="form-control"/></div>
                 </div>
 
                 <div class="form-group">
@@ -212,8 +212,8 @@
                 <hr>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="profilo_ore_40_sostituzioni">Sostituzioni (12)</label>
-                    <div class="col-sm-2"><input type="text" id="profilo_ore_40_sostituzioni" placeholder="sost" class="form-control"/></div>
+                    <label class="col-sm-2 control-label" for="profilo_ore_40_sostituzioni_di_ufficio">Sostituzioni (12)</label>
+                    <div class="col-sm-2"><input type="text" id="profilo_ore_40_sostituzioni_di_ufficio" placeholder="sost" class="form-control"/></div>
 
                     <label class="col-sm-2 control-label" for="profilo_ore_40_con_studenti">con Stud. (18)</label>
                     <div class="col-sm-2"><input type="text" id="profilo_ore_40_con_studenti" placeholder="stud" class="form-control"/></div>
@@ -251,7 +251,8 @@
 			<div class="panel-footer text-center">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
 				<button type="button" class="btn btn-primary" onclick="profiloUpdateDetails()" >Salva</button>
-				<input type="hidden" id="hidden_profilo_id">
+				<input type="hidden" id="hidden_profilo_docente_id">
+				<input type="hidden" id="hidden_ore_dovute_id">
 			</div>
 			</div>
 			</div>
