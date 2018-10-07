@@ -42,7 +42,7 @@
 		$counter = 0;
 		foreach($resultArray as $row) {
 			$docenteOptionList .= '
-				<option value="'.$row['id'].'" data-subtext="'.$row['username'].'">'.$row['nome'].' '.$row['cognome'].'</option>
+				<option value="'.$row['id'].'" data-subtext="'.$row['username'].'">'.$row['cognome'].' '.$row['nome'].'</option>
 			';
 		}
 	}

@@ -23,140 +23,246 @@
 </div>
 <div class="panel-body">
 
-<div class="panel panel-success">
-<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;40/70 ore</div>
+<div class="panel panel-info">
+<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;70 ore</div>
 <div class="panel-body">
 
-<?php
-		$query = "	SELECT * FROM profilo_docente
-					WHERE profilo_docente.anno_scolastico_id = $__anno_scolastico_corrente_id
-					AND profilo_docente.docente_id = $__docente_id";
- console_log_data("query=", $query);
-		if (!$result = mysqli_query($con, $query)) {
-			exit(mysqli_error($con));
-		}
-		$ore_dovute_totale_con_studenti = 0;
-		$ore_dovute_totale_funzionali = 0;
-		$ore_dovute_totale = 0;
-		if(mysqli_num_rows($result) > 0) {
-			if ($row = mysqli_fetch_assoc($result)) {
-				$ore_dovute_totale_con_studenti = $row['ore_dovute_totale_con_studenti'];
-				$ore_dovute_totale_funzionali = $row['ore_dovute_totale_funzionali'];
-				$ore_dovute_totale = $row['ore_dovute_totale'];
-			}
-		}
-		else {
-			$response['status'] = 200;
-			$response['message'] = "Data not found!";
-		}
-
-		$query = "	SELECT * FROM ore_docente
-					WHERE ore_docente.anno_scolastico_id = $__anno_scolastico_corrente_id
-					AND ore_docente.docente_id = $__docente_id";
- console_log_data("query=", $query);
-		if (!$result = mysqli_query($con, $query)) {
-			warning('errore nella query: ' . $query);
-			exit(mysqli_error($con));
-		}
-		$ore_previste_con_studenti = 0;
-		$ore_previste_funzionali = 0;
-		$ore_previste_totale = 0;
-		$ore_previste_fuis = 0;
-		$ore_fatte_con_studenti = 0;
-		$ore_fatte_funzionali = 0;
-		$ore_fatte_totale = 0;
-		$ore_fatte_fuis = 0;
-		$ore_concordate_fuis = 0;
-		if(mysqli_num_rows($result) > 0) {
-			if ($row = mysqli_fetch_assoc($result)) {
-				$ore_previste_con_studenti = $row['ore_previste_con_studenti'];
-				$ore_previste_funzionali = $row['ore_previste_funzionali'];
-				$ore_previste_totale = $row['ore_previste_totale'];
-				$ore_previste_fuis = $row['ore_previste_fuis'];
-				$ore_fatte_con_studenti = $row['ore_fatte_con_studenti'];
-				$ore_fatte_funzionali = $row['ore_fatte_funzionali'];
-				$ore_fatte_totale = $row['ore_fatte_totale'];
-				$ore_fatte_fuis = $row['ore_fatte_fuis'];
-				$ore_concordate_fuis = $row['ore_concordate_fuis'];
-			}
-		}
-		else {
-			warning('problema: non ci sono le ore di ' . $__docente_id);
-			$response['status'] = 200;
-			$response['message'] = "Data not found!";
-		}
-
-		$data = '
-			<div class="table-wrapper">
-			<table class="table table-vcolor-index">
-				<thead>
-					<tr>
-						<th></th>
-						<th>dovute</th>
-						<th colspan="2">previste</th>
-						<th>fatte</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="col-md-3">con studenti</td>
-						<td class="col-md-3">'.$ore_dovute_totale_con_studenti.'</td>
-						<td class="col-md-2">'.$ore_previste_con_studenti.'</td>
-						<td class="col-md-1">
-							<button onclick="previsteConStudenti(\''.$row['id'].'\',\''.$ore_dovute_totale_con_studenti.'\',\''.$ore_previste_con_studenti.'\',\''.$ore_fatte_con_studenti.'\')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-cog"></button>
-						</td>
-						<td class="col-md-3">'.$ore_fatte_con_studenti.'</td>
-					</tr>
-					<tr>
-						<td>funzionali</td>
-						<td>'.$ore_dovute_totale_funzionali.'</td>
-						<td>'.$ore_previste_funzionali.'
-						</td>
-						<td>
-							<button onclick="previsteFunzionali(\''.$row['id'].'\',\''.$ore_dovute_totale_funzionali.'\',\''.$ore_previste_funzionali.'\',\''.$ore_fatte_funzionali.'\')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-cog"></button>
-						</td>
-						<td>'.$ore_fatte_funzionali.'</td>
-					</tr>
-					<tr>
-						<td>totale</td>
-						<td>'.$ore_dovute_totale.'</td>
-						<td>'.$ore_previste_totale.'</td>
-						<td></td>
-						<td>'.$ore_fatte_totale.'</td>
-					</tr>
-				';
-	    $data .= '
-			</table>
-			</div>';
-//		echo $data;
-?>
+	<div class="table-wrapper">
+	<table class="table table-vnocolor-index">
+		<thead>
+			<tr>
+				<th class="col-md-2"></th>
+				<th class="col-md-3 text-center">Funzionali</th>
+				<th class="col-md-3 text-center">con Studenti</th>
+				<th class="col-md-4 text-center">Totale</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>dovute</td>
+				<td class="text-center" id="dovute_ore_70_funzionali"></td>
+				<td class="text-center" id="dovute_ore_70_con_studenti"></td>
+				<td class="text-center" id="dovute_ore_70_totale"></td>
+			</tr>
+			<tr>
+				<td>previste</td>
+				<td class="text-center" id="previste_ore_70_funzionali"></td>
+				<td class="text-center" id="previste_ore_70_con_studenti"></td>
+				<td class="text-center" id="previste_ore_70_totale"></td>
+			</tr>
+			<tr>
+				<td>fatte</td>
+				<td class="text-center" id="fatte_ore_70_funzionali"></td>
+				<td class="text-center" id="fatte_ore_70_con_studenti"></td>
+				<td class="text-center" id="fatte_ore_70_totale"></td>
+			</tr>
 		</tbody>
 	</table>
+	</div>
+</div>
+<!-- <div class="panel-footer"></div> -->
+</div>
+
+<div class="panel panel-success">
+<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;40 ore</div>
+<div class="panel-body">
+
+	<div class="table-wrapper">
+	<table class="table table-vnocolor-index">
+		<thead>
+			<tr>
+				<th class="col-md-2"></th>
+				<th class="col-md-2 text-center">Sostituzioni</th>
+				<th class="col-md-2 text-center">Aggiornamento</th>
+				<th class="col-md-2 text-center">con Studenti</th>
+				<th class="col-md-3 text-center">Totale</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>dovute</td>
+				<td class="text-center" id="dovute_ore_40_sostituzioni_di_ufficio"></td>
+				<td class="text-center" id="dovute_ore_40_aggiornamento"></td>
+				<td class="text-center" id="dovute_ore_40_con_studenti"></td>
+				<td class="text-center" id="dovute_ore_40_totale"></td>
+			</tr>
+			<tr>
+				<td>previste</td>
+				<td class="text-center" id="previste_ore_40_sostituzioni_di_ufficio"></td>
+				<td class="text-center" id="previste_ore_40_aggiornamento"></td>
+				<td class="text-center" id="previste_ore_40_con_studenti"></td>
+				<td class="text-center" id="previste_ore_40_totale"></td>
+			</tr>
+			<tr>
+				<td>fatte</td>
+				<td class="text-center" id="fatte_ore_40_sostituzioni_di_ufficio"></td>
+				<td class="text-center" id="fatte_ore_40_aggiornamento"></td>
+				<td class="text-center" id="fatte_ore_40_con_studenti"></td>
+				<td class="text-center" id="fatte_ore_40_totale"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
 </div>
 
 <!-- <div class="panel-footer"></div> -->
 </div>
 
 <div class="panel panel-warning">
-<div class="panel-heading"><span class="glyphicon glyphicon-time"></span>&emsp;80 ore</div>
+<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;80 ore</div>
 <div class="panel-body">
 
- </div>
-
+	<div class="table-wrapper">
+	<table class="table table-vnocolor-index">
+		<thead>
+			<tr>
+				<th class="col-md-2 text-center"></th>
+				<th class="col-md-1 text-center">Collegio Doc.</th>
+				<th class="col-md-1 text-center">Udienze</th>
+				<th class="col-md-1 text-center">Dip. (min)</th>
+				<th class="col-md-1 text-center">Dip. (max)</th>
+				<th class="col-md-1 text-center">Aggioranmento</th>
+				<th class="col-md-1 text-center">CdC</th>
+				<th class="col-md-2 text-center">Totale</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="col-md-2">dovute</td>
+				<td class="text-center" id="dovute_ore_80_collegi_docenti"></td>
+				<td class="text-center" id="dovute_ore_80_udienze_generali"></td>
+				<td class="text-center" id="dovute_ore_80_dipartimenti_min"></td>
+				<td class="text-center" id="dovute_ore_80_dipartimenti_max"></td>
+				<td class="text-center" id="dovute_ore_80_aggiornamento_facoltativo"></td>
+				<td class="text-center" id="dovute_ore_80_consigli_di_classe"></td>
+				<td class="text-center" id="dovute_ore_80_totale"></td>
+			</tr>
+			<tr>
+				<td class="col-md-2">previste</td>
+				<td class="text-center" id="previste_ore_80_collegi_docenti"></td>
+				<td class="text-center" id="previste_ore_80_udienze_generali"></td>
+				<td class="text-center" id="previste_ore_80_dipartimenti_min"></td>
+				<td class="text-center" id="previste_ore_80_dipartimenti_max"></td>
+				<td class="text-center" id="previste_ore_80_aggiornamento_facoltativo"></td>
+				<td class="text-center" id="previste_ore_80_consigli_di_classe"></td>
+				<td class="text-center" id="previste_ore_80_totale"></td>
+			</tr>
+			<tr>
+				<td class="col-md-2">fatte</td>
+				<td class="text-center" id="fatte_ore_80_collegi_docenti"></td>
+				<td class="text-center" id="fatte_ore_80_udienze_generali"></td>
+				<td class="text-center" id="fatte_ore_80_dipartimenti_min"></td>
+				<td class="text-center" id="fatte_ore_80_dipartimenti_max"></td>
+				<td class="text-center" id="fatte_ore_80_aggiornamento_facoltativo"></td>
+				<td class="text-center" id="fatte_ore_80_consigli_di_classe"></td>
+				<td class="text-center" id="fatte_ore_80_totale"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
 <!-- <div class="panel-footer"></div> -->
 </div>
 
-<div class="panel panel-danger">
-<div class="panel-heading"><span class="glyphicon glyphicon-picture"></span>&emsp;Uscite</div>
+
+
+
+ </div>
+<!-- <div class="panel-footer"></div> -->
+</div>
+
+
+<div class="panel panel-info">
+<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;...</div>
 <div class="panel-body">
+    <div class="row"  style="margin-bottom:10px;">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+            <div class="pull-right">
+				<button class="btn btn-success" data-toggle="modal" data-target="#update_attivita_modal"><span class="glyphicon glyphicon-plus"></span>&ensp;Aggiungi attività </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="attivita_previste_records_content"></div>
+        </div>
+    </div>
 </div>
 
 <!-- <div class="panel-footer"></div> -->
 </div>
- </div>
 
-<!-- <div class="panel-footer"></div> -->
+<?php
+	// prepara l'elenco dei tipi di attivita
+	$categoria = '';
+	$tipoAttivitaOptionList = '				<option value="0"></option>';
+	$query = "	SELECT * FROM attivita_tipo
+				WHERE attivita_tipo.valido = true
+				ORDER BY attivita_tipo.categoria, attivita_tipo.nome ASC
+				;";
+	if (!$result = mysqli_query($con, $query)) {
+		exit(mysqli_error($con));
+	}
+	if(mysqli_num_rows($result) > 0) {
+		$resultArray = $result->fetch_all(MYSQLI_ASSOC);
+		foreach($resultArray as $row) {
+			if ($categoria !== $row['categoria']) {
+				if ($categoria !== '') {
+					$tipoAttivitaOptionList .= '</optgroup>';
+				}
+				$categoria = $row['categoria'];
+				$tipoAttivitaOptionList .= '<optgroup label="'.$categoria.'">';
+			}
+			$tipoAttivitaOptionList .= '
+				<option value="'.$row['id'].'" >'.$row['nome'].'</option>
+			';
+		}
+		$tipoAttivitaOptionList .= '</optgroup>';
+	}
+?>
+
+<!-- Modal - attivita details -->
+<div class="modal fade" id="update_attivita_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Attività Prevista</h4>
+            </div>
+            <div class="modal-body">
+			<div class="form-horizontal">
+
+                <div class="form-group tipo_attivita_selector">
+                    <label class="col-sm-3 control-label" for="tipo_attivita">Tipo attività</label>
+					<div class="col-sm-8"><select id="tipo_attivita" name="tipo_attivita" class="tipo_attivita selectpicker" data-live-search="true"
+					data-noneSelectedText="seleziona..." data-width="70%" >
+<?php echo $tipoAttivitaOptionList ?>
+					</select></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="update_ore">Ore</label>
+                    <div class="col-sm-3"><input type="text" id="update_ore" placeholder="ore" class="form-control"/></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="update_dettaglio">dettaglio</label>
+                    <div class="col-sm-9"><input type="text" id="update_dettaglio" placeholder="..." class="form-control"/></div>
+                </div>
+            </div>
+            </div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+				<button type="button" class="btn btn-primary" onclick="attivitaPrevistaSalva()" >Salva</button>
+				<input type="hidden" id="hidden_ore_previste_attivita_id">
+				<input type="hidden" id="hidden_ore_previste_id">
+			</div>
+        </div>
+    </div>
 </div>
+<!-- // Modal - Update docente details -->
 
 </div>
 
@@ -165,7 +271,11 @@
 	require_once '../common/style.php';
 ?>
 
-<link rel="stylesheet" href="/gestionale/css/table-vcolor-index.css">
+<!-- boostrap-select -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/i18n/defaults-it_IT.min.js"></script>
+
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-vcolor-index.css">
 
 <script type="text/javascript" src="js/scriptIndex.js"></script>
 </body>

@@ -245,6 +245,13 @@
                     <div class="col-sm-2"><input type="text" id="profilo_ore_70_totale" placeholder="tot 70" class="form-control" readonly /></div>
                 </div>
 
+                <hr>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="profilo_note">Note</label>
+                    <div class="col-sm-10"><textarea rows="3" id="profilo_note" placeholder="note" class="form-control" ></textarea></div>
+                </div>
+
 			</div>
 
             </div>

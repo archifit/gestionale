@@ -18,6 +18,7 @@
                         profilo_docente.giorni_di_servizio AS giorni_di_servizio,
                         profilo_docente.ore_di_cattedra AS ore_di_cattedra,
                         profilo_docente.ore_eccedenti AS ore_eccedenti,
+                        profilo_docente.note AS note,
                         ore_dovute.id AS ore_dovute_id,
                         ore_dovute.ore_80_collegi_docenti AS ore_80_collegi_docenti,
                         ore_dovute.ore_80_udienze_generali AS ore_80_udienze_generali,
@@ -55,7 +56,9 @@
 		    // se non trovo una riga, devo inserirla ora!
 		    $createQuery1 = "INSERT INTO profilo_docente (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
 		    $createQuery2 = "INSERT INTO ore_dovute (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
-		    
+		    $createQuery2 = "INSERT INTO ore_previste (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
+		    $createQuery2 = "INSERT INTO ore_fatte (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
+
 		    if (!$result = mysqli_query($con, $createQuery1)) {
 		        exit(mysqli_error($con));
 		    }

@@ -29,7 +29,7 @@
 					viaggio.data_partenza DESC
 				"
 				;
-info($query);
+debug($query);
 	if (!$result = mysqli_query($con, $query)) {
 		exit(mysqli_error($con));
 	}

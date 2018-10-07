@@ -84,7 +84,7 @@ function profiloGetDetails(docente_id) {
 			id: docente_id
 		},
 		function (data, status) {
-			console.log(data);
+			// console.log(data);
 				// PARSE json data
 				var profilo = JSON.parse(data);
 				// setting existing values to the modal popup fields
@@ -107,6 +107,7 @@ function profiloGetDetails(docente_id) {
 				$("#profilo_ore_70_funzionali").val(profilo.ore_70_funzionali);
 				$("#profilo_ore_70_con_studenti").val(profilo.ore_70_con_studenti);
 				$("#profilo_ore_70_totale").val(profilo.ore_70_totale);
+				$("#profilo_note").val(profilo.note);
 				
 				// hidden fields
 				$("#hidden_profilo_docente_id").val(profilo.profilo_docente_id);
@@ -142,6 +143,8 @@ function profiloUpdateDetails() {
 	var ore_70_con_studenti = $("#profilo_ore_70_con_studenti").val();
 	var ore_70_totale = $("#profilo_ore_70_totale").val();
 
+	var note = $("#profilo_note").val();
+
 	// get hidden field value
 	var profilo_id = $("#hidden_profilo_docente_id").val();
 	var ore_dovute_id = $("#hidden_ore_dovute_id").val();
@@ -169,12 +172,11 @@ function profiloUpdateDetails() {
 
 		ore_70_funzionali: ore_70_funzionali,
 		ore_70_con_studenti: ore_70_con_studenti,
-		ore_70_totale: ore_70_totale
+		ore_70_totale: ore_70_totale,
+		note: note
      },
      function (data, status) {
-         // hide modal popup
          $("#update_profilo_modal").modal("hide");
-         // reload docenti by using docenteReadRecords();
          docenteReadRecords();
      }
  );
