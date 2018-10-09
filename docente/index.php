@@ -19,94 +19,9 @@
 <div class="container-fluid" style="margin-top:60px">
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h4>Specchietto riassuntivo</h4>
+<h4>Specchietto ore dovute</h4>
 </div>
 <div class="panel-body">
-
-<div class="panel panel-info">
-<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;70 ore</div>
-<div class="panel-body">
-
-	<div class="table-wrapper">
-	<table class="table table-vnocolor-index">
-		<thead>
-			<tr>
-				<th class="col-md-2"></th>
-				<th class="col-md-3 text-center">Funzionali</th>
-				<th class="col-md-3 text-center">con Studenti</th>
-				<th class="col-md-4 text-center">Totale</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>dovute</td>
-				<td class="text-center" id="dovute_ore_70_funzionali"></td>
-				<td class="text-center" id="dovute_ore_70_con_studenti"></td>
-				<td class="text-center" id="dovute_ore_70_totale"></td>
-			</tr>
-			<tr>
-				<td>previste</td>
-				<td class="text-center" id="previste_ore_70_funzionali"></td>
-				<td class="text-center" id="previste_ore_70_con_studenti"></td>
-				<td class="text-center" id="previste_ore_70_totale"></td>
-			</tr>
-			<tr>
-				<td>fatte</td>
-				<td class="text-center" id="fatte_ore_70_funzionali"></td>
-				<td class="text-center" id="fatte_ore_70_con_studenti"></td>
-				<td class="text-center" id="fatte_ore_70_totale"></td>
-			</tr>
-		</tbody>
-	</table>
-	</div>
-</div>
-<!-- <div class="panel-footer"></div> -->
-</div>
-
-<div class="panel panel-success">
-<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;40 ore</div>
-<div class="panel-body">
-
-	<div class="table-wrapper">
-	<table class="table table-vnocolor-index">
-		<thead>
-			<tr>
-				<th class="col-md-2"></th>
-				<th class="col-md-2 text-center">Sostituzioni</th>
-				<th class="col-md-2 text-center">Aggiornamento</th>
-				<th class="col-md-2 text-center">con Studenti</th>
-				<th class="col-md-3 text-center">Totale</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>dovute</td>
-				<td class="text-center" id="dovute_ore_40_sostituzioni_di_ufficio"></td>
-				<td class="text-center" id="dovute_ore_40_aggiornamento"></td>
-				<td class="text-center" id="dovute_ore_40_con_studenti"></td>
-				<td class="text-center" id="dovute_ore_40_totale"></td>
-			</tr>
-			<tr>
-				<td>previste</td>
-				<td class="text-center" id="previste_ore_40_sostituzioni_di_ufficio"></td>
-				<td class="text-center" id="previste_ore_40_aggiornamento"></td>
-				<td class="text-center" id="previste_ore_40_con_studenti"></td>
-				<td class="text-center" id="previste_ore_40_totale"></td>
-			</tr>
-			<tr>
-				<td>fatte</td>
-				<td class="text-center" id="fatte_ore_40_sostituzioni_di_ufficio"></td>
-				<td class="text-center" id="fatte_ore_40_aggiornamento"></td>
-				<td class="text-center" id="fatte_ore_40_con_studenti"></td>
-				<td class="text-center" id="fatte_ore_40_totale"></td>
-			</tr>
-		</tbody>
-	</table>
-	</div>
-</div>
-
-<!-- <div class="panel-footer"></div> -->
-</div>
 
 <div class="panel panel-warning">
 <div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;80 ore</div>
@@ -165,15 +80,95 @@
 </div>
 
 
+<div class="panel panel-success">
+<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;40 ore</div>
+<div class="panel-body">
 
+	<div class="table-wrapper">
+	<table class="table table-vnocolor-index">
+		<thead>
+			<tr>
+				<th class="col-md-2"></th>
+				<th class="col-md-2 text-center">Sostituzioni</th>
+				<th class="col-md-2 text-center">Aggiornamento</th>
+				<th class="col-md-2 text-center">con Studenti</th>
+				<th class="col-md-3 text-center">Totale</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>dovute</td>
+				<td class="text-center" id="dovute_ore_40_sostituzioni_di_ufficio"></td>
+				<td class="text-center" id="dovute_ore_40_aggiornamento"></td>
+				<td class="text-center" id="dovute_ore_40_con_studenti"></td>
+				<td class="text-center" id="dovute_ore_40_totale"></td>
+			</tr>
+			<tr>
+				<td>previste</td>
+				<td class="text-center" id="previste_ore_40_sostituzioni_di_ufficio"></td>
+				<td class="text-center" id="previste_ore_40_aggiornamento"></td>
+				<td class="text-center" id="previste_ore_40_con_studenti"></td>
+				<td class="text-center" id="previste_ore_40_totale"></td>
+			</tr>
+			<tr>
+				<td>fatte</td>
+				<td class="text-center" id="fatte_ore_40_sostituzioni_di_ufficio"></td>
+				<td class="text-center" id="fatte_ore_40_aggiornamento"></td>
+				<td class="text-center" id="fatte_ore_40_con_studenti"></td>
+				<td class="text-center" id="fatte_ore_40_totale"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
 
- </div>
 <!-- <div class="panel-footer"></div> -->
 </div>
 
 
 <div class="panel panel-info">
-<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;...</div>
+<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;70 ore</div>
+<div class="panel-body">
+
+	<div class="table-wrapper">
+	<table class="table table-vnocolor-index">
+		<thead>
+			<tr>
+				<th class="col-md-2"></th>
+				<th class="col-md-3 text-center">Funzionali</th>
+				<th class="col-md-3 text-center">con Studenti</th>
+				<th class="col-md-4 text-center">Totale</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>dovute</td>
+				<td class="text-center" id="dovute_ore_70_funzionali"></td>
+				<td class="text-center" id="dovute_ore_70_con_studenti"></td>
+				<td class="text-center" id="dovute_ore_70_totale"></td>
+			</tr>
+			<tr>
+				<td>previste</td>
+				<td class="text-center" id="previste_ore_70_funzionali"></td>
+				<td class="text-center" id="previste_ore_70_con_studenti"></td>
+				<td class="text-center" id="previste_ore_70_totale"></td>
+			</tr>
+			<tr>
+				<td>fatte</td>
+				<td class="text-center" id="fatte_ore_70_funzionali"></td>
+				<td class="text-center" id="fatte_ore_70_con_studenti"></td>
+				<td class="text-center" id="fatte_ore_70_totale"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+<!-- <div class="panel-footer"></div> -->
+</div>
+
+
+<div class="panel panel-danger">
+<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;Ore Previste</div>
 <div class="panel-body">
     <div class="row"  style="margin-bottom:10px;">
         <div class="col-md-6">
@@ -200,7 +195,7 @@
 	$tipoAttivitaOptionList = '				<option value="0"></option>';
 	$query = "	SELECT * FROM attivita_tipo
 				WHERE attivita_tipo.valido = true
-				ORDER BY attivita_tipo.categoria, attivita_tipo.nome ASC
+				ORDER BY attivita_tipo.categoria DESC, attivita_tipo.nome ASC
 				;";
 	if (!$result = mysqli_query($con, $query)) {
 		exit(mysqli_error($con));
@@ -215,8 +210,20 @@
 				$categoria = $row['categoria'];
 				$tipoAttivitaOptionList .= '<optgroup label="'.$categoria.'">';
 			}
+			// se ha un numero fisso di ore o un max, lo segnala
+			$subtext = '';
+			if ($row['ore'] != 0) {
+				$subtext = ' data-subtext="'.$row['ore'].' ore"';
+			} else if ($row['ore_max'] != 0) {
+				$subtext = ' data-subtext="max '.$row['ore_max'].' ore"';
+			}
+			// se non va inserito dal docente lo disabilito
+			$disable = '';
+			if (! $row['inserito_da_docente']) {
+				$disable = ' disabled ';
+			}
 			$tipoAttivitaOptionList .= '
-				<option value="'.$row['id'].'" >'.$row['nome'].'</option>
+			<option value="'.$row['id'].'"'.$subtext.$disable.' >'.$row['nome'].'</option>
 			';
 		}
 		$tipoAttivitaOptionList .= '</optgroup>';
@@ -249,7 +256,7 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label" for="update_dettaglio">dettaglio</label>
-                    <div class="col-sm-9"><input type="text" id="update_dettaglio" placeholder="..." class="form-control"/></div>
+                    <div class="col-sm-9"><input type="text" id="update_dettaglio" placeholder="specificare solo se necessario" class="form-control"/></div>
                 </div>
             </div>
             </div>
@@ -264,6 +271,8 @@
 </div>
 <!-- // Modal - Update docente details -->
 
+</div>
+</div>
 </div>
 
 <!-- Bootstrap, jquery etc (css + js) -->
