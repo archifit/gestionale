@@ -24,7 +24,11 @@
 <div class="panel-body">
 
 <div class="panel panel-warning">
-<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;80 ore</div>
+<div class="panel-heading">
+	<span class="glyphicon glyphicon-list-alt"></span>
+	<a data-toggle="collapse" href="#collapse_80">&ensp;80 ore </a>
+</div>
+<div id="collapse_80" class="panel-collapse collapse  collapse in">
 <div class="panel-body">
 
 	<div class="table-wrapper">
@@ -76,12 +80,17 @@
 	</table>
 	</div>
 </div>
+</div>
 <!-- <div class="panel-footer"></div> -->
 </div>
 
 
 <div class="panel panel-success">
-<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;40 ore</div>
+<div class="panel-heading">
+	<span class="glyphicon glyphicon-list-alt"></span>
+	<a data-toggle="collapse" href="#collapse_40">&ensp;40 ore </a>
+</div>
+<div id="collapse_40" class="panel-collapse collapse  collapse in">
 <div class="panel-body">
 
 	<div class="table-wrapper">
@@ -121,13 +130,18 @@
 	</table>
 	</div>
 </div>
+</div>
 
 <!-- <div class="panel-footer"></div> -->
 </div>
 
 
 <div class="panel panel-info">
-<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;70 ore</div>
+<div class="panel-heading">
+	<span class="glyphicon glyphicon-list-alt"></span>
+	<a data-toggle="collapse" href="#collapse_70">&ensp;70 ore </a>
+</div>
+<div id="collapse_70" class="panel-collapse collapse  collapse in">
 <div class="panel-body">
 
 	<div class="table-wrapper">
@@ -163,19 +177,23 @@
 	</table>
 	</div>
 </div>
+</div>
 <!-- <div class="panel-footer"></div> -->
 </div>
 
-
 <div class="panel panel-danger">
-<div class="panel-heading"><span class="glyphicon glyphicon-list-alt"></span>&emsp;Ore Previste</div>
+<div class="panel-heading">
+	<span class="glyphicon glyphicon-list-alt"></span>
+	<a data-toggle="collapse" href="#collapse_Previste">&ensp;Ore Previste </a>
+</div>
+<div id="collapse_Previste" class="panel-collapse collapse  collapse in">
 <div class="panel-body">
     <div class="row"  style="margin-bottom:10px;">
         <div class="col-md-6">
         </div>
         <div class="col-md-6">
             <div class="pull-right">
-				<button class="btn btn-success" data-toggle="modal" data-target="#update_attivita_modal"><span class="glyphicon glyphicon-plus"></span>&ensp;Aggiungi attività </button>
+   				<button class="btn btn-success" data-toggle="modal" onclick="attivitaPrevistaAdd()"><span class="glyphicon glyphicon-plus"></span>&ensp;Aggiungi attività </button>
             </div>
         </div>
     </div>
@@ -184,6 +202,31 @@
             <div class="attivita_previste_records_content"></div>
         </div>
     </div>
+</div>
+</div>
+
+<!-- <div class="panel-footer"></div> -->
+</div>
+
+<div class="panel panel-primary">
+<div class="panel-heading">
+	<span class="glyphicon glyphicon-list-alt"></span>
+	<a style="color:white;" data-toggle="collapse" href="#collapse_Fatte">&ensp;Ore Fatte </a>
+</div>
+<div id="collapse_Fatte" class="panel-collapse collapse  collapse in">
+<div class="panel-body">
+    <div class="row"  style="margin-bottom:10px;">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="attivita_fatte_records_content"></div>
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- <div class="panel-footer"></div> -->
@@ -262,9 +305,8 @@
             </div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
-				<button type="button" class="btn btn-primary" onclick="attivitaPrevistaSalva()" >Salva</button>
+				<button type="button" class="btn btn-primary" onclick="attivitaPrevistaUpdateDetails()" >Salva</button>
 				<input type="hidden" id="hidden_ore_previste_attivita_id">
-				<input type="hidden" id="hidden_ore_previste_id">
 			</div>
         </div>
     </div>

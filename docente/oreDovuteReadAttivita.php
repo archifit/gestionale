@@ -54,8 +54,8 @@ if(mysqli_num_rows($result) > 0) {
 
 		$data .='
 			<td>
-			<button onclick="attivitaGetDetails('.$row['ore_previste_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
-			<button onclick="attivitaDelete('.$row['ore_previste_attivita_id'].'\')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+			<button onclick="attivitaPrevistaModifica('.$row['ore_previste_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+			<button onclick="attivitaPrevistaDelete('.$row['ore_previste_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
 			</td>
 			</tr>';
 	}
