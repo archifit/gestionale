@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . '/__Environment.php';
 require_once __DIR__ . '/path.php';
 
 // funzione di trasformazione della password in hash

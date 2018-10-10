@@ -56,8 +56,8 @@
 		    // se non trovo una riga, devo inserirla ora!
 		    $createQuery1 = "INSERT INTO profilo_docente (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
 		    $createQuery2 = "INSERT INTO ore_dovute (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
-		    $createQuery2 = "INSERT INTO ore_previste (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
-		    $createQuery2 = "INSERT INTO ore_fatte (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
+		    $createQuery3 = "INSERT INTO ore_previste (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
+		    $createQuery4 = "INSERT INTO ore_fatte (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
 
 		    if (!$result = mysqli_query($con, $createQuery1)) {
 		        exit(mysqli_error($con));
@@ -65,7 +65,13 @@
 		    if (!$result = mysqli_query($con, $createQuery2)) {
 		        exit(mysqli_error($con));
 		    }
-
+		    if (!$result = mysqli_query($con, $createQuery3)) {
+		        exit(mysqli_error($con));
+		    }
+		    if (!$result = mysqli_query($con, $createQuery4)) {
+		        exit(mysqli_error($con));
+		    }
+		    
 		    if (!$result = mysqli_query($con, $query)) {
 		        exit(mysqli_error($con));
 		    }
