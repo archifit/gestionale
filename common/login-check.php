@@ -8,7 +8,6 @@ function passwordHash($p) {
     return md5($p);
 	// return $p;
 }
-
 // dovrei arrivare qui sempre con un location set: lo memorizzo
 $redirect = NULL;
 if($_POST['location'] != '') {
