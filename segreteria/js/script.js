@@ -32,7 +32,8 @@ function ricalcola() {
 	var totale_80 = Math.round(coefficente * 80);
 	var totale_40 = Math.round(coefficente * 40);
 	var totale_70 = Math.round(coefficente * 70);
-	// scale le ore eccedenti
+
+	// scala le ore eccedenti dalle 70
 	if (profilo_ore_eccedenti > 0) {
 		totale_70 = Math.round(coefficente * 70 - (profilo_ore_eccedenti / 300 * profilo_giorni_di_servizio));
 	}
@@ -49,16 +50,29 @@ function ricalcola() {
 	$("#profilo_ore_80_dipartimenti_max").val(Math.round(coefficente * 24));
 	$("#profilo_ore_80_consigli_di_classe").val(Math.round(coefficente * 30));
 
-	// le 40 si
-	var profilo_ore_40_sostituzioni_di_ufficio = Math.round(coefficente * 12);
+	// le 40 invece devono sommare a 40, ma non sono tutte da 60 minuti: calcolo quanti minuti sono dovuti
+	var totale_40_in_minuti = coefficente * 40 * 60;
+	
+	// aggiornamento sono in effetti da 60 minuti
+	var profilo_ore_40_aggiornamento = Math.round(coefficente * 10);
+	
+	// quelle con studenti sono da 50
 	var profilo_ore_40_con_studenti = Math.round(coefficente * 18);
-	// il resto in aggiornamento
-	var profilo_ore_40_aggiornamento = totale_40 - profilo_ore_40_sostituzioni_di_ufficio - profilo_ore_40_con_studenti;
+	
+	// calcola quanti minuti ho tornato con aggiornamento e studenti insieme
+	var minutiRitornati = (profilo_ore_40_aggiornamento * 60) + (profilo_ore_40_con_studenti * 50);
+	
+	// e dunque ne devo tornare ancora...
+	var minutiDaFare = totale_40_in_minuti - minutiRitornati;
+	
+	// minuti da tornare in sostituzioni da 50 minuti
+	var profilo_ore_40_sostituzioni_di_ufficio = Math.round(minutiDaFare / 50);
+
 	$("#profilo_ore_40_sostituzioni_di_ufficio").val(profilo_ore_40_sostituzioni_di_ufficio);
 	$("#profilo_ore_40_con_studenti").val(profilo_ore_40_con_studenti);
 	$("#profilo_ore_40_aggiornamento").val(profilo_ore_40_aggiornamento);
 
-	// le 70 anche
+	// le 70 non hanno questo problema, considero 50 minuti con studenti e 30 funzionali
 	var profilo_ore_70_funzionali = Math.round(coefficente * 30);
 	// il resto con studenti
 	var profilo_ore_70_con_studenti = totale_70 - profilo_ore_70_funzionali;

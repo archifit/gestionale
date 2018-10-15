@@ -212,7 +212,7 @@
                 <hr>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="profilo_ore_40_sostituzioni_di_ufficio">Sostituzioni (12)</label>
+                    <label class="col-sm-2 control-label" for="profilo_ore_40_sostituzioni_di_ufficio">Sostituzioni (18)</label>
                     <div class="col-sm-2"><input type="text" id="profilo_ore_40_sostituzioni_di_ufficio" placeholder="sost" class="form-control"/></div>
 
                     <label class="col-sm-2 control-label" for="profilo_ore_40_con_studenti">con Stud. (18)</label>
