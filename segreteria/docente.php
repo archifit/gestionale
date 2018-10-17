@@ -260,6 +260,7 @@
 				<button type="button" class="btn btn-primary" onclick="profiloUpdateDetails()" >Salva</button>
 				<input type="hidden" id="hidden_profilo_docente_id">
 				<input type="hidden" id="hidden_ore_dovute_id">
+				<input type="hidden" id="hidden_ore_previste_id">
 			</div>
 			</div>
 			</div>

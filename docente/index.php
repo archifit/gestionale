@@ -236,9 +236,9 @@
 	// prepara l'elenco dei tipi di attivita
 	$categoria = '';
 	$tipoAttivitaOptionList = '				<option value="0"></option>';
-	$query = "	SELECT * FROM attivita_tipo
-				WHERE attivita_tipo.valido = true
-				ORDER BY attivita_tipo.categoria DESC, attivita_tipo.nome ASC
+	$query = "	SELECT * FROM ore_previste_tipo_attivita
+				WHERE ore_previste_tipo_attivita.valido = true
+				ORDER BY ore_previste_tipo_attivita.categoria DESC, ore_previste_tipo_attivita.nome ASC
 				;";
 	if (!$result = mysqli_query($con, $query)) {
 		exit(mysqli_error($con));
@@ -265,9 +265,11 @@
 			if (! $row['inserito_da_docente']) {
 				$disable = ' disabled ';
 			}
-			$tipoAttivitaOptionList .= '
-			<option value="'.$row['id'].'"'.$subtext.$disable.' >'.$row['nome'].'</option>
-			';
+			if ($row['inserito_da_docente']) {
+				$tipoAttivitaOptionList .= '
+					<option value="'.$row['id'].'"'.$subtext.$disable.' >'.$row['nome'].'</option>
+					';
+			}
 		}
 		$tipoAttivitaOptionList .= '</optgroup>';
 	}

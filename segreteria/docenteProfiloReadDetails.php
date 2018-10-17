@@ -33,14 +33,19 @@
                         ore_dovute.ore_40_totale AS ore_40_totale,
                         ore_dovute.ore_70_funzionali AS ore_70_funzionali,
                         ore_dovute.ore_70_con_studenti AS ore_70_con_studenti,
-                        ore_dovute.ore_70_totale AS ore_70_totale
+                        ore_dovute.ore_70_totale AS ore_70_totale,
+                        ore_previste.id AS ore_previste_id,
 
 					FROM docente
 					INNER JOIN profilo_docente
 					ON docente.id = profilo_docente.docente_id
 					INNER JOIN ore_dovute
 					ON docente.id = ore_dovute.docente_id
+					INNER JOIN ore_previste
+					ON docente.id = ore_previste.docente_id
 					WHERE profilo_docente.anno_scolastico_id = '$__anno_scolastico_corrente_id'
+					AND ore_dovute.anno_scolastico_id = '$__anno_scolastico_corrente_id'
+					AND ore_previste.anno_scolastico_id = '$__anno_scolastico_corrente_id'
 					AND docente.id = '$docente_id'";
 
 		// prova a vedere se la query fornisce un risultato
@@ -71,7 +76,7 @@
 		    if (!$result = mysqli_query($con, $createQuery4)) {
 		        exit(mysqli_error($con));
 		    }
-		    
+
 		    if (!$result = mysqli_query($con, $query)) {
 		        exit(mysqli_error($con));
 		    }

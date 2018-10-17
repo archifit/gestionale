@@ -126,6 +126,7 @@ function profiloGetDetails(docente_id) {
 				// hidden fields
 				$("#hidden_profilo_docente_id").val(profilo.profilo_docente_id);
 				$("#hidden_ore_dovute_id").val(profilo.ore_dovute_id);
+				$("#hidden_ore_previste_id").val(profilo.ore_previste_id);
 			}
 	 );
 	// Open modal popup
@@ -162,11 +163,13 @@ function profiloUpdateDetails() {
 	// get hidden field value
 	var profilo_id = $("#hidden_profilo_docente_id").val();
 	var ore_dovute_id = $("#hidden_ore_dovute_id").val();
+	var ore_previste_id = $("#hidden_ore_previste_id").val();
 
 	// Update the details by requesting to the server using ajax
 	$.post("docenteProfiloUpdateDetails.php", {
 		profilo_id: profilo_id,
 		ore_dovute_id: ore_dovute_id,
+		ore_previste_id: ore_previste_id,
 		tipo_di_contratto: tipo_di_contratto,
 		giorni_di_servizio: giorni_di_servizio,
 		ore_di_cattedra: ore_di_cattedra,

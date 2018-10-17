@@ -178,13 +178,6 @@
 				<td class="c2" colspan="1" rowspan="1"><p class="c17">
 					</p></td>
 				<td class="c2" colspan="1" rowspan="1">
-	<p class="c3">
-		<span class="c1">IL DIRIGENTE SCOLASTICO</span>
-	</p>
-	<p class="c3">
-		<span class="c1">Tiziana Rossi </span>
-	</p>
-
 				</td>
 			</tr>
 		</tbody>

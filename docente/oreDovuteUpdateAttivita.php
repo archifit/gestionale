@@ -11,7 +11,7 @@ if(isset($_POST)) {
 
 	$query = '';
 	if ($ore_previste_attivita_id > 0) {
-		$query = "UPDATE ore_previste_attivita SET dettaglio = '$update_dettaglio', ore = '$update_ore', attivita_tipo_id = '$update_tipo_attivita_id' WHERE id = '$ore_previste_attivita_id'";
+		$query = "UPDATE ore_previste_attivita SET dettaglio = '$update_dettaglio', ore = '$update_ore', ore_previste_tipo_attivita_id	 = '$update_tipo_attivita_id' WHERE id = '$ore_previste_attivita_id'";
 	} else {
 		$query = "	SELECT id FROM ore_previste WHERE docente_id = $__docente_id AND anno_scolastico_id = $__anno_scolastico_corrente_id";
 		if (!$result = mysqli_query($con, $query)) {
@@ -21,7 +21,7 @@ if(isset($_POST)) {
 			if ($row = mysqli_fetch_assoc($result)) {
 				$ore_previste_id = $row['id'];
 
-				$query = "INSERT INTO ore_previste_attivita (dettaglio, ore, attivita_tipo_id, ore_previste_id) VALUES('$update_dettaglio', '$update_ore', '$update_tipo_attivita_id', '$ore_previste_id')";
+				$query = "INSERT INTO ore_previste_attivita (dettaglio, ore, ore_previste_tipo_attivita_id, ore_previste_id) VALUES('$update_dettaglio', '$update_ore', '$update_tipo_attivita_id', '$ore_previste_id')";
 			}
 		}
 	}

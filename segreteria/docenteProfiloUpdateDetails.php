@@ -6,6 +6,7 @@
 		// get values
 		$profilo_id = $_POST['profilo_id'];
 		$ore_dovute_id = $_POST['ore_dovute_id'];
+		$ore_previste_id = $_POST['ore_previste_id'];
 		$tipo_di_contratto = $_POST['tipo_di_contratto'];
 		$giorni_di_servizio = $_POST['giorni_di_servizio'];
 		$ore_di_cattedra = $_POST['ore_di_cattedra'];
@@ -55,6 +56,20 @@
 						ore_70_con_studenti = '$ore_70_con_studenti',
 						ore_70_totale = '$ore_70_totale'
 					WHERE id = '$ore_dovute_id'";
+		debug($query);
+		if (!$result = mysqli_query($con, $query)) {
+			exit(mysqli_error($con));
+		}
+
+		$query = "	UPDATE ore_previste SET
+						ore_80_collegi_docenti = '$ore_80_collegi_docenti',
+						ore_80_udienze_generali = '$ore_80_udienze_generali',
+						ore_80_aggiornamento_facoltativo = '$ore_80_aggiornamento_facoltativo',
+						ore_80_dipartimenti_min = '$ore_80_dipartimenti_min',
+						ore_80_dipartimenti_max = '$ore_80_dipartimenti_max',
+						ore_80_consigli_di_classe = '$ore_80_consigli_di_classe',
+						ore_80_totale = '$ore_80_totale'
+					WHERE id = '$ore_previste_id'";
 		debug($query);
 		if (!$result = mysqli_query($con, $query)) {
 			exit(mysqli_error($con));
