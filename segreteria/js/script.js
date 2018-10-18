@@ -98,7 +98,7 @@ function profiloGetDetails(docente_id) {
 			id: docente_id
 		},
 		function (data, status) {
-			// console.log(data);
+			console.log(data);
 				// PARSE json data
 				var profilo = JSON.parse(data);
 				// setting existing values to the modal popup fields

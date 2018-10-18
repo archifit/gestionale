@@ -34,7 +34,7 @@
                         ore_dovute.ore_70_funzionali AS ore_70_funzionali,
                         ore_dovute.ore_70_con_studenti AS ore_70_con_studenti,
                         ore_dovute.ore_70_totale AS ore_70_totale,
-                        ore_previste.id AS ore_previste_id,
+                        ore_previste.id AS ore_previste_id
 
 					FROM docente
 					INNER JOIN profilo_docente
