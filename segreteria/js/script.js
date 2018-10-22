@@ -84,8 +84,10 @@ function ricalcola() {
 		$("#profilo_ore_70_con_studenti").val(0);
 	}
 
+	// le vere 40 si ricalcolano per eliminare errori dovuti ai minuti sospesi in giro
+	var totale_40_vero = Math.round(profilo_ore_40_aggiornamento + ((profilo_ore_40_con_studenti + profilo_ore_40_sostituzioni_di_ufficio) / 60 * 50));
 	$("#profilo_ore_80_totale").val(totale_80);
-	$("#profilo_ore_40_totale").val(totale_40);
+	$("#profilo_ore_40_totale").val(totale_40_vero);
 	$("#profilo_ore_70_totale").val(totale_70);
 }
 
@@ -96,6 +98,7 @@ function profiloGetDetails(docente_id) {
 			id: docente_id
 		},
 		function (data, status) {
+			console.log(data);
 				var profilo = JSON.parse(data);
 				$("#profilo_cognome_e_nome").val(profilo.docente_cognome + " " + profilo.docente_nome);
 				$("#profilo_tipo_di_contratto").val(profilo.tipo_di_contratto);
@@ -105,8 +108,8 @@ function profiloGetDetails(docente_id) {
 				$("#profilo_ore_80_collegi_docenti").val(profilo.ore_80_collegi_docenti);
 				$("#profilo_ore_80_udienze_generali").val(profilo.ore_80_udienze_generali);
 				$("#profilo_ore_80_aggiornamento_facoltativo").val(profilo.ore_80_aggiornamento_facoltativo);
-				$("#profilo_ore_80_dipartimenti_min").val(profilo.ore_80_dipartimenti_min);
-				$("#profilo_ore_80_dipartimenti_max").val(profilo.ore_80_dipartimenti_max);
+				$("#profilo_ore_80_dipartimenti_min").val(profilo.ore_80_dipartimenti);
+				$("#profilo_ore_80_dipartimenti_max").val(profilo.ore_80_dipartimenti);
 				$("#profilo_ore_80_consigli_di_classe").val(profilo.ore_80_consigli_di_classe);
 				$("#profilo_ore_80_totale").val(profilo.ore_80_totale);
 				$("#profilo_ore_40_sostituzioni_di_ufficio").val(profilo.ore_40_sostituzioni_di_ufficio);
@@ -130,6 +133,7 @@ function profiloGetDetails(docente_id) {
 function profiloUpdateDetails() {
 	$.post("docenteProfiloUpdateDetails.php", {
 		profilo_id: $("#hidden_profilo_docente_id").val(),
+		docente_id: $("#hidden_docente_id").val(),
 		ore_dovute_id: $("#hidden_ore_dovute_id").val(),
 		ore_previste_id: $("#hidden_ore_previste_id").val(),
 		tipo_di_contratto: $("#profilo_tipo_di_contratto").val(),

@@ -26,63 +26,37 @@ require_once '../common/connect.php';
 // prepara l'elenco delle categorie di intervento
 $query = "	SELECT * FROM `ore_previste_tipo_attivita` WHERE valido = true AND inserito_da_docente = false;
 			";
-if (!$result = mysqli_query($con, $query)) {
-	exit(mysqli_error($con));
-}
+$resultArrayTipoAttivita = dbGetAll($query);
 
 $data = '';
-if(mysqli_num_rows($result) > 0) {
-	$resultArrayTipoAttivita = $result->fetch_all(MYSQLI_ASSOC);
-	foreach($resultArrayTipoAttivita as $tipoAttivita) {
-		$tipoAttivitaId = $tipoAttivita['id'];
-		$categoria = $tipoAttivita['categoria'];
-		$nome = $tipoAttivita['nome'];
-		$ore = $tipoAttivita['ore'];
-		$ore_max = $tipoAttivita['ore_max'];
-		$data .= '
-<div class="panel panel-success">
-<div class="panel-heading container-fluid">
-	<div class="row">
-		<div class="col-md-4">
+foreach($resultArrayTipoAttivita as $tipoAttivita) {
+	$tipoAttivitaId = $tipoAttivita['id'];
+	$categoria = $tipoAttivita['categoria'];
+	$nome = $tipoAttivita['nome'];
+	$ore = $tipoAttivita['ore'];
+	$ore_max = $tipoAttivita['ore_max'];
+	$da_rendicontare = $tipoAttivita['da_rendicontare'];
+	$data .= '
+		<div class="panel panel-success">
+		<div class="panel-heading container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-4 text-center">
+					<h4>'.$nome.'</h4>
+				</div>
+				<div class="col-md-4 text-right">
+					<button onclick="addAttivita('.$tipoAttivitaId.',\''.$nome.'\','.$ore.','.$ore_max.')" class="btn btn-info"><span class="glyphicon glyphicon-plus"></button>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-4 text-center">
-			<h4>'.$nome.'</h4>
-		</div>
-		<div class="col-md-4 text-right">
-			<button onclick="addAttivita('.$tipoAttivitaId.',\''.$nome.'\','.$ore.','.$ore_max.')" class="btn btn-info"><span class="glyphicon glyphicon-plus"></button>
-		</div>
-	</div>
-</div>
-<div class="panel-body">
-';
-		$query = "	SELECT
-						ore_previste_attivita.id AS ore_previste_attivita_id,
-						ore_previste_attivita.dettaglio AS ore_previste_attivita_dettaglio,
-						ore_previste_attivita.ore AS ore_previste_attivita_ore,
-						docente.nome AS docente_nome,
-						docente.cognome AS docente_cognome
-					FROM
-						ore_previste_attivita
-					INNER JOIN docente docente
-					ON ore_previste_attivita.docente_id = docente.id
-					WHERE
-						ore_previste_attivita.anno_scolastico_id = '$__anno_scolastico_corrente_id'
-					AND
-						ore_previste_attivita.ore_previste_tipo_attivita_id = '$tipoAttivitaId'
-					ORDER BY
-						docente.cognome ASC,
-						docente.nome ASC
-					;
-			";
-		debug($query);
-		if (!$result = mysqli_query($con, $query)) {
-			exit(mysqli_error($con));
-		}
-
-		$data .= '
+		<div class="panel-body">
+		';
+	$data .= '
 		<div class="table-wrapper">
 			<table class="table table-bordered table-striped" id="table_'.$tipoAttivitaId.'" >
 				<thead>
+					<th style="display:none;">id</th>
 					<th>Docente</th>
 					<th>Dettaglio</th>
 					<th>Ore</th>
@@ -91,34 +65,57 @@ if(mysqli_num_rows($result) > 0) {
 				<tbody>
 			';
 
-		if(mysqli_num_rows($result) > 0) {
-			$resultArrayOre = $result->fetch_all(MYSQLI_ASSOC);
-			$classname = "";
-			foreach($resultArrayOre as $row_ore) {
-				$classname = ($classname==="even_row") ? "odd_row" : "even_row";
-				$data .= '
-								<tr class="'.$classname.'">
-									<td>'.$row_ore['docente_cognome'].' '.$row_ore['docente_nome'].'</td>
-									<td>'.$row_ore['ore_previste_attivita_dettaglio'].'</td>
-									<td class="col-md-1 text-center">'.$row_ore['ore_previste_attivita_ore'].'</td>
-								</tr>
-					';
-			}
+	$query = "	SELECT
+					ore_previste_attivita.id AS ore_previste_attivita_id,
+					ore_previste_attivita.dettaglio AS ore_previste_attivita_dettaglio,
+					ore_previste_attivita.ore AS ore_previste_attivita_ore,
+					ore_previste_attivita.ore_previste_tipo_attivita_id AS ore_previste_attivita_ore_previste_tipo_attivita_id,
+					docente.nome AS docente_nome,
+					docente.cognome AS docente_cognome
+				FROM
+					ore_previste_attivita
+				INNER JOIN docente docente
+				ON ore_previste_attivita.docente_id = docente.id
+				WHERE
+					ore_previste_attivita.anno_scolastico_id = '$__anno_scolastico_corrente_id'
+				AND
+					ore_previste_attivita.ore_previste_tipo_attivita_id = '$tipoAttivitaId'
+				ORDER BY
+					docente.cognome ASC,
+					docente.nome ASC
+				;
+		";
+		debug($query);
+
+		$resultArrayOre = dbGetAll($query);
+		$classname = "";
+		foreach($resultArrayOre as $row_ore) {
+			$classname = ($classname==="even_row") ? "odd_row" : "even_row";
 			$data .= '
-				</tbody>
-				';
+							<tr class="'.$classname.'">
+								<td style="display:none;">'.$row_ore['ore_previste_attivita_id'].'</td>
+								<td>'.$row_ore['docente_cognome'].' '.$row_ore['docente_nome'].'</td>
+								<td>'.$row_ore['ore_previste_attivita_dettaglio'].'</td>
+								<td class="col-md-1 text-center">'.$row_ore['ore_previste_attivita_ore'].'</td>
+								<td class="col-md-2 text-center">
+									<div onclick="deleteOreAttivita('.$row_ore['ore_previste_attivita_id'].','.$row_ore['ore_previste_attivita_ore_previste_tipo_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></div>&nbsp
+								</td>
+							</tr>
+					';
 		}
 		$data .= '
+				</tbody>
+				';
+	$data .= '
 			</table>
 			<div style="page-break-after: always;">
 		</div>
 	</div>
 ';
-		$data .= '
+	$data .= '
 </div>
 </div>
 ';
-	}
 }
 echo $data;
 ?>
@@ -128,23 +125,18 @@ echo $data;
 
 <?php
 
-	// prepara l'elenco dei docenti
-	$docenteOptionList = '				<option value="0"></option>';
-	$query = "	SELECT * FROM docente
-				WHERE docente.attivo = true
-				ORDER BY docente.cognome, docente.nome ASC
-				;";
-	if (!$result = mysqli_query($con, $query)) {
-		exit(mysqli_error($con));
-	}
-	if(mysqli_num_rows($result) > 0) {
-		$resultArray = $result->fetch_all(MYSQLI_ASSOC);
-		foreach($resultArray as $row) {
-			$docenteOptionList .= '
-				<option value="'.$row['id'].'" >'.$row['cognome'].' '.$row['nome'].'</option>
-			';
-		}
-	}
+// prepara l'elenco dei docenti
+$docenteOptionList = '				<option value="0"></option>';
+$query = "	SELECT * FROM docente
+			WHERE docente.attivo = true
+			ORDER BY docente.cognome, docente.nome ASC
+			;";
+$resultArray = dbGetAll($query);
+foreach($resultArray as $row) {
+	$docenteOptionList .= '
+		<option value="'.$row['id'].'" >'.$row['cognome'].' '.$row['nome'].'</option>
+	';
+}
 ?>
 
 <!-- Bootstrap Modals -->
@@ -174,7 +166,7 @@ echo $data;
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="ore">Ore</label>
+                    <label class="col-sm-2 control-label" for="ore" id="oreLabel" >Ore</label>
                     <div class="col-sm-8"><input type="text" id="ore" placeholder="ore" class="form-control"/></div>
                 </div>
 			</form>

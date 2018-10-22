@@ -23,16 +23,16 @@ $query = "	SELECT
 					ore_previste_attivita.dettaglio AS ore_previste_attivita_dettaglio,
 					ore_previste_tipo_attivita.id AS ore_previste_tipo_attivita_id,
 					ore_previste_tipo_attivita.categoria AS ore_previste_tipo_attivita_categoria,
+					ore_previste_tipo_attivita.inserito_da_docente AS ore_previste_tipo_attivita_inserito_da_docente,
 					ore_previste_tipo_attivita.nome AS ore_previste_tipo_attivita_nome
 
 				FROM ore_previste_attivita ore_previste_attivita
 				INNER JOIN ore_previste_tipo_attivita ore_previste_tipo_attivita
 				ON ore_previste_attivita.ore_previste_tipo_attivita_id = ore_previste_tipo_attivita.id
-				INNER JOIN ore_previste ore_previste
-				ON ore_previste_attivita.ore_previste_id = ore_previste.id
-				WHERE ore_previste.anno_scolastico_id = $__anno_scolastico_corrente_id
-				AND ore_previste.docente_id = $docente_id
+				WHERE ore_previste_attivita.anno_scolastico_id = $__anno_scolastico_corrente_id
+				AND ore_previste_attivita.docente_id = $docente_id
 				ORDER BY
+					ore_previste_tipo_attivita.inserito_da_docente DESC,
 					ore_previste_tipo_attivita.categoria, ore_previste_tipo_attivita.nome ASC
 				"
 				;
@@ -54,8 +54,14 @@ if(mysqli_num_rows($result) > 0) {
 
 		$data .='
 			<td>
-			<button onclick="attivitaPrevistaModifica('.$row['ore_previste_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
-			<button onclick="attivitaPrevistaDelete('.$row['ore_previste_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+			';
+		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
+			$data .='
+				<button onclick="attivitaPrevistaModifica('.$row['ore_previste_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+				<button onclick="attivitaPrevistaDelete('.$row['ore_previste_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+			';
+		}
+		$data .='
 			</td>
 			</tr>';
 	}

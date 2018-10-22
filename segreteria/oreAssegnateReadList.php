@@ -12,6 +12,7 @@ if(isset($_POST)) {
 						ore_previste_attivita.id AS ore_previste_attivita_id,
 						ore_previste_attivita.dettaglio AS ore_previste_attivita_dettaglio,
 						ore_previste_attivita.ore AS ore_previste_attivita_ore,
+						ore_previste_attivita.ore_previste_tipo_attivita_id AS ore_previste_attivita_ore_previste_tipo_attivita_id,
 						docente.nome AS docente_nome,
 						docente.cognome AS docente_cognome
 					FROM
@@ -27,12 +28,9 @@ if(isset($_POST)) {
 						docente.nome ASC
 					;
 						";
-	info($query);
-	if (!$result = mysqli_query($con, $query)) {
-		exit(mysqli_error($con));
-	}
-	$spesaViaggioArray = $result->fetch_all(MYSQLI_ASSOC);
-	echo json_encode($spesaViaggioArray);
+	debug($query);
+	$oreAssegnateArray = dbGetAll($query);
+	echo json_encode($oreAssegnateArray);
 }
 else {
 	$response['status'] = 200;

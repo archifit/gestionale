@@ -10,75 +10,96 @@ function previsteConStudenti(ore_docente_id, ore_dovute_totale_con_studenti, ore
 	window.location.assign(page);
 }
 
+var warning = '<span class="glyphicon glyphicon-warning-sign text-error"></span>';
+var okSymbol = '&ensp;<span class="glyphicon glyphicon-ok text-success"></span>';
+
+function getHtmlNum(value) {
+	return '&emsp;' + ((value >= 10) ? value : '&ensp;' + value);
+}
+
+function getHtmlNumAndPrevisteVisual(value, total) {
+	var numString = (value >= 10) ? value : '&ensp;' + value;
+	var diff = total - value;
+	if (diff > 0) {
+		numString += '&ensp;<span class="label label-warning">'+ diff +'</span>';
+	} else {
+		numString += okSymbol;
+	}
+	return '&emsp;' + numString;
+}
+
+function getHtmlNumAndFatteVisual(value, total) {
+	return '&emsp;' + ((value >= 10) ? value : '&ensp;' + value);
+}
+
 function oreDovuteReadRecords() {
+	var ore_dovute, ore_previste, ore_fatte;
+
 	$.post("oreDovuteReadDetails.php", {
 		table_name: 'ore_dovute'
 	},
 	function (dati, status) {
 		console.log(dati);
-		var ore = JSON.parse(dati);
-		$("#dovute_ore_70_funzionali").text(ore.ore_70_funzionali);
-		$("#dovute_ore_70_con_studenti").text(ore.ore_70_con_studenti);
-		$("#dovute_ore_70_totale").text(ore.ore_70_totale);
+		ore_dovute = JSON.parse(dati);
+		$("#dovute_ore_70_funzionali").html(getHtmlNum(ore_dovute.ore_70_funzionali));
+		$("#dovute_ore_70_con_studenti").html(getHtmlNum(ore_dovute.ore_70_con_studenti));
+		$("#dovute_ore_70_totale").html(getHtmlNum(ore_dovute.ore_70_totale));
 
-		$("#dovute_ore_40_sostituzioni_di_ufficio").text(ore.ore_40_sostituzioni_di_ufficio);
-		$("#dovute_ore_40_aggiornamento").text(ore.ore_40_aggiornamento);
-		$("#dovute_ore_40_con_studenti").text(ore.ore_40_con_studenti);
-		$("#dovute_ore_40_totale").text(ore.ore_40_totale);
+		$("#dovute_ore_40_sostituzioni_di_ufficio").html(getHtmlNum(ore_dovute.ore_40_sostituzioni_di_ufficio));
+		$("#dovute_ore_40_aggiornamento").html(getHtmlNum(ore_dovute.ore_40_aggiornamento));
+		$("#dovute_ore_40_con_studenti").html(getHtmlNum(ore_dovute.ore_40_con_studenti));
+		$("#dovute_ore_40_totale").html(getHtmlNum(ore_dovute.ore_40_totale));
 		
-		$("#dovute_ore_80_collegi_docenti").text(ore.ore_80_collegi_docenti);
-		$("#dovute_ore_80_udienze_generali").text(ore.ore_80_udienze_generali);
-		$("#dovute_ore_80_dipartimenti_min").text(ore.ore_80_dipartimenti_min);
-		$("#dovute_ore_80_dipartimenti_max").text(ore.ore_80_dipartimenti_max);
-		$("#dovute_ore_80_aggiornamento_facoltativo").text(ore.ore_80_aggiornamento_facoltativo);
-		$("#dovute_ore_80_consigli_di_classe").text(ore.ore_80_consigli_di_classe);
-		$("#dovute_ore_80_totale").text(ore.ore_80_totale);
+		$("#dovute_ore_80_collegi_docenti").html(getHtmlNum(ore_dovute.ore_80_collegi_docenti));
+		$("#dovute_ore_80_udienze_generali").html(getHtmlNum(ore_dovute.ore_80_udienze_generali));
+		$("#dovute_ore_80_dipartimenti").html(getHtmlNum(ore_dovute.ore_80_dipartimenti));
+		$("#dovute_ore_80_aggiornamento_facoltativo").html(getHtmlNum(ore_dovute.ore_80_aggiornamento_facoltativo));
+		$("#dovute_ore_80_consigli_di_classe").html(getHtmlNum(ore_dovute.ore_80_consigli_di_classe));
+		$("#dovute_ore_80_totale").html(getHtmlNum(ore_dovute.ore_80_totale));
 	});
 	$.post("oreDovuteReadDetails.php", {
 		table_name: 'ore_previste'
 	},
 	function (dati, status) {
 		console.log(dati);
-		var ore = JSON.parse(dati);
-		$("#previste_ore_70_funzionali").text(ore.ore_70_funzionali);
-		$("#previste_ore_70_con_studenti").text(ore.ore_70_con_studenti);
-		$("#previste_ore_70_totale").text(ore.ore_70_totale);
+		ore_previste = JSON.parse(dati);
+		$("#previste_ore_70_funzionali").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_70_funzionali,ore_dovute.ore_70_funzionali));
+		$("#previste_ore_70_con_studenti").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_70_con_studenti,ore_dovute.ore_70_con_studenti));
+		$("#previste_ore_70_totale").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_70_totale,ore_dovute.ore_70_totale));
 
-		$("#previste_ore_40_sostituzioni_di_ufficio").text(ore.ore_40_sostituzioni_di_ufficio);
-		$("#previste_ore_40_aggiornamento").text(ore.ore_40_aggiornamento);
-		$("#previste_ore_40_con_studenti").text(ore.ore_40_con_studenti);
-		$("#previste_ore_40_totale").text(ore.ore_40_totale);
+		$("#previste_ore_40_sostituzioni_di_ufficio").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_40_sostituzioni_di_ufficio,ore_dovute.ore_40_sostituzioni_di_ufficio));
+		$("#previste_ore_40_aggiornamento").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_40_aggiornamento,ore_dovute.ore_40_aggiornamento));
+		$("#previste_ore_40_con_studenti").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_40_con_studenti,ore_dovute.ore_40_con_studenti));
+		$("#previste_ore_40_totale").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_40_totale,ore_dovute.ore_40_totale));
 		
-		$("#previste_ore_80_collegi_docenti").text(ore.ore_80_collegi_docenti);
-		$("#previste_ore_80_udienze_generali").text(ore.ore_80_udienze_generali);
-		$("#previste_ore_80_dipartimenti_min").text(ore.ore_80_dipartimenti_min);
-		$("#previste_ore_80_dipartimenti_max").text(ore.ore_80_dipartimenti_max);
-		$("#previste_ore_80_aggiornamento_facoltativo").text(ore.ore_80_aggiornamento_facoltativo);
-		$("#previste_ore_80_consigli_di_classe").text(ore.ore_80_consigli_di_classe);
-		$("#previste_ore_80_totale").text(ore.ore_80_totale);
+		$("#previste_ore_80_collegi_docenti").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_80_collegi_docenti,ore_dovute.ore_80_collegi_docenti));
+		$("#previste_ore_80_udienze_generali").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_80_udienze_generali,ore_dovute.ore_80_udienze_generali));
+		$("#previste_ore_80_dipartimenti").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_80_dipartimenti,ore_dovute.ore_80_dipartimenti));
+		$("#previste_ore_80_aggiornamento_facoltativo").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_80_aggiornamento_facoltativo,ore_dovute.ore_80_aggiornamento_facoltativo));
+		$("#previste_ore_80_consigli_di_classe").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_80_consigli_di_classe,ore_dovute.ore_80_consigli_di_classe));
+		$("#previste_ore_80_totale").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_80_totale,ore_dovute.ore_80_totale));
 	});
 	$.post("oreDovuteReadDetails.php", {
 		table_name: 'ore_fatte'
 	},
 	function (dati, status) {
 		console.log(dati);
-		var ore = JSON.parse(dati);
-		$("#fatte_ore_70_funzionali").text(ore.ore_70_funzionali);
-		$("#fatte_ore_70_con_studenti").text(ore.ore_70_con_studenti);
-		$("#fatte_ore_70_totale").text(ore.ore_70_totale);
+		ore_fatte = JSON.parse(dati);
+		$("#fatte_ore_70_funzionali").html(getHtmlNumAndFatteVisual(ore_fatte.ore_70_funzionali,ore_dovute.ore_70_funzionali));
+		$("#fatte_ore_70_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_70_con_studenti,ore_dovute.ore_70_con_studenti));
+		$("#fatte_ore_70_totale").html(getHtmlNumAndFatteVisual(ore_fatte.ore_70_totale,ore_dovute.ore_70_totale));
 
-		$("#fatte_ore_40_sostituzioni_di_ufficio").text(ore.ore_40_sostituzioni_di_ufficio);
-		$("#fatte_ore_40_aggiornamento").text(ore.ore_40_aggiornamento);
-		$("#fatte_ore_40_con_studenti").text(ore.ore_40_con_studenti);
-		$("#fatte_ore_40_totale").text(ore.ore_40_totale);
+		$("#fatte_ore_40_sostituzioni_di_ufficio").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_sostituzioni_di_ufficio,ore_dovute.ore_40_sostituzioni_di_ufficio));
+		$("#fatte_ore_40_aggiornamento").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_aggiornamento,ore_dovute.ore_40_aggiornamento));
+		$("#fatte_ore_40_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_con_studenti,ore_dovute.ore_40_con_studenti));
+		$("#fatte_ore_40_totale").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_totale,ore_dovute.ore_40_totale));
 		
-		$("#fatte_ore_80_collegi_docenti").text(ore.ore_80_collegi_docenti);
-		$("#fatte_ore_80_udienze_generali").text(ore.ore_80_udienze_generali);
-		$("#fatte_ore_80_dipartimenti_min").text(ore.ore_80_dipartimenti_min);
-		$("#fatte_ore_80_dipartimenti_max").text(ore.ore_80_dipartimenti_max);
-		$("#fatte_ore_80_aggiornamento_facoltativo").text(ore.ore_80_aggiornamento_facoltativo);
-		$("#fatte_ore_80_consigli_di_classe").text(ore.ore_80_consigli_di_classe);
-		$("#fatte_ore_80_totale").text(ore.ore_80_totale);
+		$("#fatte_ore_80_collegi_docenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_collegi_docenti,ore_dovute.ore_80_collegi_docenti));
+		$("#fatte_ore_80_udienze_generali").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_udienze_generali,ore_dovute.ore_80_udienze_generali));
+		$("#fatte_ore_80_dipartimenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_dipartimenti,ore_dovute.ore_80_dipartimenti));
+		$("#fatte_ore_80_aggiornamento_facoltativo").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_aggiornamento_facoltativo,ore_dovute.ore_80_aggiornamento_facoltativo));
+		$("#fatte_ore_80_consigli_di_classe").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_consigli_di_classe,ore_dovute.ore_80_consigli_di_classe));
+		$("#fatte_ore_80_totale").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_totale,ore_dovute.ore_80_totale));
 	});
 }
 
@@ -95,7 +116,6 @@ function oreFatteReadAttivita() {
 }
 
 function attivitaPrevistaUpdateDetails() {
-	console.log('qq');
     var update_tipo_attivita_id = $("#tipo_attivita").val();
     var update_ore = $("#update_ore").val();
     var update_dettaglio = $("#update_dettaglio").val();
@@ -137,6 +157,7 @@ function oreDovuteAttivitaGetDetails(attivita_id) {
 		);
 	} else {
 		$("#tipo_attivita").val('');
+		$('#tipo_attivita').selectpicker('val', 0);
 		$("#update_ore").val('');
 		$("#update_dettaglio").val('');
 	}

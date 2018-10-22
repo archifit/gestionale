@@ -1,15 +1,34 @@
 <?php
-	// check request
-	if(isset($_POST['id']) && isset($_POST['id']) != "") {
-		// include Database connection file
-		require_once '../common/header-session.php';
-		require_once '../common/connect.php';
 
-		// get docente ID
-		$docente_id = $_POST['id'];
+function checkTableExists($table, $docente_id, $anno_id) {
 
-		// Get Docente Details
-		$query = "	SELECT
+	$verifyQuery = "SELECT * FROM $table WHERE anno_scolastico_id = $anno_id AND docente_id = $docente_id;";
+	debug($verifyQuery);
+	$result = dbGetFirst($verifyQuery);
+
+	// se non ci sono risultati, inserisce la nuova riga in tabella
+	if ($result === null) {
+		$createQuery = "INSERT INTO $table (docente_id, anno_scolastico_id) VALUES ($docente_id, $anno_id);";
+		debug($createQuery);
+		dbExec($createQuery);
+	}
+}
+
+// check request
+if(isset($_POST['id']) && isset($_POST['id']) != "") {
+	// include Database connection file
+	require_once '../common/header-session.php';
+	require_once '../common/connect.php';
+
+	$docente_id = $_POST['id'];
+
+	// prima verifica che esistano tutti i records nelle tabelle interessate
+	checkTableExists('profilo_docente', $docente_id, $__anno_scolastico_corrente_id);
+	checkTableExists('ore_dovute', $docente_id, $__anno_scolastico_corrente_id);
+	checkTableExists('ore_previste', $docente_id, $__anno_scolastico_corrente_id);
+	checkTableExists('ore_fatte', $docente_id, $__anno_scolastico_corrente_id);
+
+	$query = "	SELECT
                         docente.id AS docente_id,
                         docente.cognome AS docente_cognome,
                         docente.nome AS docente_nome,
@@ -23,8 +42,7 @@
                         ore_dovute.ore_80_collegi_docenti AS ore_80_collegi_docenti,
                         ore_dovute.ore_80_udienze_generali AS ore_80_udienze_generali,
                         ore_dovute.ore_80_aggiornamento_facoltativo AS ore_80_aggiornamento_facoltativo,
-                        ore_dovute.ore_80_dipartimenti_min AS ore_80_dipartimenti_min,
-                        ore_dovute.ore_80_dipartimenti_max AS ore_80_dipartimenti_max,
+                        ore_dovute.ore_80_dipartimenti AS ore_80_dipartimenti,
                         ore_dovute.ore_80_consigli_di_classe AS ore_80_consigli_di_classe,
                         ore_dovute.ore_80_totale AS ore_80_totale,
                         ore_dovute.ore_40_sostituzioni_di_ufficio AS ore_40_sostituzioni_di_ufficio,
@@ -48,53 +66,12 @@
 					AND ore_previste.anno_scolastico_id = '$__anno_scolastico_corrente_id'
 					AND docente.id = '$docente_id'";
 
-		// prova a vedere se la query fornisce un risultato
-		if (!$result = mysqli_query($con, $query)) {
-			exit(mysqli_error($con));
-		}
-		$response = array();
-		if(mysqli_num_rows($result) > 0) {
-			while ($row = mysqli_fetch_assoc($result)) {
-				$response = $row;
-			}
-		} else {
-		    // se non trovo una riga, devo inserirla ora!
-		    $createQuery1 = "INSERT INTO profilo_docente (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
-		    $createQuery2 = "INSERT INTO ore_dovute (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
-		    $createQuery3 = "INSERT INTO ore_previste (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
-		    $createQuery4 = "INSERT INTO ore_fatte (docente_id, anno_scolastico_id) VALUES ($docente_id, $__anno_scolastico_corrente_id);";
-
-		    if (!$result = mysqli_query($con, $createQuery1)) {
-		        exit(mysqli_error($con));
-		    }
-		    if (!$result = mysqli_query($con, $createQuery2)) {
-		        exit(mysqli_error($con));
-		    }
-		    if (!$result = mysqli_query($con, $createQuery3)) {
-		        exit(mysqli_error($con));
-		    }
-		    if (!$result = mysqli_query($con, $createQuery4)) {
-		        exit(mysqli_error($con));
-		    }
-
-		    if (!$result = mysqli_query($con, $query)) {
-		        exit(mysqli_error($con));
-		    }
-		    $response = array();
-		    if(mysqli_num_rows($result) > 0) {
-		        while ($row = mysqli_fetch_assoc($result)) {
-		            $response = $row;
-		        }
-		    } else {
-		        $response['status'] = 200;
-		        $response['message'] = "Strano, lo ho appena inserito. query=".$query."\nq1=".$createQuery1."\nq2=".$createQuery2;
-		    }
-		}
-		// display JSON data
-		echo json_encode($response);
-	}
-	else {
-		$response['status'] = 200;
-		$response['message'] = "Invalid Request!";
-	}
+	debug($query);
+	$response = dbGetFirst($query);
+	echo json_encode($response);
+}
+else {
+	$response['status'] = 200;
+	$response['message'] = "Invalid Request!";
+}
 ?>

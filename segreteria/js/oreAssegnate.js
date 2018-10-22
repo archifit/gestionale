@@ -1,11 +1,67 @@
+
+function reloadTable(ore_previste_tipo_attivita_id) {
+	$.post("oreAssegnateReadList.php", {
+			ore_previste_tipo_attivita_id: ore_previste_tipo_attivita_id
+		},
+		function (data, status) {
+			// PARSE json data
+			console.log(data);
+			var oreArray = JSON.parse(data);
+			console.log(oreArray);
+	
+			var tableId = 'table_' + ore_previste_tipo_attivita_id;
+			// svuota il tbody della tabella
+			$('#' + tableId + ' tbody').empty();
+			var markup = '';
+			oreArray.forEach(function(ore) {
+				if (ore.ore_previste_attivita_id !== null) {
+					markup = markup + 
+					"<tr>" +
+					"<td style=\"display:none;\">" + ore.ore_previste_attivita_id + "</td>" +
+					"<td>" + ore.docente_cognome + " " + ore.docente_nome + "</td>" +
+					"<td>" + ore.ore_previste_attivita_dettaglio + "</td>" +
+					"<td class=\"col-md-1 text-center\">" + ore.ore_previste_attivita_ore + "</td>" +
+					"<td class=\"col-md-2 text-center\">" +
+					"<div onclick=\"deleteOreAttivita(" + ore.ore_previste_attivita_id + ","+ ore.ore_previste_attivita_ore_previste_tipo_attivita_id +")\" class=\"btn btn-danger btn-xs\"><span class=\"glyphicon glyphicon-trash\"></div>&nbsp;" +
+					"</td>" +
+					"</tr>";
+				}
+			});
+			$('#' + tableId + ' > tbody:last-child').append(markup);
+		}
+	);
+}
+
 function addAttivita(tipo_attivita_id, nome, ore, ore_max) {
 	$("#hidden_ore_previste_attivita_id").val(0);
 	$("#hidden_ore_previste_tipo_attivita_id").val(tipo_attivita_id);
+	$("#myModalLabel").text(nome);
 	$("#add_new_record_modal").modal("show");
+	
+	// se sono specificate le ore, le inserisce e le rende read only
+	if (ore !== 0) {
+		$("#oreLabel").text("Ore");
+		$("#ore").val(ore);
+		$('#ore').attr('readonly', true);
+		
+	} else {
+		// non e' certo readonly
+		$('#ore').attr('readonly', false);
+		
+		// di default ci mette ore_max
+		$("#ore").val(ore_max);
+		
+		// se specificato il max, lo scrive nella label
+		if (ore === 0 && ore_max > 0) {
+			$("#oreLabel").text("Ore (max " + ore_max + ")");
+		} else {
+			$("#oreLabel").text("Ore");
+		}
+	}
 }
 
 function oreAssegnateAddRecord() {
-    $.post("oreAssegnateUpdateDetails.php", {
+    $.post("oreAssegnateAddDetails.php", {
     		ore_previste_attivita_id: $("#hidden_ore_previste_attivita_id").val(),
     		dettaglio: $("#dettaglio").val(),
 			ore: $("#ore").val(),
@@ -19,34 +75,12 @@ function oreAssegnateAddRecord() {
 	);
 }
 
-function reloadTable(ore_previste_tipo_attivita_id) {
-	$.post("oreAssegnateReadList.php", {
-		ore_previste_tipo_attivita_id: ore_previste_tipo_attivita_id
-	},
-	function (data, status) {
-		// PARSE json data
-		console.log(data);
-		var oreArray = JSON.parse(data);
-		console.log(oreArray);
-
-		var tableId = 'table_' + ore_previste_tipo_attivita_id;
-		// svuota il tbody della tabella
-		$('#' + tableId + ' tbody').empty();
-		var markup = '';
-		oreArray.forEach(function(ore) {
-			if (ore.ore_previste_attivita_id !== null) {
-				markup = markup + 
-				"<tr>" +
-				"<td>" + ore.docente_cognome + " " + ore.docente_nome + "</td>" +
-				"<td>" + ore.ore_previste_attivita_dettaglio + "</td>" +
-				"<td class=\"col-md-1 text-center\">" + ore.ore_previste_attivita_ore + "</td>" +
-				"<td></td>" +
-				"</tr>";
-			}
-		});
-		$('#' + tableId + ' > tbody:last-child').append(markup);
-//		$('#' + tableId + ' td:nth-child(1),th:nth-child(1)').hide(); // nasconde la prima colonna con l'id
-	}
-);
+function deleteOreAttivita(ore_previste_attivita_id, ore_previste_tipo_attivita_id) {
+    $.post("oreAssegnateDelete.php", {
+			id: ore_previste_attivita_id
+	    },
+	    function (data, status) {
+	        reloadTable(ore_previste_tipo_attivita_id);
+	    }
+	);
 }
-

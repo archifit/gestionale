@@ -35,46 +35,42 @@
 	<table class="table table-vnocolor-index">
 		<thead>
 			<tr>
-				<th class="col-md-2 text-center"></th>
-				<th class="col-md-1 text-center">Collegio Doc.</th>
-				<th class="col-md-1 text-center">Udienze</th>
-				<th class="col-md-1 text-center">Dip. (min)</th>
-				<th class="col-md-1 text-center">Dip. (max)</th>
-				<th class="col-md-1 text-center">Aggioranmento</th>
-				<th class="col-md-1 text-center">CdC</th>
-				<th class="col-md-2 text-center">Totale</th>
+				<th class="col-md-2 text-left"></th>
+				<th class="col-md-1 text-left">Collegio Doc.</th>
+				<th class="col-md-1 text-left">Udienze</th>
+				<th class="col-md-1 text-left">Dipartimenti</th>
+				<th class="col-md-1 text-left">Aggiornamento</th>
+				<th class="col-md-1 text-left">CdC</th>
+				<th class="col-md-2 text-left">Totale</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td class="col-md-2">dovute</td>
-				<td class="text-center" id="dovute_ore_80_collegi_docenti"></td>
-				<td class="text-center" id="dovute_ore_80_udienze_generali"></td>
-				<td class="text-center" id="dovute_ore_80_dipartimenti_min"></td>
-				<td class="text-center" id="dovute_ore_80_dipartimenti_max"></td>
-				<td class="text-center" id="dovute_ore_80_aggiornamento_facoltativo"></td>
-				<td class="text-center" id="dovute_ore_80_consigli_di_classe"></td>
-				<td class="text-center" id="dovute_ore_80_totale"></td>
+				<td class="text-left" id="dovute_ore_80_collegi_docenti"></td>
+				<td class="text-left" id="dovute_ore_80_udienze_generali"></td>
+				<td class="text-left" id="dovute_ore_80_dipartimenti"></td>
+				<td class="text-left" id="dovute_ore_80_aggiornamento_facoltativo"></td>
+				<td class="text-left" id="dovute_ore_80_consigli_di_classe"></td>
+				<td class="text-left" id="dovute_ore_80_totale"></td>
 			</tr>
 			<tr>
 				<td class="col-md-2">previste</td>
-				<td class="text-center" id="previste_ore_80_collegi_docenti"></td>
-				<td class="text-center" id="previste_ore_80_udienze_generali"></td>
-				<td class="text-center" id="previste_ore_80_dipartimenti_min"></td>
-				<td class="text-center" id="previste_ore_80_dipartimenti_max"></td>
-				<td class="text-center" id="previste_ore_80_aggiornamento_facoltativo"></td>
-				<td class="text-center" id="previste_ore_80_consigli_di_classe"></td>
-				<td class="text-center" id="previste_ore_80_totale"></td>
+				<td class="text-left" id="previste_ore_80_collegi_docenti"></td>
+				<td class="text-left" id="previste_ore_80_udienze_generali"></td>
+				<td class="text-left" id="previste_ore_80_dipartimenti"></td>
+				<td class="text-left" id="previste_ore_80_aggiornamento_facoltativo"></td>
+				<td class="text-left" id="previste_ore_80_consigli_di_classe"></td>
+				<td class="text-left" id="previste_ore_80_totale"></td>
 			</tr>
 			<tr>
 				<td class="col-md-2">fatte</td>
-				<td class="text-center" id="fatte_ore_80_collegi_docenti"></td>
-				<td class="text-center" id="fatte_ore_80_udienze_generali"></td>
-				<td class="text-center" id="fatte_ore_80_dipartimenti_min"></td>
-				<td class="text-center" id="fatte_ore_80_dipartimenti_max"></td>
-				<td class="text-center" id="fatte_ore_80_aggiornamento_facoltativo"></td>
-				<td class="text-center" id="fatte_ore_80_consigli_di_classe"></td>
-				<td class="text-center" id="fatte_ore_80_totale"></td>
+				<td class="text-left" id="fatte_ore_80_collegi_docenti"></td>
+				<td class="text-left" id="fatte_ore_80_udienze_generali"></td>
+				<td class="text-left" id="fatte_ore_80_dipartimenti"></td>
+				<td class="text-left" id="fatte_ore_80_aggiornamento_facoltativo"></td>
+				<td class="text-left" id="fatte_ore_80_consigli_di_classe"></td>
+				<td class="text-left" id="fatte_ore_80_totale"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -98,33 +94,33 @@
 		<thead>
 			<tr>
 				<th class="col-md-2"></th>
-				<th class="col-md-2 text-center">Sostituzioni</th>
-				<th class="col-md-2 text-center">Aggiornamento</th>
-				<th class="col-md-2 text-center">con Studenti</th>
-				<th class="col-md-3 text-center">Totale</th>
+				<th class="col-md-2 text-left">Sostituzioni</th>
+				<th class="col-md-2 text-left">Aggiornamento</th>
+				<th class="col-md-2 text-left">con Studenti</th>
+				<th class="col-md-3 text-left">Totale</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td>dovute</td>
-				<td class="text-center" id="dovute_ore_40_sostituzioni_di_ufficio"></td>
-				<td class="text-center" id="dovute_ore_40_aggiornamento"></td>
-				<td class="text-center" id="dovute_ore_40_con_studenti"></td>
-				<td class="text-center" id="dovute_ore_40_totale"></td>
+				<td class="text-left" id="dovute_ore_40_sostituzioni_di_ufficio"></td>
+				<td class="text-left" id="dovute_ore_40_aggiornamento"></td>
+				<td class="text-left" id="dovute_ore_40_con_studenti"></td>
+				<td class="text-left" id="dovute_ore_40_totale"></td>
 			</tr>
 			<tr>
 				<td>previste</td>
-				<td class="text-center" id="previste_ore_40_sostituzioni_di_ufficio"></td>
-				<td class="text-center" id="previste_ore_40_aggiornamento"></td>
-				<td class="text-center" id="previste_ore_40_con_studenti"></td>
-				<td class="text-center" id="previste_ore_40_totale"></td>
+				<td class="text-left" id="previste_ore_40_sostituzioni_di_ufficio"></td>
+				<td class="text-left" id="previste_ore_40_aggiornamento"></td>
+				<td class="text-left" id="previste_ore_40_con_studenti"></td>
+				<td class="text-left" id="previste_ore_40_totale"></td>
 			</tr>
 			<tr>
 				<td>fatte</td>
-				<td class="text-center" id="fatte_ore_40_sostituzioni_di_ufficio"></td>
-				<td class="text-center" id="fatte_ore_40_aggiornamento"></td>
-				<td class="text-center" id="fatte_ore_40_con_studenti"></td>
-				<td class="text-center" id="fatte_ore_40_totale"></td>
+				<td class="text-left" id="fatte_ore_40_sostituzioni_di_ufficio"></td>
+				<td class="text-left" id="fatte_ore_40_aggiornamento"></td>
+				<td class="text-left" id="fatte_ore_40_con_studenti"></td>
+				<td class="text-left" id="fatte_ore_40_totale"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -149,29 +145,29 @@
 		<thead>
 			<tr>
 				<th class="col-md-2"></th>
-				<th class="col-md-3 text-center">Funzionali</th>
-				<th class="col-md-3 text-center">con Studenti</th>
-				<th class="col-md-4 text-center">Totale</th>
+				<th class="col-md-3 text-left">Funzionali</th>
+				<th class="col-md-3 text-left">con Studenti</th>
+				<th class="col-md-4 text-left">Totale</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td>dovute</td>
-				<td class="text-center" id="dovute_ore_70_funzionali"></td>
-				<td class="text-center" id="dovute_ore_70_con_studenti"></td>
-				<td class="text-center" id="dovute_ore_70_totale"></td>
+				<td class="text-left" id="dovute_ore_70_funzionali"></td>
+				<td class="text-left" id="dovute_ore_70_con_studenti"></td>
+				<td class="text-left" id="dovute_ore_70_totale"></td>
 			</tr>
 			<tr>
 				<td>previste</td>
-				<td class="text-center" id="previste_ore_70_funzionali"></td>
-				<td class="text-center" id="previste_ore_70_con_studenti"></td>
-				<td class="text-center" id="previste_ore_70_totale"></td>
+				<td class="text-left" id="previste_ore_70_funzionali"></td>
+				<td class="text-left" id="previste_ore_70_con_studenti"></td>
+				<td class="text-left" id="previste_ore_70_totale"></td>
 			</tr>
 			<tr>
 				<td>fatte</td>
-				<td class="text-center" id="fatte_ore_70_funzionali"></td>
-				<td class="text-center" id="fatte_ore_70_con_studenti"></td>
-				<td class="text-center" id="fatte_ore_70_totale"></td>
+				<td class="text-left" id="fatte_ore_70_funzionali"></td>
+				<td class="text-left" id="fatte_ore_70_con_studenti"></td>
+				<td class="text-left" id="fatte_ore_70_totale"></td>
 			</tr>
 		</tbody>
 	</table>

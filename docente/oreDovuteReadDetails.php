@@ -16,7 +16,7 @@ $query = "
 	WHERE anno_scolastico_id = $__anno_scolastico_corrente_id
 	AND docente_id = $docente_id
 	";
-
+debug($query);
 if (!$result = mysqli_query($con, $query)) {
 	exit(mysqli_error($con));
 }

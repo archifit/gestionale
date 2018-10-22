@@ -1,22 +1,71 @@
 <?php
-// Connection variables
-//	$host = "localhost"; // MySQL host name eg. localhost
-//	$user = "root"; // MySQL user. eg. root ( if your on localserver)
-//	$password = ""; // MySQL user password  (if password is not set for your root user then keep it empty )
-//	$database = "gestionale"; // MySQL Database name
+require_once __DIR__ . '/__Environment.php';
+require_once __DIR__ . '/__LOG.php';
 
-	$host = "localhost"; // MySQL host name eg. localhost
-	$user = "Sql1102145"; // MySQL user. eg. root ( if your on localserver)
-	$password = "148t88bt31"; // MySQL user password  (if password is not set for your root user then keep it empty )
-	$database = "Sql1102145_2"; // MySQL Database name
+$__con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
+if ($__con->connect_error) {
+	die("Connection failed: " . $__con->connect_error);
+}
+mysqli_set_charset($__con, 'utf8');
 
-	// Connect to MySQL Database
-	$con = new mysqli($host, $user, $password, $database);
+// TODO: vecchia variabile, rimuovere se non piu usata
+$con = $__con;
 
-	// Check connection
-	if ($con->connect_error) {
-		die("Connection failed: " . $con->connect_error);
+// esegue una query
+function dbExec($query) {
+	global $__con;
+
+	// esegue la query
+	if (!$result = mysqli_query($__con, $query)) {
+		error('errore in esecuzione query. query='.$query);
+		exit('Application Error');
 	}
-	mysqli_set_charset($con, 'utf8');
+}
+
+// ritorna il primo risultato di una query
+function dbGetFirst($query) {
+	global $__con;
+
+	// esegue la query
+	if (!$result = mysqli_query($__con, $query)) {
+		error('errore in esecuzione query. query='.$query);
+		return null;
+	}
+
+	// controlla che ci siano dei risultati
+	if(mysqli_num_rows($result) <= 0) {
+		warning('nessun risultato per la query: '.$query);
+		return null;
+	}
+
+	// prende il primo risultato e lo ritorna
+	return mysqli_fetch_assoc($result);
+}
+
+// ritorna i risultati di una query
+function dbGetAll($query) {
+	global $__con;
+
+	// esegue la query
+	if (!$result = mysqli_query($__con, $query)) {
+		error('errore in esecuzione query. query='.$query);
+		return null;
+	}
+	return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+// ritorna un valore specifico se il risultato e' un solo valore
+function dbGetValue($query) {
+	global $__con;
+
+	// esegue la query
+	if (!$result = mysqli_query($__con, $query)) {
+		error('errore in esecuzione query. query='.$query);
+		return null;
+	}
+	$value = $result->fetch_array(MYSQLI_NUM);
+	return is_array($value) ? $value[0] : null;
+}
+
 ?>
