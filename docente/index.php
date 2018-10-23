@@ -19,7 +19,7 @@
 <div class="container-fluid" style="margin-top:60px">
 <div class="panel panel-primary">
 <div class="panel-heading">
-<h4>Specchietto ore dovute</h4>
+<h4><span class="glyphicon glyphicon-time"></span>&ensp;Specchietto ore dovute</h4>
 </div>
 <div class="panel-body">
 
@@ -309,7 +309,7 @@
         </div>
     </div>
 </div>
-<!-- // Modal - Update docente details -->
+<!-- // Modal - attivita details -->
 
 </div>
 </div>

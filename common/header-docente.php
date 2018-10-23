@@ -14,8 +14,7 @@
 			<li><a href="#">  </a></li>
 
 			<a href="<?php echo $__application_base_path; ?>/docente/corsoDiRecupero.php" class="btn btn-default navbar-btn btn-primary" role="button"><span class="glyphicon glyphicon-repeat"></span>&ensp;Corsi di Recupero </a>
-			<a href="<?php echo $__application_base_path; ?>/docente/index.php" class="btn btn-default navbar-btn btn-info" role="button"><span class="glyphicon glyphicon-list-alt"></span>&ensp;Interventi didattici </a>
-			<a href="<?php echo $__application_base_path; ?>/docente/index.php" class="btn btn-default navbar-btn btn-success" role="button"><span class="glyphicon glyphicon-user"></span>&ensp;Attività con Studenti </a>
+			<a href="<?php echo $__application_base_path; ?>/docente/attivita.php" class="btn btn-default navbar-btn btn-info" role="button"><span class="glyphicon glyphicon-list-alt"></span>&ensp;Attività </a>
 			<a href="<?php echo $__application_base_path; ?>/docente/index.php" class="btn btn-default navbar-btn btn-warning" role="button"><span class="glyphicon glyphicon-time"></span>&ensp;80 Ore</a>
 			<a href="<?php echo $__application_base_path; ?>/docente/viaggio.php" class="btn btn-default navbar-btn btn-danger" role="button"><span class="glyphicon glyphicon-picture"></span>&ensp;Uscite</a>
 		</ul>

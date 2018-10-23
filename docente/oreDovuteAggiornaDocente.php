@@ -1,6 +1,10 @@
 <?php
 function orePrevisteAggiornaDocente($docenteId) {
 	global $__anno_scolastico_corrente_id;
+	// TODO: non fatto
+}
+function orePrevisteAggiornaDocente($docenteId) {
+	global $__anno_scolastico_corrente_id;
 
 	// per prima cosa azzera i contatori
 	$ore_40_sostituzioni_di_ufficio = 0;
