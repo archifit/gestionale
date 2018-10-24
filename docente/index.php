@@ -204,30 +204,6 @@
 <!-- <div class="panel-footer"></div> -->
 </div>
 
-<div class="panel panel-primary">
-<div class="panel-heading">
-	<span class="glyphicon glyphicon-list-alt"></span>
-	<a style="color:white;" data-toggle="collapse" href="#collapse_Fatte">&ensp;Ore Fatte </a>
-</div>
-<div id="collapse_Fatte" class="panel-collapse collapse  collapse in">
-<div class="panel-body">
-    <div class="row"  style="margin-bottom:10px;">
-        <div class="col-md-6">
-        </div>
-        <div class="col-md-6">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="attivita_fatte_records_content"></div>
-        </div>
-    </div>
-</div>
-</div>
-
-<!-- <div class="panel-footer"></div> -->
-</div>
-
 <?php
 	// prepara l'elenco dei tipi di attivita
 	$categoria = '';

@@ -5,15 +5,16 @@ if(isset($_POST)) {
 	debug('1');
 	$attivita_id = $_POST['attivita_id'];
 	$tipo_attivita_id = $_POST['tipo_attivita_id'];
-	$attivita_ore = $_POST['attivita_ore'];
-	$attivita_dettaglio = mysqli_real_escape_string($con, $_POST['attivita_dettaglio']);
-	debug('2');
+	$ore = $_POST['ore'];
+	$dettaglio = mysqli_real_escape_string($con, $_POST['dettaglio']);
+	$ora_inizio = $_POST['ora_inizio'];
+	$data = $_POST['data'];
 
 	$query = '';
 	if ($attivita_id > 0) {
-		$query = "UPDATE ore_fatte_attivita SET nome = '$attivita_dettaglio', ore = '$attivita_ore', ore_previste_tipo_attivita_id	 = '$tipo_attivita_id' WHERE id = '$attivita_id'";
+		$query = "UPDATE ore_fatte_attivita SET dettaglio = '$dettaglio', ore = '$ore', ore_previste_tipo_attivita_id = '$tipo_attivita_id', ora_inizio = '$ora_inizio', data = '$data' WHERE id = '$attivita_id'";
 	} else {
-		$query = "INSERT INTO ore_fatte_attivita (nome, ore, ore_previste_tipo_attivita_id, docente_id, anno_scolastico_id) VALUES('$attivita_dettaglio', '$attivita_ore', '$tipo_attivita_id', '$__docente_id', '$__anno_scolastico_corrente_id')";
+		$query = "INSERT INTO ore_fatte_attivita (dettaglio, ore, ora_inizio, data, ore_previste_tipo_attivita_id, docente_id, anno_scolastico_id) VALUES('$dettaglio', '$ore', '$ora_inizio', '$data', '$tipo_attivita_id', '$__docente_id', '$__anno_scolastico_corrente_id')";
 	}
 	debug($query);
 

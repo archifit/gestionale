@@ -1,15 +1,25 @@
-function setDateToPickr(pickr, data_str) {
+function setDbDateToPickr(pickr, data_str) {
 	var data = Date.parseExact(data_str, 'yyyy-MM-dd');
 	pickr.setDate(data);
 }
 
-function oreFatteReadAttivita() {
+function getDbDateFromPickrId(pickrId) {
+	var data_str = $(pickrId).val();
+	var data_date = Date.parseExact(data_str, 'd/M/yyyy');
+	return data_date.toString('yyyy-MM-dd');
+}
+
+function oreFatteReadAttivitaRecords() {
 	$.get("oreFatteReadAttivita.php", {}, function (data, status) {
 		$(".attivita_fatte_records_content").html(data);
 	});
 }
 
-function oreFatteNuovaAttivita(attivita_id) {
+function oreFatteGetRegistroAttivita() {
+	alert("Registro non ancora disponibile");
+}
+
+function oreFatteGetAttivita(attivita_id) {
 	$("#hidden_ore_fatte_attivita_id").val(attivita_id);
 	if (attivita_id > 0) {
 		$.post("oreFatteAttivitaReadDetails.php", {
@@ -18,11 +28,11 @@ function oreFatteNuovaAttivita(attivita_id) {
 			function (dati, status) {
 				console.log(dati);
 				var attivita = JSON.parse(dati);
-				$('#attivita_tipo_attivita').selectpicker('val', attivita.attivita_tipo_id);
+				$('#attivita_tipo_attivita').selectpicker('val', attivita.ore_previste_tipo_attivita_id);
 				$("#attivita_ore").val(attivita.ore);
 				$("#attivita_dettaglio").val(attivita.dettaglio);
-				$("#attivita_ora_inizio").val(attivita.ora_inizio);
-				setDateToPickr(attivita_data_pickr, attivita.data);
+				$("#attivita_ora_inizio").prop('defaultValue', attivita.ora_inizio);
+				setDbDateToPickr(attivita_data_pickr, attivita.data);
 			}
 		);
 	} else {
@@ -36,23 +46,22 @@ function oreFatteNuovaAttivita(attivita_id) {
 
 	// Open modal popup
 	$("#docente_attivita_modal").modal("show");
-	
 }
 
 function attivitaFattaUpdateDetails() {
-    $.post("oreFatteUpdateAttivita.php", {
+ 	$.post("oreFatteUpdateAttivita.php", {
     	attivita_id: $("#hidden_ore_fatte_attivita_id").val(),
     	tipo_attivita_id: $("#attivita_tipo_attivita").val(),
-    	attivita_ore: $("#attivita_ore").val(),
-    	attivita_dettaglio: $("#attivita_dettaglio").val()
+    	ore: $("#attivita_ore").val(),
+    	dettaglio: $("#attivita_dettaglio").val(),
+    	ora_inizio: $("#attivita_ora_inizio").val(),
+    	data: getDbDateFromPickrId("#attivita_data")
     }, function (data, status) {
-    	oreFatteReadAttivita();
+    	oreFatteReadAttivitaRecords();
     });
     $("#docente_attivita_modal").modal("hide");
-
 }
 
-//Read records on page load
 $(document).ready(function () {
 	attivita_data_pickr = flatpickr("#attivita_data", {
 		locale: {
@@ -71,5 +80,5 @@ $(document).ready(function () {
 
 	flatpickr.localize(flatpickr.l10ns.it);
 
-  oreFatteReadAttivita();
+	oreFatteReadAttivitaRecords();
 });

@@ -1,7 +1,7 @@
 
 function previsteConStudenti(ore_docente_id, ore_dovute_totale_con_studenti, ore_previste_con_studenti, ore_fatte_con_studenti) {
 
-	// TODO: cancellare e rimuovere il file previsteConStudenti.php
+	// TODO: cancellare questa function e rimuovere il file previsteConStudenti.php
 	var page = "previsteConStudenti.php" +
 			"?ore_docente_id=" + ore_docente_id +
 			"&ore_dovute_totale_con_studenti=" + ore_dovute_totale_con_studenti +
@@ -108,12 +108,6 @@ function oreDovuteReadRecords() {
 function oreDovuteReadAttivita() {
 	$.get("oreDovuteReadAttivita.php", {}, function (data, status) {
 		$(".attivita_previste_records_content").html(data);
-	});
-}
-
-function oreFatteReadAttivita() {
-	$.get("oreFatteReadAttivita.php", {}, function (data, status) {
-		$(".attivita_fatte_records_content").html(data);
 	});
 }
 

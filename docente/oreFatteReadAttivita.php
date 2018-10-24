@@ -8,33 +8,38 @@ if(isset($_POST['docente_id']) && isset($_POST['docente_id']) != "") {
 	$docente_id = $_POST['docente_id'];
 }
 
+$data = '';
+
 // Design initial table header
-$data = '<div class="table-wrapper"><table class="table table-bordered table-striped table-green">
-						<tr>
+$data .= '<div class="table-wrapper"><table class="table table-bordered table-striped table-green">
+						<thead><tr>
 							<th>Tipo</th>
 							<th>Nome</th>
 							<th>Dettaglio</th>
-							<th>ore</th>
+							<th class="text-center">Data</th>
+							<th class="text-center">ore</th>
+							<th class="text-center">Registro</th>
 							<th></th>
-						</tr>';
+						</tr></thead><tbody>';
 
 $query = "	SELECT
-					ore_previste_attivita.id AS ore_previste_attivita_id,
-					ore_previste_attivita.ore AS ore_previste_attivita_ore,
-					ore_previste_attivita.dettaglio AS ore_previste_attivita_dettaglio,
+					ore_fatte_attivita.id AS ore_fatte_attivita_id,
+					ore_fatte_attivita.ore AS ore_fatte_attivita_ore,
+					ore_fatte_attivita.dettaglio AS ore_fatte_attivita_dettaglio,
+					ore_fatte_attivita.data AS ore_fatte_attivita_data,
 					ore_previste_tipo_attivita.id AS ore_previste_tipo_attivita_id,
 					ore_previste_tipo_attivita.categoria AS ore_previste_tipo_attivita_categoria,
 					ore_previste_tipo_attivita.inserito_da_docente AS ore_previste_tipo_attivita_inserito_da_docente,
 					ore_previste_tipo_attivita.nome AS ore_previste_tipo_attivita_nome
 
-				FROM ore_previste_attivita ore_previste_attivita
+				FROM ore_fatte_attivita ore_fatte_attivita
 				INNER JOIN ore_previste_tipo_attivita ore_previste_tipo_attivita
-				ON ore_previste_attivita.ore_previste_tipo_attivita_id = ore_previste_tipo_attivita.id
-				WHERE ore_previste_attivita.anno_scolastico_id = $__anno_scolastico_corrente_id
-				AND ore_previste_attivita.docente_id = $docente_id
+				ON ore_fatte_attivita.ore_previste_tipo_attivita_id = ore_previste_tipo_attivita.id
+				WHERE ore_fatte_attivita.anno_scolastico_id = $__anno_scolastico_corrente_id
+				AND ore_fatte_attivita.docente_id = $docente_id
 				ORDER BY
-					ore_previste_tipo_attivita.inserito_da_docente DESC,
-					ore_previste_tipo_attivita.categoria, ore_previste_tipo_attivita.nome ASC
+					ore_fatte_attivita.data DESC,
+					ore_fatte_attivita.ora_inizio
 				"
 				;
 
@@ -49,17 +54,29 @@ if(mysqli_num_rows($result) > 0) {
 		$data .= '<tr>
 			<td>'.$row['ore_previste_tipo_attivita_categoria'].'</td>
 			<td>'.$row['ore_previste_tipo_attivita_nome'].'</td>
-			<td>'.$row['ore_previste_attivita_dettaglio'].'</td>
-			<td>'.$row['ore_previste_attivita_ore'].'</td>
+			<td>'.$row['ore_fatte_attivita_dettaglio'].'</td>
+			<td class="text-center">'.$row['ore_fatte_attivita_data'].'</td>
+			<td class="text-center">'.$row['ore_fatte_attivita_ore'].'</td>
 			';
 
 		$data .='
-			<td>
+			<td class="text-center">
 			';
 		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
 			$data .='
-				<button onclick="attivitaPrevistaModifica('.$row['ore_previste_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
-				<button onclick="attivitaPrevistaDelete('.$row['ore_previste_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+				<button onclick="oreFatteGetRegistroAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
+			';
+		}
+		$data .='
+			</td>';
+
+		$data .='
+			<td class="text-center">
+			';
+		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
+			$data .='
+				<button onclick="oreFatteGetAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+				<button onclick="oreFatteDeleteAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
 			';
 		}
 		$data .='
@@ -70,8 +87,18 @@ if(mysqli_num_rows($result) > 0) {
 		// records now found
 		$data .= '<tr><td colspan="5">Records not found!</td></tr>';
 }
-
-$data .= '</table></div>';
+$data .= '</tbody>';
+/*
+$data .= '<tfoot><tr>';
+$funzionali = 12;
+$conStudenti = 24;
+$aggiornamento = 8;
+$data .= '<th colspan="7" style="text-align: center">Funzionali: '.$funzionali.'&emsp;conStudenti: '.$conStudenti.'&emsp;Aggiornamento: '.$aggiornamento.'</th>';
+$data .= '</tr></tfoot>';
+*/
+$data .= '</table>
+';
+$data .= '</div>';
 
 echo $data;
 

@@ -26,7 +26,7 @@
 		<div class="col-md-4 text-center">
 		</div>
 		<div class="col-md-4 text-right">
-			<button onclick="oreFatteNuovaAttivita(0)" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span></button>
+			<button onclick="oreFatteGetAttivita(0)" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span></button>
 		</div>
 	</div>
 </div>
