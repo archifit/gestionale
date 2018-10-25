@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/__Environment.php';
-require_once __DIR__ . '/__LOG.php';
+require_once __DIR__ . '/__Log.php';
 
 $__con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 

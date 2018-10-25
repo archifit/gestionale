@@ -9,7 +9,7 @@ if (defined('__production_environment')) {
 	define ( 'DURATA_SESSIONE', 60 * 60 * 24 * 365 );
 
 	// db connection
-	define ( 'DB_HOST', 'localhost' );
+	define ( 'DB_HOST', '89.46.111.44' );
 	define ( 'DB_USER', 'Sql1102145' );
 	define ( 'DB_PASSWORD', '148t88bt31' );
 	define ( 'DB_DATABASE', 'Sql1102145_2' );
