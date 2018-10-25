@@ -17,10 +17,16 @@
 		}
 
 		// trova l'id inserito
-		$last_id = $con->insert_id;
+		$docente_id = $con->insert_id;
+
+		// insert dell'utente
+		$query = "INSERT INTO utente(nome, cognome, username, ruolo) VALUES('$nome', '$cognome', '$username', 'docente')";
+		if (!$result = mysqli_query($con, $query)) {
+			exit(mysqli_error($con));
+		}
 
 		// insert del profilo
-		$query = "INSERT INTO profilo_docente(anno_scolastico_id, docente_id) VALUES('$__anno_scolastico_corrente_id', '$last_id')";
+		$query = "INSERT INTO profilo_docente(anno_scolastico_id, docente_id) VALUES('$__anno_scolastico_corrente_id', '$docente_id')";
 		if (!$result = mysqli_query($con, $query)) {
 			exit(mysqli_error($con));
 		}
