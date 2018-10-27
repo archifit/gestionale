@@ -19,8 +19,7 @@ function ricalcola() {
 	
 	// cattedra + 18 ore, 33 eccedenti
 	if (profilo_ore_di_cattedra > 18) {
-		 profilo_ore_eccedenti = 33;
-		$("#profilo_ore_eccedenti").val("33");
+		profilo_ore_eccedenti = Math.round(33 / 300 * profilo_giorni_di_servizio);
 		profilo_ore_di_cattedra = 18;
 	}
 	$("#profilo_ore_eccedenti").val(profilo_ore_eccedenti);
@@ -35,11 +34,12 @@ function ricalcola() {
 
 	// scala le ore eccedenti dalle 70
 	if (profilo_ore_eccedenti > 0) {
-		totale_70 = Math.round(coefficente * 70 - (profilo_ore_eccedenti / 300 * profilo_giorni_di_servizio));
+		totale_70 = Math.round(coefficente * 70 - (profilo_ore_eccedenti));
 	}
 	// se breve, le 70 diventano 0
 	if (profilo_tipo_di_contratto.toUpperCase() === "BREVE") {
-		totale_70 = 0;
+		// NB: non piu' valido
+		// totale_70 = 0;
 	}
 	
 	// le 80 non devono sommare ad 80, tanto ci sono anche min e max

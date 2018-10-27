@@ -27,6 +27,8 @@
 		$ore_70_con_studenti = $_POST['ore_70_con_studenti'];
 		$ore_70_totale = $_POST['ore_70_totale'];
 		$note = $_POST['note'];
+		$ore_40_totale = 0 + round($ore_40_aggiornamento + ($ore_40_sostituzioni_di_ufficio * 50 / 60) + ($ore_40_con_studenti * 50 / 60));
+		$ore_70_totale = 0 + round($ore_70_funzionali + $ore_70_con_studenti);
 
 		$query = "	UPDATE profilo_docente SET
 						classe_di_concorso = '$classe_di_concorso',
