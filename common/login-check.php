@@ -9,6 +9,17 @@ function passwordHash($p) {
     return md5($p);
 	// return $p;
 }
+
+// anche per encrypt in DES
+function cryptECB($crypt, $key) {
+	$iv_size = mcrypt_get_iv_size(MCRYPT_3DES, MCRYPT_MODE_ECB);
+	$iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+	// crypting
+	$cryptText = mcrypt_encrypt(MCRYPT_3DES, $key, $crypt, MCRYPT_MODE_ECB, $iv);
+
+	return $cryptText;
+}
+
 // dovrei arrivare qui sempre con un location set: lo memorizzo
 $redirect = NULL;
 if($_POST['location'] != '') {
@@ -19,16 +30,18 @@ if(isset($_POST['user']) && !empty($_POST['user']) AND isset($_POST['password'])
     if(!isset($_POST['rememberme']) || empty($_POST['rememberme'])) {
         $_POST['rememberme'] = false;
     }
-    // echo $_POST['user'].'</br>'.$_POST['password'].'</br>';
     if ($_POST['rememberme']) {
         // in questo caso e' settato, ma nel nostro software viene ignorato
     }
 }
 
 // raccoglie user e password dal post
+$key = "MYKEYFORCRYPTINGTEXT1234";
 $_user = $_POST['user'];
 $_password = $_POST['password'];
 $_passwordHash = passwordHash($_password);
+$_passwordDes = base64_encode(cryptECB($_password, $key));
+info('_user ='.$_user.' _passwordDes ='.$_passwordDes.' _passwordHash='.$_passwordHash);
 
 // start della session
 if (session_status() == PHP_SESSION_NONE) {

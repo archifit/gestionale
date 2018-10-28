@@ -81,9 +81,11 @@
 				$disable = ' disabled ';
 			}
 			if ($row['inserito_da_docente']) {
-				$tipoAttivitaOptionList .= '
+				if ($row['da_rendicontare']) {
+					$tipoAttivitaOptionList .= '
 					<option value="'.$row['id'].'"'.$subtext.$disable.' >'.$row['nome'].'</option>
 					';
+				}
 			}
 		}
 		$tipoAttivitaOptionList .= '</optgroup>';
