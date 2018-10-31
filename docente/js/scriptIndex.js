@@ -141,7 +141,7 @@ function oreDovuteAttivitaGetDetails(attivita_id) {
 			function (dati, status) {
 				console.log(dati);
 				var attivita = JSON.parse(dati);
-				$('#tipo_attivita').selectpicker('val', attivita.attivita_tipo_id);
+				$('#tipo_attivita').selectpicker('val', attivita.ore_previste_tipo_attivita_id);
 				$("#update_ore").val(attivita.ore);
 				$("#update_dettaglio").val(attivita.dettaglio);
 			}

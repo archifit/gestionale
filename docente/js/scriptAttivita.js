@@ -62,6 +62,19 @@ function attivitaFattaUpdateDetails() {
     $("#docente_attivita_modal").modal("hide");
 }
 
+function oreFatteDeleteAttivita(id) {
+    var conf = confirm("Sei sicuro di volere cancellare questa attività ?");
+    if (conf == true) {
+        $.post("oreFatteAttivitaDelete.php", {
+                id: id
+            },
+            function (data, status) {
+            	oreFatteReadAttivitaRecords();
+            }
+        );
+    }
+}
+
 $(document).ready(function () {
 	attivita_data_pickr = flatpickr("#attivita_data", {
 		locale: {
