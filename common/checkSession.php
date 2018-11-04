@@ -25,6 +25,10 @@ if (empty ( $__username )) {
     redirect ( '/error/notlogged.php' );
 }
 
+// configurazione globale
+require_once __DIR__ . '/Config.php';
+$__config = new Config();
+
 if (! $session->has ( 'anno_scolastico_corrente_anno' )) {
     debug ( 'manca in sessione anno_scolastico_corrente_anno' );
     require_once '../common/connect.php';  // TODO: Adjust

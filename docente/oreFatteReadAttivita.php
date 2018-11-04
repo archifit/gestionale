@@ -30,11 +30,14 @@ $query = "	SELECT
 					ore_previste_tipo_attivita.id AS ore_previste_tipo_attivita_id,
 					ore_previste_tipo_attivita.categoria AS ore_previste_tipo_attivita_categoria,
 					ore_previste_tipo_attivita.inserito_da_docente AS ore_previste_tipo_attivita_inserito_da_docente,
-					ore_previste_tipo_attivita.nome AS ore_previste_tipo_attivita_nome
+					ore_previste_tipo_attivita.nome AS ore_previste_tipo_attivita_nome,
+					registro_attivita.id AS registro_attivita_id
 
 				FROM ore_fatte_attivita ore_fatte_attivita
 				INNER JOIN ore_previste_tipo_attivita ore_previste_tipo_attivita
 				ON ore_fatte_attivita.ore_previste_tipo_attivita_id = ore_previste_tipo_attivita.id
+				LEFT JOIN registro_attivita registro_attivita
+				ON registro_attivita.ore_fatte_attivita_id = ore_fatte_attivita.id
 				WHERE ore_fatte_attivita.anno_scolastico_id = $__anno_scolastico_corrente_id
 				AND ore_fatte_attivita.docente_id = $docente_id
 				ORDER BY
@@ -64,7 +67,7 @@ if(mysqli_num_rows($result) > 0) {
 			';
 		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
 			$data .='
-				<button onclick="oreFatteGetRegistroAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
+				<button onclick="oreFatteGetRegistroAttivita('.$row['ore_fatte_attivita_id'].', '.$row['registro_attivita_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
 			';
 		}
 		$data .='
@@ -74,10 +77,12 @@ if(mysqli_num_rows($result) > 0) {
 			<td class="text-center">
 			';
 		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
-			$data .='
-				<button onclick="oreFatteGetAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
-				<button onclick="oreFatteDeleteAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
-			';
+			if ($__config->getOre_fatte_aperto()) {
+				$data .='
+					<button onclick="oreFatteGetAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+					<button onclick="oreFatteDeleteAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
+				';
+			}
 		}
 		$data .='
 			</td>
@@ -85,17 +90,10 @@ if(mysqli_num_rows($result) > 0) {
 	}
 } else {
 		// records now found
-		$data .= '<tr><td colspan="5">Records not found!</td></tr>';
+		$data .= '<tr><td colspan="7">Nessuna attività inserita</td></tr>';
 }
 $data .= '</tbody>';
-/*
-$data .= '<tfoot><tr>';
-$funzionali = 12;
-$conStudenti = 24;
-$aggiornamento = 8;
-$data .= '<th colspan="7" style="text-align: center">Funzionali: '.$funzionali.'&emsp;conStudenti: '.$conStudenti.'&emsp;Aggiornamento: '.$aggiornamento.'</th>';
-$data .= '</tr></tfoot>';
-*/
+
 $data .= '</table>
 ';
 $data .= '</div>';

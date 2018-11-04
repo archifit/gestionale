@@ -2,9 +2,9 @@
 <html>
 <head>
 <?php
-	require_once '../common/header-session.php';
-	require_once '../common/header-common.php';
-	ruoloRichiesto('segreteria-docenti','dirigente','docente');
+require_once '../common/header-session.php';
+require_once '../common/header-common.php';
+ruoloRichiesto('segreteria-docenti','dirigente','docente');
 ?>
 	<title>Attività</title>
 	<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">
@@ -12,8 +12,8 @@
 
 <body >
 <?php
-	require_once '../common/header-docente.php';
-	require_once '../common/connect.php';
+require_once '../common/header-docente.php';
+require_once '../common/connect.php';
 ?>
 
 <div class="container-fluid" style="margin-top:60px">
@@ -26,7 +26,13 @@
 		<div class="col-md-4 text-center">
 		</div>
 		<div class="col-md-4 text-right">
-			<button onclick="oreFatteGetAttivita(0)" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span></button>
+            <?php
+            if ($__config->getOre_fatte_aperto()) {
+            	echo '
+					<button onclick="oreFatteGetAttivita(0)" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span></button>
+				';
+            }
+   			?>
 		</div>
 	</div>
 </div>
@@ -133,9 +139,11 @@
             </div>
             </div>
 			<div class="modal-footer">
+			<div class="col-sm-12 text-center">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
 				<button type="button" class="btn btn-primary" onclick="attivitaFattaUpdateDetails()" >Salva</button>
 				<input type="hidden" id="hidden_ore_fatte_attivita_id">
+			</div>
 			</div>
         	</div>
         	</div>
@@ -143,6 +151,61 @@
     </div>
 </div>
 <!-- // Modal - attivita details -->
+
+<!-- Modal - registro details -->
+<div class="modal fade" id="docente_registro_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-success">
+			<div class="panel-heading">
+				<h4 class="modal-title" id="myModalLabel">Registro Attività</h4>
+			</div>
+			<div class="panel-body">
+			<div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="registro_tipo_attivita">Tipo attività</label>
+                    <div class="col-sm-4" id="registro_tipo_attivita"></div>
+
+                    <label class="col-sm-2 control-label" for="registro_attivita_dettaglio">Dettaglio</label>
+                    <div class="col-sm-4" id="registro_attivita_dettaglio"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="registro_attivita_data">Data</label>
+                    <div class="col-sm-2" id="registro_attivita_data"></div>
+
+                    <label class="col-sm-2 control-label" for="registro_attivita_ora_inizio">Alle</label>
+                    <div class="col-sm-2" id="registro_attivita_ora_inizio"></div>
+
+	                <div class="form-group">
+	                    <label class="col-sm-2 control-label" for="registro_attivita_ore">Ore</label>
+	                    <div class="col-sm-2" id="registro_attivita_ore"></div>
+	                </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="registro_descrizione">Descrizione</label>
+                    <div class="col-sm-9"><textarea class="form-control" rows="3" id="registro_descrizione" placeholder="descrizione" ></textarea></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="registro_descrizione">Studenti</label>
+                    <div class="col-sm-9"><textarea class="form-control" rows="3" id="registro_studenti" placeholder="studenti" ></textarea></div>
+                </div>
+            </div>
+            </div>
+			<div class="modal-footer">
+			<div class="col-sm-12 text-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+				<button type="button" class="btn btn-primary" onclick="attivitaFattaRegistroUpdateDetails()" >Salva</button>
+				<input type="hidden" id="hidden_ore_fatte_registro_id">
+			</div>
+			</div>
+        	</div>
+        	</div>
+    	</div>
+    </div>
+</div>
+<!-- // Modal - registro details -->
 
 </div>
 

@@ -7,7 +7,31 @@ require_once '../common/header-common.php';
 ruoloRichiesto('segreteria-didattica','dirigente','docente');
 ?>
 	<title>Report Corsi di Recupero</title>
-<!--  <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/print_static.css"> -->
+
+<!-- Bootstrap, jquery etc (css + js) -->
+<?php
+	require_once '../common/style.php';
+?>
+
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
+
+<!-- boostrap-select -->
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/i18n/defaults-it_IT.min.js"></script>
+
+<!-- timejs -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>
+
+<!-- flatpickr -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.js"></script>
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/l10n/it.js"></script>
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/themes/material_red.css">
+
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green.css">
+
 </head>
 
 <body >
@@ -21,6 +45,13 @@ ruoloRichiesto('segreteria-didattica','dirigente','docente');
 
 <?php
 require_once '../common/connect.php';
+
+function printableDate($data) {
+	if ($data != null) {
+		return strftime("%d/%m/%Y", strtotime($data));
+	}
+	return null;
+}
 
 // prepara l'elenco delle classi
 $query = "	SELECT DISTINCT studente_per_corso_di_recupero.classe AS studente_per_corso_di_recupero_classe
@@ -58,11 +89,14 @@ if(mysqli_num_rows($result) > 0) {
 <div class="panel-body">
 ';
 		$query = "	SELECT
+						studente_per_corso_di_recupero.id AS studente_per_corso_di_recupero_id,
 						studente_per_corso_di_recupero.cognome AS studente_per_corso_di_recupero_cognome,
 						studente_per_corso_di_recupero.nome AS studente_per_corso_di_recupero_nome,
 						studente_per_corso_di_recupero.classe AS studente_per_corso_di_recupero_classe,
 						studente_per_corso_di_recupero.voto_settembre AS studente_per_corso_di_recupero_voto_settembre,
+						studente_per_corso_di_recupero.data_voto_settembre AS studente_per_corso_di_recupero_data_voto_settembre,
 						studente_per_corso_di_recupero.voto_novembre AS studente_per_corso_di_recupero_voto_novembre,
+						studente_per_corso_di_recupero.data_voto_novembre AS studente_per_corso_di_recupero_data_voto_novembre,
 						studente_per_corso_di_recupero.passato AS studente_per_corso_di_recupero_passato,
 						studente_per_corso_di_recupero.serve_voto AS studente_per_corso_di_recupero_serve_voto,
 						corso_di_recupero.codice AS corso_di_recupero_codice,
@@ -100,13 +134,16 @@ if(mysqli_num_rows($result) > 0) {
 		<div class="table-wrapper">
 			<table class="table table-bordered table-striped">
 				<thead>
-					<th>Studente</th>
-					<th>Materia</th>
-					<th>passato</th>
-					<th>Voto Sett</th>
-					<th>Docente Set</th>
-					<th>Voto Nov</th>
-					<th>Docente Nov</th>
+                    <th>id</th>
+					<th class="col-sm-2">Studente</th>
+					<th class="col-sm-1">Materia</th>
+					<th class="col-sm-1">passato</th>
+					<th class="col-sm-1">Voto Sett</th>
+					<th class="col-sm-1">Data Sett</th>
+					<th class="col-sm-2">Docente Set</th>
+					<th class="col-sm-1">Voto Nov</th>
+					<th class="col-sm-1">Data Nov</th>
+					<th class="col-sm-2">Docente Nov</th>
 				</thead>
 ';
 			$resultArrayStudente = $result->fetch_all(MYSQLI_ASSOC);
@@ -126,13 +163,61 @@ if(mysqli_num_rows($result) > 0) {
 				$classname = ($classname==="even_row") ? "odd_row" : "even_row";
 				$data .= '
 								<tr class="'.$classname.'">
+									<td>'.$row_studente['studente_per_corso_di_recupero_id'].'</td>
 									<td>'.$row_studente['studente_per_corso_di_recupero_cognome'].' '.$row_studente['studente_per_corso_di_recupero_nome'].'</td>
-									<td>'.$row_studente['materia_nome'].'</td>
-									<td class="col-md-1 text-center">'.$passatoMarker.'</td>
+									<td><small>'.$row_studente['materia_nome'].'</small></td>
+									<td class="col-sm-1 text-center">'.$passatoMarker.'</td>
 									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_settembre'].'</td>
+									<td style="text-align: center;">'.printableDate($row_studente['studente_per_corso_di_recupero_data_voto_settembre']).'</td>
 									<td>'.$row_studente['docente_set_cognome'].' '.$row_studente['docente_set_nome'].'</td>
-									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_novembre'].'</td>
+						';
+
+				// se i voti di novembre sono aperti, apre l'inserimento per quelli che non sono esenti e non hanno preso almeno 6 a settembre
+				if ($__config->getVoti_recupero_novembre_aperto() && ! $esente && $row_studente['studente_per_corso_di_recupero_voto_settembre'] < 6) {
+
+					// prepara la lista dei voti possibili
+					$votoNovembre = $row_studente['studente_per_corso_di_recupero_voto_novembre'];
+					$votoNovembreOptionList = '				<select  class="votoNovembre selectpicker" data-noneSelectedText="seleziona..." data-width="50%" ><option value="0"></option>';
+					for($i = 4; $i<=10; $i++) {
+						$bgColor = ($i <= 5) ? 'red' : 'green';
+						$votoNovembreOptionList .= '
+				<option value="'.$i.'" data-content="
+						<span class=\'label label-info\'
+						style=\'background-color: '.$bgColor.';\'
+						>'.$i.'</span>"
+						';
+
+						// seleziona il voto corrente di novembre se esiste (se e' gia' stato dato)
+						if ($votoNovembre == $i) {
+							$votoNovembreOptionList .= ' selected ';
+						}
+						$votoNovembreOptionList .= '
+    	        		>'.$i.'</option>
+						';
+					}
+					$votoNovembreOptionList .= '</select>';
+					$data .= '
+    							<td>'.$votoNovembreOptionList.'</td>';
+
+					// la data del voto di novembre
+					$dataNovembre = strftime("%d/%m/%Y", strtotime($row_studente['studente_per_corso_di_recupero_data_voto_novembre']));
+					if (empty($row_studente['studente_per_corso_di_recupero_data_voto_novembre'])) {
+						$dataNovembre = date('d/m/Y');
+					}
+					$data .= '
+    							<td><input type="text" placeholder="Data" class="form-control dataVotoNovembre" value="'.$dataNovembre.'" /></td>';
+
+					$data .= '
 									<td>'.$row_studente['docente_nov_cognome'].' '.$row_studente['docente_nov_nome'].'</td>
+						';
+				} else {
+					$data .= '
+									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_novembre'] .$row_studente['studente_per_corso_di_recupero_serve_voto'].'</td>
+									<td style="text-align: center;">'.printableDate($row_studente['studente_per_corso_di_recupero_data_voto_novembre']).'</td>
+									<td>'.$row_studente['docente_nov_cognome'].' '.$row_studente['docente_nov_nome'].'</td>
+						';
+				}
+				$data .= '
 								</tr>
 ';
 			}
@@ -150,22 +235,16 @@ if(mysqli_num_rows($result) > 0) {
 ';
 	}
 }
+$data.='<input type="hidden" id="hidden_docente_id" value="'.$__docente_id.'">';
+$data.='<input type="hidden" id="hidden_docente_cognomenome" value="'.$__docente_cognome.' '.$__docente_nome.'">';
 echo $data;
 ?>
 
 </div>
 </div>
 </div>
-
-<!-- Bootstrap, jquery etc (css + js) -->
-<?php
-	require_once '../common/style.php';
-?>
-
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
-
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green.css">
+<!-- Custom JS file -->
+<script type="text/javascript" src="js/scriptCorsoDiRecuperoReportStudenti.js"></script>
 
 </body>
 </html>

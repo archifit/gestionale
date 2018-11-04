@@ -1,32 +1,32 @@
 
-function registraVotoSettembre(studente_per_corso_di_recupero_id, voto, __this) {
+function registraVotoNovembre(studente_per_corso_di_recupero_id, voto, __this) {
 	$.post("corsoDiRecuperoRegistraVoto.php", {
 		studente_per_corso_di_recupero_id: studente_per_corso_di_recupero_id,
-		dbFieldName: 'voto_settembre',
+		dbFieldName: 'voto_novembre',
 		voto: voto
 		},
 		function (data, status) {
 			//  cambiato il voto: scrive se passato o no
 			if (__this.value > 5) {
-				$('td:last', $(__this).parents('tr')).html('<span class=\'label label-success\'>passato</span>');
+				$('td:nth-child(4)', $(__this).parents('tr')).html('<span class=\'label label-success\'>passato</span>');
 			} else if (__this.value < 4) {
-				$('td:last', $(__this).parents('tr')).html('');
+				$('td:nth-child(4)', $(__this).parents('tr')).html('');
 			} else {
-				$('td:last', $(__this).parents('tr')).html('<span class=\'label label-danger\'>non passato</span>');
+				$('td:nth-child(4)', $(__this).parents('tr')).html('<span class=\'label label-danger\'>non passato</span>');
 			}
 		}
 	);
 }
 
-function registraDocenteSettembre(studente_per_corso_di_recupero_id, docente_id, docente_incaricato_cognomenome, __this) {
+function registraDocenteNovembre(studente_per_corso_di_recupero_id, docente_id, docente_incaricato_cognomenome, __this) {
 	$.post("corsoDiRecuperoRegistraDocente.php", {
 		studente_per_corso_di_recupero_id: studente_per_corso_di_recupero_id,
-		dbFieldName: 'docente_voto_settembre_id',
+		dbFieldName: 'docente_voto_novembre_id',
 		docente_id: docente_id
 		},
 		function (data, status) {
 			// scrive il nome del docente
-			$('td:nth-child(5)', $(__this).parents('tr')).text(docente_incaricato_cognomenome);
+			$('td:nth-child(10)', $(__this).parents('tr')).text(docente_incaricato_cognomenome);
 		}
 	);
 }
@@ -37,7 +37,6 @@ function registraDataVoto(studente_per_corso_di_recupero_id, value, dbFieldName)
 		value: value
 		},
 		function (data, status) {
-			console.log(data);
 		}
 	);
 }
@@ -68,12 +67,11 @@ function corsoVotoSetDocente() {
 
 	$("#select_docente_modal").modal("hide");
 }
-
 // memorizza il tr della riga in cui si opera (quando uso il dialog modal)
 var trSelected;
 
 $(document).ready(function () {
-	dataVotoSettembre_pickr = flatpickr(".dataVotoSettembre", {
+	dataVotoNovembre_pickr = flatpickr(".dataVotoNovembre", {
 		onChange: function(selectedDates, dateStr, instance) {
 			// difficile da ricavare: da instance il tr che lo contiene
 			var element = instance.input.parentElement.parentElement;
@@ -81,7 +79,7 @@ $(document).ready(function () {
 			var data_voto_date = Date.parseExact(dateStr, 'd/M/yyyy');
 			var data = data_voto_date.toString('yyyy-MM-dd');
 			instance.close();
-			registraDataVoto(studente_per_corso_di_recupero_id, data,'data_voto_settembre');
+			registraDataVoto(studente_per_corso_di_recupero_id, data,'data_voto_novembre');
 	    },
 		locale: {
 			firstDayOfWeek: 1
@@ -102,20 +100,22 @@ $(document).ready(function () {
 
 	flatpickr.localize(flatpickr.l10ns.it);
 
-	$(".votoSettembre").on('change', function(e){
-		var voto = this.value;
-		// ogni tanto lo chiama due volte una con undefined
-		if (voto === undefined) {
-			console.log('skip undefined!');
-			return;
-		}
-		var studente_per_corso_di_recupero_id = $('td:first', $(this).parents('tr')).text();
-		var docente_incaricato_id = $("#hidden_docente_id").val();
-		var docente_incaricato_cognomenome = $("#hidden_docente_cognomenome").val();
-		  registraVotoSettembre(studente_per_corso_di_recupero_id, voto, this);
-		  if (docente_incaricato_id >= 0) {
-			  registraDocenteSettembre(studente_per_corso_di_recupero_id, docente_incaricato_id, docente_incaricato_cognomenome, this);
-		  }
+	$(".votoNovembre").on('change', function(e){
+			var voto = this.value;
+			// ogni tanto lo chiama due volte una con undefined
+			if (voto === undefined) {
+				console.log('skip undefined!');
+				return;
+			}
+			var studente_per_corso_di_recupero_id = $('td:first', $(this).parents('tr')).text();
+			var docente_incaricato_id = $("#hidden_docente_id").val();
+			var docente_incaricato_cognomenome = $("#hidden_docente_cognomenome").val();
+			registraVotoNovembre(studente_per_corso_di_recupero_id, voto, this);
+			if (docente_incaricato_id >= 0) {
+				registraDocenteNovembre(studente_per_corso_di_recupero_id, docente_incaricato_id, docente_incaricato_cognomenome, this);
+			}
+			registraDataVoto(studente_per_corso_di_recupero_id, Date.today().toString('yyyy-MM-dd'),'data_voto_novembre');
+			$('td:nth-child(9)', $(this).parents('tr')).children(":first").val(Date.today().toString('dd/MM/yyyy'));
 		});
 	
 	$('.table td:nth-child(1),th:nth-child(1)').hide(); // nasconde la prima colonna con l'id

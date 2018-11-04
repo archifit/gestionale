@@ -2,9 +2,9 @@
 <html>
 <head>
 <?php
-	require_once '../common/header-session.php';
-	require_once '../common/header-common.php';
-	ruoloRichiesto('segreteria-docenti','dirigente','docente');
+require_once '../common/header-session.php';
+require_once '../common/header-common.php';
+ruoloRichiesto('segreteria-docenti','dirigente','docente');
 ?>
 	<title>Piano Orario</title>
 	<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">
@@ -12,8 +12,8 @@
 
 <body >
 <?php
-	require_once '../common/header-docente.php';
-	require_once '../common/connect.php';
+require_once '../common/header-docente.php';
+require_once '../common/connect.php';
 ?>
 
 <div class="container-fluid" style="margin-top:60px">
@@ -189,8 +189,14 @@
         </div>
         <div class="col-md-6">
             <div class="pull-right">
+            <?php
+            if ($__config->getOre_previsioni_aperto()) {
+            	echo '
    				<button class="btn btn-success" data-toggle="modal" onclick="attivitaPrevistaAdd()"><span class="glyphicon glyphicon-plus"></span>&ensp;Aggiungi attività </button>
-            </div>
+				';
+            }
+   			?>
+   			</div>
         </div>
     </div>
     <div class="row">

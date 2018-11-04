@@ -56,10 +56,12 @@ if(mysqli_num_rows($result) > 0) {
 			<td>
 			';
 		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
-			$data .='
+			if ($__config->getOre_previsioni_aperto()) {
+				$data .='
 				<button onclick="attivitaPrevistaModifica('.$row['ore_previste_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 				<button onclick="attivitaPrevistaDelete('.$row['ore_previste_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>
 			';
+			}
 		}
 		$data .='
 			</td>

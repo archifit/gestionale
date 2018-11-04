@@ -19,6 +19,7 @@
 			<a href="<?php echo $__application_base_path; ?>/dirigente/selezionaDocente.php" class="btn btn-default navbar-btn btn-primary" role="button"><span class="glyphicon glyphicon-education"></span>&ensp;Docente </a>
 			<a href="<?php echo $__application_base_path; ?>/dirigente/corsoDiRecuperoReport.php" class="btn btn-default navbar-btn btn-info" role="button"><span class="glyphicon glyphicon-repeat"></span>&ensp;Corsi di Recupero </a>
 
+			<a href="<?php echo $__application_base_path; ?>/dirigente/configurazione.php" class="btn btn-default navbar-btn btn-warning" role="button"><span class="glyphicon glyphicon-cog"></span>&ensp;Configura </a>
 			<a href="<?php echo $__application_base_path; ?>/dirigente/sostituzioni.php" class="btn btn-default navbar-btn btn-danger" role="button"><span class="glyphicon glyphicon-retweet"></span>&ensp;Sostituzioni </a>
 		</ul>
 		<ul class="nav navbar-nav navbar-right top-navbar-nav">

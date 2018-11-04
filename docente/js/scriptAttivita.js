@@ -15,8 +15,44 @@ function oreFatteReadAttivitaRecords() {
 	});
 }
 
-function oreFatteGetRegistroAttivita() {
-	alert("Registro non ancora disponibile");
+function oreFatteGetRegistroAttivita(attivita_id, registro_id) {
+	$("#hidden_ore_fatte_registro_id").val(registro_id);
+	$("#hidden_ore_fatte_attivita_id").val(attivita_id);
+	console.log('attivita_id=' + attivita_id + ' registro_id=' + registro_id);
+	$.post("oreFatteAttivitaReadDetails.php", {
+			attivita_id: attivita_id
+		},
+		function (dati, status) {
+			console.log(dati);
+			var attivita = JSON.parse(dati);
+			$("#registro_tipo_attivita").html('<p class="form-control-static">' + attivita.nome + '</p>');
+			$("#registro_attivita_dettaglio").html('<p class="form-control-static">' + attivita.dettaglio + '</p>');
+			$("#registro_attivita_data").html('<p class="form-control-static">' + Date.parseExact(attivita.data, 'yyyy-MM-dd').toString('d/M/yyyy') + '</p>');
+			$("#registro_attivita_ora_inizio").html('<p class="form-control-static">' + attivita.ora_inizio + '</p>');
+			$("#registro_attivita_ore").html('<p class="form-control-static">' + attivita.ore + '</p>');
+			if (registro_id > 0) {
+				$("#registro_descrizione").val(attivita.descrizione);
+				$("#registro_studenti").val(attivita.studenti);
+			} else {
+				$("#registro_descrizione").val('');
+				$("#registro_studenti").val('');
+			}
+		}
+	);
+
+	$("#docente_registro_modal").modal("show");
+}
+
+function attivitaFattaRegistroUpdateDetails() {
+ 	$.post("oreFatteUpdateRegistro.php", {
+    	registro_id: $("#hidden_ore_fatte_registro_id").val(),
+    	attivita_id: $("#hidden_ore_fatte_attivita_id").val(),
+    	descrizione: $("#registro_descrizione").val(),
+    	studenti: $("#registro_studenti").val()
+    }, function (data, status) {
+    	oreFatteReadAttivitaRecords();
+    });
+    $("#docente_registro_modal").modal("hide");
 }
 
 function oreFatteGetAttivita(attivita_id) {
@@ -31,6 +67,7 @@ function oreFatteGetAttivita(attivita_id) {
 				$('#attivita_tipo_attivita').selectpicker('val', attivita.ore_previste_tipo_attivita_id);
 				$("#attivita_ore").val(attivita.ore);
 				$("#attivita_dettaglio").val(attivita.dettaglio);
+				$("#attivita_ora_inizio").val(attivita.ora_inizio);
 				$("#attivita_ora_inizio").prop('defaultValue', attivita.ora_inizio);
 				setDbDateToPickr(attivita_data_pickr, attivita.data);
 			}

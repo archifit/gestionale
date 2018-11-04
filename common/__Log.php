@@ -12,23 +12,27 @@ if (defined('__production_environment')) {
     }
     function debug($message) {
         global $__logger;
+        global $__username;
         $page = basename ( $_SERVER ['PHP_SELF'] );
-        $__logger->debug("$page: $message");
+        $__logger->debug("$page: [$__username] $message");
     }
     function info($message) {
         global $__logger;
+        global $__username;
         $page = basename ( $_SERVER ['PHP_SELF'] );
-        $__logger->info("$page: $message");
+        $__logger->info("$page: [$__username] $message");
     }
     function warning($message) {
         global $__logger;
+        global $__username;
         $page = basename ( $_SERVER ['PHP_SELF'] );
-        $__logger->warning("$page: $message");
+        $__logger->warning("$page: [$__username] $message");
     }
     function error($message) {
         global $__logger;
+        global $__username;
         $page = basename ( $_SERVER ['PHP_SELF'] );
-        $__logger->err("$page: $message");
+        $__logger->err("$page: [$__username] $message");
     }
 } else if (defined('__test_environment') || defined('__development_environment')) {
     require_once __DIR__ . '/Log.php';
@@ -42,23 +46,27 @@ if (defined('__production_environment')) {
     }
     function debug($message) {
         global $__logger;
+        global $__username;
         $page = basename ( $_SERVER ['PHP_SELF'] );
-        $__logger->debug("$page: $message");
+        $__logger->debug("$page: [$__username] $message");
     }
     function info($message) {
-        global $__logger;
-        $page = basename ( $_SERVER ['PHP_SELF'] );
-        $__logger->info("$page: $message");
+    	global $__logger;
+    	global $__username;
+    	$page = basename ( $_SERVER ['PHP_SELF'] );
+        $__logger->info("$page: [$__username] $message");
     }
     function warning($message) {
         global $__logger;
+        global $__username;
         $page = basename ( $_SERVER ['PHP_SELF'] );
-        $__logger->warning("$page: $message");
+        $__logger->warning("$page: [$__username] $message");
     }
     function error($message) {
         global $__logger;
+        global $__username;
         $page = basename ( $_SERVER ['PHP_SELF'] );
-        $__logger->err("$page: $message");
+        $__logger->err("$page: [$__username] $message");
     }
 }
 

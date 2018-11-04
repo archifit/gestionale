@@ -2,7 +2,6 @@
 if(isset($_POST)) {
 	require_once '../common/header-session.php';
 	require_once '../common/connect.php';
-	debug('1');
 	$attivita_id = $_POST['attivita_id'];
 	$tipo_attivita_id = $_POST['tipo_attivita_id'];
 	$ore = $_POST['ore'];

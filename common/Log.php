@@ -2,6 +2,7 @@
 /**
  * $Header$
  * $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
+ * https://pear.php.net/package/Log
  *
  * @version $Revision$
  * @package Log
