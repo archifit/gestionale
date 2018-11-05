@@ -2,9 +2,12 @@
 require_once '../common/header-session.php';
 require_once '../common/connect.php';
 
+$modificabile = $__config->getOre_previsioni_aperto();
+
 $docente_id = $__docente_id;
 if(isset($_POST['docente_id']) && isset($_POST['docente_id']) != "") {
 	$docente_id = $_POST['docente_id'];
+	$modificabile = false;
 }
 
 // Design initial table header
@@ -56,7 +59,7 @@ if(mysqli_num_rows($result) > 0) {
 			<td>
 			';
 		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
-			if ($__config->getOre_previsioni_aperto()) {
+			if ($modificabile) {
 				$data .='
 				<button onclick="attivitaPrevistaModifica('.$row['ore_previste_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 				<button onclick="attivitaPrevistaDelete('.$row['ore_previste_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>

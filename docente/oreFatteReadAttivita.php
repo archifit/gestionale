@@ -3,9 +3,12 @@
 require_once '../common/header-session.php';
 require_once '../common/connect.php';
 
+$modificabile = $__config->getOre_fatte_aperto();
+
 $docente_id = $__docente_id;
 if(isset($_POST['docente_id']) && isset($_POST['docente_id']) != "") {
 	$docente_id = $_POST['docente_id'];
+	$modificabile = false;
 }
 
 $data = '';
@@ -58,7 +61,7 @@ if(mysqli_num_rows($result) > 0) {
 			<td>'.$row['ore_previste_tipo_attivita_categoria'].'</td>
 			<td>'.$row['ore_previste_tipo_attivita_nome'].'</td>
 			<td>'.$row['ore_fatte_attivita_dettaglio'].'</td>
-			<td class="text-center">'.$row['ore_fatte_attivita_data'].'</td>
+			<td class="text-center">'.strftime("%d/%m/%Y", strtotime($row['ore_fatte_attivita_data'])).'</td>
 			<td class="text-center">'.$row['ore_fatte_attivita_ore'].'</td>
 			';
 
@@ -77,7 +80,7 @@ if(mysqli_num_rows($result) > 0) {
 			<td class="text-center">
 			';
 		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
-			if ($__config->getOre_fatte_aperto()) {
+			if ($modificabile) {
 				$data .='
 					<button onclick="oreFatteGetAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 					<button onclick="oreFatteDeleteAttivita('.$row['ore_fatte_attivita_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></button>

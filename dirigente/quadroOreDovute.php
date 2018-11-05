@@ -31,7 +31,7 @@ require_once '../common/connect.php';
 <div class="container-fluid" style="margin-top:60px">
 <div class="panel panel-success">
 <div class="panel-heading">
-<h4><span class="glyphicon glyphicon-time"></span>&ensp;Quadro Ore Dovute</h4>
+<h4><span class="glyphicon glyphicon-dashboard"></span>&ensp;Quadro Ore Dovute</h4>
 </div>
 <div class="panel-body">
 
@@ -113,6 +113,7 @@ ORDER BY
 debug($query);
 $resultArray = dbGetAll($query);
 foreach($resultArray as $docente) {
+	$docenteCognomeNome = $docente['cognome'].' '.$docente['nome'];
 	$data = '
 <div class="panel panel-warning">
 <div class="panel-heading">
@@ -132,6 +133,7 @@ foreach($resultArray as $docente) {
 				<th class="col-md-1 text-left">40 Aggiornamento</th>
 				<th class="col-md-1 text-left">70 Funzionali</th>
 				<th class="col-md-1 text-left">70 con Studenti</th>
+				<th class="col-md-1 text-left"></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -142,6 +144,7 @@ foreach($resultArray as $docente) {
 				<td class="text-left">'.getHtmlNum($docente['ore_dovute_ore_40_aggiornamento']).'</td>
 				<td class="text-left">'.getHtmlNum($docente['ore_dovute_ore_70_funzionali']).'</td>
 				<td class="text-left">'.getHtmlNum($docente['ore_dovute_ore_70_con_studenti']).'</td>
+				<td class="text-center"></td>
 			</tr>
 			<tr>
 				<td class="col-md-2">previste</td>
@@ -150,6 +153,7 @@ foreach($resultArray as $docente) {
 				<td class="text-left">'.getHtmlNumAndPrevisteVisual($docente['ore_previste_ore_40_aggiornamento'],$docente['ore_dovute_ore_40_aggiornamento']).'</td>
 				<td class="text-left">'.getHtmlNumAndPrevisteVisual($docente['ore_previste_ore_70_funzionali'],$docente['ore_dovute_ore_70_funzionali']).'</td>
 				<td class="text-left">'.getHtmlNumAndPrevisteVisual($docente['ore_previste_ore_70_con_studenti'],$docente['ore_dovute_ore_70_con_studenti']).'</td>
+				<td class="text-center"><button onclick="viewAttivitaPreviste(\''.$docente['id'].'\',\''.$docenteCognomeNome.'\')" class="btn btn-info btn-xs" ><span class="glyphicon glyphicon-indent-left"></button></td>
 			</tr>
 			<tr>
 				<td class="col-md-2">fatte</td>
@@ -158,6 +162,7 @@ foreach($resultArray as $docente) {
 				<td class="text-left">'.getHtmlNumAndFatteVisual($docente['ore_fatte_ore_40_aggiornamento'],$docente['ore_dovute_ore_40_aggiornamento']).'</td>
 				<td class="text-left">'.getHtmlNumAndFatteVisual($docente['ore_fatte_ore_70_funzionali'],$docente['ore_dovute_ore_70_funzionali']).'</td>
 				<td class="text-left">'.getHtmlNumAndFatteVisual($docente['ore_fatte_ore_70_con_studenti'],$docente['ore_dovute_ore_70_con_studenti']).'</td>
+				<td class="text-center"><button onclick="viewAttivitaFatte(\''.$docente['id'].'\',\''.$docenteCognomeNome.'\')" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-list"></button></td>
 			</tr>
 		</tbody>
 	</table>
@@ -175,6 +180,61 @@ foreach($resultArray as $docente) {
 
 </div>
 </div>
+
+<!-- Modal - previste -->
+<div class="modal fade" id="previste_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalPrevisteLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-info">
+			<div class="panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalPrevisteTitleLabel">Attività Previste</h4>
+            </div>
+            <div class="panel-body">
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="attivita_previste_records_content"></div>
+			        </div>
+			    </div>
+            </div>
+			<div class="panel-footer text-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+			</div>
+			</div>
+			</div>
+        </div>
+    </div>
+</div>
+<!-- // Modal - previste -->
+
+<!-- Modal - fatte -->
+<div class="modal fade" id="fatte_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalFatteLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-success">
+			<div class="panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalFatteTitleLabel">Attività Fatte</h4>
+            </div>
+            <div class="panel-body">
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="attivita_fatte_records_content"></div>
+			        </div>
+			    </div>
+            </div>
+			<div class="panel-footer text-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+			</div>
+			</div>
+			</div>
+        </div>
+    </div>
+</div>
+<!-- // Modal - fatte -->
+
 </div>
 
 <script type="text/javascript" src="js/scriptQuadroOreDovute.js"></script>
