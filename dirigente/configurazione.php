@@ -4,10 +4,8 @@
 	<title>Configurazione</title>
 
 <?php
-// Bootstrap, jquery etc (css + js)
 require_once '../common/header-session.php';
 require_once '../common/style.php';
-
 ?>
 
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
