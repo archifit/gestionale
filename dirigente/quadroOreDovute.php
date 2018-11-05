@@ -17,6 +17,9 @@ ruoloRichiesto('dirigente');
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/i18n/defaults-it_IT.min.js"></script>
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">
 
+<!-- timejs -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>
+
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-vcolor-index.css">
 <script type="text/javascript" src="js/scriptQuadroOreDovute.js"></script>
 
@@ -234,6 +237,61 @@ foreach($resultArray as $docente) {
     </div>
 </div>
 <!-- // Modal - fatte -->
+
+<!-- Modal - registro details -->
+<div class="modal fade" id="docente_registro_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-success">
+			<div class="panel-heading">
+				<h4 class="modal-title" id="myModalLabel">Registro Attività</h4>
+			</div>
+			<div class="panel-body">
+			<div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="registro_tipo_attivita">Tipo attività</label>
+                    <div class="col-sm-4" id="registro_tipo_attivita"></div>
+
+                    <label class="col-sm-2 control-label" for="registro_attivita_dettaglio">Dettaglio</label>
+                    <div class="col-sm-4" id="registro_attivita_dettaglio"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="registro_attivita_data">Data</label>
+                    <div class="col-sm-2" id="registro_attivita_data"></div>
+
+                    <label class="col-sm-2 control-label" for="registro_attivita_ora_inizio">Alle</label>
+                    <div class="col-sm-2" id="registro_attivita_ora_inizio"></div>
+
+	                <div class="form-group">
+	                    <label class="col-sm-2 control-label" for="registro_attivita_ore">Ore</label>
+	                    <div class="col-sm-2" id="registro_attivita_ore"></div>
+	                </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="registro_descrizione">Descrizione</label>
+                    <div class="col-sm-9" id="registro_descrizione"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="registro_descrizione">Studenti</label>
+                    <div class="col-sm-9" id="registro_studenti"></div>
+                </div>
+            </div>
+            </div>
+			<div class="modal-footer">
+			<div class="col-sm-12 text-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+				<button type="button" class="btn btn-primary" onclick="attivitaFattaRegistroUpdateDetails()" >Salva</button>
+				<input type="hidden" id="hidden_ore_fatte_registro_id">
+			</div>
+			</div>
+        	</div>
+        	</div>
+    	</div>
+    </div>
+</div>
+<!-- // Modal - registro details -->
 
 </div>
 

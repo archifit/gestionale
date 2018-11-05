@@ -16,7 +16,6 @@ function viewAttivitaFatte(id, docente) {
 			docente_id: id
 		},
 		function (data, status) {
-			console.log(data);
 			$(".attivita_fatte_records_content").html(data);
 			$("#myModalFatteTitleLabel").text('Attività Fatte (' + docente + ')');
 		    $("#fatte_modal").modal("show");
@@ -24,26 +23,73 @@ function viewAttivitaFatte(id, docente) {
 	);
 }
 
-var warning = '<span class="glyphicon glyphicon-warning-sign text-error"></span>';
-var okSymbol = '&ensp;<span class="glyphicon glyphicon-ok text-success"></span>';
+function oreFatteGetRegistroAttivita(attivita_id, registro_id) {
+	$.post("../docente/oreFatteAttivitaReadDetails.php", {
+			attivita_id: attivita_id
+		},
+		function (dati, status) {
+			console.log(dati);
+			var attivita = JSON.parse(dati);
+			$("#registro_tipo_attivita").html('<p class="form-control-static">' + attivita.nome + '</p>');
+			$("#registro_attivita_dettaglio").html('<p class="form-control-static">' + attivita.dettaglio + '</p>');
+			$("#registro_attivita_data").html('<p class="form-control-static">' + Date.parseExact(attivita.data, 'yyyy-MM-dd').toString('d/M/yyyy') + '</p>');
+			$("#registro_attivita_ora_inizio").html('<p class="form-control-static">' + attivita.ora_inizio + '</p>');
+			$("#registro_attivita_ore").html('<p class="form-control-static">' + attivita.ore + '</p>');
+			$("#registro_descrizione").html('<p class="form-control-static" style="white-space: pre-wrap;">' + attivita.descrizione + '</p>');
+			$("#registro_studenti").html('<p class="form-control-static" style="white-space: pre-wrap;">' + attivita.studenti + '</p>');
+		}
+	);
 
-function getHtmlNum(value) {
-	return '&emsp;' + ((value >= 10) ? value : '&ensp;' + value);
+	$("#docente_registro_modal").modal("show");
 }
 
-function getHtmlNumAndPrevisteVisual(value, total) {
-	var numString = (value >= 10) ? value : '&ensp;' + value;
-	var diff = total - value;
-	if (diff > 0) {
-		numString += '&ensp;<span class="label label-warning">- '+ diff +'</span>';
-	} else if (diff < 0) {
-			numString += '&ensp;<span class="label label-danger">+ '+ (-diff) +'</span>';
-	} else {
-		numString += okSymbol;
-	}
-	return '&emsp;' + numString;
-}
 
-function getHtmlNumAndFatteVisual(value, total) {
-	return '&emsp;' + ((value >= 10) ? value : '&ensp;' + value);
+//stack modal dialogs
+$(document)
+.on('show.bs.modal', '.modal', function(e) {
+ $(this).appendTo($('body'));
+})
+.on('shown.bs.modal', '.modal.in', function(e) {
+ setModalsAndBackdropsOrder();
+})
+.on('hidden.bs.modal', '.modal', function(e) {
+ setModalsAndBackdropsOrder();
+});
+
+function setModalsAndBackdropsOrder() {
+var modalZIndex = 1040;
+
+$('.modal.in').each(function(index) {
+ var $modal = $(this);
+
+ modalZIndex++;
+
+ $modal.css('zIndex', modalZIndex);
+ $modal.next('.modal-backdrop.in').addClass('hidden').css('zIndex', modalZIndex - 1);
+});
+
+$('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
 }
+$('.modal').on('hidden.bs.modal', function(event) {
+ $(this).removeClass('fv-modal-stack');
+ $('body').data('fv_open_modals', $('body').data('fv_open_modals') - 1);
+});
+
+$('.modal').on('shown.bs.modal', function(event) {
+ if(typeof($('body').data('fv_open_modals')) == 'undefined') {
+     $('body').data( 'fv_open_modals', 0);
+ }
+
+ if($(this).hasClass('fv-modal-stack')) {
+     return;
+ }
+                
+ $(this).addClass('fv-modal-stack');
+ $('body').data('fv_open_modals', $('body').data('fv_open_modals') + 1);
+ $(this).css('z-index', 1040 + (10 * $('body').data('fv_open_modals')));
+ $('.modal-backdrop').not('.fv-modal-stack')
+                         .css('z-index', 1039 + (10 * $('body').data('fv_open_modals')));
+
+ $('.modal-backdrop').not('fv-modal-stack')
+     .addClass( 'fv-modal-stack' ); 
+});
