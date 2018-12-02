@@ -77,7 +77,7 @@ if(mysqli_num_rows($result) > 0) {
 		} else {
 			$data .='
 			<td class="text-center">'.'</td>
-			<td class="text-center">'.'</td>
+			<td class="text-center">'.$row['ore_fatte_attivita_ore'].'</td>
 			';
 		}
 
@@ -92,11 +92,14 @@ if(mysqli_num_rows($result) > 0) {
 		} else {
 			// per le altre inserire un rendiconto se richiesto
 			if ($row['ore_previste_tipo_attivita_da_rendicontare']) {
+				// TODO: inserire di nuovo
+				/*
 				// se non ancora rendicontato colora in warning
 				$btn_class = $row['rendiconto_attivita_rendicontato'] ? 'btn-success' : 'btn-warning';
 				$data .='
 				<button onclick="oreFatteGetRendicontoAttivita('.$row['ore_fatte_attivita_id'].', '.$row['rendiconto_attivita_id'].')" class="btn '. $btn_class .' btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
 			';
+			*/
 			}
 		}
 		$data .='

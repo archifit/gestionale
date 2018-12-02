@@ -2,12 +2,12 @@
 <html>
 <head>
 <?php
-require_once '../common/header-session.php';
+require_once '../common/checkSession.php';
 require_once '../common/header-common.php';
+require_once '../common/_include_bootstrap-select.php';
 ruoloRichiesto('segreteria-docenti','dirigente','docente');
 ?>
 	<title>Piano Orario</title>
-	<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">
 </head>
 
 <body >
@@ -17,6 +17,7 @@ require_once '../common/connect.php';
 ?>
 
 <div class="container-fluid" style="margin-top:60px">
+
 <div class="panel panel-primary">
 <div class="panel-heading">
 <h4><span class="glyphicon glyphicon-time"></span>&ensp;Specchietto ore dovute</h4>
@@ -36,41 +37,37 @@ require_once '../common/connect.php';
 		<thead>
 			<tr>
 				<th class="col-md-2 text-left"></th>
-				<th class="col-md-1 text-left">Collegio Doc.</th>
-				<th class="col-md-1 text-left">Udienze</th>
-				<th class="col-md-1 text-left">Dipartimenti</th>
-				<th class="col-md-1 text-left">Aggiornamento</th>
-				<th class="col-md-1 text-left">CdC</th>
-				<th class="col-md-2 text-left">Totale</th>
+				<th class="col-md-2 text-left">Collegio Doc.</th>
+				<th class="col-md-2 text-left">Udienze</th>
+				<th class="col-md-2 text-left">Dipartimenti</th>
+				<th class="col-md-2 text-left">Aggiornamento</th>
+				<th class="col-md-2 text-left">CdC</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td class="col-md-2">dovute</td>
+				<td class="text-left" >dovute</td>
 				<td class="text-left" id="dovute_ore_80_collegi_docenti"></td>
 				<td class="text-left" id="dovute_ore_80_udienze_generali"></td>
 				<td class="text-left" id="dovute_ore_80_dipartimenti"></td>
 				<td class="text-left" id="dovute_ore_80_aggiornamento_facoltativo"></td>
 				<td class="text-left" id="dovute_ore_80_consigli_di_classe"></td>
-				<td class="text-left" id="dovute_ore_80_totale"></td>
 			</tr>
 			<tr>
-				<td class="col-md-2">previste</td>
+				<td class="text-left" >previste</td>
 				<td class="text-left" id="previste_ore_80_collegi_docenti"></td>
 				<td class="text-left" id="previste_ore_80_udienze_generali"></td>
 				<td class="text-left" id="previste_ore_80_dipartimenti"></td>
 				<td class="text-left" id="previste_ore_80_aggiornamento_facoltativo"></td>
 				<td class="text-left" id="previste_ore_80_consigli_di_classe"></td>
-				<td class="text-left" id="previste_ore_80_totale"></td>
 			</tr>
 			<tr>
-				<td class="col-md-2">fatte</td>
+				<td class="text-left" >fatte</td>
 				<td class="text-left" id="fatte_ore_80_collegi_docenti"></td>
 				<td class="text-left" id="fatte_ore_80_udienze_generali"></td>
 				<td class="text-left" id="fatte_ore_80_dipartimenti"></td>
 				<td class="text-left" id="fatte_ore_80_aggiornamento_facoltativo"></td>
 				<td class="text-left" id="fatte_ore_80_consigli_di_classe"></td>
-				<td class="text-left" id="fatte_ore_80_totale"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -94,10 +91,9 @@ require_once '../common/connect.php';
 		<thead>
 			<tr>
 				<th class="col-md-2"></th>
-				<th class="col-md-2 text-left">Sostituzioni</th>
-				<th class="col-md-2 text-left">Aggiornamento</th>
-				<th class="col-md-2 text-left">con Studenti</th>
-				<th class="col-md-3 text-left">Totale</th>
+				<th class="col-md-3 text-left">Sostituzioni</th>
+				<th class="col-md-3 text-left">Aggiornamento</th>
+				<th class="col-md-3 text-left">con Studenti</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -106,21 +102,18 @@ require_once '../common/connect.php';
 				<td class="text-left" id="dovute_ore_40_sostituzioni_di_ufficio"></td>
 				<td class="text-left" id="dovute_ore_40_aggiornamento"></td>
 				<td class="text-left" id="dovute_ore_40_con_studenti"></td>
-				<td class="text-left" id="dovute_ore_40_totale"></td>
 			</tr>
 			<tr>
 				<td>previste</td>
 				<td class="text-left" id="previste_ore_40_sostituzioni_di_ufficio"></td>
 				<td class="text-left" id="previste_ore_40_aggiornamento"></td>
 				<td class="text-left" id="previste_ore_40_con_studenti"></td>
-				<td class="text-left" id="previste_ore_40_totale"></td>
 			</tr>
 			<tr>
 				<td>fatte</td>
 				<td class="text-left" id="fatte_ore_40_sostituzioni_di_ufficio"></td>
 				<td class="text-left" id="fatte_ore_40_aggiornamento"></td>
 				<td class="text-left" id="fatte_ore_40_con_studenti"></td>
-				<td class="text-left" id="fatte_ore_40_totale"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -144,10 +137,9 @@ require_once '../common/connect.php';
 	<table class="table table-vnocolor-index">
 		<thead>
 			<tr>
-				<th class="col-md-2"></th>
+				<th class="col-md-5"></th>
 				<th class="col-md-3 text-left">Funzionali</th>
 				<th class="col-md-3 text-left">con Studenti</th>
-				<th class="col-md-4 text-left">Totale</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -155,19 +147,16 @@ require_once '../common/connect.php';
 				<td>dovute</td>
 				<td class="text-left" id="dovute_ore_70_funzionali"></td>
 				<td class="text-left" id="dovute_ore_70_con_studenti"></td>
-				<td class="text-left" id="dovute_ore_70_totale"></td>
 			</tr>
 			<tr>
 				<td>previste</td>
 				<td class="text-left" id="previste_ore_70_funzionali"></td>
 				<td class="text-left" id="previste_ore_70_con_studenti"></td>
-				<td class="text-left" id="previste_ore_70_totale"></td>
 			</tr>
 			<tr>
 				<td>fatte</td>
 				<td class="text-left" id="fatte_ore_70_funzionali"></td>
 				<td class="text-left" id="fatte_ore_70_con_studenti"></td>
-				<td class="text-left" id="fatte_ore_70_totale"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -199,6 +188,9 @@ require_once '../common/connect.php';
    			</div>
         </div>
     </div>
+
+<div id="notificationBlock"></div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="attivita_previste_records_content"></div>
@@ -302,9 +294,8 @@ require_once '../common/connect.php';
 	require_once '../common/style.php';
 ?>
 
-<!-- boostrap-select -->
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/i18n/defaults-it_IT.min.js"></script>
+<!-- bootbox notificator -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootbox-4.4.0/js/bootbox.min.js"></script>
 
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-vcolor-index.css">
 
