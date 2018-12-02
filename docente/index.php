@@ -4,6 +4,7 @@
 <?php
 require_once '../common/checkSession.php';
 require_once '../common/header-common.php';
+require_once '../common/style.php';
 require_once '../common/_include_bootstrap-select.php';
 ruoloRichiesto('segreteria-docenti','dirigente','docente');
 ?>
@@ -288,11 +289,6 @@ require_once '../common/connect.php';
 </div>
 </div>
 </div>
-
-<!-- Bootstrap, jquery etc (css + js) -->
-<?php
-	require_once '../common/style.php';
-?>
 
 <!-- bootbox notificator -->
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootbox-4.4.0/js/bootbox.min.js"></script>
