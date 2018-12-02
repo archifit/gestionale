@@ -27,7 +27,7 @@ ruoloRichiesto('segreteria-docenti','segreteria-didattica','dirigente','docente'
 			<a href="<?php echo $__application_base_path; ?>/docente/corsoDiRecuperoReportStudenti.php" class="btn btn-default btn-warning" role="button"><span class="glyphicon glyphicon-repeat"></span>&ensp;Risultati </a>
 		</div>
 		<div class="col-md-2 text-center">
-			<a href="<?php echo $__application_base_path; ?>/docente/corsoDiRecuperoVoti.php" class="btn btn-default btn-success" role="button"><span class="glyphicon glyphicon-repeat"></span>&ensp;Voti </a>
+			<a href="<?php echo $__application_base_path; echo ($__config->getVoti_recupero_novembre_aperto() ? '/docente/corsoDiRecuperoReportStudenti.php' : '/docente/corsoDiRecuperoVoti.php');?>" class="btn btn-default btn-success" role="button"><span class="glyphicon glyphicon-repeat"></span>&ensp;Voti </a>
 		</div>
 		<div class="col-md-2 text-center">
 			<label for="soloOggiCheckBox" class=""> Solo Corsi di Oggi </label>

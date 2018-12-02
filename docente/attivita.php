@@ -2,12 +2,15 @@
 <html>
 <head>
 <?php
-require_once '../common/header-session.php';
+require_once '../common/checkSession.php';
 require_once '../common/header-common.php';
+require_once '../common/style.php';
+//require_once '../common/_include_bootstrap-toggle.php';
+require_once '../common/_include_bootstrap-select.php';
+require_once '../common/_include_flatpickr.php';
 ruoloRichiesto('segreteria-docenti','dirigente','docente');
 ?>
 	<title>Attività</title>
-	<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">
 </head>
 
 <body >
@@ -207,28 +210,46 @@ require_once '../common/connect.php';
 </div>
 <!-- // Modal - registro details -->
 
+<!-- Modal - rendiconto details -->
+<div class="modal fade" id="docente_rendiconto_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-success">
+			<div class="panel-heading">
+				<h4 class="modal-title" id="myModalLabel">Rendiconto Attività</h4>
+			</div>
+			<div class="panel-body">
+			<div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="rendiconto_tipo_attivita">Tipo attività</label>
+                    <div class="col-sm-4" id="rendiconto_tipo_attivita"></div>
+
+                    <label class="col-sm-2 control-label" for="rendiconto_attivita_dettaglio">Dettaglio</label>
+                    <div class="col-sm-4" id="rendiconto_attivita_dettaglio"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="rendiconto_rendiconto">Rendiconto</label>
+                    <div class="col-sm-9"><textarea class="form-control" rows="3" id="rendiconto_rendiconto" placeholder="rendiconto" ></textarea></div>
+                </div>
+            </div>
+            </div>
+			<div class="modal-footer">
+			<div class="col-sm-12 text-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+				<button type="button" class="btn btn-primary" onclick="attivitaFattaRendicontoUpdateDetails()" >Salva</button>
+				<input type="hidden" id="hidden_ore_fatte_rendiconto_id">
+			</div>
+			</div>
+        	</div>
+        	</div>
+    	</div>
+    </div>
 </div>
+<!-- // Modal - rendiconto details -->
 
-
-<!-- Bootstrap, jquery etc (css + js) -->
-<?php
-	require_once '../common/style.php';
-?>
-<!-- boostrap-select -->
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/i18n/defaults-it_IT.min.js"></script>
-
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
-
-<!-- timejs -->
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>
-
-<!-- flatpickr -->
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.js"></script>
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/l10n/it.js"></script>
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.css">
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/themes/material_red.css">
+</div>
 
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green-2.css">
 

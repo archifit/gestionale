@@ -19,7 +19,7 @@ function oreFatteGetRegistroAttivita(attivita_id, registro_id) {
 	$("#hidden_ore_fatte_registro_id").val(registro_id);
 	$("#hidden_ore_fatte_attivita_id").val(attivita_id);
 	console.log('attivita_id=' + attivita_id + ' registro_id=' + registro_id);
-	$.post("oreFatteAttivitaReadDetails.php", {
+	$.post("oreFatteAttivitaReadRegistro.php", {
 			attivita_id: attivita_id
 		},
 		function (dati, status) {
@@ -53,6 +53,40 @@ function attivitaFattaRegistroUpdateDetails() {
     	oreFatteReadAttivitaRecords();
     });
     $("#docente_registro_modal").modal("hide");
+}
+
+function oreFatteGetRendicontoAttivita(attivita_id, rendiconto_id) {
+	$("#hidden_ore_fatte_rendiconto_id").val(rendiconto_id);
+	$("#hidden_ore_fatte_attivita_id").val(attivita_id);
+	console.log('attivita_id=' + attivita_id + ' rendiconto_id=' + rendiconto_id);
+	$.post("oreFatteAttivitaReadRendiconto.php", {
+			attivita_id: attivita_id
+		},
+		function (dati, status) {
+			console.log(dati);
+			var attivita = JSON.parse(dati);
+			$("#rendiconto_tipo_attivita").html('<p class="form-control-static">' + attivita.nome + '</p>');
+			$("#rendiconto_attivita_dettaglio").html('<p class="form-control-static">' + attivita.dettaglio + '</p>');
+			if (rendiconto_id > 0) {
+				$("#rendiconto_rendiconto").val(attivita.rendiconto);
+			} else {
+				$("#rendiconto_rendiconto").val('');
+			}
+		}
+	);
+
+	$("#docente_rendiconto_modal").modal("show");
+}
+
+function attivitaFattaRendicontoUpdateDetails() {
+ 	$.post("oreFatteUpdateRendiconto.php", {
+ 		rendiconto_id: $("#hidden_ore_fatte_rendiconto_id").val(),
+    	attivita_id: $("#hidden_ore_fatte_attivita_id").val(),
+    	rendiconto: $("#rendiconto_rendiconto").val()
+    }, function (data, status) {
+    	oreFatteReadAttivitaRecords();
+    });
+    $("#docente_rendiconto_modal").modal("hide");
 }
 
 function oreFatteGetAttivita(attivita_id) {

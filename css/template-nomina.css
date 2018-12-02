@@ -7,24 +7,6 @@ table td, table th {
 	padding: 0
 }
 
-.c2 {
-	border-right-style: solid;
-	padding: 5pt 5pt 5pt 5pt;
-	border-bottom-color: #ffffff;
-	border-top-width: 0pt;
-	border-right-width: 0pt;
-	border-left-color: #ffffff;
-	vertical-align: top;
-	border-right-color: #ffffff;
-	border-left-width: 0pt;
-	border-top-style: solid;
-	border-left-style: solid;
-	border-bottom-width: 0pt;
-	width: 240.9pt;
-	border-top-color: #ffffff;
-	border-bottom-style: solid
-}
-
 .c0 {
 	margin-left: 290.6pt;
 	padding-top: 0pt;
@@ -45,14 +27,31 @@ table td, table th {
 	font-style: normal
 }
 
-.c9 {
-	color: #000000;
-	font-weight: 700;
-	text-decoration: none;
-	vertical-align: baseline;
-	font-size: 10pt;
-	font-family: "Arial";
-	font-style: normal
+.c2 {
+	border-right-style: solid;
+	padding: 5pt 5pt 5pt 5pt;
+	border-bottom-color: #ffffff;
+	border-top-width: 0pt;
+	border-right-width: 0pt;
+	border-left-color: #ffffff;
+	vertical-align: top;
+	border-right-color: #ffffff;
+	border-left-width: 0pt;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-width: 0pt;
+	width: 240.9pt;
+	border-top-color: #ffffff;
+	border-bottom-style: solid
+}
+
+.c3 {
+	padding-top: 0pt;
+	padding-bottom: 0pt;
+	line-height: 1.5;
+	orphans: 2;
+	widows: 2;
+	text-align: left
 }
 
 .c4 {
@@ -65,20 +64,15 @@ table td, table th {
 	font-style: normal
 }
 
-.c15 {
-	color: #000000;
-	font-weight: 400;
-	text-decoration: none;
-	vertical-align: baseline;
-	font-size: 11pt;
-	font-family: "Arial";
-	font-style: normal
+.c5 {
+	font-size: 9pt;
+	font-weight: 700
 }
 
-.c3 {
+.c6 {
 	padding-top: 0pt;
 	padding-bottom: 0pt;
-	line-height: 1.5;
+	line-height: 1.15;
 	orphans: 2;
 	widows: 2;
 	text-align: left
@@ -93,13 +87,28 @@ table td, table th {
 	text-align: center
 }
 
-.c6 {
-	padding-top: 0pt;
-	padding-bottom: 0pt;
-	line-height: 1.15;
-	orphans: 2;
-	widows: 2;
-	text-align: left
+.c8 {
+	height: 24pt
+}
+
+.c9 {
+	color: #000000;
+	font-weight: 700;
+	text-decoration: none;
+	vertical-align: baseline;
+	font-size: 10pt;
+	font-family: "Arial";
+	font-style: normal
+}
+
+.c10 {
+	height: 11pt
+}
+
+.c11 {
+	border-spacing: 0;
+	border-collapse: collapse;
+	margin-right: auto
 }
 
 .c12 {
@@ -109,6 +118,26 @@ table td, table th {
 	orphans: 2;
 	widows: 2;
 	text-align: center
+}
+
+.c13 {
+	background-color: #ffffff;
+	max-width: 481.9pt;
+	padding: 1.7pt 26.7pt 1.7pt 26.7pt
+}
+
+.c14 {
+	margin-left: 42.5pt
+}
+
+.c15 {
+	color: #000000;
+	font-weight: 400;
+	text-decoration: none;
+	vertical-align: baseline;
+	font-size: 11pt;
+	font-family: "Arial";
+	font-style: normal
 }
 
 .c16 {
@@ -126,6 +155,10 @@ table td, table th {
 	text-align: right
 }
 
+.c18 {
+	height: 0pt
+}
+
 .c19 {
 	padding-top: 0pt;
 	padding-bottom: 0pt;
@@ -133,37 +166,142 @@ table td, table th {
 	text-align: left
 }
 
-.c11 {
+.c20 {
+	font-size: 13pt
+}
+
+.c21 {
+	font-size: 11pt
+}
+
+.c31 {
 	border-spacing: 0;
 	border-collapse: collapse;
 	margin-right: auto
 }
 
-.c13 {
-	background-color: #ffffff;
-	max-width: 481.9pt;
-	padding: 1.7pt 56.7pt 1.7pt 56.7pt
+.c32 {
+	padding-top: 0pt;
+	padding-bottom: 0pt;
+	line-height: 1.0;
+	text-align: left
 }
 
-.c5 {
-	font-size: 9pt;
-	font-weight: 700
-}
-
-.c10 {
-	height: 11pt
-}
-
-.c8 {
-	height: 24pt
-}
-
-.c18 {
+.c33 {
 	height: 0pt
 }
 
-.c14 {
-	margin-left: 42.5pt
+.c34 {
+	border-right-style: solid;
+	padding: 5pt 5pt 5pt 5pt;
+	border-bottom-color: #000000;
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-left-color: #000000;
+	vertical-align: top;
+	border-right-color: #000000;
+	border-left-width: 1pt;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-width: 1pt;
+	width: 175.3pt;
+	border-top-color: #000000;
+	border-bottom-style: solid
+}
+
+.c35 {
+	border-right-style: solid;
+	padding: 5pt 5pt 5pt 5pt;
+	border-bottom-color: #000000;
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-left-color: #000000;
+	vertical-align: top;
+	border-right-color: #000000;
+	border-left-width: 1pt;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-width: 1pt;
+	width: 101.2pt;
+	border-top-color: #000000;
+	border-bottom-style: solid
+}
+
+.c36 {
+	border-right-style: solid;
+	padding: 5pt 5pt 5pt 5pt;
+	border-bottom-color: #000000;
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-left-color: #000000;
+	vertical-align: top;
+	border-right-color: #000000;
+	border-left-width: 1pt;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-width: 1pt;
+	width: 133.2pt;
+	border-top-color: #000000;
+	border-bottom-style: solid
+}
+
+.c37 {
+	border-right-style: solid;
+	padding: 5pt 5pt 5pt 5pt;
+	border-bottom-color: #000000;
+	border-top-width: 1pt;
+	border-right-width: 1pt;
+	border-left-color: #000000;
+	vertical-align: top;
+	border-right-color: #000000;
+	border-left-width: 1pt;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-bottom-width: 1pt;
+	width: 71.7pt;
+	border-top-color: #000000;
+	border-bottom-style: solid
+}
+
+.c38 {
+	color: #000000;
+	font-weight: 400;
+	text-decoration: none;
+	vertical-align: baseline;
+	font-size: 11pt;
+	font-family: "Arial";
+	font-style: normal
+}
+
+.c39 {
+	color: #000000;
+	font-weight: 700;
+	text-decoration: none;
+	vertical-align: baseline;
+	font-size: 12pt;
+	font-family: "Arial";
+	font-style: normal
+}
+
+.c40 {
+	padding-top: 5pt;
+	padding-bottom: 0pt;
+	line-height: 1.5;
+	orphans: 2;
+	widows: 2;
+	text-align: left
+}
+
+.c100L {
+	text-align: left
+}
+
+.c100C {
+	text-align: center
+}
+
+.c100R {
+	text-align: ricght
 }
 
 .title {

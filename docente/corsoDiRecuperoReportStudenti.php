@@ -137,13 +137,14 @@ if(mysqli_num_rows($result) > 0) {
                     <th>id</th>
 					<th class="col-sm-2">Studente</th>
 					<th class="col-sm-1">Materia</th>
-					<th class="col-sm-1">passato</th>
 					<th class="col-sm-1">Voto Sett</th>
 					<th class="col-sm-1">Data Sett</th>
-					<th class="col-sm-2">Docente Set</th>
+					<th class="col-sm-1">Docente Set</th>
 					<th class="col-sm-1">Voto Nov</th>
 					<th class="col-sm-1">Data Nov</th>
-					<th class="col-sm-2">Docente Nov</th>
+					<th class="col-sm-1">Docente Nov</th>
+					<th class="col-sm-1">passato</th>
+					<th class="col-sm-1"></th>
 				</thead>
 ';
 			$resultArrayStudente = $result->fetch_all(MYSQLI_ASSOC);
@@ -166,10 +167,9 @@ if(mysqli_num_rows($result) > 0) {
 									<td>'.$row_studente['studente_per_corso_di_recupero_id'].'</td>
 									<td>'.$row_studente['studente_per_corso_di_recupero_cognome'].' '.$row_studente['studente_per_corso_di_recupero_nome'].'</td>
 									<td><small>'.$row_studente['materia_nome'].'</small></td>
-									<td class="col-sm-1 text-center">'.$passatoMarker.'</td>
 									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_settembre'].'</td>
 									<td style="text-align: center;">'.printableDate($row_studente['studente_per_corso_di_recupero_data_voto_settembre']).'</td>
-									<td>'.$row_studente['docente_set_cognome'].' '.$row_studente['docente_set_nome'].'</td>
+									<td><small>'.$row_studente['docente_set_cognome'].' '.$row_studente['docente_set_nome'].'</small></td>
 						';
 
 				// se i voti di novembre sono aperti, apre l'inserimento per quelli che non sono esenti e non hanno preso almeno 6 a settembre
@@ -208,18 +208,33 @@ if(mysqli_num_rows($result) > 0) {
     							<td><input type="text" placeholder="Data" class="form-control dataVotoNovembre" value="'.$dataNovembre.'" /></td>';
 
 					$data .= '
-									<td>'.$row_studente['docente_nov_cognome'].' '.$row_studente['docente_nov_nome'].'</td>
+									<td><small>'.$row_studente['docente_nov_cognome'].' '.$row_studente['docente_nov_nome'].'</small></td>
 						';
 				} else {
 					$data .= '
-									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_novembre'] .$row_studente['studente_per_corso_di_recupero_serve_voto'].'</td>
+									<td style="text-align: center;">'.$row_studente['studente_per_corso_di_recupero_voto_novembre'].'</td>
 									<td style="text-align: center;">'.printableDate($row_studente['studente_per_corso_di_recupero_data_voto_novembre']).'</td>
-									<td>'.$row_studente['docente_nov_cognome'].' '.$row_studente['docente_nov_nome'].'</td>
+									<td><small>'.$row_studente['docente_nov_cognome'].' '.$row_studente['docente_nov_nome'].'</small></td>
+						';
+				}
+				$data .= '
+									<td class="col-sm-1 text-center">'.$passatoMarker.'</td>
+						';
+				// se si sa se è passato, consente di generare la lettera alla famiglia
+				if (!$esente && isset($row_studente['studente_per_corso_di_recupero_passato']) && (/* $row_studente['studente_per_corso_di_recupero_voto_settembre'] >= 6 || */ $row_studente['studente_per_corso_di_recupero_voto_novembre'] > 0) ) {
+					$data .= '
+									<td class="text-center">
+									<button onclick="letteraCarenze('.$row_studente['studente_per_corso_di_recupero_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-envelope"></button>
+									</td>
+						';
+				} else {
+					$data .= '
+									<td></td>
 						';
 				}
 				$data .= '
 								</tr>
-';
+						';
 			}
 			$data .= '
 							</tbody>

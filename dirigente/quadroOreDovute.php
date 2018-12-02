@@ -4,18 +4,12 @@
 	<title>Quadro Ore Dovute</title>
 <?php
 require_once '../common/header-session.php';
+require_once '../common/header-common.php';
 require_once '../common/style.php';
+//require_once '../common/_include_bootstrap-toggle.php';
+//require_once '../common/_include_bootstrap-select.php';
 ruoloRichiesto('dirigente');
 ?>
-
-<!-- boostrap-toggle -->
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
-
-<!-- boostrap-select -->
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/i18n/defaults-it_IT.min.js"></script>
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">
 
 <!-- timejs -->
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>

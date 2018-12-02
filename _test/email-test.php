@@ -7,7 +7,7 @@
 <body>
 
 <?php
-
+echo phpversion();
 $to = "paolo.scapin@martinomartini.eu";
 $subject = "local testing e-mail";
 $sender = "postmaster@martinomartini.eu";

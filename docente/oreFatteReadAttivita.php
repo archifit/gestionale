@@ -34,13 +34,18 @@ $query = "	SELECT
 					ore_previste_tipo_attivita.categoria AS ore_previste_tipo_attivita_categoria,
 					ore_previste_tipo_attivita.inserito_da_docente AS ore_previste_tipo_attivita_inserito_da_docente,
 					ore_previste_tipo_attivita.nome AS ore_previste_tipo_attivita_nome,
-					registro_attivita.id AS registro_attivita_id
+					ore_previste_tipo_attivita.da_rendicontare AS ore_previste_tipo_attivita_da_rendicontare,
+					registro_attivita.id AS registro_attivita_id,
+					rendiconto_attivita.rendicontato AS rendiconto_attivita_rendicontato,
+					rendiconto_attivita.id AS rendiconto_attivita_id
 
 				FROM ore_fatte_attivita ore_fatte_attivita
 				INNER JOIN ore_previste_tipo_attivita ore_previste_tipo_attivita
 				ON ore_fatte_attivita.ore_previste_tipo_attivita_id = ore_previste_tipo_attivita.id
 				LEFT JOIN registro_attivita registro_attivita
 				ON registro_attivita.ore_fatte_attivita_id = ore_fatte_attivita.id
+				LEFT JOIN rendiconto_attivita rendiconto_attivita
+				ON rendiconto_attivita.ore_fatte_attivita_id = ore_fatte_attivita.id
 				WHERE ore_fatte_attivita.anno_scolastico_id = $__anno_scolastico_corrente_id
 				AND ore_fatte_attivita.docente_id = $docente_id
 				ORDER BY
@@ -61,17 +66,38 @@ if(mysqli_num_rows($result) > 0) {
 			<td>'.$row['ore_previste_tipo_attivita_categoria'].'</td>
 			<td>'.$row['ore_previste_tipo_attivita_nome'].'</td>
 			<td>'.$row['ore_fatte_attivita_dettaglio'].'</td>
+			';
+
+		// data e ora solo per quelle inserite da docente
+		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
+			$data .='
 			<td class="text-center">'.strftime("%d/%m/%Y", strtotime($row['ore_fatte_attivita_data'])).'</td>
 			<td class="text-center">'.$row['ore_fatte_attivita_ore'].'</td>
 			';
+		} else {
+			$data .='
+			<td class="text-center">'.'</td>
+			<td class="text-center">'.'</td>
+			';
+		}
 
 		$data .='
 			<td class="text-center">
 			';
+		// registro per quelle inserite da docente
 		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
 			$data .='
 				<button onclick="oreFatteGetRegistroAttivita('.$row['ore_fatte_attivita_id'].', '.$row['registro_attivita_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
 			';
+		} else {
+			// per le altre inserire un rendiconto se richiesto
+			if ($row['ore_previste_tipo_attivita_da_rendicontare']) {
+				// se non ancora rendicontato colora in warning
+				$btn_class = $row['rendiconto_attivita_rendicontato'] ? 'btn-success' : 'btn-warning';
+				$data .='
+				<button onclick="oreFatteGetRendicontoAttivita('.$row['ore_fatte_attivita_id'].', '.$row['rendiconto_attivita_id'].')" class="btn '. $btn_class .' btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
+			';
+			}
 		}
 		$data .='
 			</td>';
