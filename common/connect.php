@@ -12,6 +12,11 @@ mysqli_set_charset($__con, 'utf8');
 // TODO: vecchia variabile, rimuovere se non piu usata
 $con = $__con;
 
+function dblastId() {
+	global $__con;
+	return mysqli_insert_id($__con);
+}
+
 // esegue una query
 function dbExec($query) {
 	global $__con;
