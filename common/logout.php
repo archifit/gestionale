@@ -3,6 +3,7 @@ require_once __DIR__ . '/__Environment.php';
 require_once __DIR__ . '/path.php';
 require_once __DIR__ . '/__Log.php';
 require_once __DIR__ . '/__Util.php';
+require_once __DIR__ . '/checkSession.php';
 
 info('utente ' . $__username . ': logged out');
 $session->logout();
