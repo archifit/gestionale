@@ -37,8 +37,6 @@ require_once '../common/header-dirigente.php';
     </div>
 </div>
 
-<!-- <div class="panel-footer"></div> -->
-
 <div class="panel panel-info">
 <div class="panel-heading">Corsi di Recupero</div>
 <div class="panel-body">
@@ -55,10 +53,20 @@ require_once '../common/header-dirigente.php';
 </div>
 </div>
 
-<!-- <div class="panel-footer"></div> -->
+<div class="panel panel-success">
+<div class="panel-heading">Bonus</div>
+<div class="panel-body">
+	<div class="form-horizontal">
+			<label class="col-sm-3 control-label" for="bonus_adesione_checkbox">Adesione Bonus
+				<input type="checkbox" class="checkbox-inline col-sm-1" id="bonus_adesione_checkbox"  data-toggle="toggle" data-size="small" data-onstyle="success" data-on="Aperto" data-off="Chiuso" <?php if ($__config->getBonus_adesione_aperto()) echo 'checked'; ?> >
+			</label>
+
+			<label class="col-sm-3 control-label" for="bonus_rendiconto_checkbox">Rendiconto Bonus
+				<input type="checkbox" class="checkbox-inline col-sm-1" id="bonus_rendiconto_checkbox"  data-toggle="toggle" data-size="small" data-onstyle="success" data-on="Aperto" data-off="Chiuso" <?php if ($__config->getBonus_rendiconto_aperto()) echo 'checked'; ?> >
+			</label>
+		</div>
+    </div>
 </div>
-
-
 
 </div>
 
