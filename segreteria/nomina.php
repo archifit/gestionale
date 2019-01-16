@@ -1,4 +1,6 @@
-<html>
+  K  §ùòà  <html>
+  ù
+  ° °àà°       
 <head>
 <?php
 	require_once '../common/header-session.php';
@@ -41,12 +43,16 @@
 	}
 
 	$tipoViaggio = "";
+	$tipoViaggioNoArticolo = "";
 	if ($row['viaggio_tipo_viaggio'] === 'Uscita Formativa') {
-		$tipoViaggio = "l'uscita formativa";
+	    $tipoViaggio = "l'uscita formativa";
+	    $tipoViaggioNoArticolo = "uscita formativa";
 	} else if ($row['viaggio_tipo_viaggio'] === 'Visita Guidata') {
-		$tipoViaggio = "la visita guidata";
+	    $tipoViaggio = "la visita guidata";
+	    $tipoViaggioNoArticolo = "visita guidata";
 	} else if ($row['viaggio_tipo_viaggio'] === 'Viaggio di Istruzione') {
-		$tipoViaggio = "il viaggio d'istruzione";
+	    $tipoViaggio = "il viaggio d'istruzione";
+	    $tipoViaggioNoArticolo = "viaggio d'istruzione";
 	}
 
 	$oldLocale = setlocale(LC_TIME, 'ita', 'it_IT');
@@ -117,7 +123,7 @@
 	</p>
 	</br>
 	<p class="c3">
-		<span class="c5">VISTA </span><span class="c1">la disponibilit&agrave; della S.V. ad accompagnare in visita guidata;</span>
+		<span class="c5">VISTA </span><span class="c1">la disponibilit&agrave; della S.V. ad accompagnare in <?php echo $tipoViaggioNoArticolo; ?>;</span>
 	</p>
 	<p class="c3">
 		<span class="c5">CONSIDERATO </span><span class="c1">che l&#39;attivit&agrave; sotto descritta &egrave; stata approvata dal consiglio di classe;</span>
@@ -129,10 +135,10 @@
 		<span class="c5">TENUTO CONTO </span><span class="c1">che <?php echo $tipoViaggio; ?> a <?php echo $row['viaggio_destinazione']; ?> sar&agrave; effettuato/a per le classi <?php echo $row['viaggio_classe']; ?></span>
 	</p>
 	<p class="c3">
-		<span class="c1">con partenza da Mezzolombardo alle ore <?php echo $row['viaggio_ora_partenza']; ?> del <?php echo $dataPartenza; ?></span>
+		<span class="c1">con partenza alle ore <?php echo $row['viaggio_ora_partenza']; ?> del <?php echo $dataPartenza; ?></span>
 	</p>
 	<p class="c3">
-		<span class="c1">e ritorno a Mezzolombardo alle ore <?php echo $row['viaggio_ora_rientro']; ?> del <?php echo $dataRientro; ?></span>
+		<span class="c1">e ritorno alle ore <?php echo $row['viaggio_ora_rientro']; ?> del <?php echo $dataRientro; ?></span>
 	</p>
 	<p class="c3">
 		<span class="c5">TENUTO CONTO</span><span class="c1">&nbsp;che si autorizza l&#39;impegno FUIS, ovvero si prevede il riconoscimento delle ore nella misura prevista dalle vigenti disposizioni contrattuali, per complessivi n&deg; 1 accompagnatori</span>
