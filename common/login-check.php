@@ -41,7 +41,7 @@ $_user = $_POST['user'];
 $_password = $_POST['password'];
 $_passwordHash = passwordHash($_password);
 $_passwordDes = base64_encode(cryptECB($_password, $key));
-info('_user ='.$_user.' _passwordDes ='.$_passwordDes.' _passwordHash='.$_passwordHash);
+// info('_user ='.$_user.' _passwordDes ='.$_passwordDes.' _passwordHash='.$_passwordHash);
 
 // start della session
 if (session_status() == PHP_SESSION_NONE) {
@@ -69,6 +69,7 @@ if(mysqli_num_rows($result) > 0) {
 
 // se l'utente non esiste nel db locale, non posso (e non devo!) fare nulla
 if (!$utenteTrovato) {
+	info('Errore: l\'utente ' . $_user . ' non esiste: contattare l\'ufficio');
 	die('Errore: l\'utente ' . $_user . ' non esiste: contattare l\'ufficio');
 }
 
@@ -78,20 +79,23 @@ if (!empty($passwordDaDb)) {
 	if ($_passwordHash === $passwordDaDb) {
 		$_SESSION['__username'] = $_user;
 		if($redirect !== '') {
+			info('utente ' . $_user . ': logged in');
 			header("Location: ". $redirect);
 			die('');
 		} else {
-			header("Location: login.php?p=3");
+			header("Location: login.php?location=docente");
 			die('');
 		}
 	} else {
-		header("Location: login.php?p=1");
-		die ('password errata');
+		info('Errore: utente ' . $_user . ': password errata');
+		header("Location: login.php?location=".$redirect);
 	}
 }
 
 // la password non la ho sul db locale: la controllo dal sito
 require_once 'login-verify.php';
+info('update verified user ='.$_user.' _passwordDes ='.$_passwordDes.' _passwordHash='.$_passwordHash);
+info('utente ' . $_user . ': logged in');
 
 // se sono tornato indietro significa che la password era corretta: la registro sul db locale (e' comunque un md5)
 $query = "UPDATE utente SET password='$_passwordHash' WHERE username = '$_user'";
