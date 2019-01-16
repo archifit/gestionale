@@ -1,6 +1,4 @@
-  K  §ùòà  <html>
-  ù
-  ° °àà°       
+<html>
 <head>
 <?php
 	require_once '../common/header-session.php';
