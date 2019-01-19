@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Quadro Ore Dovute</title>
 <?php
 require_once '../common/header-session.php';
 require_once '../common/header-common.php';
@@ -9,7 +8,17 @@ require_once '../common/style.php';
 //require_once '../common/_include_bootstrap-toggle.php';
 //require_once '../common/_include_bootstrap-select.php';
 ruoloRichiesto('dirigente');
+require_once '../common/connect.php';
+if(isset($_GET)) {
+    // get values
+    $docente_id = $_GET['id'];
+    $query = "SELECT * FROM docente WHERE docente.id = $docente_id; ";
+    debug($query);
+    $docente = dbGetFirst($query);
+    $docenteCognomeNome = $docente['cognome'].' '.$docente['nome'];
+}
 ?>
+	<title><?php echo $docenteCognomeNome; ?></title>
 
 <!-- timejs -->
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>
@@ -22,16 +31,9 @@ ruoloRichiesto('dirigente');
 <body >
 <?php
 require_once '../common/header-dirigente.php';
-require_once '../common/connect.php';
 ?>
 
 <div class="container-fluid" style="margin-top:60px">
-<div class="panel panel-success">
-<div class="panel-heading">
-<h4><span class="glyphicon glyphicon-dashboard"></span>&ensp;Quadro Ore Dovute</h4>
-</div>
-<div class="panel-body">
-
 <?php
 
 $warning = '<span class="glyphicon glyphicon-warning-sign text-error"></span>';
@@ -61,25 +63,34 @@ function getHtmlNumAndFatteVisual($value, $total) {
 	return '&emsp;' . (($value >= 10) ? $value : '&ensp;' . $value);
 }
 
-$query = "SELECT * FROM docente WHERE docente.attivo = true ORDER BY cognome,nome; ";
-debug($query);
-$resultArray = dbGetAll($query);
-foreach($resultArray as $docente) {
-    // disegna il pannello del docente
-    $docenteCognomeNome = $docente['cognome'].' '.$docente['nome'];
-    $data = '';
-    $data .= '
-        <div class="panel panel-warning">
-            <div class="panel-heading">
-            	<span class="glyphicon glyphicon-list-alt"></span>
-            	<a data-toggle="collapse" href="#collapse_80">&ensp;'.$docenteCognomeNome.' </a>
-            </div>
-            <div id="collapse_80" class="panel-collapse collapse  collapse in">
-                <div class="panel-body">
-        ';
+$docenteCognomeNome = $docente['cognome'].' '.$docente['nome'];
+$data = '';
 
-    // disegna la tabella delle ore
-    $query = "
+
+// disegna il pannello delle ORE
+$data .= '
+    <div class="panel panel-warning">
+        <div class="panel-heading">
+        	<div class="row">
+        		<div class="col-md-4">
+        		<h4>
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                    <a data-toggle="collapse" href="#collapse_ore">&ensp;Quadro Orario</a>
+                </h4>
+        		</div>
+        		<div class="col-md-4 text-center">
+                	<h4>'.$docenteCognomeNome.'</h4>
+        		</div>
+        		<div class="col-md-4 text-right">
+         		</div>
+        	</div>
+        </div>
+        <div id="collapse_ore" class="panel-collapse collapse  collapse in">
+            <div class="panel-body">
+    ';
+
+// disegna la tabella delle ore
+$query = "
 SELECT
 	docente.*,
 	
@@ -122,9 +133,9 @@ AND
 AND
 	ore_fatte.anno_scolastico_id = $__anno_scolastico_corrente_id
 ";
-    debug($query);
-    $ore = dbGetFirst($query);
-        $data .= '
+debug($query);
+$ore = dbGetFirst($query);
+$data .= '
 	<div class="table-wrapper">
 	<table class="table table-vnocolor-index">
 		<thead>
@@ -170,48 +181,92 @@ AND
 	</table>
 	</div>
 				    
-	';
+';
 
-        
+// chiude il pannello delle ORE
+$data .= '
+                </div>
+            </div>
+            <!-- <div class="panel-footer"></div> -->
+        </div>
+				    
+    ';
+
+// disegna il pannello del FUIS
+$data .= '
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+        	<div class="row">
+        		<div class="col-md-4">
+        		<h4>
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                    <a data-toggle="collapse" href="#collapse_fuis">&ensp;FUIS</a>
+                </h4>
+        		</div>
+        		<div class="col-md-4 text-center">
+                	<h4>'.$docenteCognomeNome.'</h4>
+        		</div>
+        		<div class="col-md-4 text-right">
+         		</div>
+        	</div>
+        </div>
+        <div id="collapse_fuis" class="panel-collapse collapse  collapse in">
+            <div class="panel-body">
+    ';
+
+// chiude il pannellodel FUIS
+$data .= '
+                </div>
+            </div>
+            <!-- <div class="panel-footer"></div> -->
+        </div>
+				    
+    ';
+
     // disegna il pannello del bonus
-        $data .= '
-<div class="panel panel-success">
-<div class="panel-heading">
-	<div class="row">
-		<div class="col-md-4">
-		<h4><span class="glyphicon glyphicon-list-alt"></span>&ensp;Bonus</h4>
-		</div>
-		<div class="col-md-4 text-center">
-		</div>
-		<div class="col-md-4 text-right">
- 		</div>
-	</div>
-</div>
-<div class="panel-body">
-    <div class="row"  style="margin-bottom:10px;">
-        <div class="col-md-6">
+$data .= '
+    <div class="panel panel-success">
+        <div class="panel-heading">
+        	<div class="row">
+        		<div class="col-md-4">
+        		<h4>
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                    <a data-toggle="collapse" href="#collapse_bonus">&ensp;Bonus</a>
+                </h4>
+        		</div>
+        		<div class="col-md-4 text-center">
+                	<h4>'.$docenteCognomeNome.'</h4>
+        		</div>
+        		<div class="col-md-4 text-right">
+         		</div>
+        	</div>
         </div>
-        <div class="col-md-6">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-			<div class="table-wrapper">
-				<table class="table table-bordered table-striped table-green">
-					<thead>
-						<tr>
-						<th class="text-center">Codice</th>
-						<th class="text-center">Descrittore</th>
-						<th class="text-center">Valore</th>
-						<th class="text-center"></th>
-						<th class="text-center">Approvato</th>
-						</tr>
-					</thead>
-					<tbody>				    
-        ';
+        <div id="collapse_bonus" class="panel-collapse collapse  collapse in">
+            <div class="panel-body">
+                <div class="row"  style="margin-bottom:10px;">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+            			<div class="table-wrapper">
+            				<table class="table table-bordered table-striped table-green" id="table-docente-bonus">
+            					<thead>
+            						<tr>
+            						<th class="text-center">Codice</th>
+            						<th class="text-center">Descrittore</th>
+            						<th class="text-center">Valore</th>
+            						<th class="text-center"></th>
+            						<th class="text-center">Approvato</th>
+            						</tr>
+            					</thead>
+            					<tbody>				    
+    ';
 
         // disegna la tabella del bonus     
-        $query = "
+$query = "
 SELECT
 	bonus_docente.id AS bonus_docente_id,
 	bonus_docente.approvato AS bonus_docente_approvato,
@@ -249,34 +304,41 @@ AND
 ORDER BY
 	bonus.codice;
 ";
-        debug($query);
-        $resultArray2 = dbGetAll($query);
-        foreach($resultArray2 as $bonus) {
-            $data .= '
-            <tr>
-                <td class="text-left">'.$bonus['bonus_codice'].'</td>
-                <td class="text-left">'.$bonus['bonus_descrittori'].'</td>
-                <td class="text-left">'.$bonus['bonus_valore_previsto'].'</td>
-			';
-            
-            $data .='
-        		<td class="text-center">
-		';
-            $data .='
-				<button onclick="bonusRendiconto('.$bonus['bonus_docente_id'].', \''.$bonus['bonus_codice'].'\', \''.$bonus['bonus_descrittori'].'\', \''.$bonus['bonus_evidenze'].'\')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
-			';
-            $data .='
-                </td>
-		';
-            $data .='
-            <td class="text-left">'.$bonus['bonus_docente_approvato'].'</td>
-        </tr>
-	';
-            
-        }
-        
-        // chiude il pannello del bonus
+debug($query);
+$resultArray2 = dbGetAll($query);
+foreach($resultArray2 as $bonus) {
         $data .= '
+        <tr>
+            <td class="text-left">'.$bonus['bonus_docente_id'].'</td>
+            <td class="text-left">'.$bonus['bonus_codice'].'</td>
+            <td class="text-left">'.$bonus['bonus_descrittori'].'</td>
+            <td class="text-left">'.$bonus['bonus_valore_previsto'].'</td>
+		';
+        
+        $data .='
+    		<td class="text-center">
+	   ';
+        $data .='
+			<button onclick="bonusRendiconto('.$bonus['bonus_docente_id'].', \''.$bonus['bonus_codice'].'\', \''.$bonus['bonus_descrittori'].'\', \''.$bonus['bonus_evidenze'].'\')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
+		';
+        $data .='
+            </td>
+	   ';
+        $data .= '<td class="text-center"><input type="checkbox" data-toggle="toggle" data-onstyle="primary" id="approvato'.$bonus['bonus_docente_id'].'" ';
+        if ($bonus['bonus_docente_approvato']) {
+            $data .= 'checked ';
+        }
+        $data .= '></td>
+					</tr>
+					';
+        $data .='
+    </tr>
+        ';
+            
+}
+
+// chiude il pannello del bonus
+$data .= '
 					</tbody>
 				</table>
 	        </div>
@@ -284,25 +346,15 @@ ORDER BY
     </div>
 </div>
             
-<!-- <div class="panel-footer"></div> -->
+<div class="panel-footer">
+<div id="totale"></div>
 </div>
-        ';
-        
-    // chiude il pannello del docente
-        $data .= '
-                </div>
-            </div>
-            <!-- <div class="panel-footer"></div> -->
-        </div>
+</div>
+    ';
 
-        ';
-	echo $data;
-}
-
+echo $data;
 ?>
 
-</div>
-</div>
 
 <!-- Modal - previste -->
 <div class="modal fade" id="previste_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalPrevisteLabel">
@@ -413,9 +465,40 @@ ORDER BY
 </div>
 <!-- // Modal - registro details -->
 
+<!-- Modal - rendiconto details -->
+<div class="modal fade" id="bonus_docente_rendiconto_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-success">
+			<div class="panel-heading">
+				<h4 class="modal-title" id="myModalLabel">Rendiconto Evidenze</h4>
+			</div>
+			<div class="panel-body">
+                <div class="form-group">
+                    <div class="" id="evidenze_text"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rendiconto_rendiconto">Rendiconto</label>
+                    <textarea class="form-control" rows="5" id="rendiconto_rendiconto" placeholder="rendiconto" readonly="readonly"></textarea>
+                </div>
+            </div>
+			<div class="modal-footer">
+			<div class="col-sm-12 text-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+				<input type="hidden" id="hidden_bonus_docente_id">
+			</div>
+			</div>
+        	</div>
+        	</div>
+    	</div>
+    </div>
+</div>
+<!-- // Modal - rendiconto details -->
+
 </div>
 
-<script type="text/javascript" src="js/scriptQuadroOreDovute.js"></script>
 </body>
 </html>
 

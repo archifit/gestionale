@@ -43,6 +43,69 @@ function oreFatteGetRegistroAttivita(attivita_id, registro_id) {
 	$("#docente_registro_modal").modal("show");
 }
 
+function bonusRendiconto(bonus_docente_id, bonus_codice, bonus_descrittori, bonus_evidenze) {
+	$("#hidden_bonus_docente_id").val(bonus_docente_id);
+
+	$.post("../docente/bonusDocenteReadDetails.php", {
+			bonus_docente_id: bonus_docente_id
+		},
+		function (dati, status) {
+			// console.log(dati);
+			var bonus = JSON.parse(dati);
+			$("#rendiconto_rendiconto").val(bonus.rendiconto_evidenze);
+		}
+	);
+
+	$("#myModalLabel").text(bonus_codice + ": " + bonus_descrittori);
+	$("#evidenze_text").text(bonus_evidenze);
+	$("#bonus_docente_rendiconto_modal").modal("show");
+}
+
+function bonusRegistraApprovazione(bonus_docente_id, approvato) {
+	alert("id=" + bonus_docente_id +" val=" + approvato);
+	$.post("bonusRegistraApprovazione.php", {
+			bonus_docente_id: bonus_docente_id,
+			approvato: approvato
+		},
+		function (data, status) {
+			calcolaTotale();
+		}
+	);
+}
+
+function calculateColumn(index) {
+    var total = 0;
+    $('#table-docente-bonus tr').each(function() {
+        var value = parseInt($('td', this).eq(index).text());
+        if (!isNaN(value)) {
+            total += value;
+        	alert('value='+value+' total='+total);
+        }
+    });
+    return total;
+}
+
+function calcolaTotale() {
+	var totale = calculateColumn(3);
+	alert(totale);
+	$("#totale").html = totale;
+}
+
+$(document).ready(function () {
+
+	$('#table-docente-bonus td:nth-child(1)').hide(); // nasconde la prima colonna con l'id
+
+	$('#table-docente-bonus :checkbox').change(function() {
+		var bonus_docente_id = $('td:first', $(this).parents('tr')).text();
+		var approvato = true;
+		if(this.checked != true) {
+			approvato = false;
+		}
+		bonusRegistraApprovazione(bonus_docente_id, this.checked);
+//		alert("id=" + bonus_docente_id +" val=" + approvato);
+	});
+	calcolaTotale();
+});
 
 //stack modal dialogs
 $(document)

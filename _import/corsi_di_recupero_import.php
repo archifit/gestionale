@@ -103,30 +103,30 @@
 		while (!startswith( $lines[$i++], "DOCENTE"));
 		$line = $lines[$i];
 		$array = str_getcsv($line);
-		$docente = titlecase($array[0]);
+		$ore = titlecase($array[0]);
 
 		// controlla che il docente esista
 		$query = "	SELECT docente.id
 					FROM docente
-					WHERE docente.cognome = '$docente';";
+					WHERE docente.cognome = '$ore';";
 		$docente_id = selectId($query, 'id');
 		$query = "	SELECT profilo_docente.id
 					FROM profilo_docente
 					WHERE profilo_docente.anno_scolastico_id = '$__anno_scolastico_corrente_id'
 					AND profilo_docente.docente_id = '$docente_id'";
 		$profilo_docente_id = selectId($query, 'id');
-		$message .= 'docente='.$docente.' docente_id='.$docente_id.' profilo_docente_id='.$profilo_docente_id.PHP_EOL;
+		$message .= 'docente='.$ore.' docente_id='.$docente_id.' profilo_docente_id='.$profilo_docente_id.PHP_EOL;
 		echo '
-						<td>'.$docente.'</td>
+						<td>'.$ore.'</td>
 						<td>'.$docente_id.'</td>';
 
 		$sqlContent .= "
--- $codice - prende docente.id dal cognome $docente
+-- $codice - prende docente.id dal cognome $ore
 SELECT `id` FROM docente
-WHERE docente.cognome='$docente' LIMIT 1
+WHERE docente.cognome='$ore' LIMIT 1
 INTO @docente_id;
 
--- prende profilo_docente.id dal id ricavato da cognome $docente
+-- prende profilo_docente.id dal id ricavato da cognome $ore
 SELECT `id` FROM profilo_docente
 WHERE profilo_docente.anno_scolastico_id = '$__anno_scolastico_corrente_id'
 	AND profilo_docente.docente_id = '$docente_id' LIMIT 1
