@@ -62,7 +62,7 @@ function bonusRendiconto(bonus_docente_id, bonus_codice, bonus_descrittori, bonu
 }
 
 function bonusRegistraApprovazione(bonus_docente_id, approvato) {
-	alert("id=" + bonus_docente_id +" val=" + approvato);
+//	alert("id=" + bonus_docente_id +" val=" + approvato);
 	$.post("bonusRegistraApprovazione.php", {
 			bonus_docente_id: bonus_docente_id,
 			approvato: approvato
@@ -79,7 +79,7 @@ function calculateColumn(index) {
         var value = parseInt($('td', this).eq(index).text());
         if (!isNaN(value)) {
             total += value;
-        	alert('value='+value+' total='+total);
+//        	alert('value='+value+' total='+total);
         }
     });
     return total;
@@ -87,7 +87,7 @@ function calculateColumn(index) {
 
 function calcolaTotale() {
 	var totale = calculateColumn(3);
-	alert(totale);
+//	alert(totale);
 	$("#totale").html = totale;
 }
 
