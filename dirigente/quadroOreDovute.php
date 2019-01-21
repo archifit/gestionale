@@ -26,11 +26,6 @@ require_once '../common/connect.php';
 ?>
 
 <div class="container-fluid" style="margin-top:60px">
-<div class="panel panel-success">
-<div class="panel-heading">
-<h4><span class="glyphicon glyphicon-dashboard"></span>&ensp;Quadro Ore Dovute</h4>
-</div>
-<div class="panel-body">
 
 <?php
 
@@ -69,10 +64,10 @@ foreach($resultArray as $docente) {
     $docenteCognomeNome = $docente['cognome'].' '.$docente['nome'];
     $data = '';
     $data .= '
-        <div class="panel panel-warning">
+        <div class="panel panel-info">
             <div class="panel-heading">
-            	<span class="glyphicon glyphicon-list-alt"></span>
-            	<a data-toggle="collapse" href="#collapse_80">&ensp;'.$docenteCognomeNome.' </a>
+                <span class="glyphicon glyphicon-dashboard"></span>
+            	<a href="quadroDocente.php?id='.$docente['id'].'" target="_blank">&ensp;'.$docenteCognomeNome.' </a>
             </div>
             <div id="collapse_80" class="panel-collapse collapse  collapse in">
                 <div class="panel-body">
@@ -169,7 +164,6 @@ AND
 		</tbody>
 	</table>
 	</div>
-				    
 	';
 
         
@@ -179,7 +173,7 @@ AND
 <div class="panel-heading">
 	<div class="row">
 		<div class="col-md-4">
-		<h4><span class="glyphicon glyphicon-list-alt"></span>&ensp;Bonus</h4>
+		<span class="glyphicon glyphicon-list-alt"></span>&ensp;Bonus
 		</div>
 		<div class="col-md-4 text-center">
 		</div>
@@ -283,7 +277,7 @@ ORDER BY
         </div>
     </div>
 </div>
-            
+       
 <!-- <div class="panel-footer"></div> -->
 </div>
         ';
@@ -300,9 +294,6 @@ ORDER BY
 }
 
 ?>
-
-</div>
-</div>
 
 <!-- Modal - previste -->
 <div class="modal fade" id="previste_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalPrevisteLabel">
