@@ -166,45 +166,48 @@ AND
 	</div>
 	';
 
+        // disegna il pannello del fuis
+        $data .= '
+            <div class="panel panel-danger">
+            <div class="panel-heading">
+            	<div class="row">
+            		<div class="col-md-4">
+            		<span class="glyphicon glyphicon-list-alt"></span>&ensp;FUIS
+            		</div>
+            		<div class="col-md-4 text-center">
+            		</div>
+            		<div class="col-md-4 text-right">
+             		</div>
+            	</div>
+            </div>
+            <div class="panel-body">
+        ';
+        
+        // chiude il pannello del bonus
+        $data .= '
+            </div>
+            <!-- <div class="panel-footer"></div> -->
+            </div>
+        ';
         
     // disegna il pannello del bonus
         $data .= '
-<div class="panel panel-success">
-<div class="panel-heading">
-	<div class="row">
-		<div class="col-md-4">
-		<span class="glyphicon glyphicon-list-alt"></span>&ensp;Bonus
-		</div>
-		<div class="col-md-4 text-center">
-		</div>
-		<div class="col-md-4 text-right">
- 		</div>
-	</div>
-</div>
-<div class="panel-body">
-    <div class="row"  style="margin-bottom:10px;">
-        <div class="col-md-6">
-        </div>
-        <div class="col-md-6">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-			<div class="table-wrapper">
-				<table class="table table-bordered table-striped table-green">
-					<thead>
-						<tr>
-						<th class="text-center">Codice</th>
-						<th class="text-center">Descrittore</th>
-						<th class="text-center">Valore</th>
-						<th class="text-center"></th>
-						<th class="text-center">Approvato</th>
-						</tr>
-					</thead>
-					<tbody>				    
+            <div class="panel panel-success">
+            <div class="panel-heading">
+            	<div class="row">
+            		<div class="col-md-4">
+            		<span class="glyphicon glyphicon-list-alt"></span>&ensp;Bonus
+            		</div>
+            		<div class="col-md-4 text-center">
+            		</div>
+            		<div class="col-md-4 text-right">
+             		</div>
+            	</div>
+            </div>
+            <div class="panel-body">
         ';
-
-        // disegna la tabella del bonus     
+       
+        // disegna il body del pannello del bonus     
         $query = "
 SELECT
 	bonus_docente.id AS bonus_docente_id,
@@ -245,39 +248,42 @@ ORDER BY
 ";
         debug($query);
         $resultArray2 = dbGetAll($query);
+        $richiesto = 0;
+        $pendente = 0;
+        $approvato = 0;
         foreach($resultArray2 as $bonus) {
-            $data .= '
-            <tr>
-                <td class="text-left">'.$bonus['bonus_codice'].'</td>
-                <td class="text-left">'.$bonus['bonus_descrittori'].'</td>
-                <td class="text-left">'.$bonus['bonus_valore_previsto'].'</td>
-			';
-            
-            $data .='
-        		<td class="text-center">
-		';
-            $data .='
-				<button onclick="bonusRendiconto('.$bonus['bonus_docente_id'].', \''.$bonus['bonus_codice'].'\', \''.$bonus['bonus_descrittori'].'\', \''.$bonus['bonus_evidenze'].'\')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
-			';
-            $data .='
-                </td>
-		';
-            $data .='
-            <td class="text-left">'.$bonus['bonus_docente_approvato'].'</td>
-        </tr>
-	';
-            
+            $valore = $bonus['bonus_valore_previsto'];
+            $richiesto += $valore;
+            if ($bonus['bonus_docente_approvato']) {
+                $approvato += $valore;
+            } else {
+                $pendente += $valore;
+            }
         }
+        $perc = ($richiesto == 0) ? 0: ($approvato / $richiesto) * 100;
         
         // chiude il pannello del bonus
         $data .= '
-					</tbody>
-				</table>
-	        </div>
+        <div class="row">
+            <div class="col-md-1 text-right">Richiesto</div>
+            <div class="col-md-2 text-left">'.$richiesto.'</div>
+            <div class="col-md-1 text-right">Pendente</div>
+            <div class="col-md-2 text-left">'.$pendente.'</div>
+            <div class="col-md-1 text-right">Approvato</div>
+            <div class="col-md-2 text-left">'.$approvato.'</div>
+    
+            <div class="col-md-2">
+            <div class="progress progress-striped">
+              <div class="progress-bar progress-bar-success" id="progress-bar-approvate" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: '.$perc.'%"></div>
+              <div class="progress-bar progress-bar-warning" id="progress-bar-pendente" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: '.(100 - $perc).'%"></div>
+            </div>
+            </div>
         </div>
-    </div>
+        ';
+
+        // chiude il pannello del bonus
+        $data .= '
 </div>
-       
 <!-- <div class="panel-footer"></div> -->
 </div>
         ';

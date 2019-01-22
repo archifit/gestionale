@@ -105,6 +105,10 @@ function calcolaTotale() {
 	$("#bonus_richiesto").text(richiesto);
 	$("#bonus_pendente").text(pendente);
 	$("#bonus_approvato").text(approvato);
+	var perc = (approvato / richiesto) * 100;
+
+	$('#progress-bar-approvate').css('width', perc + '%').attr('aria-valuenow', perc);
+	$('#progress-bar-pendente').css('width', (100 - perc) + '%').attr('aria-valuenow', (100 - perc));
 }
 
 $(document).ready(function () {

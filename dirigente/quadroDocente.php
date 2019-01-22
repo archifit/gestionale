@@ -341,14 +341,24 @@ $data .= '
 </div>
             
 <div class="panel-footer">
-    <div class="row"  style="margin-bottom:10px;">
+    <div class="row">
         <div class="col-md-1 text-right">Richiesto</div>
-        <div class="col-md-3 text-left" id="bonus_richiesto"></div>
+        <div class="col-md-2 text-left" id="bonus_richiesto"></div>
         <div class="col-md-1 text-right">Pendente</div>
-        <div class="col-md-3 text-left" id="bonus_pendente"></div>
+        <div class="col-md-2 text-left" id="bonus_pendente"></div>
         <div class="col-md-1 text-right">Approvato</div>
-        <div class="col-md-3 text-left" id="bonus_approvato"></div>
+        <div class="col-md-2 text-left" id="bonus_approvato"></div>
+
+        <div class="col-md-2">
+        <div class="progress progress-striped">
+          <div class="progress-bar progress-bar-success" id="progress-bar-approvate" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar progress-bar-warning" id="progress-bar-pendente" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        </div>
+
     </div>
+
+
 </div>
 </div>
     ';
