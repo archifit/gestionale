@@ -73,13 +73,11 @@ $data .= '
         <div class="panel-heading">
         	<div class="row">
         		<div class="col-md-4">
-        		<h4>
                     <span class="glyphicon glyphicon-list-alt"></span>
                     <a data-toggle="collapse" href="#collapse_ore">&ensp;Quadro Orario</a>
-                </h4>
         		</div>
         		<div class="col-md-4 text-center">
-                	<h4>'.$docenteCognomeNome.'</h4>
+                	'.$docenteCognomeNome.'
         		</div>
         		<div class="col-md-4 text-right">
          		</div>
@@ -198,13 +196,11 @@ $data .= '
         <div class="panel-heading">
         	<div class="row">
         		<div class="col-md-4">
-        		<h4>
                     <span class="glyphicon glyphicon-list-alt"></span>
                     <a data-toggle="collapse" href="#collapse_fuis">&ensp;FUIS</a>
-                </h4>
         		</div>
         		<div class="col-md-4 text-center">
-                	<h4>'.$docenteCognomeNome.'</h4>
+                	'.$docenteCognomeNome.'
         		</div>
         		<div class="col-md-4 text-right">
          		</div>
@@ -229,13 +225,11 @@ $data .= '
         <div class="panel-heading">
         	<div class="row">
         		<div class="col-md-4">
-        		<h4>
                     <span class="glyphicon glyphicon-list-alt"></span>
                     <a data-toggle="collapse" href="#collapse_bonus">&ensp;Bonus</a>
-                </h4>
         		</div>
         		<div class="col-md-4 text-center">
-                	<h4>'.$docenteCognomeNome.'</h4>
+                	'.$docenteCognomeNome.'
         		</div>
         		<div class="col-md-4 text-right">
          		</div>
@@ -347,7 +341,14 @@ $data .= '
 </div>
             
 <div class="panel-footer">
-<div id="totale"></div>
+    <div class="row"  style="margin-bottom:10px;">
+        <div class="col-md-1 text-right">Richiesto</div>
+        <div class="col-md-3 text-left" id="bonus_richiesto"></div>
+        <div class="col-md-1 text-right">Pendente</div>
+        <div class="col-md-3 text-left" id="bonus_pendente"></div>
+        <div class="col-md-1 text-right">Approvato</div>
+        <div class="col-md-3 text-left" id="bonus_approvato"></div>
+    </div>
 </div>
 </div>
     ';

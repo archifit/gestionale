@@ -86,9 +86,25 @@ function calculateColumn(index) {
 }
 
 function calcolaTotale() {
-	var totale = calculateColumn(3);
-//	alert(totale);
-	$("#totale").html = totale;
+    var richiesto = 0;
+    var pendente = 0;
+    var approvato = 0;
+    $('#table-docente-bonus tr').each(function() {
+        var value = parseInt($('td', this).eq(3).text());
+        if (!isNaN(value)) {
+        	richiesto += value;
+            var $chkbox = $(this).find('input[type="checkbox"]');
+            if ($chkbox.prop('checked')) {
+            	approvato += value;
+            } else {
+            	pendente += value;
+            }
+        }
+    });
+
+	$("#bonus_richiesto").text(richiesto);
+	$("#bonus_pendente").text(pendente);
+	$("#bonus_approvato").text(approvato);
 }
 
 $(document).ready(function () {
