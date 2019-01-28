@@ -220,9 +220,26 @@ function viaggioRimborso(id) {
 			$("#rimborso_data_partenza").text(data_partenza.toLocaleDateString("it-IT", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
 			$("#rimborso_data_rientro").text(data_rientro.toLocaleDateString("it-IT", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
 
+			var ore_richieste = spesaViaggioArray[0].viaggio_ore_richieste;
+			var diaria = spesaViaggioArray[0].viaggio_richiesta_fuis;
+			if (diaria != true) {
+				console.log("diaria != true");
+			} else {
+				console.log("diaria SET");
+			}
+			if (ore_richieste <= 0) {
+				console.log("ore_richieste <= 0");
+			} else {
+				console.log("ore_richieste VALORE=" + ore_richieste);
+			}
 			$("#rimborso_ore_richieste").text(spesaViaggioArray[0].viaggio_ore_richieste);
-			$("#rimborso_richiesta_fuis").prop('defaultValue', spesaViaggioArray[0].viaggio_richiesta_fuis);
-
+			$("#rimborso_richiesta_fuis").prop('checked', diaria == true);
+			if (diaria == true && ore_richieste > 0) {
+				alert('non si dovrebbe richiedere la diaria e le ore insieme, tranni casi particolari: ore_richieste=' + ore_richieste + ' diaria=' + diaria);
+			}
+			if (ore_richieste <= 0 && diaria != true) {
+				alert('Non abbiamo richiesto ore o diaria...: ore_richieste=' + ore_richieste + ' diaria=' + diaria);
+			}
 			// svuota il tbody della tabella spese;
 			$('#rimborso_spese_table tbody').empty();
 			var markup = '';
