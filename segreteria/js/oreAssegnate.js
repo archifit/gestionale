@@ -1,14 +1,19 @@
+function ricalcolaTutti() {
+	$.get("oreAssegnateRicalcolaTutti.php", {
+	},
+	function (data, status) {
+		console.log(data);
+	}
+}
 
 function reloadTable(ore_previste_tipo_attivita_id) {
 	$.post("oreAssegnateReadList.php", {
 			ore_previste_tipo_attivita_id: ore_previste_tipo_attivita_id
 		},
 		function (data, status) {
-			// PARSE json data
-			console.log(data);
+			// console.log(data);
 			var oreArray = JSON.parse(data);
-			console.log(oreArray);
-	
+			// console.log(oreArray);
 			var tableId = 'table_' + ore_previste_tipo_attivita_id;
 			// svuota il tbody della tabella
 			$('#' + tableId + ' tbody').empty();

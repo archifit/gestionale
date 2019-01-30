@@ -11,14 +11,12 @@
 		$docente_incaricato_id = $_POST['docente_incaricato_id'];
 		$destinazione = escapePost('destinazione');
 		$classe = escapePost('classe');
+		$note = escapePost('note');
 		$ora_partenza = $_POST['ora_partenza'];
 		$ora_rientro = $_POST['ora_rientro'];
 
-		$query = "INSERT INTO viaggio(protocollo, tipo_viaggio, data_nomina, data_partenza, data_rientro, docente_id, destinazione, classe, ora_partenza, ora_rientro, anno_scolastico_id) VALUES('$protocollo', '$tipo_viaggio', '$data_nomina', '$data_partenza', '$data_rientro', '$docente_incaricato_id', '$destinazione', '$classe', '$ora_partenza', '$ora_rientro', '$__anno_scolastico_corrente_id')";
+		$query = "INSERT INTO viaggio(protocollo, tipo_viaggio, data_nomina, data_partenza, data_rientro, docente_id, destinazione, classe, note, ora_partenza, ora_rientro, anno_scolastico_id) VALUES('$protocollo', '$tipo_viaggio', '$data_nomina', '$data_partenza', '$data_rientro', '$docente_incaricato_id', '$destinazione', '$classe', '$note', '$ora_partenza', '$ora_rientro', '$__anno_scolastico_corrente_id')";
         debug($query);
-		if (!$result = mysqli_query($con, $query)) {
-			exit(mysqli_error($con));
-		}
-		echo "aggiuto 1 viaggio!";
+        dbExec($query);
 	}
 ?>

@@ -4,18 +4,17 @@
 	<title>Configurazione</title>
 
 <?php
-require_once '../common/header-session.php';
+require_once '../common/checkSession.php';
+require_once '../common/header-common.php';
 require_once '../common/style.php';
+require_once '../common/_include_bootstrap-toggle.php';
+ruoloRichiesto('dirigente');
 ?>
-
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
 
 </head>
 
 <body >
 <?php
-ruoloRichiesto('dirigente');
 require_once '../common/header-dirigente.php';
 ?>
 

@@ -20,6 +20,7 @@
 					viaggio.ore_richieste AS viaggio_ore_richieste,
 					viaggio.richiesta_fuis AS viaggio_richiesta_fuis,
 					viaggio.classe AS viaggio_classe,
+					viaggio.note AS viaggio_note,
 					viaggio.stato AS viaggio_stato
 
 				FROM viaggio viaggio
@@ -63,8 +64,8 @@ debug($row['viaggio_destinazione']);
 				case "effettuato":
 					$statoMarker = '<span class="label label-warning">effettuato</span>';
 					break;
-				case "rimborsato":
-					$statoMarker = '<span class="label label-primary">rimborsato</span>';
+				case "evaso":
+					$statoMarker = '<span class="label label-primary">evaso</span>';
 					break;
 				case "chiuso":
 					$statoMarker = '<span class="label label-danger">chiuso</span>';
@@ -127,6 +128,19 @@ debug($row['viaggio_destinazione']);
 					<p class="form-control-static">'.$row['viaggio_ora_rientro'].'</p>
 				</div>
 			</div>
+';
+			$note = $row['viaggio_note'];
+			if ($note != null && strlen($note) > 0) {
+			    $data .= '
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="data">Note:</label>
+				<div class="col-sm-9">
+					<p class="form-control-static">'.$note.'</p>
+				</div>
+			</div>
+';
+			}
+	$data .= '
 		</form>
 		<form class="form-horizontal">
 		</form>

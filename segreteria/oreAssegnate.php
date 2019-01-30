@@ -21,6 +21,17 @@ require_once '../common/connect.php';
 
 <div class="container-fluid" style="margin-top:60px">
 <div class="panel panel-primary">
+<div class="row" style="margin-top:10px;" style="margin-bottom:10px;">
+	<div class="col-md-4">
+	</div>
+	<div class="col-md-4 text-center">
+		<button onclick="ricalcolaTutti()" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span>&ensp;Ricalcola Tutti</button>
+	</div>
+	<div class="col-md-4 text-right">
+	</div>
+</div>
+<div class="row" style="margin-top:10px;" style="margin-bottom:10px;">
+</div>
 
 <?php
 // prepara l'elenco delle categorie di intervento

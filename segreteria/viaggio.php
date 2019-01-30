@@ -2,18 +2,22 @@
 <html>
 <head>
 <?php
-	require_once '../common/header-session.php';
-	ruoloRichiesto('dirigente','segreteria-docenti');
+require_once '../common/checkSession.php';
+require_once '../common/header-common.php';
+require_once '../common/style.php';
+require_once '../common/_include_bootstrap-toggle.php';
+require_once '../common/_include_bootstrap-select.php';
+require_once '../common/_include_flatpickr.php';
+ruoloRichiesto('segreteria-docenti','dirigente');
 ?>
+	<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green-2.css">
 	<title>Viaggi e Uscite</title>
-	<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-select/css/bootstrap-select.min.css">
 </head>
 
 <body >
 <?php
 	require_once '../common/header-segreteria.php';
 	require_once '../common/connect.php';
-	ruoloRichiesto('dirigente','segreteria-docenti');
 ?>
 
 <!-- Content Section -->
@@ -137,6 +141,11 @@
                     <label class="col-sm-2 control-label" for="classe">Classe</label>
                     <div class="col-sm-8"><input type="text" id="classe" placeholder="classe" class="form-control"/></div>
                 </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="note">Note</label>
+                    <div class="col-sm-8"><input type="text" id="note" placeholder="note" class="form-control"/></div>
+                </div>
 			</form>
 
             </div>
@@ -215,6 +224,10 @@
                     <label class="col-sm-2 control-label" for="update_classe">Classe</label>
                     <div class="col-sm-8"><input type="text" id="update_classe" placeholder="classe" class="form-control"/></div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="update_note">Note</label>
+                    <div class="col-sm-8"><input type="text" id="update_note" placeholder="note" class="form-control"/></div>
+                </div>
 
                 <div class="form-group stato_selector">
                     <label class="col-sm-2 control-label" for="update_stato">Stato</label></br>
@@ -223,7 +236,7 @@
 						<option data-content="<span class='label label-info'>assegnato</span>">assegnato</option>
 						<option data-content="<span class='label label-success'>accettato</span>">accettato</option>
 						<option data-content="<span class='label label-warning'>effettuato</span>">effettuato</option>
-						<option data-content="<span class='label label-primary'>rimborsato</span>">rimborsato</option>
+						<option data-content="<span class='label label-primary'>evaso</span>">evaso</option>
 						<option data-content="<span class='label label-danger'>chiuso</span>">chiuso</option>
 						<option data-content="<span class='label label-danger'>annullato</span>">annullato</option>
 					</select></div>
@@ -301,7 +314,8 @@
             </div>
 			<div class="panel-footer text-center">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
-				<button type="button" class="btn btn-success" onclick="viaggioRimborsato()" >Rimborsato</button>
+				<button type="button" class="btn btn-success" id="btnEvaso" onclick="viaggioEvaso()" >Evaso</button>
+				<button type="button" class="btn btn-success" id="btnChiudi" onclick="viaggioChiudi()" >Chiudi</button>
 				<input type="hidden" id="hidden_rimborso_viaggio_id">
 			</div>
             </div>
@@ -311,29 +325,6 @@
 </div>
 
 </div>
-
-<!-- Bootstrap, jquery etc (css + js) -->
-<?php
-	require_once '../common/style.php';
-?>
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/css/bootstrap-toggle.min.css">
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
-
-<!-- boostrap-select -->
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootstrap-select/js/i18n/defaults-it_IT.min.js"></script>
-
-<!-- timejs -->
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>
-
-<!-- flatpickr -->
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.js"></script>
-<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/flatpickr/dist/l10n/it.js"></script>
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/flatpickr.min.css">
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/common/flatpickr/dist/themes/material_red.css">
-
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green-2.css">
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/header-style.css">
 
 <!-- Custom JS file -->
 <script type="text/javascript" src="js/scriptViaggio.js"></script>

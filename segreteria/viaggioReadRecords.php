@@ -58,8 +58,8 @@ info($query);
 				case "effettuato":
 					$statoMarker = '<span class="label label-warning">effettuato</span>';
 					break;
-				case "rimborsato":
-					$statoMarker = '<span class="label label-primary">rimborsato</span>';
+				case "evaso":
+					$statoMarker = '<span class="label label-primary">evaso</span>';
 					break;
 				case "chiuso":
 					$statoMarker = '<span class="label label-danger">chiuso</span>';

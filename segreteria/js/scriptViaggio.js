@@ -1,4 +1,17 @@
 var ancheChiusi=0;
+var ore_richieste = 0;
+var diaria = 0;
+
+function setDbDateToPickr(pickr, data_str) {
+	var data = Date.parseExact(data_str, 'yyyy-MM-dd');
+	pickr.setDate(data);
+}
+
+function getDbDateFromPickrId(pickrId) {
+	var data_str = $(pickrId).val();
+	var data_date = Date.parseExact(data_str, 'd/M/yyyy');
+	return data_date.toString('yyyy-MM-dd');
+}
 
 $('#ancheChiusiCheckBox').change(function() {
     // this si riferisce al checkbox 
@@ -13,33 +26,18 @@ $('#ancheChiusiCheckBox').change(function() {
 
 // Add record
 function viaggioAddRecord() {
-    // get values
-    var protocollo = $("#protocollo").val();
-    var tipo_viaggio = $("#tipo_viaggio").val();
-    var data_nomina_str = $("#data_nomina").val();
-    var data_partenza_str = $("#data_partenza").val();
-    var data_rientro_str = $("#data_rientro").val();
-	var data_nomina_date = Date.parseExact(data_nomina_str, 'd/M/yyyy');
-	var data_partenza_date = Date.parseExact(data_partenza_str, 'd/M/yyyy');
-	var data_rientro_date = Date.parseExact(data_rientro_str, 'd/M/yyyy');
-    var docente_incaricato_id = $("#docente_incaricato").val();
-    var destinazione = $("#destinazione").val();
-    var classe = $("#classe").val();
-    var ora_partenza = $("#ora_partenza").val();
-    var ora_rientro = $("#ora_rientro").val();
-
-    // Add record
     $.post("viaggioAddRecord.php", {
-        protocollo: protocollo,
-        tipo_viaggio: tipo_viaggio,
-        data_nomina: data_nomina_date.toString('yyyy-MM-dd'),
-        data_partenza: data_partenza_date.toString('yyyy-MM-dd'),
-        data_rientro: data_rientro_date.toString('yyyy-MM-dd'),
-        docente_incaricato_id: docente_incaricato_id,
-        destinazione: destinazione,
-        classe: classe,
-        ora_partenza: ora_partenza,
-		ora_rientro: ora_rientro
+        protocollo: $("#protocollo").val(),
+        tipo_viaggio: $("#tipo_viaggio").val(),
+        data_nomina: getDbDateFromPickrId("#data_nomina"),
+        data_partenza: getDbDateFromPickrId("#data_partenza"),
+        data_rientro: getDbDateFromPickrId("#data_rientro"),
+        docente_incaricato_id: $("#docente_incaricato").val(),
+        destinazione: $("#destinazione").val(),
+        classe: $("#classe").val(),
+        note: $("#note").val(),
+        ora_partenza: $("#ora_partenza").val(),
+		ora_rientro: $("#ora_rientro").val()
     }, function (data, status) {
         // close the popup
         $("#add_new_record_modal").modal("hide");
@@ -52,6 +50,7 @@ function viaggioAddRecord() {
         $("docente_incaricato").val(0);
         $("#destinazione").val("");
         $("#classe").val("");
+        $("#note").val("");
         $("#ora_partenza").val("");
         $("#ora_rientro").val("");
     });
@@ -86,18 +85,6 @@ function viaggioDelete(id, data_partenza, destinazione) {
     }
 }
 
-function getDateFromId(id) {
-    var data_str = $(id).val();
-	var data_date = Date.parseExact(data_str, 'd/M/yyyy');
-	var data = data_date.toString('yyyy-MM-dd');
-	return data;
-}
-
-function setDateToPickr(pickr, data_str) {
-	var data_nomina = Date.parseExact(data_str, 'yyyy-MM-dd');
-	pickr.setDate(data_nomina);
-}
-
 // Get details for update
 function viaggioGetDetails(id) {
 	// Add viaggio ID to the hidden field for future usage
@@ -112,19 +99,12 @@ function viaggioGetDetails(id) {
 			// setting existing values to the modal popup fields
 			$("#update_protocollo").val(viaggio.protocollo);
 			$('#update_tipo_viaggio').selectpicker('val', viaggio.tipo_viaggio);
-			var data_nomina_str = viaggio.data_nomina;
-			var data_partenza_str = viaggio.data_partenza;
-			var data_rientro_str = viaggio.data_rientro;
-			var data_nomina = Date.parseExact(data_nomina_str, 'yyyy-MM-dd');
-			var data_partenza = Date.parseExact(data_partenza_str, 'yyyy-MM-dd');
-			var data_rientro = Date.parseExact(data_rientro_str, 'yyyy-MM-dd');
-//			$("#update_data_partenza").val(data_partenza.toString('d/M/yyyy'));
-//			$("#update_data_rientro").val(data_rientro.toString('d/M/yyyy'));
-			update_data_nomina_pickr.setDate(data_nomina);
-			update_data_partenza_pickr.setDate(data_partenza);
-			update_data_rientro_pickr.setDate(data_rientro);
+			setDbDateToPickr(update_data_nomina_pickr, viaggio.data_nomina);
+			setDbDateToPickr(update_data_partenza_pickr, viaggio.data_partenza);
+			setDbDateToPickr(update_data_rientro_pickr, viaggio.data_rientro);
 			$('#update_docente_incaricato').selectpicker('val', viaggio.docente_id);
 			$("#update_classe").val(viaggio.classe);
+			$("#update_note").val(viaggio.note);
 			$("#update_destinazione").val(viaggio.destinazione);
 			$("#update_ora_partenza").val(viaggio.ora_partenza);
 			$("#update_ora_rientro").val(viaggio.ora_rientro);
@@ -137,40 +117,20 @@ function viaggioGetDetails(id) {
 
 // Update details
 function viaggioUpdateDetails() {
-    // get values
-    var data_nomina_str = $("#update_data_nomina").val();
-    var data_partenza_str = $("#update_data_partenza").val();
-    var data_rientro_str = $("#update_data_rientro").val();
-	var data_nomina_date = Date.parseExact(data_nomina_str, 'd/M/yyyy');
-	var data_partenza_date = Date.parseExact(data_partenza_str, 'd/M/yyyy');
-	var data_rientro_date = Date.parseExact(data_rientro_str, 'd/M/yyyy');
-    var protocollo = $("#update_protocollo").val();
-    var tipo_viaggio = $("#update_tipo_viaggio").val();
-    var docente_incaricato_id = $("#update_docente_incaricato").val();
-    var classe = $("#update_classe").val();
-    var destinazione = $("#update_destinazione").val();
-    var ora_partenza = $("#update_ora_partenza").val();
-    var ora_rientro = $("#update_ora_rientro").val();
-    var stato = $("#update_stato").val();
-
-    // get hidden field value
-    var viaggio_id = $("#hidden_viaggio_id").val();
-	var data_nomina = data_nomina_date.toString('yyyy-MM-dd');
-	var data_partenza = data_partenza_date.toString('yyyy-MM-dd');
-	var data_rientro = data_rientro_date.toString('yyyy-MM-dd');
 	$.post("viaggioUpdateDetails.php", {
-		viaggio_id: viaggio_id,
-        protocollo: protocollo,
-        tipo_viaggio: tipo_viaggio,
-        data_nomina: data_nomina,
-        data_partenza: data_partenza,
-        data_rientro: data_rientro,
-        docente_incaricato_id: docente_incaricato_id,
-        destinazione: destinazione,
-        classe: classe,
-        ora_partenza: ora_partenza,
-		ora_rientro: ora_rientro,
-		stato: stato
+		viaggio_id: $("#hidden_viaggio_id").val(),
+        protocollo: $("#update_protocollo").val(),
+        tipo_viaggio: $("#update_tipo_viaggio").val(),
+        data_nomina: getDbDateFromPickrId("#update_data_nomina"),
+        data_partenza: getDbDateFromPickrId("#update_data_partenza"),
+        data_rientro: getDbDateFromPickrId("#update_data_rientro"),
+        docente_incaricato_id: $("#update_docente_incaricato").val(),
+        destinazione: $("#update_destinazione").val(),
+        classe: $("#update_classe").val(),
+        note: $("#update_note").val(),
+        ora_partenza: $("#update_ora_partenza").val(),
+		ora_rientro: $("#update_ora_rientro").val(),
+		stato: $("#update_stato").val()
 		},
 		function (data, status) {
 			$("#update_record_modal").modal("hide");
@@ -205,9 +165,12 @@ function viaggioRimborso(id) {
 			console.log(data);
 			var spesaViaggioArray = JSON.parse(data);
 			console.log(spesaViaggioArray);
+			var stato = spesaViaggioArray[0].viaggio_stato;
+			if (stato != "evaso" && stato != "effettuato") {
+				alert('il viaggio risulta in stato ' + stato + ' e non può essere trattato');
+				return;
+			}
 			totaleRimborso = 0;
-			// setting existing values to the modal popup fields
-			// $("#update_protocollo").val(viaggio.protocollo);
 			$("#rimborso_destinazione").text(spesaViaggioArray[0].viaggio_destinazione);
 			$("#rimborso_classe").text(spesaViaggioArray[0].viaggio_classe);
 
@@ -220,18 +183,10 @@ function viaggioRimborso(id) {
 			$("#rimborso_data_partenza").text(data_partenza.toLocaleDateString("it-IT", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
 			$("#rimborso_data_rientro").text(data_rientro.toLocaleDateString("it-IT", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
 
-			var ore_richieste = spesaViaggioArray[0].viaggio_ore_richieste;
-			var diaria = spesaViaggioArray[0].viaggio_richiesta_fuis;
-			if (diaria != true) {
-				console.log("diaria != true");
-			} else {
-				console.log("diaria SET");
-			}
-			if (ore_richieste <= 0) {
-				console.log("ore_richieste <= 0");
-			} else {
-				console.log("ore_richieste VALORE=" + ore_richieste);
-			}
+			// controlla che sia richiesta la diaria o le ore
+			ore_richieste = spesaViaggioArray[0].viaggio_ore_richieste;
+			diaria = spesaViaggioArray[0].viaggio_richiesta_fuis;
+
 			$("#rimborso_ore_richieste").text(spesaViaggioArray[0].viaggio_ore_richieste);
 			$("#rimborso_richiesta_fuis").prop('checked', diaria == true);
 			if (diaria == true && ore_richieste > 0) {
@@ -243,8 +198,10 @@ function viaggioRimborso(id) {
 			// svuota il tbody della tabella spese;
 			$('#rimborso_spese_table tbody').empty();
 			var markup = '';
+			var richiestiRimborsi = false;
 			spesaViaggioArray.forEach(function(spesa) {
 				if (spesa.spesa_viaggio_id !== null) {
+					richiestiRimborsi = true;
 					markup = markup + 
 					"<tr>" +
 					"<td>" + spesa.spesa_viaggio_id + "</td>" +
@@ -269,10 +226,19 @@ function viaggioRimborso(id) {
 			"</tr>";
 			$('#rimborso_spese_table > tbody:last-child').append(markup);
 			$('#rimborso_spese_table td:nth-child(1),th:nth-child(1)').hide(); // nasconde la prima colonna con l'id
+
+			// nasconde il bottone che non serve
+			if (stato == "evaso" || richiestiRimborsi == false) {
+				$("#btnEvaso").hide();
+				$("#btnChiudi").show();
+			} else {
+				$("#btnEvaso").show();
+				$("#btnChiudi").hide();
+			}
+			// Open modal popup
+			$("#rimborso_viaggio_modal").modal("show");
 		}
     );
-	// Open modal popup
-	$("#rimborso_viaggio_modal").modal("show");
 }
 
 function viaggioAccettaSpesa(spesa_viaggio_id) {
@@ -287,15 +253,51 @@ function viaggioAccettaSpesa(spesa_viaggio_id) {
 
 var totaleRimborso = 0;
 
-function viaggioRimborsato() {
+function viaggioEvaso() {
     var viaggio_id = $("#hidden_rimborso_viaggio_id").val();
 
     $.post("../docente/viaggioCambiaStato.php", {
 		viaggio_id: viaggio_id,
-    	nuovo_stato: "rimborsato"
+    	nuovo_stato: "evaso"
         },
         function (data, status) {
 			$("#rimborso_viaggio_modal").modal("hide");
+        	viaggioReadRecords();
+        }
+    );
+}
+
+function viaggioChiudi() {
+	var viaggio_id = $("#hidden_rimborso_viaggio_id").val();
+	var numero_giorni = 0;
+	var numero_ore = 0;
+
+	// se si deve indennita' forfettaria:
+	if (diaria == true) {
+		var gg = prompt("Indennità forfettaria: inserire il numero di giorni", "1");
+		if (gg != null) {
+			numero_giorni = parseInt(gg, 10);
+		} else {
+			return;
+		}
+	}
+	if (ore_richieste > 0) {
+		var ore = prompt("Ore di recupero", ore_richieste);
+		if (ore != null) {
+			numero_ore = parseInt(ore, 10);
+		} else {
+			return;
+		}
+	}
+    $.post("viaggioChiudi.php", {
+		viaggio_id: viaggio_id,
+		numero_giorni: numero_giorni,
+		numero_ore: ore_richieste
+        },
+        function (data, status) {
+			$("#rimborso_viaggio_modal").modal("hide");
+			diaria = false;
+			ore_richieste = 0;
         	viaggioReadRecords();
         }
     );
@@ -374,5 +376,5 @@ $(document).ready(function () {
 
 	flatpickr.localize(flatpickr.l10ns.it);
 
-    viaggioReadRecords(); // calling function
+    viaggioReadRecords();
 });

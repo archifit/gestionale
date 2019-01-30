@@ -18,6 +18,7 @@
 					viaggio.ora_rientro AS viaggio_ora_rientro,
 					viaggio.destinazione AS viaggio_destinazione,
 					viaggio.classe AS viaggio_classe,
+					viaggio.note AS viaggio_note,
 					viaggio.stato AS viaggio_stato,
 					docente.cognome AS docente_cognome,
 					docente.nome AS docente_nome
@@ -52,6 +53,8 @@
 	    $tipoViaggio = "il viaggio d'istruzione";
 	    $tipoViaggioNoArticolo = "viaggio d'istruzione";
 	}
+
+	$note = $row['viaggio_note'];
 
 	$oldLocale = setlocale(LC_TIME, 'ita', 'it_IT');
 	$dataNomina = utf8_encode( strftime("%d %B %Y", strtotime($row['viaggio_data_nomina'])));
@@ -174,6 +177,14 @@
 		<span class="c1">alloggio, ecc.) prima della partenza, durante l&#39;attivit&agrave;, nonch&eacute; successivamente alla stessa.</span>
 	</p>
 	</br>
+<?php 
+if ($note != null && strlen($note) > 0) {
+    echo '<p class="c3">';
+    echo '<span class="c5">NOTE: </span><span class="c1">'.$note.'</span>';
+    echo '</p>';
+    echo '</br>';
+}
+?>
 	<a id="t.f727949b760321cc972232d42b2d9fa1f8785d82"></a>
 	<a id="t.1"></a>
 	<table class="c11">

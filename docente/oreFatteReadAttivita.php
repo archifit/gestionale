@@ -35,17 +35,13 @@ $query = "	SELECT
 					ore_previste_tipo_attivita.inserito_da_docente AS ore_previste_tipo_attivita_inserito_da_docente,
 					ore_previste_tipo_attivita.nome AS ore_previste_tipo_attivita_nome,
 					ore_previste_tipo_attivita.da_rendicontare AS ore_previste_tipo_attivita_da_rendicontare,
-					registro_attivita.id AS registro_attivita_id,
-					rendiconto_attivita.rendicontato AS rendiconto_attivita_rendicontato,
-					rendiconto_attivita.id AS rendiconto_attivita_id
+					registro_attivita.id AS registro_attivita_id
 
 				FROM ore_fatte_attivita ore_fatte_attivita
 				INNER JOIN ore_previste_tipo_attivita ore_previste_tipo_attivita
 				ON ore_fatte_attivita.ore_previste_tipo_attivita_id = ore_previste_tipo_attivita.id
 				LEFT JOIN registro_attivita registro_attivita
 				ON registro_attivita.ore_fatte_attivita_id = ore_fatte_attivita.id
-				LEFT JOIN rendiconto_attivita rendiconto_attivita
-				ON rendiconto_attivita.ore_fatte_attivita_id = ore_fatte_attivita.id
 				WHERE ore_fatte_attivita.anno_scolastico_id = $__anno_scolastico_corrente_id
 				AND ore_fatte_attivita.docente_id = $docente_id
 				ORDER BY
