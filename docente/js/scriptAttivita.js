@@ -13,6 +13,12 @@ function oreFatteReadAttivitaRecords() {
 	$.get("oreFatteReadAttivita.php", {}, function (data, status) {
 		$(".attivita_fatte_records_content").html(data);
 	});
+	$.get("oreFatteReadAttribuite.php", {}, function (data, status) {
+		$(".attribuite_records_content").html(data);
+	});
+	$.get("oreFatteReadViaggi.php", {}, function (data, status) {
+		$(".viaggi_records_content").html(data);
+	});
 }
 
 function oreFatteGetRegistroAttivita(attivita_id, registro_id) {

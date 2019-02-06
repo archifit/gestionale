@@ -16,12 +16,12 @@ $data = '';
 // Design initial table header
 $data .= '<div class="table-wrapper"><table class="table table-bordered table-striped table-green">
 						<thead><tr>
-							<th>Tipo</th>
-							<th>Nome</th>
-							<th>Dettaglio</th>
-							<th class="text-center">Data</th>
-							<th class="text-center">ore</th>
-							<th class="text-center">Registro</th>
+							<th class="col-md-1 text-left">Tipo</th>
+							<th class="col-md-2 text-left">Nome</th>
+							<th class="col-md-5 text-left">Dettaglio</th>
+							<th class="col-md-1 text-center">Data</th>
+							<th class="col-md-1 text-center">Ore</th>
+							<th class="col-md-1 text-center">Registro</th>
 							<th></th>
 						</tr></thead><tbody>';
 
