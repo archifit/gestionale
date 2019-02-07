@@ -3,7 +3,7 @@ function ricalcolaTutti() {
 	},
 	function (data, status) {
 		console.log(data);
-	}
+	});
 }
 
 function reloadTable(ore_previste_tipo_attivita_id) {

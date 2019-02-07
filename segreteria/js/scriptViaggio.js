@@ -274,7 +274,7 @@ function viaggioChiudi() {
 
 	// se si deve indennita' forfettaria:
 	if (diaria == true) {
-		var gg = prompt("Indennità forfettaria: inserire il numero di giorni", "1");
+		var gg = prompt("Indennità forfettaria: inserire importo dovuto", "0");
 		if (gg != null) {
 			numero_giorni = parseInt(gg, 10);
 		} else {
