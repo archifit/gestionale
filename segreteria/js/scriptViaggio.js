@@ -225,7 +225,7 @@ function viaggioRimborso(id) {
 			"<td class=\"text-right\"><strong>" + totaleRimborso.toLocaleString('it', {minimumFractionDigits : 2, maximumFractionDigits : 2}) + "</strong></td>" +
 			"</tr>";
 			$('#rimborso_spese_table > tbody:last-child').append(markup);
-			$('#rimborso_spese_table td:nth-child(1),th:nth-child(1)').hide(); // nasconde la prima colonna con l'id
+			$('#rimborso_spese_table td:nth-child(1)').hide(); // nasconde la prima colonna con l'id
 
 			// nasconde il bottone che non serve
 			if (stato == "evaso" || richiestiRimborsi == false) {
@@ -269,14 +269,14 @@ function viaggioEvaso() {
 
 function viaggioChiudi() {
 	var viaggio_id = $("#hidden_rimborso_viaggio_id").val();
-	var numero_giorni = 0;
+	var importo_diaria = 0;
 	var numero_ore = 0;
 
 	// se si deve indennita' forfettaria:
 	if (diaria == true) {
-		var gg = prompt("Indennità forfettaria: inserire importo dovuto", "0");
-		if (gg != null) {
-			numero_giorni = parseInt(gg, 10);
+		var importo = prompt("Indennità forfettaria: inserire importo dovuto", "0");
+		if (importo != null) {
+			importo_diaria = parseFloat(importo);
 		} else {
 			return;
 		}
@@ -291,7 +291,7 @@ function viaggioChiudi() {
 	}
     $.post("viaggioChiudi.php", {
 		viaggio_id: viaggio_id,
-		numero_giorni: numero_giorni,
+		importo_diaria: importo_diaria,
 		numero_ore: ore_richieste
         },
         function (data, status) {

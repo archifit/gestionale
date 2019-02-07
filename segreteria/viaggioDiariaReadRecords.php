@@ -12,9 +12,8 @@ $data .= '<div class="table-wrapper"><table class="table table-bordered table-st
 							<th>Docente</th>
 							<th>Destinazione</th>
 							<th class="text-center">Data</th>
-							<th class="text-center">Giorni</th>
 							<th class="text-center">Importo</th>
-							<th class="text-center"></th>
+							<th class="text-center">Pagato il</th>
 						</tr>
                         </thead>
                         <tbody>';
@@ -53,25 +52,18 @@ $query = "	SELECT
 				    $docenteCognomeNome = $diaria['docente_cognome'].' '.$diaria['docente_nome'];
 				    $destinazione = $diaria['viaggio_destinazione'];
 				    $dataPartenza = strftime("%d/%m/%Y", strtotime($diaria['viaggio_data_partenza']));
-				    $importo = $diaria['fuis_viaggio_diaria_numero_giorni'] * 41.35;
+				    $importo = $diaria['fuis_viaggio_diaria_importo'];
 				    $data .= '<tr>
                     			<td>'.$docenteCognomeNome.'</td>
                     			<td>'.$destinazione.'</td>
                     			<td class="text-center">'.$dataPartenza.'</td>
-                    			<td>'.$diaria['fuis_viaggio_diaria_numero_giorni'].'</td>
-                    			<td>'.$importo.'</td>
+                    			<td class="text-right">'.$importo.'</td>
                                 ';
 				    $dataLiquidazione = $diaria['fuis_viaggio_diaria_data_richiesta_liquidazione'];
 				    $data .='
                     			<td class="text-center">
                     			';
-				    if ($dataLiquidazione == null) {
-				        $data .='
-                    				<button onclick="viaggioDiariaPaga('.$id.', \''.$docenteCognomeNome.'\', \''.$destinazione.'\', \''.$dataPartenza.'\', \''.$importo.'\')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
-                    			';
-				    } else {
-				        $data .= strftime("%d/%m/%Y", strtotime($dataLiquidazione));
-				    }
+    		        $data .= strftime("%d/%m/%Y", strtotime($dataLiquidazione));
 				    $data .='
                     			</td>';
 				    $data .= '

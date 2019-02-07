@@ -6,11 +6,12 @@ if(isset($_POST)) {
     
     // get values
     $viaggio_id = $_POST['viaggio_id'];
-    $numero_giorni = $_POST['numero_giorni'];
+    $importo_diaria = $_POST['importo_diaria'];
     $numero_ore = $_POST['numero_ore'];
+    $data = date('Y-m-d');
     
-    if ($numero_giorni > 0) {
-        $query = "INSERT INTO fuis_viaggio_diaria(numero_giorni, viaggio_id) VALUES('$numero_giorni', '$viaggio_id')";
+    if ($importo_diaria > 0) {
+        $query = "INSERT INTO fuis_viaggio_diaria(importo, liquidato, data_richiesta_liquidazione, viaggio_id) VALUES('$importo_diaria', true, '$data', '$viaggio_id')";
         debug($query);
         dbExec($query);
     }
