@@ -150,7 +150,7 @@ AND
 				<td class="text-left">'.getHtmlNumAndPrevisteVisual($ore['ore_previste_ore_40_aggiornamento'],$ore['ore_dovute_ore_40_aggiornamento']).'</td>
 				<td class="text-left">'.getHtmlNumAndPrevisteVisual($ore['ore_previste_ore_70_funzionali'],$ore['ore_dovute_ore_70_funzionali']).'</td>
 				<td class="text-left">'.getHtmlNumAndPrevisteVisual($ore['ore_previste_ore_70_con_studenti'],$ore['ore_dovute_ore_70_con_studenti']).'</td>
-				<td class="text-center"><button onclick="viewAttivitaPreviste(\''.$ore['id'].'\',\''.$docenteCognomeNome.'\')" class="btn btn-info btn-xs" ><span class="glyphicon glyphicon-indent-left"></button></td>
+				<td class="text-center"><button onclick="viewAttivitaPreviste(\''.$docente['id'].'\',\''.$docenteCognomeNome.'\')" class="btn btn-info btn-xs" ><span class="glyphicon glyphicon-indent-left"></button></td>
 			</tr>
 			<tr>
 				<td class="col-md-2">fatte</td>
@@ -159,7 +159,7 @@ AND
 				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_40_aggiornamento'],$ore['ore_dovute_ore_40_aggiornamento']).'</td>
 				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_funzionali'],$ore['ore_dovute_ore_70_funzionali']).'</td>
 				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_con_studenti'],$ore['ore_dovute_ore_70_con_studenti']).'</td>
-				<td class="text-center"><button onclick="viewAttivitaFatte(\''.$ore['id'].'\',\''.$docenteCognomeNome.'\')" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-list"></button></td>
+				<td class="text-center"><button onclick="viewAttivitaFatte(\''.$docente['id'].'\',\''.$docenteCognomeNome.'\')" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-list"></button></td>
 			</tr>
 		</tbody>
 	</table>
