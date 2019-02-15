@@ -54,6 +54,7 @@ function printableDate($data) {
 }
 
 // prepara l'elenco delle classi
+$data = '';
 $query = "	SELECT DISTINCT studente_per_corso_di_recupero.classe AS studente_per_corso_di_recupero_classe
 			FROM
 				studente_per_corso_di_recupero studente_per_corso_di_recupero
@@ -64,31 +65,25 @@ $query = "	SELECT DISTINCT studente_per_corso_di_recupero.classe AS studente_per
 			ORDER BY
 				studente_per_corso_di_recupero.classe ASC;
 			";
-if (!$result = mysqli_query($con, $query)) {
-	exit(mysqli_error($con));
-}
-
-$data = '';
-if(mysqli_num_rows($result) > 0) {
-	$resultArrayClasse = $result->fetch_all(MYSQLI_ASSOC);
-	foreach($resultArrayClasse as $row_classe) {
-		$classe = $row_classe['studente_per_corso_di_recupero_classe'];
-		$data .= '
-<div class="panel panel-success">
-<div class="panel-heading container-fluid">
-	<div class="row">
-		<div class="col-md-4">
-		</div>
-		<div class="col-md-4 text-center">
-			<h4>'.$classe.'</h4>
-		</div>
-		<div class="col-md-4 text-right">
-		</div>
-	</div>
-</div>
-<div class="panel-body">
-';
-		$query = "	SELECT
+$resultArray = dbGetAll($query);
+foreach($resultArray as $row_classe) {
+	$classe = $row_classe['studente_per_corso_di_recupero_classe'];
+	$data .= '
+        <div class="panel panel-success">
+        <div class="panel-heading container-fluid">
+        	<div class="row">
+        		<div class="col-md-4">
+        		</div>
+        		<div class="col-md-4 text-center">
+        			<h4>'.$classe.'</h4>
+        		</div>
+        		<div class="col-md-4 text-right">
+        		</div>
+        	</div>
+        </div>
+        <div class="panel-body">
+        ';
+	$query = "	SELECT
 						studente_per_corso_di_recupero.id AS studente_per_corso_di_recupero_id,
 						studente_per_corso_di_recupero.cognome AS studente_per_corso_di_recupero_cognome,
 						studente_per_corso_di_recupero.nome AS studente_per_corso_di_recupero_nome,
@@ -126,11 +121,9 @@ if(mysqli_num_rows($result) > 0) {
 					;
 			";
 		debug($query);
-		if (!$result = mysqli_query($con, $query)) {
-			exit(mysqli_error($con));
-		}
-		if(mysqli_num_rows($result) > 0) {
-			$data .= '
+		$resultArray2 = dbGetAll($query);
+		if (count($resultArray2) > 0) {
+		    $data .= '
 		<div class="table-wrapper">
 			<table class="table table-bordered table-striped">
 				<thead>
@@ -147,9 +140,8 @@ if(mysqli_num_rows($result) > 0) {
 					<th class="col-sm-1"></th>
 				</thead>
 ';
-			$resultArrayStudente = $result->fetch_all(MYSQLI_ASSOC);
-			$classname = "";
-			foreach($resultArrayStudente as $row_studente) {
+		    $classname = "";
+		    foreach($resultArray2 as $row_studente) {
 				$passatoMarker = '';
 				if ($row_studente['studente_per_corso_di_recupero_passato']) {
 					$passatoMarker = '<span class=\'label label-success\'>passato</span>';
@@ -248,7 +240,6 @@ if(mysqli_num_rows($result) > 0) {
 		$data .= '
 </div>
 ';
-	}
 }
 $data.='<input type="hidden" id="hidden_docente_id" value="'.$__docente_id.'">';
 $data.='<input type="hidden" id="hidden_docente_cognomenome" value="'.$__docente_cognome.' '.$__docente_nome.'">';

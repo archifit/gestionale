@@ -8,6 +8,7 @@ require_once '../common/style.php';
 require_once '../common/_include_bootstrap-select.php';
 ruoloRichiesto('segreteria-docenti','dirigente','docente');
 ?>
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-vcolor-index.css">
 	<title>Piano Orario</title>
 </head>
 
@@ -211,39 +212,34 @@ require_once '../common/connect.php';
 				WHERE ore_previste_tipo_attivita.valido = true
 				ORDER BY ore_previste_tipo_attivita.categoria DESC, ore_previste_tipo_attivita.nome ASC
 				;";
-	if (!$result = mysqli_query($con, $query)) {
-		exit(mysqli_error($con));
-	}
-	if(mysqli_num_rows($result) > 0) {
-		$resultArray = $result->fetch_all(MYSQLI_ASSOC);
-		foreach($resultArray as $row) {
-			if ($categoria !== $row['categoria']) {
-				if ($categoria !== '') {
-					$tipoAttivitaOptionList .= '</optgroup>';
-				}
-				$categoria = $row['categoria'];
-				$tipoAttivitaOptionList .= '<optgroup label="'.$categoria.'">';
+	$resultArray = dbGetAll($query);
+	foreach($resultArray as $row) {
+		if ($categoria !== $row['categoria']) {
+			if ($categoria !== '') {
+				$tipoAttivitaOptionList .= '</optgroup>';
 			}
-			// se ha un numero fisso di ore o un max, lo segnala
-			$subtext = '';
-			if ($row['ore'] != 0) {
-				$subtext = ' data-subtext="'.$row['ore'].' ore"';
-			} else if ($row['ore_max'] != 0) {
-				$subtext = ' data-subtext="max '.$row['ore_max'].' ore"';
-			}
-			// se non va inserito dal docente lo disabilito
-			$disable = '';
-			if (! $row['inserito_da_docente']) {
-				$disable = ' disabled ';
-			}
-			if ($row['inserito_da_docente']) {
-				$tipoAttivitaOptionList .= '
-					<option value="'.$row['id'].'"'.$subtext.$disable.' >'.$row['nome'].'</option>
-					';
-			}
+			$categoria = $row['categoria'];
+			$tipoAttivitaOptionList .= '<optgroup label="'.$categoria.'">';
 		}
-		$tipoAttivitaOptionList .= '</optgroup>';
+		// se ha un numero fisso di ore o un max, lo segnala
+		$subtext = '';
+		if ($row['ore'] != 0) {
+			$subtext = ' data-subtext="'.$row['ore'].' ore"';
+		} else if ($row['ore_max'] != 0) {
+			$subtext = ' data-subtext="max '.$row['ore_max'].' ore"';
+		}
+		// se non va inserito dal docente lo disabilito
+		$disable = '';
+		if (! $row['inserito_da_docente']) {
+			$disable = ' disabled ';
+		}
+		if ($row['inserito_da_docente']) {
+			$tipoAttivitaOptionList .= '
+				<option value="'.$row['id'].'"'.$subtext.$disable.' >'.$row['nome'].'</option>
+				';
+		}
 	}
+	$tipoAttivitaOptionList .= '</optgroup>';
 ?>
 
 <!-- Modal - attivita details -->
@@ -292,8 +288,6 @@ require_once '../common/connect.php';
 
 <!-- bootbox notificator -->
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootbox-4.4.0/js/bootbox.min.js"></script>
-
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-vcolor-index.css">
 
 <script type="text/javascript" src="js/scriptIndex.js"></script>
 </body>

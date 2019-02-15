@@ -122,41 +122,36 @@ require_once '../common/connect.php';
 				WHERE ore_previste_tipo_attivita.valido = true
 				ORDER BY ore_previste_tipo_attivita.categoria DESC, ore_previste_tipo_attivita.nome ASC
 				;";
-	if (!$result = mysqli_query($con, $query)) {
-		exit(mysqli_error($con));
-	}
-	if(mysqli_num_rows($result) > 0) {
-		$resultArray = $result->fetch_all(MYSQLI_ASSOC);
-		foreach($resultArray as $row) {
-			if ($categoria !== $row['categoria']) {
-				if ($categoria !== '') {
-					$tipoAttivitaOptionList .= '</optgroup>';
-				}
-				$categoria = $row['categoria'];
-				$tipoAttivitaOptionList .= '<optgroup label="'.$categoria.'">';
+	$resultArray = dbGetAll($query);
+	foreach($resultArray as $row) {
+		if ($categoria !== $row['categoria']) {
+			if ($categoria !== '') {
+				$tipoAttivitaOptionList .= '</optgroup>';
 			}
-			// se ha un numero fisso di ore o un max, lo segnala
-			$subtext = '';
-			if ($row['ore'] != 0) {
-				$subtext = ' data-subtext="'.$row['ore'].' ore"';
-			} else if ($row['ore_max'] != 0) {
-				$subtext = ' data-subtext="max '.$row['ore_max'].' ore"';
-			}
-			// se non va inserito dal docente lo disabilito
-			$disable = '';
-			if (! $row['inserito_da_docente']) {
-				$disable = ' disabled ';
-			}
-			if ($row['inserito_da_docente']) {
-				if ($row['da_rendicontare']) {
-					$tipoAttivitaOptionList .= '
-					<option value="'.$row['id'].'"'.$subtext.$disable.' >'.$row['nome'].'</option>
-					';
-				}
+			$categoria = $row['categoria'];
+			$tipoAttivitaOptionList .= '<optgroup label="'.$categoria.'">';
+		}
+		// se ha un numero fisso di ore o un max, lo segnala
+		$subtext = '';
+		if ($row['ore'] != 0) {
+			$subtext = ' data-subtext="'.$row['ore'].' ore"';
+		} else if ($row['ore_max'] != 0) {
+			$subtext = ' data-subtext="max '.$row['ore_max'].' ore"';
+		}
+		// se non va inserito dal docente lo disabilito
+		$disable = '';
+		if (! $row['inserito_da_docente']) {
+			$disable = ' disabled ';
+		}
+		if ($row['inserito_da_docente']) {
+			if ($row['da_rendicontare']) {
+				$tipoAttivitaOptionList .= '
+				<option value="'.$row['id'].'"'.$subtext.$disable.' >'.$row['nome'].'</option>
+				';
 			}
 		}
-		$tipoAttivitaOptionList .= '</optgroup>';
 	}
+	$tipoAttivitaOptionList .= '</optgroup>';
 ?>
 
 <!-- Modal - attivita details -->
