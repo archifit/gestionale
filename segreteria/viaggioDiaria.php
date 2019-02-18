@@ -16,7 +16,7 @@ ruoloRichiesto('segreteria-docenti','dirigente');
 
 <body >
 <?php
-require_once '../common/header-docente.php';
+require_once '../common/header-segreteria.php';
 require_once '../common/connect.php';
 ?>
 

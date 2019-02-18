@@ -4,7 +4,11 @@ if(isset($_POST['id']) && isset($_POST['id']) != "") {
 	require_once '../common/connect.php';
 
 	$id = $_POST['id'];
-
+	
+	$query = "DELETE FROM registro_attivita WHERE ore_fatte_attivita_id = '$id'";
+	debug($query);
+	dbExec($query);
+	
 	$query = "DELETE FROM ore_fatte_attivita WHERE id = '$id'";
 	debug($query);
 	dbExec($query);
