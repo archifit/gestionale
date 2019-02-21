@@ -182,6 +182,8 @@ function viaggioRimborso(id) {
 			var data_rientro = Date.parseExact(data_rientro_str, 'yyyy-MM-dd');
 			$("#rimborso_data_partenza").text(data_partenza.toLocaleDateString("it-IT", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
 			$("#rimborso_data_rientro").text(data_rientro.toLocaleDateString("it-IT", { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }));
+			$("#rimborso_ora_partenza").text(spesaViaggioArray[0].viaggio_ora_partenza);
+			$("#rimborso_ora_rientro").text(spesaViaggioArray[0].viaggio_ora_rientro);
 
 			// controlla che sia richiesta la diaria o le ore
 			ore_richieste = spesaViaggioArray[0].viaggio_ore_richieste;

@@ -280,6 +280,15 @@ ruoloRichiesto('segreteria-docenti','dirigente');
                     <label for="rimborso_data_rientro" class="col-sm-2 control-label">Al</label>
                     <div class="col-sm-4"><p class="form-control-static" id="rimborso_data_rientro" ></p></div>
                 </div>
+
+                <div class="form-group">
+                    <label for="rimborso_ora_partenza" class="col-sm-2 control-label">Partenza</label>
+                    <div class="col-sm-4"><p class="form-control-static" id="rimborso_ora_partenza" ></p></div>
+
+                    <label for="rimborso_ora_rientro" class="col-sm-2 control-label">Rientro</label>
+                    <div class="col-sm-4"><p class="form-control-static" id="rimborso_ora_rientro" ></p></div>
+                </div>
+
 <hr>
                 <div class="form-group">
                     <label for="rimborso_spese_table">Spese</label>
