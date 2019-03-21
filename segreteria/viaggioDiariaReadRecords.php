@@ -20,7 +20,6 @@ $data .= '<div class="table-wrapper"><table class="table table-bordered table-st
 
 $query = "	SELECT
 					fuis_viaggio_diaria.id AS fuis_viaggio_diaria_id,
-					fuis_viaggio_diaria.numero_giorni AS fuis_viaggio_diaria_numero_giorni,
 					fuis_viaggio_diaria.importo AS fuis_viaggio_diaria_importo,
 					fuis_viaggio_diaria.liquidato AS fuis_viaggio_diaria_liquidato,
 					fuis_viaggio_diaria.data_richiesta_liquidazione AS fuis_viaggio_diaria_data_richiesta_liquidazione,

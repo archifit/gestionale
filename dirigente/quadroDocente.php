@@ -60,7 +60,19 @@ function getHtmlNumAndPrevisteVisual($value, $total) {
 }
 
 function getHtmlNumAndFatteVisual($value, $total) {
-	return '&emsp;' . (($value >= 10) ? $value : '&ensp;' . $value);
+    global $okSymbol;
+    global $warning;
+    
+    $numString = ($value >= 10) ? $value : '&ensp;' . $value;
+    $diff = $total - $value;
+    if ($diff > 0) {
+        $numString .= '&ensp;<span class="label label-warning">- '. $diff .'</span>';
+    } else if ($diff < 0) {
+        $numString .= '&ensp;<span class="label label-danger">+ '. (-$diff) .'</span>';
+    } else {
+        $numString .= $okSymbol;
+    }
+    return '&emsp;' . $numString;
 }
 
 $docenteCognomeNome = $docente['cognome'].' '.$docente['nome'];
