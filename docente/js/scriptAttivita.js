@@ -13,6 +13,10 @@ function oreFatteReadAttivitaRecords() {
 	$.get("oreFatteReadAttivita.php", {}, function (data, status) {
 		$(".attivita_fatte_records_content").html(data);
 	});
+	$.get("oreFatteClilReadAttivita.php", {}, function (data, status) {
+		console.log(data);
+		$(".attivita_fatte_clil_records_content").html(data);
+	});
 	$.get("oreFatteReadAttribuite.php", {}, function (data, status) {
 		$(".attribuite_records_content").html(data);
 	});
@@ -150,6 +154,14 @@ function oreFatteDeleteAttivita(id) {
             }
         );
     }
+}
+
+function oreFatteSommario() {
+	$.get("oreFatteReadSommarioAttivita.php", {}, function (data, status) {
+		$(".sommario_attivita_records_content").html(data);
+	});
+
+	$("#docente_sommario_modal").modal("show");
 }
 
 $(document).ready(function () {

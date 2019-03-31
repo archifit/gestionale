@@ -21,6 +21,13 @@ function viewAttivitaFatte(id, docente) {
 		    $("#fatte_modal").modal("show");
 		}
 	);
+	$.post("../docente/oreFatteReadSommarioAttivita.php", {
+		docente_id: id
+	},
+	function (data, status) {
+		$(".sommario_attivita_records_content").html(data);
+	}
+);
 }
 
 function oreFatteGetRegistroAttivita(attivita_id, registro_id) {

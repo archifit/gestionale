@@ -24,15 +24,16 @@ require_once '../common/connect.php';
 <div class="panel-heading">
 	<div class="row">
 		<div class="col-md-4">
-		<span class="glyphicon glyphicon-list-alt"></span>&ensp;Attività
+		<span class="glyphicon glyphicon-education"></span>&ensp;Attività
 		</div>
 		<div class="col-md-4 text-center">
+			<button onclick="oreFatteSommario()" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-option-horizontal"></span> Sommario</button>
 		</div>
 		<div class="col-md-4 text-right">
             <?php
             if ($__config->getOre_fatte_aperto()) {
             	echo '
-					<button onclick="oreFatteGetAttivita(0)" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span></button>
+					<button onclick="oreFatteGetAttivita(0)" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-plus"></span></button>
 				';
             }
    			?>
@@ -49,6 +50,43 @@ require_once '../common/connect.php';
     <div class="row">
         <div class="col-md-12">
             <div class="attivita_fatte_records_content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="panel-footer"></div> -->
+</div>
+
+<div class="panel panel-info">
+<div class="panel-heading">
+	<div class="row">
+		<div class="col-md-4">
+		<span class="glyphicon glyphicon-education"></span>&ensp;Attività CLIL
+		</div>
+		<div class="col-md-4 text-center">
+			<button onclick="oreFatteClilSommario()" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-option-horizontal"></span> Sommario</button>
+		</div>
+		<div class="col-md-4 text-right">
+            <?php
+            if ($__config->getOre_fatte_aperto()) {
+            	echo '
+					<button onclick="oreFatteGetClilAttivita(0)" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-plus"></span></button>
+				';
+            }
+   			?>
+		</div>
+	</div>
+</div>
+<div class="panel-body">
+    <div class="row"  style="margin-bottom:10px;">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="attivita_fatte_clil_records_content"></div>
         </div>
     </div>
 </div>
@@ -89,7 +127,7 @@ require_once '../common/connect.php';
 <div class="panel-heading">
 	<div class="row">
 		<div class="col-md-4">
-		<span class="glyphicon glyphicon-list-alt"></span>&ensp;Viaggi
+		<span class="glyphicon glyphicon-picture"></span>&ensp;Viaggi
 		</div>
 		<div class="col-md-4 text-center">
 		</div>
@@ -293,6 +331,40 @@ require_once '../common/connect.php';
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
 				<button type="button" class="btn btn-primary" onclick="attivitaFattaRendicontoUpdateDetails()" >Salva</button>
 				<input type="hidden" id="hidden_ore_fatte_rendiconto_id">
+			</div>
+			</div>
+        	</div>
+        	</div>
+    	</div>
+    </div>
+</div>
+<!-- // Modal - rendiconto details -->
+
+<!-- Modal - sommario details -->
+<div class="modal fade" id="docente_sommario_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-success">
+			<div class="panel-heading">
+				<h4 class="modal-title" id="myModalLabel">Sommario Attività</h4>
+			</div>
+            <div class="panel-body">
+                <div class="row"  style="margin-bottom:10px;">
+                    <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="sommario_attivita_records_content"></div>
+                    </div>
+                </div>
+            </div>
+			<div class="modal-footer">
+			<div class="col-sm-12 text-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Chiudi</button>
 			</div>
 			</div>
         	</div>

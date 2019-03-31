@@ -26,26 +26,90 @@ require_once '../common/connect.php';
 ?>
 
 <div class="container-fluid" style="margin-top:60px">
+<div class="row">
+<div class="col-md-offset-4 col-md-4">
+
 <div class="panel panel-danger">
 <div class="panel-heading container-fluid">
 	<div class="row">
 		<div class="col-md-4">
-			<span class="glyphicon glyphicon-education"></span>&emsp;<strong>Fuis</strong>
+			<span class="glyphicon glyphicon-euro"></span>&emsp;<strong>Fuis</strong>
 		</div>
 	</div>
 </div>
+<?php
+$query = "
+    SELECT
+        SUM(viaggi) as sum_viaggi,
+        SUM(assegnato) as sum_assegnato,
+        SUM(funzionale) as sum_funzionale,
+        SUM(con_studenti) as sum_con_studenti,
+        SUM(clil_funzionale) as sum_clil_funzionale,
+        SUM(clil_con_studenti) as sum_clil_con_studenti,
+        SUM(totale) as sum_totale
+    FROM `fuis_docente`
+    WHERE fuis_docente.anno_scolastico_id = '$__anno_scolastico_corrente_id'
+";
+$fuis = dbGetFirst($query);
+$clil_totale = $fuis['sum_clil_funzionale'] + $fuis['sum_clil_con_studenti'];
+
+?>
+
 <div class="panel-body">
-    <div class="row"  style="margin-bottom:10px;">
-    </div>
+	<table class="table" >
+		<thead>
+			<tr>
+				<th>Totale</th>
+				<th class="col-md-4 text-right"><?php echo number_format($fuis['sum_totale'],2) ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Viaggi</td>
+				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_viaggi'],2) ?></td>
+			</tr>
+			<tr>
+				<td>Assegnato</td>
+				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_assegnato'],2) ?></td>
+			</tr>
+			<tr>
+				<td>Funzionale</td>
+				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_funzionale'],2) ?></td>
+			</tr>
+			<tr>
+				<td>Con Studenti</td>
+				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_con_studenti'],2) ?></td>
+			</tr>
+		</tbody>
+	</table>
     <div class="row">
-        <div class="col-md-12">
-            <div class="fuis_records_content"></div>
-        </div>
+        <div class="col-md-12 text-center"><h4>CLIL</h4></div>
     </div>
+	<table class="table" >
+		<thead>
+			<tr>
+				<th>Clil Totale</th>
+				<th class="col-md-4 text-right"><?php echo number_format($clil_totale,2) ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Clil Funzionale</td>
+				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_clil_funzionale'],2) ?></td>
+			</tr>
+			<tr>
+				<td>Clil Con Studenti</td>
+				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_clil_con_studenti'],2) ?></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
 <!-- <div class="panel-footer"></div> -->
 </div>
+</div>
+</div>
+
 </div>
 </body>
 </html>
