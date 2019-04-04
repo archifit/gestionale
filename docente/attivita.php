@@ -70,7 +70,7 @@ require_once '../common/connect.php';
             <?php
             if ($__config->getOre_fatte_aperto()) {
             	echo '
-					<button onclick="oreFatteGetClilAttivita(0)" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-plus"></span></button>
+					<button onclick="oreFatteClilGetAttivita(0)" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-plus"></span></button>
 				';
             }
    			?>
@@ -227,7 +227,7 @@ require_once '../common/connect.php';
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-2 control-label" for="attivita_dettaglio">dettaglio</label>
+                    <label class="col-sm-2 control-label" for="attivita_dettaglio">Dettaglio</label>
                     <div class="col-sm-9"><input type="text" id="attivita_dettaglio" placeholder="specificare se necessario" class="form-control"/></div>
                 </div>
             </div>
@@ -292,6 +292,7 @@ require_once '../common/connect.php';
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
 				<button type="button" class="btn btn-primary" onclick="attivitaFattaRegistroUpdateDetails()" >Salva</button>
 				<input type="hidden" id="hidden_ore_fatte_registro_id">
+				<input type="hidden" id="hidden_registro_clil">
 			</div>
 			</div>
         	</div>
@@ -373,6 +374,57 @@ require_once '../common/connect.php';
     </div>
 </div>
 <!-- // Modal - rendiconto details -->
+
+<!-- Modal - attivita clil details -->
+<div class="modal fade" id="docente_attivita_clil_modal" tabindex="-1" role="dialog" aria-labelledby="myModal_clilLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+			<div class="panel panel-success">
+			<div class="panel-heading">
+				<h4 class="modal-title" id="myModal_clilLabel">Attività CLIL</h4>
+			</div>
+			<div class="panel-body">
+			<div class="form-horizontal">
+
+                <div class="form-group tipo_attivita_selector">
+                    <label class="col-sm-2 control-label" for="tipo_attivita">Con Studenti</label>
+					<div class="col-sm-6">
+						<input type="checkbox" data-toggle="toggle" data-onstyle="primary" id="clil_con_studenti" checked>
+					</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="attivita_clil_data">Data</label>
+					<div class="col-sm-4"><input type="text" value="21/8/2018" id=attivita_clil_data placeholder="data" class="form-control" /></div>
+
+                    <label class="col-sm-2 control-label" for="attivita_clil_ora_inizio">Alle</label>
+                    <div class="col-sm-4"><input type="text" id="attivita_clil_ora_inizio" placeholder="ora inizio" class="form-control"/></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="attivita_clil_ore">Ore</label>
+                    <div class="col-sm-3"><input type="text" id="attivita_clil_ore" placeholder="ore" class="form-control"/></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="attivita_clil_dettaglio">Dettaglio</label>
+                    <div class="col-sm-9"><input type="text" id="attivita_clil_dettaglio" placeholder="specificare se necessario" class="form-control"/></div>
+                </div>
+            </div>
+            </div>
+			<div class="modal-footer">
+			<div class="col-sm-12 text-center">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+				<button type="button" class="btn btn-primary" onclick="attivitaFattaClilUpdateDetails()" >Salva</button>
+				<input type="hidden" id="hidden_ore_fatte_clil_attivita_id">
+			</div>
+			</div>
+        	</div>
+        	</div>
+    	</div>
+    </div>
+</div>
+<!-- // Modal - attivita clil details -->
 
 </div>
 
