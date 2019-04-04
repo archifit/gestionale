@@ -228,8 +228,9 @@ function oreFatteAggiornaDocente($docenteId) {
 	
 	// aggiorna i valori della tabella ore_fatte
 
+	// eliminato dal seguente:
+	// 						ore_40_sostituzioni_di_ufficio = '$ore_40_sostituzioni_di_ufficio',
 	$query = "	UPDATE ore_fatte SET
-						ore_40_sostituzioni_di_ufficio = '$ore_40_sostituzioni_di_ufficio',
 						ore_40_aggiornamento = '$ore_40_aggiornamento',
 						ore_40_con_studenti = '$ore_40_con_studenti',
 						ore_70_funzionali = '$ore_70_funzionali',
