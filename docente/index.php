@@ -20,12 +20,6 @@ require_once '../common/connect.php';
 
 <div class="container-fluid" style="margin-top:60px">
 
-<div class="panel panel-primary">
-<div class="panel-heading">
-<h4><span class="glyphicon glyphicon-time"></span>&ensp;Specchietto ore dovute</h4>
-</div>
-<div class="panel-body">
-
 <div class="panel panel-warning">
 <div class="panel-heading">
 	<span class="glyphicon glyphicon-list-alt"></span>
@@ -168,6 +162,42 @@ require_once '../common/connect.php';
 <!-- <div class="panel-footer"></div> -->
 </div>
 
+
+<div class="panel panel-primary" id="panel-clil">
+<div class="panel-heading">
+	<span class="glyphicon glyphicon-list-alt"></span>&ensp;Clil
+</div>
+<div id="collapse_clil" class="panel-collapse collapse  collapse in">
+<div class="panel-body">
+
+	<div class="table-wrapper">
+	<table class="table table-vnocolor-index">
+		<thead>
+			<tr>
+				<th class="col-md-5"></th>
+				<th class="col-md-3 text-left">Funzionali</th>
+				<th class="col-md-3 text-left">con Studenti</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>previste</td>
+				<td class="text-left" id="clil_previste_ore_70_funzionali"></td>
+				<td class="text-left" id="clil_previste_ore_70_con_studenti"></td>
+			</tr>
+			<tr>
+				<td>fatte</td>
+				<td class="text-left" id="clil_fatte_funzionali"></td>
+				<td class="text-left" id="clil_fatte_con_studenti"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+</div>
+<!-- <div class="panel-footer"></div> -->
+</div>
+
 <div class="panel panel-danger">
 <div class="panel-heading">
 	<span class="glyphicon glyphicon-list-alt"></span>
@@ -282,8 +312,6 @@ require_once '../common/connect.php';
 </div>
 <!-- // Modal - attivita details -->
 
-</div>
-</div>
 </div>
 
 <!-- bootbox notificator -->

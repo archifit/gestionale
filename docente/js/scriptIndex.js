@@ -81,6 +81,20 @@ function oreDovuteReadRecords() {
 				$("#fatte_ore_80_dipartimenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_dipartimenti,ore_dovute.ore_80_dipartimenti));
 				$("#fatte_ore_80_aggiornamento_facoltativo").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_aggiornamento_facoltativo,ore_dovute.ore_80_aggiornamento_facoltativo));
 				$("#fatte_ore_80_consigli_di_classe").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_consigli_di_classe,ore_dovute.ore_80_consigli_di_classe));
+				$.post("oreDovuteClilReadDetails.php", {
+					table_name: 'ore_fatte_attivita_clil'
+				},
+				function (dati, status) {
+					console.log(dati);
+					ore_fatte_clil = JSON.parse(dati);
+					$("#clil_fatte_funzionali").html(getHtmlNumAndFatteVisual(ore_fatte_clil.funzionali,0));
+					$("#clil_fatte_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte_clil.con_studenti,0));
+					if (parseInt(ore_fatte_clil.funzionali,0) + parseInt(ore_fatte_clil.con_studenti,0) == 0) {
+						$("#panel-clil").addClass('hidden');
+					} else {
+						$("#panel-clil").removeClass('hidden');
+					}
+				});
 			});
 		});
 	});

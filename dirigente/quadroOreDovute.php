@@ -131,6 +131,26 @@ AND
 ";
     debug($query);
     $ore = dbGetFirst($query);
+    
+    // prende anche le ore di clil
+    $query = "
+	SELECT SUM(ore) FROM ore_fatte_attivita_clil
+	WHERE anno_scolastico_id = $__anno_scolastico_corrente_id
+	AND docente_id = ".$docente['id']."
+    AND con_studenti = false
+	";
+    debug($query);
+    $clil_funzionali=dbGetValue($query);
+    
+    $query = "
+	SELECT SUM(ore) FROM ore_fatte_attivita_clil
+	WHERE anno_scolastico_id = $__anno_scolastico_corrente_id
+	AND docente_id = ".$docente['id']."
+    AND con_studenti = true
+	";
+    debug($query);
+    $clil_con_studenti=dbGetValue($query);
+    
         $data .= '
 	<div class="table-wrapper">
 	<table class="table table-vnocolor-index">
@@ -142,6 +162,8 @@ AND
 				<th class="col-md-1 text-left">40 Aggiornamento</th>
 				<th class="col-md-1 text-left">70 Funzionali</th>
 				<th class="col-md-1 text-left">70 con Studenti</th>
+				<th class="col-md-1 text-left">CLIL Funzionali</th>
+				<th class="col-md-1 text-left">CLIL con Studenti</th>
 				<th class="col-md-1 text-left"></th>
 			</tr>
 		</thead>
@@ -153,6 +175,8 @@ AND
 				<td class="text-left">'.getHtmlNum($ore['ore_dovute_ore_40_aggiornamento']).'</td>
 				<td class="text-left">'.getHtmlNum($ore['ore_dovute_ore_70_funzionali']).'</td>
 				<td class="text-left">'.getHtmlNum($ore['ore_dovute_ore_70_con_studenti']).'</td>
+				<td class="text-left"></td>
+				<td class="text-left"></td>
 				<td class="text-center"></td>
 			</tr>
 			<tr>
@@ -162,6 +186,8 @@ AND
 				<td class="text-left">'.getHtmlNumAndPrevisteVisual($ore['ore_previste_ore_40_aggiornamento'],$ore['ore_dovute_ore_40_aggiornamento']).'</td>
 				<td class="text-left">'.getHtmlNumAndPrevisteVisual($ore['ore_previste_ore_70_funzionali'],$ore['ore_dovute_ore_70_funzionali']).'</td>
 				<td class="text-left">'.getHtmlNumAndPrevisteVisual($ore['ore_previste_ore_70_con_studenti'],$ore['ore_dovute_ore_70_con_studenti']).'</td>
+				<td class="text-left"></td>
+				<td class="text-left"></td>
 				<td class="text-center"><button onclick="viewAttivitaPreviste(\''.$docente['id'].'\',\''.$docenteCognomeNome.'\')" class="btn btn-info btn-xs" ><span class="glyphicon glyphicon-indent-left"></button></td>
 			</tr>
 			<tr>
@@ -171,6 +197,8 @@ AND
 				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_40_aggiornamento'],$ore['ore_dovute_ore_40_aggiornamento']).'</td>
 				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_funzionali'],$ore['ore_dovute_ore_70_funzionali']).'</td>
 				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_con_studenti'],$ore['ore_dovute_ore_70_con_studenti']).'</td>
+				<td class="text-left">'.getHtmlNumAndFatteVisual($clil_funzionali,0).'</td>
+				<td class="text-left">'.getHtmlNumAndFatteVisual($clil_con_studenti,0).'</td>
 				<td class="text-center"><button onclick="viewAttivitaFatte(\''.$docente['id'].'\',\''.$docenteCognomeNome.'\')" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-list"></button></td>
 			</tr>
 		</tbody>
