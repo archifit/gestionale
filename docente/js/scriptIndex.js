@@ -20,6 +20,23 @@ function getHtmlNumAndPrevisteVisual(value, total) {
 }
 
 function getHtmlNumAndFatteVisual(value, total) {
+	var numString = (value >= 10) ? value : '&ensp;' + value;
+	var diff = total - value;
+	if (diff > 0) {
+		numString += '&ensp;<span class="label label-warning">- '+ diff +'</span>';
+	} else if (diff < 0) {
+			numString += '&ensp;<span class="label label-danger">+ '+ (-diff) +'</span>';
+	} else {
+		numString += okSymbol;
+	}
+	return '&emsp;' + numString;
+}
+
+function getHtmlNumAndFacoltativeVisual(value, total) {
+	return '&emsp;' + ((value >= 10) ? value : '&ensp;' + value);
+}
+
+function getHtmlNumAndFatte80Visual(value, total) {
 	return '&emsp;' + ((value >= 10) ? value : '&ensp;' + value);
 }
 
@@ -61,7 +78,7 @@ function oreDovuteReadRecords() {
 			$("#previste_ore_80_udienze_generali").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_80_udienze_generali,ore_dovute.ore_80_udienze_generali));
 			$("#previste_ore_80_dipartimenti").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_80_dipartimenti,ore_dovute.ore_80_dipartimenti));
 			// usiamo getHtmlNumAndFatteVisual per le facoltative in quanto non devono segnalare mancanze eventuali
-			$("#previste_ore_80_aggiornamento_facoltativo").html(getHtmlNumAndFatteVisual(ore_previste.ore_80_aggiornamento_facoltativo,ore_dovute.ore_80_aggiornamento_facoltativo));
+			$("#previste_ore_80_aggiornamento_facoltativo").html(getHtmlNumAndFacoltativeVisual(ore_previste.ore_80_aggiornamento_facoltativo,ore_dovute.ore_80_aggiornamento_facoltativo));
 			$("#previste_ore_80_consigli_di_classe").html(getHtmlNumAndPrevisteVisual(ore_previste.ore_80_consigli_di_classe,ore_dovute.ore_80_consigli_di_classe));
 			$.post("oreDovuteReadDetails.php", {
 				table_name: 'ore_fatte'
@@ -76,11 +93,25 @@ function oreDovuteReadRecords() {
 				$("#fatte_ore_40_aggiornamento").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_aggiornamento,ore_dovute.ore_40_aggiornamento));
 				$("#fatte_ore_40_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_con_studenti,ore_dovute.ore_40_con_studenti));
 				
-				$("#fatte_ore_80_collegi_docenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_collegi_docenti,ore_dovute.ore_80_collegi_docenti));
-				$("#fatte_ore_80_udienze_generali").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_udienze_generali,ore_dovute.ore_80_udienze_generali));
-				$("#fatte_ore_80_dipartimenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_dipartimenti,ore_dovute.ore_80_dipartimenti));
-				$("#fatte_ore_80_aggiornamento_facoltativo").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_aggiornamento_facoltativo,ore_dovute.ore_80_aggiornamento_facoltativo));
-				$("#fatte_ore_80_consigli_di_classe").html(getHtmlNumAndFatteVisual(ore_fatte.ore_80_consigli_di_classe,ore_dovute.ore_80_consigli_di_classe));
+				$("#fatte_ore_80_collegi_docenti").html(getHtmlNumAndFatte80Visual(ore_fatte.ore_80_collegi_docenti,ore_dovute.ore_80_collegi_docenti));
+				$("#fatte_ore_80_udienze_generali").html(getHtmlNumAndFatte80Visual(ore_fatte.ore_80_udienze_generali,ore_dovute.ore_80_udienze_generali));
+				$("#fatte_ore_80_dipartimenti").html(getHtmlNumAndFatte80Visual(ore_fatte.ore_80_dipartimenti,ore_dovute.ore_80_dipartimenti));
+				$("#fatte_ore_80_aggiornamento_facoltativo").html(getHtmlNumAndFatte80Visual(ore_fatte.ore_80_aggiornamento_facoltativo,ore_dovute.ore_80_aggiornamento_facoltativo));
+				$("#fatte_ore_80_consigli_di_classe").html(getHtmlNumAndFatte80Visual(ore_fatte.ore_80_consigli_di_classe,ore_dovute.ore_80_consigli_di_classe));
+				$.post("oreDovuteClilReadDetails.php", {
+					table_name: 'ore_fatte_attivita_clil'
+				},
+				function (dati, status) {
+					console.log(dati);
+					ore_fatte_clil = JSON.parse(dati);
+					$("#clil_fatte_funzionali").html(getHtmlNumAndFatteVisual(ore_fatte_clil.funzionali,0));
+					$("#clil_fatte_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte_clil.con_studenti,0));
+					if (parseInt(ore_fatte_clil.funzionali,0) + parseInt(ore_fatte_clil.con_studenti,0) == 0) {
+						$("#panel-clil").addClass('hidden');
+					} else {
+						$("#panel-clil").removeClass('hidden');
+					}
+				});
 			});
 		});
 	});
