@@ -195,7 +195,7 @@ function oreFatteClilGetAttivita(attivita_id) {
 				$("#attivita_clil_dettaglio").val(attivita.dettaglio);
 				$("#attivita_clil_ora_inizio").val(attivita.ora_inizio);
 				$("#attivita_clil_ora_inizio").prop('defaultValue', attivita.ora_inizio);
-				setDbDateToPickr(attivita_data_pickr, attivita.data);
+				setDbDateToPickr(attivita_clil_data_pickr, attivita.data);
 			}
 		);
 	} else {

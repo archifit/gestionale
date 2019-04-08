@@ -163,7 +163,6 @@ require_once '../common/connect.php';
 </div>
 
 
-
 <div class="panel panel-primary" id="panel-clil">
 <div class="panel-heading">
 	<span class="glyphicon glyphicon-list-alt"></span>&ensp;Clil
