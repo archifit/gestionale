@@ -391,6 +391,17 @@ echo $data;
             </div>
             <div class="panel-body">
 			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Sommario</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="sommario_attivita_previste_records_content"></div>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Dettaglio</h4></div>
+			    </div>
+			    <div class="row">
 			        <div class="col-md-12">
 			            <div class="attivita_previste_records_content"></div>
 			        </div>

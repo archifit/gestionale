@@ -9,6 +9,13 @@ function viewAttivitaPreviste(id, docente) {
 		    $("#previste_modal").modal("show");
 		}
 	);
+	$.post("../docente/orePrevisteReadSommarioAttivita.php", {
+		docente_id: id
+	},
+	function (data, status) {
+		$(".sommario_attivita_previste_records_content").html(data);
+	}
+);
 }
 
 function viewAttivitaFatte(id, docente) {
