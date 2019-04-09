@@ -3,6 +3,11 @@
 require_once '../common/checkSession.php';
 require_once '../common/connect.php';
 
+
+function formatNoZero($value) {
+    return ($value > 0) ? number_format($value,2) : ' ';
+}
+
 $data = '';
 $data .= '
 <div class="table-wrapper"><table id="fuis_docenti_table" class="table table-bordered table-striped table-green">
@@ -14,7 +19,9 @@ $data .= '
             <th class="text-center col-md-1">Assegnate</th>
             <th class="text-center col-md-1">Funzionali</th>
             <th class="text-center col-md-1">Con Studenti</th>
-            <th class="text-center col-md-2">Totale</th>
+            <th class="text-center col-md-1">Clil Funzionali</th>
+            <th class="text-center col-md-1">Clil Con Studenti</th>
+            <th class="text-center col-md-1">Totale</th>
 		</tr>
     </thead>
     <tbody>';
@@ -44,11 +51,13 @@ foreach($resultArray as $docente) {
     $data .= '<tr>
     			<td>'.$local_docente_id.'</td>
     			<td><a href="quadroDocente.php?id='.$local_docente_id.'" target="_blank">&ensp;'.$docenteCognomeNome.' </a></td>
-    			<td class="text-center">'.$viaggi.'</td>
-    			<td class="text-center">'.$assegnato.'</td>
-    			<td class="text-center">'.$funzionale.'</td>
-    			<td class="text-center">'.$con_studenti.'</td>
-    			<td class="text-center">'.$totale.'</td>
+    			<td class="text-right">'.formatNoZero($viaggi).'</td>
+    			<td class="text-right">'.formatNoZero($assegnato).'</td>
+    			<td class="text-right">'.formatNoZero($funzionale).'</td>
+    			<td class="text-right">'.formatNoZero($con_studenti).'</td>
+    			<td class="text-right"> </td>
+    			<td class="text-right"> </td>
+    			<td class="text-right totale">'.formatNoZero($totale).'</td>
     		</tr>';
 }
 $data .= '</tbody>';

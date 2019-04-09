@@ -20,7 +20,7 @@ function reloadTable(fuis_assegnato_tipo_id) {
 					"<tr>" +
 					"<td style=\"display:none;\">" + fuis.fuis_assegnato_id + "</td>" +
 					"<td>" + fuis.docente_cognome + " " + fuis.docente_nome + "</td>" +
-					"<td>" + fuis.fuis_assegnato_importo + "</td>" +
+					"<td class=\"col-md-2 text-right\">" + parseFloat(fuis.fuis_assegnato_importo).toFixed(2) + "</td>" +
 					"<td class=\"col-md-2 text-center\">" +
 					"<div onclick=\"editFuisAssegnato(" + fuis.fuis_assegnato_id + ","+ fuis.fuis_assegnato_fuis_assegnato_tipo_id + "," + 1 + ","+ fuis.fuis_assegnato_importo + "," + fuis.docente_id + ")\" class=\"btn btn-success btn-xs\"><span class=\"glyphicon glyphicon-pencil\"></div>&nbsp;" +
 					"<div onclick=\"deleteFuisAssegnato(" + fuis.fuis_assegnato_id + ","+ fuis.fuis_assegnato_fuis_assegnato_tipo_id +")\" class=\"btn btn-danger btn-xs\"><span class=\"glyphicon glyphicon-trash\"></div>&nbsp;" +
@@ -29,7 +29,8 @@ function reloadTable(fuis_assegnato_tipo_id) {
 			});
 			$('#' + tableId + ' > tbody:last-child').append(markup);
 			console.log("totale=" + totale);
-			$('#' + totaleId).text(totale);
+			$('#' + totaleId).text('Totale ' + Math.round(totale));
+			$('#' + totaleId).css("font-weight","Bold");
 		}
 	);
 }

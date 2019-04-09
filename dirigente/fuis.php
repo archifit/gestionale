@@ -60,25 +60,25 @@ $clil_totale = $fuis['sum_clil_funzionale'] + $fuis['sum_clil_con_studenti'];
 		<thead>
 			<tr>
 				<th>Totale</th>
-				<th class="col-md-4 text-right"><?php echo number_format($fuis['sum_totale'],2) ?></th>
+				<th class="col-md-4 text-right" id="fuis_totale"></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td>Viaggi</td>
-				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_viaggi'],2) ?></td>
+				<td class="col-md-4 text-right" id="fuis_viaggi"></td>
 			</tr>
 			<tr>
 				<td>Assegnato</td>
-				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_assegnato'],2) ?></td>
+				<td class="col-md-4 text-right" id="fuis_assegnato"></td>
 			</tr>
 			<tr>
 				<td>Funzionale</td>
-				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_funzionale'],2) ?></td>
+				<td class="col-md-4 text-right" id="fuis_funzionale"></td>
 			</tr>
 			<tr>
 				<td>Con Studenti</td>
-				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_con_studenti'],2) ?></td>
+				<td class="col-md-4 text-right" id="fuis_con_studenti"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -89,17 +89,17 @@ $clil_totale = $fuis['sum_clil_funzionale'] + $fuis['sum_clil_con_studenti'];
 		<thead>
 			<tr>
 				<th>Clil Totale</th>
-				<th class="col-md-4 text-right"><?php echo number_format($clil_totale,2) ?></th>
+				<th class="col-md-4 text-right" id="fuis_clil_totale"></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
 				<td>Clil Funzionale</td>
-				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_clil_funzionale'],2) ?></td>
+				<td class="col-md-4 text-right" id="fuis_clil_funzionale"></td>
 			</tr>
 			<tr>
 				<td>Clil Con Studenti</td>
-				<td class="col-md-4 text-right"><?php echo number_format($fuis['sum_clil_con_studenti'],2) ?></td>
+				<td class="col-md-4 text-right" id="fuis_clil_con_studenti"></td>
 			</tr>
 		</tbody>
 	</table>

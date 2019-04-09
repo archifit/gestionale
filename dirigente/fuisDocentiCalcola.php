@@ -48,18 +48,18 @@ foreach($resultArray as $docente) {
 SELECT
 	docente.id,
 	ore_dovute.ore_40_sostituzioni_di_ufficio AS ore_dovute_ore_40_sostituzioni_di_ufficio,
-	ore_dovute.	ore_40_con_studenti AS ore_dovute_ore_40_con_studenti,
-	ore_dovute.	ore_70_funzionali AS ore_dovute_ore_70_funzionali,
+	ore_dovute.ore_40_con_studenti AS ore_dovute_ore_40_con_studenti,
+	ore_dovute.ore_70_funzionali AS ore_dovute_ore_70_funzionali,
 	ore_dovute.ore_70_con_studenti AS ore_dovute_ore_70_con_studenti,
 	    
 	ore_previste.ore_40_sostituzioni_di_ufficio AS ore_previste_ore_40_sostituzioni_di_ufficio,
-	ore_previste.	ore_40_con_studenti AS ore_previste_ore_40_con_studenti,
-	ore_previste.	ore_70_funzionali AS ore_previste_ore_70_funzionali,
+	ore_previste.ore_40_con_studenti AS ore_previste_ore_40_con_studenti,
+	ore_previste.ore_70_funzionali AS ore_previste_ore_70_funzionali,
 	ore_previste.ore_70_con_studenti AS ore_previste_ore_70_con_studenti,
 	    
 	ore_fatte.ore_40_sostituzioni_di_ufficio AS ore_fatte_ore_40_sostituzioni_di_ufficio,
-	ore_fatte.	ore_40_con_studenti AS ore_fatte_ore_40_con_studenti,
-	ore_fatte.	ore_70_funzionali AS ore_fatte_ore_70_funzionali,
+	ore_fatte.ore_40_con_studenti AS ore_fatte_ore_40_con_studenti,
+	ore_fatte.ore_70_funzionali AS ore_fatte_ore_70_funzionali,
 	ore_fatte.ore_70_con_studenti AS ore_fatte_ore_70_con_studenti
 	    
 FROM docente
@@ -96,11 +96,43 @@ AND
 	
 	// totale fuis
 	$fuis_totale = $fuis_viaggio_diaria + $fuis_assegnato + $fuis_funzionali + $fuis_con_studenti;
+
+	// CLIL
+	// somma i fuis funzionali e con studenti di quest'anno
+	$query = "
+SELECT
+    SUM(ore)
+FROM `ore_fatte_attivita_clil`
+WHERE
+	ore_fatte_attivita_clil.docente_id = $localDocenteId
+AND
+	ore_fatte_attivita_clil.anno_scolastico_id = $__anno_scolastico_corrente_id
+AND
+	ore_fatte_attivita_clil.con_studenti = false
+";
+	$clil_ore_funzionale = dbGetValue($query);
+
+	$query = "
+SELECT
+    SUM(ore)
+FROM `ore_fatte_attivita_clil`
+WHERE
+	ore_fatte_attivita_clil.docente_id = $localDocenteId
+AND
+	ore_fatte_attivita_clil.anno_scolastico_id = $__anno_scolastico_corrente_id
+AND
+	ore_fatte_attivita_clil.con_studenti = true
+";
+	$clil_ore_con_studenti = dbGetValue($query);
+
+	$clil_funzionale = $clil_ore_funzionale * 17.5;
+	$clil_con_studenti = $clil_ore_con_studenti * 35;
 	
 	$query = "
-        REPLACE INTO fuis_docente (`viaggi`, `assegnato`, `funzionale`, `con_studenti`, `totale`, `docente_id`, `anno_scolastico_id`)
-        VALUES ($fuis_viaggio_diaria, $fuis_assegnato, $fuis_funzionali, $fuis_con_studenti, $fuis_totale, $localDocenteId, $__anno_scolastico_corrente_id);
+        REPLACE INTO fuis_docente (`viaggi`, `assegnato`, `funzionale`, `con_studenti`, `totale`, `clil_funzionale`, `clil_con_studenti`, `docente_id`, `anno_scolastico_id`)
+        VALUES ($fuis_viaggio_diaria, $fuis_assegnato, $fuis_funzionali, $fuis_con_studenti, $fuis_totale, $clil_funzionale, $clil_con_studenti, $localDocenteId, $__anno_scolastico_corrente_id);
         ";
+	debug($query);
 	dbExec($query);
 }
 ?>

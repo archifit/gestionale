@@ -56,7 +56,7 @@ $query = "	SELECT
                     			<td>'.$docenteCognomeNome.'</td>
                     			<td>'.$destinazione.'</td>
                     			<td class="text-center">'.$dataPartenza.'</td>
-                    			<td class="text-right">'.$importo.'</td>
+                    			<td class="text-right">'.number_format($importo,2).'</td>
                                 ';
 				    $dataLiquidazione = $diaria['fuis_viaggio_diaria_data_richiesta_liquidazione'];
 				    $data .='

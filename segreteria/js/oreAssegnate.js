@@ -47,7 +47,7 @@ function addAttivita(tipo_attivita_id, nome, ore, ore_max) {
 	if (ore !== 0) {
 		$("#oreLabel").text("Ore");
 		$("#ore").val(ore);
-		$('#ore').attr('readonly', true);
+		$('#ore').attr('readonly', false);
 		
 	} else {
 		// non e' certo readonly

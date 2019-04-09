@@ -14,7 +14,7 @@ ruoloRichiesto('dirigente');
 <!-- timejs -->
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>
 
-<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green-2.css">
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green-3.css">
 <script type="text/javascript" src="js/scriptFuisDocenti.js"></script>
 
 </head>
@@ -31,6 +31,8 @@ require_once '../common/connect.php';
 	<div class="row">
 		<div class="col-md-4">
 			<span class="glyphicon glyphicon-education"></span>&emsp;<strong>Fuis Docenti</strong>
+		</div>
+		<div class="col-md-4 text-center" id="totale_fuis_docenti">
 		</div>
 	</div>
 </div>

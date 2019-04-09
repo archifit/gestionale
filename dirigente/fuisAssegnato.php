@@ -60,7 +60,7 @@ foreach($resultArrayFuisAssegnatoTipo as $fuisAssegnatoTipo) {
 				<thead>
 					<th style="display:none;">id</th>
 					<th>Docente</th>
-					<th>Importo</th>
+					<th class="text-center">Importo</th>
 					<th></th>
 				</thead>
 				<tbody>
@@ -96,7 +96,7 @@ foreach($resultArrayFuisAssegnatoTipo as $fuisAssegnatoTipo) {
 							<tr class="'.$classname.'">
 								<td style="display:none;">'.$fuis['fuis_assegnato_id'].'</td>
 								<td>'.$fuis['docente_cognome'].' '.$fuis['docente_nome'].'</td>
-								<td>'.$fuis['fuis_assegnato_importo'].'</td>
+								<td class="col-md-2 text-right">'.$fuis['fuis_assegnato_importo'].'</td>
 								<td class="col-md-2 text-center">
 									<div onclick="editFuisAssegnato('.$fuis['fuis_assegnato_id'].','.$fuis['fuis_assegnato_fuis_assegnato_tipo_id'].',\''.$nome.'\','.$fuis['fuis_assegnato_importo'].','.$fuis['docente_id'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></div>&nbsp
 									<div onclick="deleteFuisAssegnato('.$fuis['fuis_assegnato_id'].','.$fuis['fuis_assegnato_fuis_assegnato_tipo_id'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></div>&nbsp
