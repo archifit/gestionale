@@ -57,8 +57,8 @@ foreach($resultArray as $docente) {
     			<td class="text-right">'.formatNoZero($assegnato).'</td>
     			<td class="text-right">'.formatNoZero($funzionale).'</td>
     			<td class="text-right">'.formatNoZero($con_studenti).'</td>
-    			<td class="text-right">'.formatNoZero($$clil_funzionale).'</td>
-    			<td class="text-right">'.formatNoZero($$clil_con_studenti).'</td>
+    			<td class="text-right">'.formatNoZero($clil_funzionale).'</td>
+    			<td class="text-right">'.formatNoZero($clil_con_studenti).'</td>
     			<td class="text-right totale">'.formatNoZero($totale).'</td>
     		</tr>';
 }
