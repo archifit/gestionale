@@ -47,6 +47,8 @@ foreach($resultArray as $docente) {
     $assegnato = $docente['assegnato'];
     $funzionale = $docente['funzionale'];
     $con_studenti = $docente['con_studenti'];
+    $clil_funzionale = $docente['clil_funzionale'];
+    $clil_con_studenti = $docente['clil_con_studenti'];
     $totale = $docente['totale'];
     $data .= '<tr>
     			<td>'.$local_docente_id.'</td>
@@ -55,8 +57,8 @@ foreach($resultArray as $docente) {
     			<td class="text-right">'.formatNoZero($assegnato).'</td>
     			<td class="text-right">'.formatNoZero($funzionale).'</td>
     			<td class="text-right">'.formatNoZero($con_studenti).'</td>
-    			<td class="text-right"> </td>
-    			<td class="text-right"> </td>
+    			<td class="text-right">'.formatNoZero($$clil_funzionale).'</td>
+    			<td class="text-right">'.formatNoZero($$clil_con_studenti).'</td>
     			<td class="text-right totale">'.formatNoZero($totale).'</td>
     		</tr>';
 }
