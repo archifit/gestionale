@@ -172,7 +172,7 @@ debug($row['viaggio_destinazione']);
 							spesa_viaggio.data ASC
 						"
 						;
-info($query);
+debug($query);
 			if (!$result = mysqli_query($con, $query)) {
 				exit(mysqli_error($con));
 			}

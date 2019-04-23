@@ -53,12 +53,12 @@ foreach($resultArray as $docente) {
     $data .= '<tr>
     			<td>'.$local_docente_id.'</td>
     			<td><a href="quadroDocente.php?id='.$local_docente_id.'" target="_blank">&ensp;'.$docenteCognomeNome.' </a></td>
-    			<td class="text-right">'.formatNoZero($viaggi).'</td>
-    			<td class="text-right">'.formatNoZero($assegnato).'</td>
-    			<td class="text-right">'.formatNoZero($funzionale).'</td>
-    			<td class="text-right">'.formatNoZero($con_studenti).'</td>
-    			<td class="text-right">'.formatNoZero($clil_funzionale).'</td>
-    			<td class="text-right">'.formatNoZero($clil_con_studenti).'</td>
+    			<td class="text-right viaggi">'.formatNoZero($viaggi).'</td>
+    			<td class="text-right assegnato">'.formatNoZero($assegnato).'</td>
+    			<td class="text-right funzionale">'.formatNoZero($funzionale).'</td>
+    			<td class="text-right con_studenti">'.formatNoZero($con_studenti).'</td>
+    			<td class="text-right clil_funzionale">'.formatNoZero($clil_funzionale).'</td>
+    			<td class="text-right clil_con_studenti">'.formatNoZero($clil_con_studenti).'</td>
     			<td class="text-right totale">'.formatNoZero($totale).'</td>
     		</tr>';
 }
