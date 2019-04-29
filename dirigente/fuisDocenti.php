@@ -29,10 +29,12 @@ require_once '../common/connect.php';
 <div class="panel panel-info">
 <div class="panel-heading container-fluid">
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<span class="glyphicon glyphicon-education"></span>&emsp;<strong>Fuis Docenti</strong>
 		</div>
-		<div class="col-md-4 text-center" id="totale_fuis_docenti">
+		<div class="col-md-3 text-center" id="totale_fuis_docenti">
+		</div>
+		<div class="col-md-3 text-center" id="totale_fuis_docenti_clil">
 		</div>
 	</div>
 </div>

@@ -8,23 +8,78 @@ function ricalcolaTutti() {
 	});
 }
 
+function number_format (number, decimals, decPoint, thousandsSep) {
+	  number = (number + '').replace(/[^0-9+\-Ee.]/g, '')
+	  var n = !isFinite(+number) ? 0 : +number
+	  var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals)
+	  var sep = (typeof thousandsSep === 'undefined') ? ',' : thousandsSep
+	  var dec = (typeof decPoint === 'undefined') ? '.' : decPoint
+	  var s = ''
+
+	  var toFixedFix = function (n, prec) {
+	    if (('' + n).indexOf('e') === -1) {
+	      return +(Math.round(n + 'e+' + prec) + 'e-' + prec)
+	    } else {
+	      var arr = ('' + n).split('e')
+	      var sig = ''
+	      if (+arr[1] + prec > 0) {
+	        sig = '+'
+	      }
+	      return (+(Math.round(+arr[0] + 'e' + sig + (+arr[1] + prec)) + 'e-' + prec)).toFixed(prec)
+	    }
+	  }
+
+	  // @todo: for IE parseFloat(0.55).toFixed(0) = 0;
+	  s = (prec ? toFixedFix(n, prec).toString() : '' + Math.round(n)).split('.')
+	  if (s[0].length > 3) {
+	    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep)
+	  }
+	  if ((s[1] || '').length < prec) {
+	    s[1] = s[1] || ''
+	    s[1] += new Array(prec - s[1].length + 1).join('0')
+	  }
+
+	  return s.join(dec)
+}
+
+function getFromTable(table, item) {
+	var content = table.find("." + item).text().trim().replace(/,/g, '');
+	if (isNaN(content) || content.length == 0) {
+		return 0;
+	}
+	return parseFloat(content);
+}
+
 function fuisDocentiReadRecords() {
 	$.get("fuisDocentiReadRecords.php", {}, function (data, status) {
 		$(".fuis_docenti_records_content").html(data);
 		$('#fuis_docenti_table td:nth-child(1),th:nth-child(1)').hide(); // nasconde la prima colonna con l'id
 		// calcola il totale
-		var totale = 0;
-		$(".totale").each(function() {
-		    var value = $(this).text();
-		    // add only if the value is number
-		    if(!isNaN(value) && value.trim().length != 0) {
-		    	console.log('summing [' + value + ']')
-		    	totale += parseFloat(value);
-		    }
+		var totale_non_clil = 0;
+		var totale_clil = 0;
+		
+		$("#fuis_docenti_table tr").each(function() {
+			var viaggi = getFromTable($(this),"viaggi");
+			var assegnato = getFromTable($(this),"assegnato");
+			var funzionale = getFromTable($(this),"funzionale");
+			var con_studenti = getFromTable($(this),"con_studenti");
+			var clil_funzionale = getFromTable($(this),"clil_funzionale");
+			var clil_con_studenti = getFromTable($(this),"clil_con_studenti");
+			var parziale_non_clil = viaggi + assegnato + funzionale + con_studenti;
+			var parziale_clil = clil_funzionale + clil_con_studenti;
+			var parziale_complessivo = parziale_non_clil + parziale_clil;
+			if (parziale_complessivo > 0) {
+				$(this).find(".totale").text(number_format(parziale_complessivo,2));
+			}
+
+			totale_non_clil += parziale_non_clil;
+			totale_clil += parziale_clil;
 		});
-		console.log("SUM=" + totale);
-		$('#totale_fuis_docenti').text('Totale ' + Math.round(totale));
+		
+		$('#totale_fuis_docenti').text('Totale senza CLIL: ' + number_format(totale_non_clil,2));
 		$('#totale_fuis_docenti').css("font-weight","Bold");
+		$('#totale_fuis_docenti_clil').text('Totale CLIL: ' + number_format(totale_clil,2));
+		$('#totale_fuis_docenti_clil').css("font-weight","Bold");
 	});
 }
 
