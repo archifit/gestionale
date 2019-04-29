@@ -29,12 +29,44 @@ function viewAttivitaFatte(id, docente) {
 		}
 	);
 	$.post("../docente/oreFatteReadSommarioAttivita.php", {
+			docente_id: id
+		},
+		function (data, status) {
+			$(".sommario_attivita_records_content").html(data);
+		}
+	);
+
+	$.post("../docente/oreFatteClilReadAttivita.php", {
 		docente_id: id
 	},
 	function (data, status) {
-		$(".sommario_attivita_records_content").html(data);
+		$(".attivita_fatte_clil_records_content").html(data);
 	}
-);
+	);
+	$.post("../docente/oreFatteClilReadSommarioAttivita.php", {
+		docente_id: id
+	},
+	function (data, status) {
+		$(".sommario_attivita_clil_records_content").html(data);
+	}
+	);
+
+	$.post("../docente/oreFatteReadAttribuite.php", {
+		docente_id: id
+	},
+	function (data, status) {
+		$(".attribuite_records_content").html(data);
+	}
+	);
+
+	$.post("../docente/oreFatteReadViaggi.php", {
+		docente_id: id
+	},
+	function (data, status) {
+		$(".viaggi_records_content").html(data);
+	}
+	);
+
 }
 
 function oreFatteGetRegistroAttivita(attivita_id, registro_id) {

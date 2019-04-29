@@ -444,6 +444,41 @@ echo $data;
 			            <div class="attivita_fatte_records_content"></div>
 			        </div>
 			    </div>
+
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Sommario Clil</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="sommario_attivita_clil_records_content"></div>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Dettaglio Clil</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="attivita_fatte_clil_records_content"></div>
+			        </div>
+			    </div>
+
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Attribuite</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="attribuite_records_content"></div>
+			        </div>
+			    </div>
+
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Viaggi</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="viaggi_records_content"></div>
+			        </div>
+			    </div>
             </div>
 			<div class="panel-footer text-center">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
