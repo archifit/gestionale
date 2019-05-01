@@ -18,14 +18,15 @@ function viewAttivitaPreviste(id, docente) {
 );
 }
 
-function viewAttivitaFatte(id, docente) {
+function viewAttivitaFatte() {
+	var id = $("#hidden_docente_id").val();
+	var nome = $("#hidden_docente_nome").val();
+	
 	$.post("../docente/oreFatteReadAttivita.php", {
 			docente_id: id
 		},
 		function (data, status) {
 			$(".attivita_fatte_records_content").html(data);
-			$("#myModalFatteTitleLabel").text('Attività Fatte (' + docente + ')');
-		    $("#fatte_modal").modal("show");
 		}
 	);
 	$.post("../docente/oreFatteReadSommarioAttivita.php", {
@@ -67,6 +68,48 @@ function viewAttivitaFatte(id, docente) {
 	}
 	);
 
+}
+
+function oreFatteControllaAttivita(attivita_id, dettaglio, ore, commento) {
+//	bootbox.alert('<p>attivita_id='+attivita_id+'</p><p>dettaglio='+dettaglio + "</p><p>ore="+ore + "</p>");
+	
+	bootbox.prompt({
+	    title: "<p>ore: " + ore + "</p><p>" + dettaglio + "</p>",
+	    message: '<p>Seleziona il messaggio:</p>',
+	    inputType: 'radio',
+	    inputOptions: [
+	    {
+	        text: 'attività già inserita (duplicato)',
+	        value: 'attività già inserita (duplicato)',
+	    },
+	    {
+	        text: 'attività non concordata con DS',
+	        value: 'attività non concordata con DS',
+	    },
+	    {
+	        text: 'Altro (specificare)...',
+	        value: '',
+	    }
+	    ],
+	    callback: function (result) {
+	    	if (result == null) {
+	    		return;
+	    	}
+	    	if (result !== "") {
+		        console.log(result);
+		        viewAttivitaFatte();
+	    	} else {
+	    		bootbox.prompt({
+	    		    title: "<p>ore: " + ore + "</p><p>" + dettaglio + "</p>",
+	    		    message: '<p>Inserire il commento:</p>',
+	    		    inputType: 'textarea',
+	    		    callback: function (commento) {
+	    		        console.log("Commento=" + commento);
+	    		    }
+	    		});;
+	    	}
+	    }
+	});
 }
 
 function oreFatteGetRegistroAttivita(attivita_id, registro_id) {
@@ -114,7 +157,7 @@ function bonusRegistraApprovazione(bonus_docente_id, approvato) {
 			approvato: approvato
 		},
 		function (data, status) {
-			calcolaTotale();
+			calcolaTotaleBonus();
 		}
 	);
 }
@@ -131,7 +174,7 @@ function calculateColumn(index) {
     return total;
 }
 
-function calcolaTotale() {
+function calcolaTotaleBonus() {
     var richiesto = 0;
     var pendente = 0;
     var approvato = 0;
@@ -170,55 +213,6 @@ $(document).ready(function () {
 		bonusRegistraApprovazione(bonus_docente_id, this.checked);
 //		alert("id=" + bonus_docente_id +" val=" + approvato);
 	});
-	calcolaTotale();
-});
-
-//stack modal dialogs
-$(document)
-.on('show.bs.modal', '.modal', function(e) {
- $(this).appendTo($('body'));
-})
-.on('shown.bs.modal', '.modal.in', function(e) {
- setModalsAndBackdropsOrder();
-})
-.on('hidden.bs.modal', '.modal', function(e) {
- setModalsAndBackdropsOrder();
-});
-
-function setModalsAndBackdropsOrder() {
-var modalZIndex = 1040;
-
-$('.modal.in').each(function(index) {
- var $modal = $(this);
-
- modalZIndex++;
-
- $modal.css('zIndex', modalZIndex);
- $modal.next('.modal-backdrop.in').addClass('hidden').css('zIndex', modalZIndex - 1);
-});
-
-$('.modal.in:visible:last').focus().next('.modal-backdrop.in').removeClass('hidden');
-}
-$('.modal').on('hidden.bs.modal', function(event) {
- $(this).removeClass('fv-modal-stack');
- $('body').data('fv_open_modals', $('body').data('fv_open_modals') - 1);
-});
-
-$('.modal').on('shown.bs.modal', function(event) {
- if(typeof($('body').data('fv_open_modals')) == 'undefined') {
-     $('body').data( 'fv_open_modals', 0);
- }
-
- if($(this).hasClass('fv-modal-stack')) {
-     return;
- }
-                
- $(this).addClass('fv-modal-stack');
- $('body').data('fv_open_modals', $('body').data('fv_open_modals') + 1);
- $(this).css('z-index', 1040 + (10 * $('body').data('fv_open_modals')));
- $('.modal-backdrop').not('.fv-modal-stack')
-                         .css('z-index', 1039 + (10 * $('body').data('fv_open_modals')));
-
- $('.modal-backdrop').not('fv-modal-stack')
-     .addClass( 'fv-modal-stack' ); 
+	calcolaTotaleBonus();
+	viewAttivitaFatte();
 });

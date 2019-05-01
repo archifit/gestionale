@@ -23,7 +23,11 @@ if(isset($_GET)) {
 <!-- timejs -->
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/timejs/date-it-IT.js"></script>
 
+<!-- bootbox notificator -->
+<script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootbox-4.4.0/js/bootbox.min.js"></script>
+
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-vcolor-index.css">
+
 <script type="text/javascript" src="js/scriptQuadroOreDovute.js"></script>
 
 </head>
@@ -185,7 +189,7 @@ $data .= '
 				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_40_aggiornamento'],$ore['ore_dovute_ore_40_aggiornamento']).'</td>
 				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_funzionali'],$ore['ore_dovute_ore_70_funzionali']).'</td>
 				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_con_studenti'],$ore['ore_dovute_ore_70_con_studenti']).'</td>
-				<td class="text-center"><button onclick="viewAttivitaFatte(\''.$ore['id'].'\',\''.$docenteCognomeNome.'\')" class="btn btn-success btn-xs" ><span class="glyphicon glyphicon-list"></button></td>
+				<td class="text-center"></td>
 			</tr>
 		</tbody>
 	</table>
@@ -222,7 +226,7 @@ $data .= '
             <div class="panel-body">
     ';
 
-// chiude il pannellodel FUIS
+// chiude il pannello del FUIS
 $data .= '
                 </div>
             </div>
@@ -231,152 +235,228 @@ $data .= '
 				    
     ';
 
-    // disegna il pannello del bonus
-$data .= '
+// disegna il pannello del bonus
+if ($__config->getBonus_rendiconto_aperto() || $__config->getBonus_adesione_aperto()) {
+    $data .= '
+        <div class="panel panel-success">
+            <div class="panel-heading">
+            	<div class="row">
+            		<div class="col-md-4">
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                        <a data-toggle="collapse" href="#collapse_bonus">&ensp;Bonus</a>
+            		</div>
+            		<div class="col-md-4 text-center">
+                    	'.$docenteCognomeNome.'
+            		</div>
+            		<div class="col-md-4 text-right">
+             		</div>
+            	</div>
+            </div>
+            <div id="collapse_bonus" class="panel-collapse collapse  collapse in">
+                <div class="panel-body">
+                    <div class="row"  style="margin-bottom:10px;">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                			<div class="table-wrapper">
+                				<table class="table table-bordered table-striped table-green" id="table-docente-bonus">
+                					<thead>
+                						<tr>
+                						<th class="text-center">Codice</th>
+                						<th class="text-center">Descrittore</th>
+                						<th class="text-center">Valore</th>
+                						<th class="text-center"></th>
+                						<th class="text-center">Approvato</th>
+                						</tr>
+                					</thead>
+                					<tbody>				    
+        ';
+
+        // disegna la tabella del bonus     
+    $query = "
+    SELECT
+    	bonus_docente.id AS bonus_docente_id,
+    	bonus_docente.approvato AS bonus_docente_approvato,
+    	
+    	bonus_area.codice AS bonus_area_codice,
+    	bonus_area.descrizione AS bonus_area_descrizione,
+    	bonus_area.valore_massimo AS bonus_area_valore_massimo,
+    	bonus_area.peso_percentuale AS bonus_area_peso_percentuale,
+    	
+    	bonus_indicatore.codice AS bonus_indicatore_codice,
+    	bonus_indicatore.descrizione AS bonus_indicatore_descrizione,
+    	bonus_indicatore.valore_massimo AS bonus_indicatore_valore_massimo,
+    	
+    	bonus.codice AS bonus_codice,
+    	bonus.descrittori AS bonus_descrittori,
+    	bonus.evidenze AS bonus_evidenze,
+    	bonus.valore_previsto AS bonus_valore_previsto
+    	
+    FROM bonus_docente
+    
+    INNER JOIN bonus
+    ON bonus_docente.bonus_id = bonus.id
+    
+    INNER JOIN bonus_indicatore
+    ON bonus.bonus_indicatore_id = bonus_indicatore.id
+    
+    INNER JOIN bonus_area
+    ON bonus_indicatore.bonus_area_id = bonus_area.id
+    
+    WHERE
+    	bonus_docente.docente_id = ".$docente['id']."
+    AND
+    	bonus_docente.anno_scolastico_id = $__anno_scolastico_corrente_id
+    	
+    ORDER BY
+    	bonus.codice;
+    ";
+    debug($query);
+    $resultArray2 = dbGetAll($query);
+    foreach($resultArray2 as $bonus) {
+            $data .= '
+            <tr>
+                <td class="text-left">'.$bonus['bonus_docente_id'].'</td>
+                <td class="text-left">'.$bonus['bonus_codice'].'</td>
+                <td class="text-left">'.$bonus['bonus_descrittori'].'</td>
+                <td class="text-left">'.$bonus['bonus_valore_previsto'].'</td>
+    		';
+            
+            $data .='
+        		<td class="text-center">
+    	   ';
+            $data .='
+    			<button onclick="bonusRendiconto('.$bonus['bonus_docente_id'].', \''.$bonus['bonus_codice'].'\', \''.$bonus['bonus_descrittori'].'\', \''.$bonus['bonus_evidenze'].'\')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
+    		';
+            $data .='
+                </td>
+    	   ';
+            $data .= '<td class="text-center"><input type="checkbox" data-toggle="toggle" data-onstyle="primary" id="approvato'.$bonus['bonus_docente_id'].'" ';
+            if ($bonus['bonus_docente_approvato']) {
+                $data .= 'checked ';
+            }
+            $data .= '></td>
+    					</tr>
+    					';
+            $data .='
+        </tr>
+            ';
+                
+    }
+
+// chiude il pannello del bonus
+    $data .= '
+    					</tbody>
+    				</table>
+    	        </div>
+            </div>
+        </div>
+    </div>
+                
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-1 text-right">Richiesto</div>
+            <div class="col-md-2 text-left" id="bonus_richiesto"></div>
+            <div class="col-md-1 text-right">Pendente</div>
+            <div class="col-md-2 text-left" id="bonus_pendente"></div>
+            <div class="col-md-1 text-right">Approvato</div>
+            <div class="col-md-2 text-left" id="bonus_approvato"></div>
+    
+            <div class="col-md-2">
+            <div class="progress progress-striped">
+              <div class="progress-bar progress-bar-success" id="progress-bar-approvate" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar progress-bar-warning" id="progress-bar-pendente" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            </div>
+    
+        </div>
+    
+    
+    </div>
+    </div>
+        ';
+}
+echo $data;
+?>
+
+<input type="hidden" id="hidden_docente_id" value="<?php echo $docente_id; ?>">
+<input type="hidden" id="hidden_docente_nome" value="<?php echo $docenteCognomeNome; ?>">
+
     <div class="panel panel-success">
         <div class="panel-heading">
         	<div class="row">
         		<div class="col-md-4">
                     <span class="glyphicon glyphicon-list-alt"></span>
-                    <a data-toggle="collapse" href="#collapse_bonus">&ensp;Bonus</a>
+                    <a data-toggle="collapse" href="#collapse_fuis">&ensp;Attività</a>
         		</div>
-        		<div class="col-md-4 text-center">
-                	'.$docenteCognomeNome.'
-        		</div>
+        		<div class="col-md-4 text-center"><?php echo $docenteCognomeNome; ?></div>
         		<div class="col-md-4 text-right">
          		</div>
         	</div>
         </div>
-        <div id="collapse_bonus" class="panel-collapse collapse  collapse in">
+        <div id="collapse_fuis" class="panel-collapse collapse  collapse in">
             <div class="panel-body">
-                <div class="row"  style="margin-bottom:10px;">
-                    <div class="col-md-6">
-                    </div>
-                    <div class="col-md-6">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-            			<div class="table-wrapper">
-            				<table class="table table-bordered table-striped table-green" id="table-docente-bonus">
-            					<thead>
-            						<tr>
-            						<th class="text-center">Codice</th>
-            						<th class="text-center">Descrittore</th>
-            						<th class="text-center">Valore</th>
-            						<th class="text-center"></th>
-            						<th class="text-center">Approvato</th>
-            						</tr>
-            					</thead>
-            					<tbody>				    
-    ';
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Sommario</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="sommario_attivita_records_content"></div>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Dettaglio</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="attivita_fatte_records_content"></div>
+			        </div>
+			    </div>
 
-        // disegna la tabella del bonus     
-$query = "
-SELECT
-	bonus_docente.id AS bonus_docente_id,
-	bonus_docente.approvato AS bonus_docente_approvato,
-	
-	bonus_area.codice AS bonus_area_codice,
-	bonus_area.descrizione AS bonus_area_descrizione,
-	bonus_area.valore_massimo AS bonus_area_valore_massimo,
-	bonus_area.peso_percentuale AS bonus_area_peso_percentuale,
-	
-	bonus_indicatore.codice AS bonus_indicatore_codice,
-	bonus_indicatore.descrizione AS bonus_indicatore_descrizione,
-	bonus_indicatore.valore_massimo AS bonus_indicatore_valore_massimo,
-	
-	bonus.codice AS bonus_codice,
-	bonus.descrittori AS bonus_descrittori,
-	bonus.evidenze AS bonus_evidenze,
-	bonus.valore_previsto AS bonus_valore_previsto
-	
-FROM bonus_docente
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Sommario Clil</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="sommario_attivita_clil_records_content"></div>
+			        </div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Dettaglio Clil</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="attivita_fatte_clil_records_content"></div>
+			        </div>
+			    </div>
 
-INNER JOIN bonus
-ON bonus_docente.bonus_id = bonus.id
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Attribuite</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="attribuite_records_content"></div>
+			        </div>
+			    </div>
 
-INNER JOIN bonus_indicatore
-ON bonus.bonus_indicatore_id = bonus_indicatore.id
+			    <div class="row">
+			        <div class="col-md-12 text-center"><h4>Viaggi</h4></div>
+			    </div>
+			    <div class="row">
+			        <div class="col-md-12">
+			            <div class="viaggi_records_content"></div>
+			        </div>
+			    </div>
 
-INNER JOIN bonus_area
-ON bonus_indicatore.bonus_area_id = bonus_area.id
-
-WHERE
-	bonus_docente.docente_id = ".$docente['id']."
-AND
-	bonus_docente.anno_scolastico_id = $__anno_scolastico_corrente_id
-	
-ORDER BY
-	bonus.codice;
-";
-debug($query);
-$resultArray2 = dbGetAll($query);
-foreach($resultArray2 as $bonus) {
-        $data .= '
-        <tr>
-            <td class="text-left">'.$bonus['bonus_docente_id'].'</td>
-            <td class="text-left">'.$bonus['bonus_codice'].'</td>
-            <td class="text-left">'.$bonus['bonus_descrittori'].'</td>
-            <td class="text-left">'.$bonus['bonus_valore_previsto'].'</td>
-		';
-        
-        $data .='
-    		<td class="text-center">
-	   ';
-        $data .='
-			<button onclick="bonusRendiconto('.$bonus['bonus_docente_id'].', \''.$bonus['bonus_codice'].'\', \''.$bonus['bonus_descrittori'].'\', \''.$bonus['bonus_evidenze'].'\')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-list-alt"></button>
-		';
-        $data .='
-            </td>
-	   ';
-        $data .= '<td class="text-center"><input type="checkbox" data-toggle="toggle" data-onstyle="primary" id="approvato'.$bonus['bonus_docente_id'].'" ';
-        if ($bonus['bonus_docente_approvato']) {
-            $data .= 'checked ';
-        }
-        $data .= '></td>
-					</tr>
-					';
-        $data .='
-    </tr>
-        ';
-            
-}
-
-// chiude il pannello del bonus
-$data .= '
-					</tbody>
-				</table>
-	        </div>
+            </div>
         </div>
+        <!-- <div class="panel-footer"></div> -->
     </div>
-</div>
-            
-<div class="panel-footer">
-    <div class="row">
-        <div class="col-md-1 text-right">Richiesto</div>
-        <div class="col-md-2 text-left" id="bonus_richiesto"></div>
-        <div class="col-md-1 text-right">Pendente</div>
-        <div class="col-md-2 text-left" id="bonus_pendente"></div>
-        <div class="col-md-1 text-right">Approvato</div>
-        <div class="col-md-2 text-left" id="bonus_approvato"></div>
-
-        <div class="col-md-2">
-        <div class="progress progress-striped">
-          <div class="progress-bar progress-bar-success" id="progress-bar-approvate" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-          <div class="progress-bar progress-bar-warning" id="progress-bar-pendente" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        </div>
-
-    </div>
-
-
-</div>
-</div>
-    ';
-
-echo $data;
-?>
+                  
 
 
 <!-- Modal - previste -->
