@@ -70,9 +70,20 @@ function viewAttivitaFatte() {
 
 }
 
+function oreFatteAggiornaStatoAttivita(attivita_id, commento, contestata) {
+	$.post("oreFatteAggiornaStatoAttivita.php", {
+		attivita_id: attivita_id,
+		contestata: contestata,
+		commento: commento
+	},
+	function (data, status) {
+		viewAttivitaFatte();
+	}
+	);
+}
+
+
 function oreFatteControllaAttivita(attivita_id, dettaglio, ore, commento) {
-//	bootbox.alert('<p>attivita_id='+attivita_id+'</p><p>dettaglio='+dettaglio + "</p><p>ore="+ore + "</p>");
-	
 	bootbox.prompt({
 	    title: "<p>ore: " + ore + "</p><p>" + dettaglio + "</p>",
 	    message: '<p>Seleziona il messaggio:</p>',
@@ -96,7 +107,7 @@ function oreFatteControllaAttivita(attivita_id, dettaglio, ore, commento) {
 	    		return;
 	    	}
 	    	if (result !== "") {
-		        console.log(result);
+		        oreFatteAggiornaStatoAttivita(attivita_id, result, true);
 		        viewAttivitaFatte();
 	    	} else {
 	    		bootbox.prompt({
@@ -104,7 +115,8 @@ function oreFatteControllaAttivita(attivita_id, dettaglio, ore, commento) {
 	    		    message: '<p>Inserire il commento:</p>',
 	    		    inputType: 'textarea',
 	    		    callback: function (commento) {
-	    		        console.log("Commento=" + commento);
+	    		        oreFatteAggiornaStatoAttivita(attivita_id, commento, true);
+	    		        viewAttivitaFatte();
 	    		    }
 	    		});;
 	    	}

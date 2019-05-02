@@ -120,11 +120,11 @@ if(mysqli_num_rows($result) > 0) {
 			} else {
 			    if ($row['ore_fatte_attivita_contestata'] == 1) {
 			        $data .='
-    				    <button onclick="oreFatteControllaAttivita('.$row['ore_fatte_attivita_id'].', \''.$row['ore_fatte_attivita_dettaglio'].'\','.$row['ore_fatte_attivita_ore'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+    				    <button onclick="oreFatteRipristrinaAttivita('.$row['ore_fatte_attivita_id'].', \''.str_replace("'", "\'", $row['ore_fatte_attivita_dettaglio']).'\','.$row['ore_fatte_attivita_ore'].')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 				    ';
 			    } else {
 			        $data .='
-    				<button onclick="oreFatteControllaAttivita('.$row['ore_fatte_attivita_id'].', \''.$row['ore_fatte_attivita_dettaglio'].'\','.$row['ore_fatte_attivita_ore'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+    				<button onclick="oreFatteControllaAttivita('.$row['ore_fatte_attivita_id'].', \''.str_replace("'", "\'", $row['ore_fatte_attivita_dettaglio']).'\','.$row['ore_fatte_attivita_ore'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></button>
 				';
 			    }
 			}

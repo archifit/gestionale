@@ -31,8 +31,11 @@ foreach($resultArray as $ore_previste_tipo_attivita) {
         AND
             ore_fatte_attivita.anno_scolastico_id = $__anno_scolastico_corrente_id
         AND
+            ore_fatte_attivita.contestata is not true
+        AND
             ore_fatte_attivita.ore_previste_tipo_attivita_id = $ore_previste_tipo_attivita_id
         ";
+    debug($query);
     $ore = dbGetValue($query);
     if (!empty($ore)) {
         $data .= '<tr>
