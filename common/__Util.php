@@ -40,4 +40,9 @@ function haRuolo($ruolo) {
     }
     return false;
 }
+
+function str2js($str) {
+    return preg_replace("/\r\n|\r|\n/",'<br/>',str_replace("'", "\'", $str));
+}
+
 ?>

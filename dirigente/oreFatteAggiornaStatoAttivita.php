@@ -4,22 +4,30 @@ if(isset($_POST)) {
 	require_once '../common/connect.php';
 	
 	$attivita_id = $_POST['attivita_id'];
+	$docente_id = $_POST['docente_id'];
 	$contestata = $_POST['contestata'];
-	$commento = $_POST['commento'];
+	$commento = mysqli_real_escape_string($con, $_POST['commento']);
 
-	debug("$attivita_id=" + $attivita_id);
-	debug("$contestata=" + $contestata);
-	debug("$commento=" + $commento);
+	debug("attivita_id=" . $attivita_id);
+	debug("contestata=" . $contestata);
+	debug("commento=" . $commento);
 	$query = '';
-	if ($contestata !== 0) {
+	if ($contestata === "true") {
 	    $query = "UPDATE ore_fatte_attivita SET contestata = true WHERE id = $attivita_id";
 	    debug($query);
 	    dbExec($query);
-//	    $query = "INSERT INTO ore_fatte_attivita_commento (commento, ore_fatte_attivita_id) VALUES('$commento', '$attivita_id')";
+	    $query = "REPLACE INTO ore_fatte_attivita_commento (`commento`, `ore_fatte_attivita_id`) VALUES ('$commento', $attivita_id);";
 	    debug($query);
 	    dbExec($query);
 	} else {
-	    debug("CONTESTATA-" + $commento);
+	    $query = "UPDATE ore_fatte_attivita SET contestata = false WHERE id = $attivita_id";
+	    debug($query);
+	    dbExec($query);
+	    $query = "DELETE FROM ore_fatte_attivita_commento WHERE ore_fatte_attivita_id = $attivita_id;";
+	    debug($query);
+	    dbExec($query);
 	}
+	require_once '../docente/oreDovuteAggiornaDocente.php';
+	oreFatteAggiornaDocente($docente_id);
 }
 ?>

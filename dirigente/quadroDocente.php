@@ -184,11 +184,11 @@ $data .= '
 			</tr>
 			<tr>
 				<td class="col-md-2">fatte</td>
-				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_40_sostituzioni_di_ufficio'],$ore['ore_dovute_ore_40_sostituzioni_di_ufficio']).'</td>
-				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_40_con_studenti'],$ore['ore_dovute_ore_40_con_studenti']).'</td>
-				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_40_aggiornamento'],$ore['ore_dovute_ore_40_aggiornamento']).'</td>
-				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_funzionali'],$ore['ore_dovute_ore_70_funzionali']).'</td>
-				<td class="text-left">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_con_studenti'],$ore['ore_dovute_ore_70_con_studenti']).'</td>
+				<td class="text-left" id="fatte_ore_40_sostituzioni_di_ufficio">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_40_sostituzioni_di_ufficio'],$ore['ore_dovute_ore_40_sostituzioni_di_ufficio']).'</td>
+				<td class="text-left" id="fatte_ore_40_con_studenti">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_40_con_studenti'],$ore['ore_dovute_ore_40_con_studenti']).'</td>
+				<td class="text-left" id="fatte_ore_40_aggiornamento">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_40_aggiornamento'],$ore['ore_dovute_ore_40_aggiornamento']).'</td>
+				<td class="text-left" id="fatte_ore_70_funzionali">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_funzionali'],$ore['ore_dovute_ore_70_funzionali']).'</td>
+				<td class="text-left" id="fatte_ore_70_con_studenti">'.getHtmlNumAndFatteVisual($ore['ore_fatte_ore_70_con_studenti'],$ore['ore_dovute_ore_70_con_studenti']).'</td>
 				<td class="text-center"></td>
 			</tr>
 		</tbody>
@@ -225,6 +225,61 @@ $data .= '
         <div id="collapse_fuis" class="panel-collapse collapse  collapse in">
             <div class="panel-body">
     ';
+$data .= '
+	<div class="table-wrapper">
+	<table class="table table-vnocolor-index">
+		<thead>
+			<tr>
+				<th class="col-md-1 text-left"></th>
+				<th class="col-md-1 text-left">Sostituzioni</th>
+				<th class="col-md-1 text-left">Funzionali</th>
+				<th class="col-md-1 text-left">con Studenti</th>
+				<th class="col-md-1 text-left">CLIL Funzionali</th>
+				<th class="col-md-1 text-left">CLIL con Studenti</th>
+				<th class="col-md-1 text-left">FUIS Ore</th>
+				<th class="col-md-1 text-left">FUIS CLIL</th>
+				<th class="col-md-1 text-left">FUIS Assegnato</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="col-md-1">Ore</td>
+				<td class="text-left" id="sostituzioni_ore"></td>
+				<td class="text-left" id="funzionale_ore"></td>
+				<td class="text-left" id="con_studenti_ore"></td>
+				<td class="text-left" id="clil_funzionale_ore"></td>
+				<td class="text-left" id="clil_con_studenti_ore"></td>
+				<td class="text-left"></td>
+				<td class="text-left"></td>
+				<td class="text-center"></td>
+			</tr>
+			<tr>
+				<td class="col-md-1">Importo Proposto</td>
+				<td class="text-left" id="sostituzioni_proposto"></td>
+				<td class="text-left" id="funzionale_proposto"></td>
+				<td class="text-left" id="con_studenti_proposto"></td>
+				<td class="text-left" id="clil_funzionale_proposto"></td>
+				<td class="text-left" id="clil_con_studenti_proposto"></td>
+				<td class="text-left" id="totale_proposto"></td>
+				<td class="text-left" id="clil_totale_proposto"></td>
+				<td class="text-left" id="assegnato_proposto"></td>
+			</tr>
+			<tr>
+				<td class="col-md-1">Importo Approvato</td>
+				<td class="text-left" id="sostituzioni_approvato"></td>
+				<td class="text-left" id="funzionale_approvato"></td>
+				<td class="text-left" id="con_studenti_approvato"></td>
+				<td class="text-left" id="clil_funzionale_approvato"></td>
+				<td class="text-left" id="clil_con_studenti_approvato"></td>
+				<td class="text-left" id="totale_approvato"></td>
+				<td class="text-left" id="clil_totale_approvato"></td>
+				<td class="text-left" id="assegnato_approvato"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+				    
+';
 
 // chiude il pannello del FUIS
 $data .= '
@@ -391,14 +446,14 @@ echo $data;
         	<div class="row">
         		<div class="col-md-4">
                     <span class="glyphicon glyphicon-list-alt"></span>
-                    <a data-toggle="collapse" href="#collapse_fuis">&ensp;Attività</a>
+                    <a data-toggle="collapse" href="#collapse_attivita">&ensp;Attività</a>
         		</div>
         		<div class="col-md-4 text-center"><?php echo $docenteCognomeNome; ?></div>
         		<div class="col-md-4 text-right">
          		</div>
         	</div>
         </div>
-        <div id="collapse_fuis" class="panel-collapse collapse  collapse in">
+        <div id="collapse_attivita" class="panel-collapse collapse  collapse in">
             <div class="panel-body">
 			    <div class="row">
 			        <div class="col-md-12 text-center"><h4>Sommario</h4></div>

@@ -53,7 +53,7 @@ if (! $session->has ( 'anno_scolastico_corrente_anno' )) {
     $session->set ( 'anno_scolastico_corrente_anno', $row ['anno'] );
     $session->set ( 'anno_scolastico_scorso_id', $row ['anno_scorso_id'] );
 } else {
-    debug ( 'esiste anno_scolastico_corrente_anno=' . $session->get ( 'anno_scolastico_corrente_anno' ) );
+//    debug ( 'esiste anno_scolastico_corrente_anno=' . $session->get ( 'anno_scolastico_corrente_anno' ) );
 }
 
 $__anno_scolastico_corrente_id = $session->get ( 'anno_scolastico_corrente_id' );
@@ -88,7 +88,7 @@ if (! $session->has ( 'utente_id' )) {
     $session->set ( 'utente_cognome', $row ['cognome'] );
     $session->set ( 'utente_ruolo', $row ['ruolo'] );
 } else {
-    debug ( 'esiste utente_id=' . $session->get ( 'utente_id' ) );
+//    debug ( 'esiste utente_id=' . $session->get ( 'utente_id' ) );
 }
 
 $__utente_id = $session->get ( 'utente_id' );
@@ -127,14 +127,14 @@ if (!$session->has ( 'docente_id' ) && $session->has ( 'utente_ruolo' ) && ($ses
         $response ['message'] = "user $__username not found!";
     }
 } else {
-    debug ( 'esiste docente_id=' . $session->get ( 'docente_id' ) );
+//    debug ( 'esiste docente_id=' . $session->get ( 'docente_id' ) );
 }
 
 $__docente_id = $session->get ( 'docente_id' );
 $__docente_nome = $session->get ( 'docente_nome' );
 $__docente_cognome = $session->get ( 'docente_cognome' );
 $__docente_email = $session->get ( 'docente_email' );
-
+/*
 debug ( '__username=' . $__username );
 debug ( '__anno_scolastico_corrente_id=' . $__anno_scolastico_corrente_id );
 debug ( '__anno_scolastico_corrente_anno=' . $__anno_scolastico_corrente_anno );
@@ -147,5 +147,5 @@ debug ( '__docente_id=' . $__docente_id );
 debug ( '__docente_nome=' . $__docente_nome );
 debug ( '__docente_cognome=' . $__docente_cognome );
 debug ( '__docente_email=' . $__docente_email );
-
+*/
 ?>

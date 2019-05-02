@@ -123,7 +123,9 @@ function oreFatteAggiornaDocente($docenteId) {
 		FROM ore_fatte_attivita
 		INNER JOIN ore_previste_tipo_attivita
 		on ore_fatte_attivita.ore_previste_tipo_attivita_id = ore_previste_tipo_attivita.id
-		WHERE ore_fatte_attivita.docente_id = $docenteId AND ore_fatte_attivita.anno_scolastico_id = $__anno_scolastico_corrente_id;
+		WHERE ore_fatte_attivita.docente_id = $docenteId
+        AND ore_fatte_attivita.contestata is not true
+        AND ore_fatte_attivita.anno_scolastico_id = $__anno_scolastico_corrente_id;
 		";
 	debug($query);
 	$resultArray = dbGetAll($query);
@@ -194,7 +196,7 @@ function oreFatteAggiornaDocente($docenteId) {
 	    }
 	}
 	
-	// infine le ore dei viaggi (che vanno con gli studenti
+	// infine le ore dei viaggi (che vanno con gli studenti)
 	$query = "	SELECT
 					viaggio_ore_recuperate.id AS viaggio_ore_recuperate_id,
 					viaggio_ore_recuperate.ore AS viaggio_ore_recuperate_ore

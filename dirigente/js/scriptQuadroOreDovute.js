@@ -1,21 +1,117 @@
+
+var warning = '<span class="glyphicon glyphicon-warning-sign text-error"></span>';
+var okSymbol = '&ensp;<span class="glyphicon glyphicon-ok text-success"></span>';
+
+function getHtmlNum(value) {
+	return '&emsp;' + ((value >= 10) ? value : '&ensp;' + value);
+}
+
+function getHtmlNumAndPrevisteVisual(value, total) {
+	var numString = (value >= 10) ? value : '&ensp;' + value;
+	var diff = total - value;
+	if (diff > 0) {
+		numString += '&ensp;<span class="label label-warning">- '+ diff +'</span>';
+	} else if (diff < 0) {
+			numString += '&ensp;<span class="label label-danger">+ '+ (-diff) +'</span>';
+	} else {
+		numString += okSymbol;
+	}
+	return '&emsp;' + numString;
+}
+
+function getHtmlNumAndFatteVisual(value, total) {
+	var numString = (value >= 10) ? value : '&ensp;' + value;
+	var diff = total - value;
+	if (diff > 0) {
+		numString += '&ensp;<span class="label label-warning">- '+ diff +'</span>';
+	} else if (diff < 0) {
+			numString += '&ensp;<span class="label label-danger">+ '+ (-diff) +'</span>';
+	} else {
+		numString += okSymbol;
+	}
+	return '&emsp;' + numString;
+}
+
+function getHtmlNumAndFacoltativeVisual(value, total) {
+	return '&emsp;' + ((value >= 10) ? value : '&ensp;' + value);
+}
+
+function getHtmlNumAndFatte80Visual(value, total) {
+	return '&emsp;' + ((value >= 10) ? value : '&ensp;' + value);
+}
+
+// ----------------------------------------------------------------------------------------------
+
 function viewAttivitaPreviste(id, docente) {
 	$.post("../docente/oreDovuteReadAttivita.php", {
 			docente_id: id
 		},
 		function (data, status) {
-			console.log(data);
 			$(".attivita_previste_records_content").html(data);
 			$("#myModalPrevisteTitleLabel").text('Attività Previste (' + docente + ')');
 		    $("#previste_modal").modal("show");
-		}
-	);
+		});
 	$.post("../docente/orePrevisteReadSommarioAttivita.php", {
 		docente_id: id
 	},
 	function (data, status) {
 		$(".sommario_attivita_previste_records_content").html(data);
-	}
-);
+	});
+}
+
+function viewQuadroOrario() {
+	var ore_dovute, ore_previste, ore_fatte;
+
+	$.post("../docente/oreDovuteReadDetails.php", {
+		docente_id: $("#hidden_docente_id").val(),
+		table_name: 'ore_dovute'
+	},
+	function (dati, status) {
+		console.log(dati);
+		ore_dovute = JSON.parse(dati);
+	
+		$.post("../docente/oreDovuteReadDetails.php", {
+			docente_id: $("#hidden_docente_id").val(),
+			table_name: 'ore_fatte'
+		},
+		function (dati, status) {
+			console.log(dati);
+			ore_fatte = JSON.parse(dati);
+			$("#fatte_ore_70_funzionali").html(getHtmlNumAndFatteVisual(ore_fatte.ore_70_funzionali,ore_dovute.ore_70_funzionali));
+			$("#fatte_ore_70_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_70_con_studenti,ore_dovute.ore_70_con_studenti));
+	
+			$("#fatte_ore_40_sostituzioni_di_ufficio").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_sostituzioni_di_ufficio,ore_dovute.ore_40_sostituzioni_di_ufficio));
+			$("#fatte_ore_40_aggiornamento").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_aggiornamento,ore_dovute.ore_40_aggiornamento));
+			$("#fatte_ore_40_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_con_studenti,ore_dovute.ore_40_con_studenti));
+			$.post("../docente/oreDovuteClilReadDetails.php", {
+				docente_id: $("#hidden_docente_id").val(),
+				table_name: 'ore_fatte_attivita_clil'
+			},
+			function (dati, status) {
+				console.log(dati);
+				ore_fatte_clil = JSON.parse(dati);
+				$("#clil_fatte_funzionali").html(getHtmlNumAndFatteVisual(ore_fatte_clil.funzionali,0));
+				$("#clil_fatte_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte_clil.con_studenti,0));
+				if (parseInt(ore_fatte_clil.funzionali,0) + parseInt(ore_fatte_clil.con_studenti,0) == 0) {
+					$("#panel-clil").addClass('hidden');
+				} else {
+					$("#panel-clil").removeClass('hidden');
+				}
+			});
+		});
+	});
+}
+
+function viewFuis() {
+	var id = $("#hidden_docente_id").val();
+	
+	$.post("fuisDocentiCalcolaUno.php", {
+		docente_id: id
+	},
+	function (data, status) {
+	});
+	
+	
 }
 
 function viewAttivitaFatte() {
@@ -23,56 +119,51 @@ function viewAttivitaFatte() {
 	var nome = $("#hidden_docente_nome").val();
 	
 	$.post("../docente/oreFatteReadAttivita.php", {
-			docente_id: id
-		},
-		function (data, status) {
-			$(".attivita_fatte_records_content").html(data);
-		}
-	);
+		docente_id: id
+	},
+	function (data, status) {
+		$(".attivita_fatte_records_content").html(data);
+	});
 	$.post("../docente/oreFatteReadSommarioAttivita.php", {
-			docente_id: id
-		},
-		function (data, status) {
-			$(".sommario_attivita_records_content").html(data);
-		}
-	);
+		docente_id: id
+	},
+	function (data, status) {
+		$(".sommario_attivita_records_content").html(data);
+	});
 
 	$.post("../docente/oreFatteClilReadAttivita.php", {
 		docente_id: id
 	},
 	function (data, status) {
 		$(".attivita_fatte_clil_records_content").html(data);
-	}
-	);
+	});
 	$.post("../docente/oreFatteClilReadSommarioAttivita.php", {
 		docente_id: id
 	},
 	function (data, status) {
 		$(".sommario_attivita_clil_records_content").html(data);
-	}
-	);
+	});
 
 	$.post("../docente/oreFatteReadAttribuite.php", {
 		docente_id: id
 	},
 	function (data, status) {
 		$(".attribuite_records_content").html(data);
-	}
-	);
+	});
 
 	$.post("../docente/oreFatteReadViaggi.php", {
 		docente_id: id
 	},
 	function (data, status) {
 		$(".viaggi_records_content").html(data);
-	}
-	);
-
+	});
+	viewQuadroOrario();
 }
 
 function oreFatteAggiornaStatoAttivita(attivita_id, commento, contestata) {
 	$.post("oreFatteAggiornaStatoAttivita.php", {
 		attivita_id: attivita_id,
+		docente_id: $("#hidden_docente_id").val(),
 		contestata: contestata,
 		commento: commento
 	},
@@ -83,14 +174,10 @@ function oreFatteAggiornaStatoAttivita(attivita_id, commento, contestata) {
 }
 
 function oreFatteRipristrinaAttivita(attivita_id, dettaglio, ore, commento) {
-    console.log('attivita_id: ' + attivita_id);
-    console.log('dettaglio: ' + dettaglio);
-    console.log('ore: ' + ore);
-    console.log('commento: ' + commento);
-
     bootbox.confirm({
 	    message: "<p><strong>Attività:</strong></br>" + dettaglio + "</p>"
 	    		+ "<p><strong>Commento:</strong></br>" + commento + "</p>"
+	    		+ "<hr style=\"border-top: 2px solid #6699ff;\">"
 	    		+ "<p>Vuoi ripristinare questa attività e rimuovere il commento?</p>",
 	    buttons: {
 	        confirm: {
@@ -104,12 +191,8 @@ function oreFatteRipristrinaAttivita(attivita_id, dettaglio, ore, commento) {
 	    },
 	    callback: function (result) {
 	    	if (result === true) {
-		        console.log('This was logged NOT in the callback: ' + result);
-		        oreFatteAggiornaStatoAttivita(attivita_id, result, false, "commentomio");
+		        oreFatteAggiornaStatoAttivita(attivita_id, "ripristinata", false);
 		        viewAttivitaFatte();
-	    	} else {
-
-		        console.log('This was logged in the callback: ' + result);
 	    	}
 	    }
 	});
@@ -147,8 +230,10 @@ function oreFatteControllaAttivita(attivita_id, dettaglio, ore) {
 	    		    message: '<p>Inserire il commento:</p>',
 	    		    inputType: 'textarea',
 	    		    callback: function (commento) {
-	    		        oreFatteAggiornaStatoAttivita(attivita_id, commento, true);
-	    		        viewAttivitaFatte();
+	    		    	if (commento != null) {
+		    		        oreFatteAggiornaStatoAttivita(attivita_id, commento, true);
+		    		        viewAttivitaFatte();
+	    		    	}
 	    		    }
 	    		});;
 	    	}
@@ -161,7 +246,6 @@ function oreFatteGetRegistroAttivita(attivita_id, registro_id) {
 			attivita_id: attivita_id
 		},
 		function (dati, status) {
-			console.log(dati);
 			var attivita = JSON.parse(dati);
 			$("#registro_tipo_attivita").html('<p class="form-control-static">' + attivita.nome + '</p>');
 			$("#registro_attivita_dettaglio").html('<p class="form-control-static">' + attivita.dettaglio + '</p>');
@@ -183,7 +267,6 @@ function bonusRendiconto(bonus_docente_id, bonus_codice, bonus_descrittori, bonu
 			bonus_docente_id: bonus_docente_id
 		},
 		function (dati, status) {
-			// console.log(dati);
 			var bonus = JSON.parse(dati);
 			$("#rendiconto_rendiconto").val(bonus.rendiconto_evidenze);
 		}
