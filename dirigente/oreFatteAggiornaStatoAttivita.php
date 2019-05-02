@@ -7,14 +7,19 @@ if(isset($_POST)) {
 	$contestata = $_POST['contestata'];
 	$commento = $_POST['commento'];
 
+	debug("$attivita_id=" + $attivita_id);
+	debug("$contestata=" + $contestata);
+	debug("$commento=" + $commento);
 	$query = '';
 	if ($contestata !== 0) {
 	    $query = "UPDATE ore_fatte_attivita SET contestata = true WHERE id = $attivita_id";
 	    debug($query);
 	    dbExec($query);
-	    $query = "INSERT INTO ore_fatte_attivita_commento (commento, ore_fatte_attivita_id) VALUES('$commento', '$attivita_id')";
+//	    $query = "INSERT INTO ore_fatte_attivita_commento (commento, ore_fatte_attivita_id) VALUES('$commento', '$attivita_id')";
 	    debug($query);
 	    dbExec($query);
+	} else {
+	    debug("CONTESTATA-" + $commento);
 	}
 }
 ?>

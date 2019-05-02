@@ -103,7 +103,14 @@ function oreFatteRipristrinaAttivita(attivita_id, dettaglio, ore, commento) {
 	        }
 	    },
 	    callback: function (result) {
-	        console.log('This was logged in the callback: ' + result);
+	    	if (result === true) {
+		        console.log('This was logged NOT in the callback: ' + result);
+		        oreFatteAggiornaStatoAttivita(attivita_id, result, false, "commentomio");
+		        viewAttivitaFatte();
+	    	} else {
+
+		        console.log('This was logged in the callback: ' + result);
+	    	}
 	    }
 	});
 }
