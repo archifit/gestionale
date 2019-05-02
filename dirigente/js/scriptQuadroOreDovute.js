@@ -82,8 +82,33 @@ function oreFatteAggiornaStatoAttivita(attivita_id, commento, contestata) {
 	);
 }
 
+function oreFatteRipristrinaAttivita(attivita_id, dettaglio, ore, commento) {
+    console.log('attivita_id: ' + attivita_id);
+    console.log('dettaglio: ' + dettaglio);
+    console.log('ore: ' + ore);
+    console.log('commento: ' + commento);
 
-function oreFatteControllaAttivita(attivita_id, dettaglio, ore, commento) {
+    bootbox.confirm({
+	    message: "<p><strong>Attività:</strong></br>" + dettaglio + "</p>"
+	    		+ "<p><strong>Commento:</strong></br>" + commento + "</p>"
+	    		+ "<p>Vuoi ripristinare questa attività e rimuovere il commento?</p>",
+	    buttons: {
+	        confirm: {
+	            label: 'Si',
+	            className: 'btn-success'
+	        },
+	        cancel: {
+	            label: 'No',
+	            className: 'btn-danger'
+	        }
+	    },
+	    callback: function (result) {
+	        console.log('This was logged in the callback: ' + result);
+	    }
+	});
+}
+
+function oreFatteControllaAttivita(attivita_id, dettaglio, ore) {
 	bootbox.prompt({
 	    title: "<p>ore: " + ore + "</p><p>" + dettaglio + "</p>",
 	    message: '<p>Seleziona il messaggio:</p>',
