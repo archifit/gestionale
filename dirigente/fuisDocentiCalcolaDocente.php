@@ -68,7 +68,7 @@ AND
 	ore_fatte.anno_scolastico_id = $__anno_scolastico_corrente_id
 ";
 	$ore = dbGetFirst($query);
-	$ore_sostituzioni =  $ore['ore_fatte_ore_40_sostituzioni_di_ufficio'];
+	$ore_sostituzioni =  $ore['ore_fatte_ore_40_sostituzioni_di_ufficio'] - $ore['ore_dovute_ore_40_sostituzioni_di_ufficio'];
 	$ore_funzionali = $ore['ore_fatte_ore_70_funzionali'] - $ore['ore_dovute_ore_70_funzionali'];
 	if ($ore_funzionali < 0) {
 	    $ore_funzionali = 0;
@@ -77,12 +77,12 @@ AND
 	if ($ore_con_studenti < 0) {
 	    $ore_con_studenti = 0;
 	}
-	$fuis_funzionali = $ore_funzionali * 17.5;
-	$fuis_con_studenti = $ore_con_studenti * 35;
-	$fuis_sostituzioni = $ore_sostituzioni * 35;
+	$fuis_funzionale_proposto = $ore_funzionali * 17.5;
+	$fuis_con_studenti_proposto = $ore_con_studenti * 35;
+	$fuis_sostituzioni_proposto = $ore_sostituzioni * 35;
 	
 	// totale fuis
-	$fuis_totale = $fuis_viaggio_diaria + $fuis_assegnato + $fuis_funzionali + $fuis_con_studenti;
+	$fuis_totale = $fuis_viaggio_diaria + $fuis_assegnato + $fuis_funzionale_proposto + $fuis_con_studenti_proposto;
 
 	// CLIL
 	// somma i fuis funzionali e con studenti di quest'anno
@@ -112,25 +112,46 @@ AND
 ";
 	$clil_ore_con_studenti = 0 + dbGetValue($query);
 
-	$clil_funzionale = $clil_ore_funzionale * 17.5;
-	$clil_con_studenti = $clil_ore_con_studenti * 35;
-	
+	$clil_funzionale_proposto = $clil_ore_funzionale * 17.5;
+	$clil_con_studenti_proposto = $clil_ore_con_studenti * 35;
+
+	// TODO: rimuovere questa query
 	$query = "
         REPLACE INTO fuis_docente (`viaggi`, `assegnato`, `funzionale`, `con_studenti`, `totale`, `clil_funzionale`, `clil_con_studenti`, `docente_id`, `anno_scolastico_id`)
-        VALUES ($fuis_viaggio_diaria, $fuis_assegnato, $fuis_funzionali, $fuis_con_studenti, $fuis_totale, $clil_funzionale, $clil_con_studenti, $localDocenteId, $__anno_scolastico_corrente_id);
+        VALUES ($fuis_viaggio_diaria, $fuis_assegnato, $fuis_funzionale_proposto, $fuis_con_studenti_proposto, $fuis_totale, $clil_funzionale_proposto, $clil_con_studenti_proposto, $localDocenteId, $__anno_scolastico_corrente_id);
         ";
 	debug($query);
 	dbExec($query);
+
+	// prende il valore attualmente registrato
+	$query = "SELECT * FROM fuis_docente WHERE docente_id = $localDocenteId AND anno_scolastico_id = $__anno_scolastico_corrente_id;";
+	$fuis_corrente = dbGetFirst($query);
+	
+	$clil_funzionale_assegnato = $clil_funzionale_proposto;
+	$clil_con_studenti_assegnato = $clil_con_studenti_proposto;
+	$fuis_funzionale_assegnato = $fuis_funzionale_proposto;
+	$fuis_con_studenti_assegnato = $fuis_con_studenti_proposto;
+	$fuis_sostituzioni_assegnato = $fuis_sostituzioni_proposto;
+	
+	if ($fuis_corrente != null && $fuis_corrente['funzionale_assegnato'] == null) {
+	    $clil_funzionale_assegnato = $fuis_corrente['clil_funzionale_assegnato'];
+	    $clil_con_studenti_assegnato = $fuis_corrente['clil_con_studenti_assegnato'];
+	    $fuis_funzionale_assegnato = $fuis_corrente['funzionale_assegnato'];
+	    $fuis_con_studenti_assegnato = $fuis_corrente['con_studenti_assegnato'];
+	    $fuis_sostituzioni_assegnato = $fuis_corrente['sostituzioni_assegnato'];
+	}
 	
 	$query = "
         REPLACE INTO fuis_docente (
             `clil_funzionale_ore`, `clil_con_studenti_ore`, `funzionale_ore`, `con_studenti_ore`, `sostituzioni_ore`,
             `clil_funzionale_proposto`, `clil_con_studenti_proposto`, `funzionale_proposto`, `con_studenti_proposto`, `sostituzioni_proposto`,
+            `clil_funzionale_assegnato`, `clil_con_studenti_assegnato`, `funzionale_assegnato`, `con_studenti_assegnato`, `sostituzioni_assegnato`,
             `docente_id`, `anno_scolastico_id`
         )
         VALUES (
             $clil_ore_funzionale, $clil_ore_con_studenti, $ore_funzionali, $ore_con_studenti, $ore_sostituzioni,
-            $clil_funzionale, $clil_con_studenti, $fuis_funzionali, $fuis_con_studenti, $fuis_sostituzioni,
+            $clil_funzionale_proposto, $clil_con_studenti_proposto, $fuis_funzionale_proposto, $fuis_con_studenti_proposto, $fuis_sostituzioni_proposto,
+            $clil_funzionale_assegnato, $clil_con_studenti_assegnato, $fuis_funzionale_assegnato, $fuis_con_studenti_assegnato, $fuis_sostituzioni_assegnato,
             $localDocenteId, $__anno_scolastico_corrente_id
         );";
 	debug($query);
