@@ -83,6 +83,89 @@ $docenteCognomeNome = $docente['cognome'].' '.$docente['nome'];
 $data = '';
 
 
+// disegna il pannello del FUIS
+$data .= '
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+        	<div class="row">
+        		<div class="col-md-4">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                    <a data-toggle="collapse" href="#collapse_fuis">&ensp;FUIS</a>
+        		</div>
+        		<div class="col-md-4 text-center">
+                	'.$docenteCognomeNome.'
+        		</div>
+        		<div class="col-md-4 text-center" id="fuis_totale_da_pagare_id"></div>
+        	</div>
+        </div>
+        <div id="collapse_fuis" class="panel-collapse collapse  collapse in">
+            <div class="panel-body">
+    ';
+$data .= '
+	<div class="table-wrapper">
+	<table class="table table-vnocolor-index">
+		<thead>
+			<tr>
+				<th class="col-md-1 text-left"></th>
+				<th class="col-md-1 text-left">Sostituzioni</th>
+				<th class="col-md-1 text-left">Funzionali</th>
+				<th class="col-md-1 text-left">con Studenti</th>
+				<th class="col-md-1 text-left">CLIL Funzionali</th>
+				<th class="col-md-1 text-left">CLIL con Studenti</th>
+				<th class="col-md-1 text-left">FUIS Ore</th>
+				<th class="col-md-1 text-left">FUIS CLIL</th>
+				<th class="col-md-1 text-left">FUIS Assegnato</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="col-md-1">Ore</td>
+				<td class="text-left" id="sostituzioni_ore"></td>
+				<td class="text-left" id="funzionale_ore"></td>
+				<td class="text-left" id="con_studenti_ore"></td>
+				<td class="text-left" id="clil_funzionale_ore"></td>
+				<td class="text-left" id="clil_con_studenti_ore"></td>
+				<td class="text-left"></td>
+				<td class="text-left"></td>
+				<td class="text-center"></td>
+			</tr>
+			<tr>
+				<td class="col-md-1">Importo Proposto</td>
+				<td class="text-left" id="sostituzioni_proposto"></td>
+				<td class="text-left" id="funzionale_proposto"></td>
+				<td class="text-left" id="con_studenti_proposto"></td>
+				<td class="text-left" id="clil_funzionale_proposto"></td>
+				<td class="text-left" id="clil_con_studenti_proposto"></td>
+				<td class="text-left" id="totale_proposto"></td>
+				<td class="text-left" id="clil_totale_proposto"></td>
+				<td class="text-left" id="assegnato_proposto"></td>
+			</tr>
+			<tr>
+				<td class="col-md-1">Importo Approvato</td>
+				<td class="text-left" id="sostituzioni_approvato"></td>
+				<td class="text-left" id="funzionale_approvato"></td>
+				<td class="text-left" id="con_studenti_approvato"></td>
+				<td class="text-left" id="clil_funzionale_approvato"></td>
+				<td class="text-left" id="clil_con_studenti_approvato"></td>
+				<td class="text-left" id="totale_approvato"></td>
+				<td class="text-left" id="clil_totale_approvato"></td>
+				<td class="text-left" id="assegnato_approvato"></td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+    
+';
+
+// chiude il pannello del FUIS
+$data .= '
+                </div>
+            </div>
+            <!-- <div class="panel-footer"></div> -->
+        </div>
+				    
+    ';
+
 // disegna il pannello delle ORE
 $data .= '
     <div class="panel panel-warning">
@@ -198,90 +281,6 @@ $data .= '
 ';
 
 // chiude il pannello delle ORE
-$data .= '
-                </div>
-            </div>
-            <!-- <div class="panel-footer"></div> -->
-        </div>
-				    
-    ';
-
-// disegna il pannello del FUIS
-$data .= '
-    <div class="panel panel-danger">
-        <div class="panel-heading">
-        	<div class="row">
-        		<div class="col-md-4">
-                    <span class="glyphicon glyphicon-list-alt"></span>
-                    <a data-toggle="collapse" href="#collapse_fuis">&ensp;FUIS</a>
-        		</div>
-        		<div class="col-md-4 text-center">
-                	'.$docenteCognomeNome.'
-        		</div>
-        		<div class="col-md-4 text-right">
-         		</div>
-        	</div>
-        </div>
-        <div id="collapse_fuis" class="panel-collapse collapse  collapse in">
-            <div class="panel-body">
-    ';
-$data .= '
-	<div class="table-wrapper">
-	<table class="table table-vnocolor-index">
-		<thead>
-			<tr>
-				<th class="col-md-1 text-left"></th>
-				<th class="col-md-1 text-left">Sostituzioni</th>
-				<th class="col-md-1 text-left">Funzionali</th>
-				<th class="col-md-1 text-left">con Studenti</th>
-				<th class="col-md-1 text-left">CLIL Funzionali</th>
-				<th class="col-md-1 text-left">CLIL con Studenti</th>
-				<th class="col-md-1 text-left">FUIS Ore</th>
-				<th class="col-md-1 text-left">FUIS CLIL</th>
-				<th class="col-md-1 text-left">FUIS Assegnato</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="col-md-1">Ore</td>
-				<td class="text-left" id="sostituzioni_ore"></td>
-				<td class="text-left" id="funzionale_ore"></td>
-				<td class="text-left" id="con_studenti_ore"></td>
-				<td class="text-left" id="clil_funzionale_ore"></td>
-				<td class="text-left" id="clil_con_studenti_ore"></td>
-				<td class="text-left"></td>
-				<td class="text-left"></td>
-				<td class="text-center"></td>
-			</tr>
-			<tr>
-				<td class="col-md-1">Importo Proposto</td>
-				<td class="text-left" id="sostituzioni_proposto"></td>
-				<td class="text-left" id="funzionale_proposto"></td>
-				<td class="text-left" id="con_studenti_proposto"></td>
-				<td class="text-left" id="clil_funzionale_proposto"></td>
-				<td class="text-left" id="clil_con_studenti_proposto"></td>
-				<td class="text-left" id="totale_proposto"></td>
-				<td class="text-left" id="clil_totale_proposto"></td>
-				<td class="text-left" id="assegnato_proposto"></td>
-			</tr>
-			<tr>
-				<td class="col-md-1">Importo Approvato</td>
-				<td class="text-left" id="sostituzioni_approvato"></td>
-				<td class="text-left" id="funzionale_approvato"></td>
-				<td class="text-left" id="con_studenti_approvato"></td>
-				<td class="text-left" id="clil_funzionale_approvato"></td>
-				<td class="text-left" id="clil_con_studenti_approvato"></td>
-				<td class="text-left" id="totale_approvato"></td>
-				<td class="text-left" id="clil_totale_approvato"></td>
-				<td class="text-left" id="assegnato_approvato"></td>
-			</tr>
-		</tbody>
-	</table>
-	</div>
-				    
-';
-
-// chiude il pannello del FUIS
 $data .= '
                 </div>
             </div>

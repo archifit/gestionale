@@ -109,6 +109,14 @@ function viewFuis() {
 		docente_id: id
 	},
 	function (data, status) {
+		console.log(data);
+		console.log('calcola uno fatto');
+		$.post("fuisDocentiLoadRecord.php", {
+			docente_id: id
+		},
+		function (data, status) {
+			console.log(data);
+		});
 	});
 	
 	
@@ -169,6 +177,7 @@ function oreFatteAggiornaStatoAttivita(attivita_id, commento, contestata) {
 	},
 	function (data, status) {
 		viewAttivitaFatte();
+		viewFuis();
 	}
 	);
 }

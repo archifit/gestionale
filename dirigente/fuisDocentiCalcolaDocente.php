@@ -97,7 +97,7 @@ AND
 AND
 	ore_fatte_attivita_clil.con_studenti = false
 ";
-	$clil_ore_funzionale = dbGetValue($query);
+	$clil_ore_funzionale = 0 + dbGetValue($query);
 
 	$query = "
 SELECT
@@ -110,7 +110,7 @@ AND
 AND
 	ore_fatte_attivita_clil.con_studenti = true
 ";
-	$clil_ore_con_studenti = dbGetValue($query);
+	$clil_ore_con_studenti = 0 + dbGetValue($query);
 
 	$clil_funzionale = $clil_ore_funzionale * 17.5;
 	$clil_con_studenti = $clil_ore_con_studenti * 35;
