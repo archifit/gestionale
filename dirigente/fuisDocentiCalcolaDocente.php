@@ -70,19 +70,10 @@ AND
 	$ore = dbGetFirst($query);
 	$ore_sostituzioni =  $ore['ore_fatte_ore_40_sostituzioni_di_ufficio'] - $ore['ore_dovute_ore_40_sostituzioni_di_ufficio'];
 	$ore_funzionali = $ore['ore_fatte_ore_70_funzionali'] - $ore['ore_dovute_ore_70_funzionali'];
-	if ($ore_funzionali < 0) {
-	    $ore_funzionali = 0;
-	}
 	$ore_con_studenti = $ore['ore_fatte_ore_70_con_studenti'] - $ore['ore_dovute_ore_70_con_studenti'];
-	if ($ore_con_studenti < 0) {
-	    $ore_con_studenti = 0;
-	}
 	$fuis_funzionale_proposto = $ore_funzionali * 17.5;
 	$fuis_con_studenti_proposto = $ore_con_studenti * 35;
 	$fuis_sostituzioni_proposto = $ore_sostituzioni * 35;
-	
-	// totale fuis
-	$fuis_totale = $fuis_viaggio_diaria + $fuis_assegnato + $fuis_funzionale_proposto + $fuis_con_studenti_proposto;
 
 	// CLIL
 	// somma i fuis funzionali e con studenti di quest'anno
@@ -94,6 +85,8 @@ WHERE
 	ore_fatte_attivita_clil.docente_id = $localDocenteId
 AND
 	ore_fatte_attivita_clil.anno_scolastico_id = $__anno_scolastico_corrente_id
+AND
+    ore_fatte_attivita_clil.contestata is not true
 AND
 	ore_fatte_attivita_clil.con_studenti = false
 ";
@@ -108,6 +101,8 @@ WHERE
 AND
 	ore_fatte_attivita_clil.anno_scolastico_id = $__anno_scolastico_corrente_id
 AND
+    ore_fatte_attivita_clil.contestata is not true
+AND
 	ore_fatte_attivita_clil.con_studenti = true
 ";
 	$clil_ore_con_studenti = 0 + dbGetValue($query);
@@ -115,43 +110,56 @@ AND
 	$clil_funzionale_proposto = $clil_ore_funzionale * 17.5;
 	$clil_con_studenti_proposto = $clil_ore_con_studenti * 35;
 
-	// TODO: rimuovere questa query
-	$query = "
-        REPLACE INTO fuis_docente (`viaggi`, `assegnato`, `funzionale`, `con_studenti`, `totale`, `clil_funzionale`, `clil_con_studenti`, `docente_id`, `anno_scolastico_id`)
-        VALUES ($fuis_viaggio_diaria, $fuis_assegnato, $fuis_funzionale_proposto, $fuis_con_studenti_proposto, $fuis_totale, $clil_funzionale_proposto, $clil_con_studenti_proposto, $localDocenteId, $__anno_scolastico_corrente_id);
-        ";
-	debug($query);
-	dbExec($query);
-
 	// prende il valore attualmente registrato
 	$query = "SELECT * FROM fuis_docente WHERE docente_id = $localDocenteId AND anno_scolastico_id = $__anno_scolastico_corrente_id;";
 	$fuis_corrente = dbGetFirst($query);
 	
-	$clil_funzionale_assegnato = $clil_funzionale_proposto;
-	$clil_con_studenti_assegnato = $clil_con_studenti_proposto;
-	$fuis_funzionale_assegnato = $fuis_funzionale_proposto;
-	$fuis_con_studenti_assegnato = $fuis_con_studenti_proposto;
-	$fuis_sostituzioni_assegnato = $fuis_sostituzioni_proposto;
-	
-	if ($fuis_corrente != null && $fuis_corrente['funzionale_assegnato'] == null) {
-	    $clil_funzionale_assegnato = $fuis_corrente['clil_funzionale_assegnato'];
-	    $clil_con_studenti_assegnato = $fuis_corrente['clil_con_studenti_assegnato'];
-	    $fuis_funzionale_assegnato = $fuis_corrente['funzionale_assegnato'];
-	    $fuis_con_studenti_assegnato = $fuis_corrente['con_studenti_assegnato'];
-	    $fuis_sostituzioni_assegnato = $fuis_corrente['sostituzioni_assegnato'];
+	$clil_funzionale_approvato = $clil_funzionale_proposto;
+	$clil_con_studenti_approvato = $clil_con_studenti_proposto;
+	$fuis_funzionale_approvato = $fuis_funzionale_proposto;
+	$fuis_con_studenti_approvato = $fuis_con_studenti_proposto;
+	$fuis_sostituzioni_approvato = $fuis_sostituzioni_proposto;
+	debug('fuis_funzionale_proposto='.$fuis_funzionale_proposto);
+	debug('fuis_funzionale_approvato='.$fuis_funzionale_approvato);
+	/*
+	if ($fuis_corrente != null && $fuis_corrente['funzionale_approvato'] != null) {
+	    debug('setting');
+	    $clil_funzionale_approvato = $fuis_corrente['clil_funzionale_approvato'];
+	    $clil_con_studenti_approvato = $fuis_corrente['clil_con_studenti_approvato'];
+	    $fuis_funzionale_approvato = $fuis_corrente['funzionale_approvato'];
+	    debug('cambio fuis_funzionale_approvato='.$fuis_funzionale_approvato);
+	    $fuis_con_studenti_approvato = $fuis_corrente['con_studenti_approvato'];
+	    $fuis_sostituzioni_approvato = $fuis_corrente['sostituzioni_approvato'];
+	}
+*/
+	$totale_proposto = $fuis_sostituzioni_proposto + $fuis_funzionale_proposto + $fuis_con_studenti_proposto;
+	$totale_approvato = $fuis_sostituzioni_approvato + $fuis_funzionale_approvato + $fuis_con_studenti_approvato;
+	$clil_totale_proposto = $clil_funzionale_proposto + $clil_con_studenti_proposto;
+	$clil_totale_approvato = $clil_funzionale_approvato + $clil_con_studenti_approvato;
+	// nessuno deve dare soldi indietro alla scuola
+	if ($totale_proposto < 0) {
+	    $totale_proposto = 0;
+	}
+	if ($totale_approvato < 0) {
+	    $totale_approvato = 0;
 	}
 	
+	$totale_da_pagare = $fuis_assegnato + $totale_approvato + $clil_totale_approvato;
 	$query = "
         REPLACE INTO fuis_docente (
+            `viaggi`, `assegnato`, 
             `clil_funzionale_ore`, `clil_con_studenti_ore`, `funzionale_ore`, `con_studenti_ore`, `sostituzioni_ore`,
             `clil_funzionale_proposto`, `clil_con_studenti_proposto`, `funzionale_proposto`, `con_studenti_proposto`, `sostituzioni_proposto`,
-            `clil_funzionale_assegnato`, `clil_con_studenti_assegnato`, `funzionale_assegnato`, `con_studenti_assegnato`, `sostituzioni_assegnato`,
+            `clil_funzionale_approvato`, `clil_con_studenti_approvato`, `funzionale_approvato`, `con_studenti_approvato`, `sostituzioni_approvato`,
+            `totale_proposto`, `clil_totale_proposto`, `totale_approvato`, `clil_totale_approvato`, `totale_da_pagare`,
             `docente_id`, `anno_scolastico_id`
         )
         VALUES (
+            $fuis_viaggio_diaria, $fuis_assegnato,
             $clil_ore_funzionale, $clil_ore_con_studenti, $ore_funzionali, $ore_con_studenti, $ore_sostituzioni,
             $clil_funzionale_proposto, $clil_con_studenti_proposto, $fuis_funzionale_proposto, $fuis_con_studenti_proposto, $fuis_sostituzioni_proposto,
-            $clil_funzionale_assegnato, $clil_con_studenti_assegnato, $fuis_funzionale_assegnato, $fuis_con_studenti_assegnato, $fuis_sostituzioni_assegnato,
+            $clil_funzionale_approvato, $clil_con_studenti_approvato, $fuis_funzionale_approvato, $fuis_con_studenti_approvato, $fuis_sostituzioni_approvato,
+            $totale_proposto, $clil_totale_proposto, $totale_approvato, $clil_totale_approvato, $totale_da_pagare,
             $localDocenteId, $__anno_scolastico_corrente_id
         );";
 	debug($query);

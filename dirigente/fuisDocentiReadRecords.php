@@ -5,7 +5,7 @@ require_once '../common/connect.php';
 
 
 function formatNoZero($value) {
-    return ($value > 0) ? number_format($value,2) : ' ';
+    return ($value != 0) ? number_format($value,2) : ' ';
 }
 
 $data = '';
@@ -15,13 +15,14 @@ $data .= '
         <tr>
             <th class="text-center col-md-1">id</th>
             <th class="text-center col-md-2">Docente</th>
-            <th class="text-center col-md-1">Viaggi</th>
+            <th class="text-center col-md-1">Viaggi (diaria)</th>
             <th class="text-center col-md-1">Assegnate</th>
+            <th class="text-center col-md-1">Sostituzioni</th>
             <th class="text-center col-md-1">Funzionali</th>
             <th class="text-center col-md-1">Con Studenti</th>
             <th class="text-center col-md-1">Clil Funzionali</th>
             <th class="text-center col-md-1">Clil Con Studenti</th>
-            <th class="text-center col-md-1">Totale</th>
+            <th class="text-center col-md-1">Da Pagare</th>
 		</tr>
     </thead>
     <tbody>';
@@ -45,16 +46,18 @@ foreach($resultArray as $docente) {
     $docenteCognomeNome = $docente['cognome'].' '.$docente['nome'];
     $viaggi = $docente['viaggi'];
     $assegnato = $docente['assegnato'];
-    $funzionale = $docente['funzionale'];
-    $con_studenti = $docente['con_studenti'];
-    $clil_funzionale = $docente['clil_funzionale'];
-    $clil_con_studenti = $docente['clil_con_studenti'];
-    $totale = $docente['totale'];
+    $sostituzioni = $docente['sostituzioni_approvato'];
+    $funzionale = $docente['funzionale_approvato'];
+    $con_studenti = $docente['con_studenti_approvato'];
+    $clil_funzionale = $docente['clil_funzionale_approvato'];
+    $clil_con_studenti = $docente['clil_con_studenti_approvato'];
+    $totale = $docente['totale_da_pagare'];
     $data .= '<tr>
     			<td>'.$local_docente_id.'</td>
     			<td><a href="quadroDocente.php?id='.$local_docente_id.'" target="_blank">&ensp;'.$docenteCognomeNome.' </a></td>
     			<td class="text-right viaggi">'.formatNoZero($viaggi).'</td>
     			<td class="text-right assegnato">'.formatNoZero($assegnato).'</td>
+    			<td class="text-right funzionale">'.formatNoZero($sostituzioni).'</td>
     			<td class="text-right funzionale">'.formatNoZero($funzionale).'</td>
     			<td class="text-right con_studenti">'.formatNoZero($con_studenti).'</td>
     			<td class="text-right clil_funzionale">'.formatNoZero($clil_funzionale).'</td>

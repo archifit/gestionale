@@ -18,10 +18,10 @@ $data .= '<div class="table-wrapper"><table class="table table-bordered table-st
 						<thead><tr>
 							<th class="col-md-1 text-left">Tipo</th>
 							<th class="col-md-2 text-left">Nome</th>
-							<th class="col-md-6 text-left">Dettaglio</th>
+							<th class="col-md-5 text-left">Dettaglio</th>
 							<th class="col-md-1 text-center">Ore</th>
 							<th class="col-md-1 text-center">Rendiconto</th>
-							<th class="col-md-1 text-center"></th>
+							<th class="col-md-2 text-center"></th>
 						</tr></thead><tbody>';
 
 $query = "	SELECT

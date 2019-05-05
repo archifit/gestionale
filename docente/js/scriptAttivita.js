@@ -14,7 +14,6 @@ function oreFatteReadAttivitaRecords() {
 		$(".attivita_fatte_records_content").html(data);
 	});
 	$.get("oreFatteClilReadAttivita.php", {}, function (data, status) {
-		console.log(data);
 		$(".attivita_fatte_clil_records_content").html(data);
 	});
 	$.get("oreFatteReadAttribuite.php", {}, function (data, status) {

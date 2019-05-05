@@ -76,6 +76,15 @@ function number_format (number, decimals, decPoint, thousandsSep) {
 
 // ----------------------------------------------------------------------------------------------
 
+function fuisEmail() {
+	$.post("fuisEmailDocente.php", {
+		docente_id: $("#hidden_docente_id").val()
+	},
+	function (data, status) {
+		alert(data);
+	});
+}
+
 function viewAttivitaPreviste(id, docente) {
 	$.post("../docente/oreDovuteReadAttivita.php", {
 			docente_id: id
@@ -150,7 +159,31 @@ function viewFuis() {
 		function (data, status) {
 			console.log(data);
 			fuis = JSON.parse(data);
-			$("#sostituzioni_ore").html(number_format(fuis.sostituzioni_ore,2));
+			$("#sostituzioni_ore").html(number_format(fuis.sostituzioni_ore,0));
+			$("#funzionale_ore").html(number_format(fuis.funzionale_ore,0));
+			$("#con_studenti_ore").html(number_format(fuis.con_studenti_ore,0));
+			$("#clil_funzionale_ore").html(number_format(fuis.clil_funzionale_ore,0));
+			$("#clil_con_studenti_ore").html(number_format(fuis.clil_con_studenti_ore,0));
+
+			$("#sostituzioni_proposto").html(number_format(fuis.sostituzioni_proposto,2));
+			$("#funzionale_proposto").html(number_format(fuis.funzionale_proposto,2));
+			$("#con_studenti_proposto").html(number_format(fuis.con_studenti_proposto,2));
+			$("#clil_funzionale_proposto").html(number_format(fuis.clil_funzionale_proposto,2));
+			$("#clil_con_studenti_proposto").html(number_format(fuis.clil_con_studenti_proposto,2));
+			$("#totale_proposto").html(number_format(fuis.totale_proposto,2));
+			$("#clil_totale_proposto").html(number_format(fuis.clil_totale_proposto,2));
+			$("#assegnato_proposto").html(number_format(fuis.assegnato,2));
+
+			$("#sostituzioni_approvato").html(number_format(fuis.sostituzioni_approvato,2));
+			$("#funzionale_approvato").html(number_format(fuis.funzionale_approvato,2));
+			$("#con_studenti_approvato").html(number_format(fuis.con_studenti_approvato,2));
+			$("#clil_funzionale_approvato").html(number_format(fuis.clil_funzionale_approvato,2));
+			$("#clil_con_studenti_approvato").html(number_format(fuis.clil_con_studenti_approvato,2));
+			$("#totale_approvato").html(number_format(fuis.totale_approvato,2));
+			$("#clil_totale_approvato").html(number_format(fuis.clil_totale_approvato,2));
+			$("#assegnato_approvato").html(number_format(fuis.assegnato,2));
+
+			$("#fuis_totale_da_pagare_id").html('<strong>Totale da pagare: € ' + number_format(fuis.totale_da_pagare,2) + '</strong>');
 		});
 	});
 }
@@ -201,12 +234,13 @@ function viewAttivitaFatte() {
 	viewQuadroOrario();
 }
 
-function oreFatteAggiornaStatoAttivita(attivita_id, commento, contestata) {
+function oreFatteAggiornaStatoAttivita(attivita_id, commento, contestata, clilmode) {
 	$.post("oreFatteAggiornaStatoAttivita.php", {
 		attivita_id: attivita_id,
 		docente_id: $("#hidden_docente_id").val(),
 		contestata: contestata,
-		commento: commento
+		commento: commento,
+		clilmode: clilmode
 	},
 	function (data, status) {
 		viewAttivitaFatte();
@@ -215,7 +249,7 @@ function oreFatteAggiornaStatoAttivita(attivita_id, commento, contestata) {
 	);
 }
 
-function oreFatteRipristrinaAttivita(attivita_id, dettaglio, ore, commento) {
+function oreFatteRipristrinaAttivita(attivita_id, dettaglio, ore, commento, clilmode) {
     bootbox.confirm({
 	    message: "<p><strong>Attività:</strong></br>" + dettaglio + "</p>"
 	    		+ "<p><strong>Commento:</strong></br>" + commento + "</p>"
@@ -233,14 +267,14 @@ function oreFatteRipristrinaAttivita(attivita_id, dettaglio, ore, commento) {
 	    },
 	    callback: function (result) {
 	    	if (result === true) {
-		        oreFatteAggiornaStatoAttivita(attivita_id, "ripristinata", false);
+		        oreFatteAggiornaStatoAttivita(attivita_id, "ripristinata", false, clilmode);
 		        viewAttivitaFatte();
 	    	}
 	    }
 	});
 }
 
-function oreFatteControllaAttivita(attivita_id, dettaglio, ore) {
+function oreFatteControllaAttivita(attivita_id, dettaglio, ore, clilmode) {
 	bootbox.prompt({
 	    title: "<p>ore: " + ore + "</p><p>" + dettaglio + "</p>",
 	    message: '<p>Seleziona il messaggio:</p>',
@@ -264,7 +298,7 @@ function oreFatteControllaAttivita(attivita_id, dettaglio, ore) {
 	    		return;
 	    	}
 	    	if (result !== "") {
-		        oreFatteAggiornaStatoAttivita(attivita_id, result, true);
+		        oreFatteAggiornaStatoAttivita(attivita_id, result, true, clilmode);
 		        viewAttivitaFatte();
 	    	} else {
 	    		bootbox.prompt({
@@ -384,4 +418,5 @@ $(document).ready(function () {
 	});
 	calcolaTotaleBonus();
 	viewAttivitaFatte();
+	viewFuis();
 });

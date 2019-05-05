@@ -37,23 +37,6 @@ require_once '../common/connect.php';
 		</div>
 	</div>
 </div>
-<?php
-$query = "
-    SELECT
-        SUM(viaggi) as sum_viaggi,
-        SUM(assegnato) as sum_assegnato,
-        SUM(funzionale) as sum_funzionale,
-        SUM(con_studenti) as sum_con_studenti,
-        SUM(clil_funzionale) as sum_clil_funzionale,
-        SUM(clil_con_studenti) as sum_clil_con_studenti,
-        SUM(totale) as sum_totale
-    FROM `fuis_docente`
-    WHERE fuis_docente.anno_scolastico_id = '$__anno_scolastico_corrente_id'
-";
-$fuis = dbGetFirst($query);
-$clil_totale = $fuis['sum_clil_funzionale'] + $fuis['sum_clil_con_studenti'];
-
-?>
 
 <div class="panel-body">
 	<table class="table" >
@@ -79,6 +62,10 @@ $clil_totale = $fuis['sum_clil_funzionale'] + $fuis['sum_clil_con_studenti'];
 			<tr>
 				<td>Con Studenti</td>
 				<td class="col-md-4 text-right" id="fuis_con_studenti"></td>
+			</tr>
+			<tr>
+				<td>Sostituzioni</td>
+				<td class="col-md-4 text-right" id="fuis_sostituzioni"></td>
 			</tr>
 		</tbody>
 	</table>

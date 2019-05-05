@@ -11,6 +11,9 @@ if(isset($_POST['docente_id']) && isset($_POST['docente_id']) != "") {
 	$modificabile = false;
 }
 
+$contestataMarker = '<span class=\'label label-danger\'>contestata</span>';
+$accettataMarker = '';
+
 $data = '';
 
 // Design initial table header
@@ -18,10 +21,11 @@ $data .= '<div class="table-wrapper"><table class="table table-bordered table-st
 						<thead><tr>
 							<th class="col-md-1 text-left">Tipo</th>
 							<th class="col-md-2 text-left">Nome</th>
-							<th class="col-md-5 text-left">Dettaglio</th>
+							<th class="col-md-4 text-left">Dettaglio</th>
 							<th class="col-md-1 text-center">Data</th>
 							<th class="col-md-1 text-center">Ore</th>
 							<th class="col-md-1 text-center">Registro</th>
+							<th></th>
 							<th></th>
 						</tr></thead><tbody>';
 
@@ -61,11 +65,17 @@ if (!$result = mysqli_query($con, $query)) {
 // if query results contains rows then fetch those rows
 if(mysqli_num_rows($result) > 0) {
 	while($row = mysqli_fetch_assoc($result)) {
-		//			console_log_data("docente=", $row);
-		$data .= '<tr>
-			<td>'.$row['ore_previste_tipo_attivita_categoria'].'</td>
-			<td>'.$row['ore_previste_tipo_attivita_nome'].'</td>
-			<td>'.$row['ore_fatte_attivita_dettaglio'];
+	    $strikeOn = '';
+	    $strikeOff = '';
+	    if ($row['ore_fatte_attivita_contestata'] == 1) {
+	        $strikeOn = '<strike>';
+	        $strikeOff = '</strike>';
+	    }
+	    
+	    $data .= '<tr>
+			<td>'.$strikeOn.$row['ore_previste_tipo_attivita_categoria'].$strikeOff.'</td>
+			<td>'.$strikeOn.$row['ore_previste_tipo_attivita_nome'].$strikeOff.'</td>
+			<td>'.$strikeOn.$row['ore_fatte_attivita_dettaglio'].$strikeOff;
 		if ($row['ore_fatte_attivita_contestata'] == 1) {
 		    $data .='</br><span class="text-danger"><strong>'.$row['ore_fatte_attivita_commento_commento'].'</strong></span>';
 		}
@@ -74,8 +84,8 @@ if(mysqli_num_rows($result) > 0) {
 		// data e ora solo per quelle inserite da docente
 		if ($row['ore_previste_tipo_attivita_inserito_da_docente']) {
 			$data .='
-			<td class="text-center">'.strftime("%d/%m/%Y", strtotime($row['ore_fatte_attivita_data'])).'</td>
-			<td class="text-center">'.$row['ore_fatte_attivita_ore'].'</td>
+			<td class="text-center">'.$strikeOn.strftime("%d/%m/%Y", strtotime($row['ore_fatte_attivita_data'])).$strikeOff.'</td>
+			<td class="text-center">'.$strikeOn.$row['ore_fatte_attivita_ore'].$strikeOff.'</td>
 			';
 		} else {
 			$data .='
@@ -107,7 +117,9 @@ if(mysqli_num_rows($result) > 0) {
 		}
 		$data .='
 			</td>';
-
+		$marker = ($row['ore_fatte_attivita_contestata'] == 1)? $contestataMarker : $accettataMarker;
+		$data .= '<td class="col-md-1 text-center">'.$marker.'</td>';
+		
 		$data .='
 			<td class="text-center">
 			';
@@ -120,11 +132,11 @@ if(mysqli_num_rows($result) > 0) {
 			} else {
 			    if ($row['ore_fatte_attivita_contestata'] == 1) {
 			        $data .='
-    				    <button onclick="oreFatteRipristrinaAttivita('.$row['ore_fatte_attivita_id'].', \''.str2js($row['ore_fatte_attivita_dettaglio']).'\','.$row['ore_fatte_attivita_ore'].', \''.str2js($row['ore_fatte_attivita_commento_commento']).'\')" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+    				    <button onclick="oreFatteRipristrinaAttivita('.$row['ore_fatte_attivita_id'].', \''.str2js($row['ore_fatte_attivita_dettaglio']).'\','.$row['ore_fatte_attivita_ore'].', \''.str2js($row['ore_fatte_attivita_commento_commento']).'\', \'\')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-ok"></span> Ripristina</button>
 				    ';
 			    } else {
 			        $data .='
-    				<button onclick="oreFatteControllaAttivita('.$row['ore_fatte_attivita_id'].', \''.str2js($row['ore_fatte_attivita_dettaglio']).'\','.$row['ore_fatte_attivita_ore'].')" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-pencil"></button>
+    				<button onclick="oreFatteControllaAttivita('.$row['ore_fatte_attivita_id'].', \''.str2js($row['ore_fatte_attivita_dettaglio']).'\','.$row['ore_fatte_attivita_ore'].', \'\')" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-remove"></span> Contesta</button>
 				';
 			    }
 			}

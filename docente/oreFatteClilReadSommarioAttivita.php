@@ -13,8 +13,8 @@ $data = '';
 // Design initial table header
 $data .= '<div class="table-wrapper"><table class="table table-bordered table-striped table-green">
 						<thead><tr>
-							<th class="col-md-1 text-left">Tipo</th>
-							<th class="col-md-1 text-center">Ore</th>
+							<th class="col-md-10 text-left">Tipo</th>
+							<th class="col-md-2 text-center">Ore</th>
 						</tr></thead><tbody>';
 
 $query = "
@@ -24,6 +24,8 @@ $query = "
         ore_fatte_attivita_clil.docente_id = $docente_id
     AND
         ore_fatte_attivita_clil.anno_scolastico_id = $__anno_scolastico_corrente_id
+    AND
+        ore_fatte_attivita_clil.contestata is not true
     AND
         ore_fatte_attivita_clil.con_studenti = 1
     ";

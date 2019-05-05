@@ -27,6 +27,7 @@ if(isset($_GET)) {
 <script type="text/javascript" src="<?php echo $__application_base_path; ?>/common/bootbox-4.4.0/js/bootbox.min.js"></script>
 
 <link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-vcolor-index.css">
+<link rel="stylesheet" href="<?php echo $__application_base_path; ?>/css/table-green-2.css">
 
 <script type="text/javascript" src="js/scriptQuadroOreDovute.js"></script>
 
@@ -161,7 +162,9 @@ $data .= '
 $data .= '
                 </div>
             </div>
-            <!-- <div class="panel-footer"></div> -->
+            <div class="panel-footer">
+                <button onclick="fuisEmail()" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-envelope"> Notifica Docente</button>
+            </div>
         </div>
 				    
     ';

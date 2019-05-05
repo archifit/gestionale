@@ -13,9 +13,9 @@ $data = '';
 // Design initial table header
 $data .= '<div class="table-wrapper"><table class="table table-bordered table-striped table-green">
 						<thead><tr>
-							<th class="col-md-1 text-left">Tipo</th>
-							<th class="col-md-2 text-left">Nome</th>
-							<th class="col-md-1 text-center">Ore</th>
+							<th class="col-md-2 text-left">Tipo</th>
+							<th class="col-md-8 text-left">Nome</th>
+							<th class="col-md-2 text-center">Ore</th>
 						</tr></thead><tbody>';
 
 $query = "	SELECT * FROM ore_previste_tipo_attivita WHERE ore_previste_tipo_attivita.inserito_da_docente = true";
