@@ -52,6 +52,7 @@ function getFromTable(table, item) {
 
 function fuisDocentiReadRecords() {
 	$.get("fuisDocentiReadRecords.php", {}, function (data, status) {
+		console.log(data);
 		$(".fuis_docenti_records_content").html(data);
 		$('#fuis_docenti_table td:nth-child(1),th:nth-child(1)').hide(); // nasconde la prima colonna con l'id
 		// calcola il totale
@@ -69,7 +70,7 @@ function fuisDocentiReadRecords() {
 			var parziale_clil = clil_funzionale + clil_con_studenti;
 			var parziale_complessivo = parziale_non_clil + parziale_clil;
 			if (parziale_complessivo > 0) {
-				$(this).find(".totale").text(number_format(parziale_complessivo,2));
+//				$(this).find(".totale").text(number_format(parziale_complessivo,2));
 			}
 
 			totale_non_clil += parziale_non_clil;
