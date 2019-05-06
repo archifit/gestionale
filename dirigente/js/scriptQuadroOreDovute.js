@@ -85,6 +85,14 @@ function fuisEmail() {
 	});
 }
 
+function fuisRivisto() {
+	$.post("fuisDocenteRivisto.php", {
+		docente_id: $("#hidden_docente_id").val()
+	},
+	function (data, status) {
+	});
+}
+
 function viewAttivitaPreviste(id, docente) {
 	$.post("../docente/oreDovuteReadAttivita.php", {
 			docente_id: id

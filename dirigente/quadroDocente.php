@@ -162,8 +162,18 @@ $data .= '
 $data .= '
                 </div>
             </div>
-            <div class="panel-footer">
-                <button onclick="fuisEmail()" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-envelope"> Notifica Docente</button>
+            <div class="panel-footer text-center">
+        	<div class="row">
+        		<div class="col-md-4 text-center">
+                    <button onclick="fuisRivisto()" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-off"> Chiudi</button>
+        		</div>
+        		<div class="col-md-4 text-center">
+                    <button onclick="fuisRivisto()" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-ok"> Rivisto</button>
+        		</div>
+           		<div class="col-md-4 text-center">
+                    <button onclick="fuisEmail()" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-envelope"> Notifica Docente</button>
+        		</div>
+            </div>
             </div>
         </div>
 				    
