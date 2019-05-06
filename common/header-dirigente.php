@@ -19,6 +19,7 @@
 			<a href="<?php echo $__application_base_path; ?>/dirigente/selezionaDocente.php" class="btn btn-default navbar-btn btn-primary" role="button"><span class="glyphicon glyphicon-education"></span>&ensp;Docente </a>
 			<a href="<?php echo $__application_base_path; ?>/dirigente/quadroOreDovute.php" class="btn btn-default navbar-btn btn-success" role="button"><span class="glyphicon glyphicon-dashboard"></span>&ensp;Ore Dovute </a>
 			<a href="<?php echo $__application_base_path; ?>/dirigente/corsoDiRecuperoReport.php" class="btn btn-default navbar-btn btn-info" role="button"><span class="glyphicon glyphicon-repeat"></span>&ensp;Corsi di Recupero </a>
+			<a href="<?php echo $__application_base_path; ?>/dirigente/configurazione.php" class="btn btn-default navbar-btn btn-warning" role="button"><span class="glyphicon glyphicon-cog"></span>&ensp;Configura </a>
 
 <div class="btn-group">
 
@@ -33,7 +34,11 @@
     <li><a href="<?php echo $__application_base_path; ?>/dirigente/fuisDocenti.php">Fuis Docenti</a></li>
   </ul>
 </div>
-			<a href="<?php echo $__application_base_path; ?>/dirigente/configurazione.php" class="btn btn-default navbar-btn btn-warning" role="button"><span class="glyphicon glyphicon-cog"></span>&ensp;Configura </a>
+<?php
+if ($__config->getBonus_rendiconto_aperto() || $__config->getBonus_adesione_aperto()) {
+    echo '<a href="'.$__application_base_path.'/dirigente/bonusDocenti.php" class="btn btn-default navbar-btn btn-success" role="button"><span class="glyphicon glyphicon-list-alt"></span>&ensp;Bonus </a>';
+}
+?>
 		</ul>
 		<ul class="nav navbar-nav navbar-right top-navbar-nav">
 			<li><a href="http://www.martinomartini.eu/help/gestionale/html/Gestionale.html" target="_blank" ><span class="glyphicon glyphicon-question-sign"></span></a></li>

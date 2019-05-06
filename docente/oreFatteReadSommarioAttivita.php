@@ -5,7 +5,7 @@ require_once '../common/connect.php';
 
 $docente_id = $__docente_id;
 if(isset($_POST['docente_id']) && isset($_POST['docente_id']) != "") {
-	$docente_id = $_POST['docente_id'];
+    $docente_id = $_POST['docente_id'];
 }
 
 $data = '';

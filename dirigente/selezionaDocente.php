@@ -27,25 +27,18 @@
 </div>
 
 <?php
-
-	// prepara l'elenco dei docenti
-	$docenteOptionList = '				<option value="0"></option>';
-	$query = "	SELECT * FROM docente
-				WHERE docente.attivo = true
-				ORDER BY docente.cognome, docente.nome ASC
-				;";
-	if (!$result = mysqli_query($con, $query)) {
-		exit(mysqli_error($con));
-	}
-	if(mysqli_num_rows($result) > 0) {
-		$resultArray = $result->fetch_all(MYSQLI_ASSOC);
-		$counter = 0;
-		foreach($resultArray as $row) {
-			$docenteOptionList .= '
-				<option value="'.$row['id'].'" data-subtext="'.$row['username'].'">'.$row['cognome'].' '.$row['nome'].'</option>
-			';
-		}
-	}
+// prepara l'elenco dei docenti
+$docenteOptionList = '				<option value="0"></option>';
+$query = "	SELECT * FROM docente
+			WHERE docente.attivo = true
+			ORDER BY docente.cognome, docente.nome ASC
+			;";
+$resultArray = dbGetAll($query);
+foreach($resultArray as $row) {
+    $docenteOptionList .= '
+		<option value="'.$row['id'].'" data-subtext="'.$row['username'].'">'.$row['cognome'].' '.$row['nome'].'</option>
+	';
+}
 ?>
 
 <div class="panel-body">
