@@ -336,6 +336,26 @@ function oreFatteGetRegistroAttivita(attivita_id, registro_id) {
 	$("#docente_registro_modal").modal("show");
 }
 
+function oreFatteClilGetRegistroAttivita(attivita_id, registro_id) {
+	$.post("../docente/oreFatteClilAttivitaReadDetails.php", {
+			attivita_id: attivita_id
+		},
+		function (dati, status) {
+			console.log(dati);
+			var attivita = JSON.parse(dati);
+			$("#registro_tipo_attivita").html('<p class="form-control-static">' + attivita.nome + '</p>');
+			$("#registro_attivita_dettaglio").html('<p class="form-control-static">' + attivita.dettaglio + '</p>');
+			$("#registro_attivita_data").html('<p class="form-control-static">' + Date.parseExact(attivita.data, 'yyyy-MM-dd').toString('d/M/yyyy') + '</p>');
+			$("#registro_attivita_ora_inizio").html('<p class="form-control-static">' + attivita.ora_inizio + '</p>');
+			$("#registro_attivita_ore").html('<p class="form-control-static">' + attivita.ore + '</p>');
+			$("#registro_descrizione").html('<p class="form-control-static" style="white-space: pre-wrap;">' + attivita.descrizione + '</p>');
+			$("#registro_studenti").html('<p class="form-control-static" style="white-space: pre-wrap;">' + attivita.studenti + '</p>');
+		}
+	);
+
+	$("#docente_registro_modal").modal("show");
+}
+
 function bonusRendiconto(bonus_docente_id, bonus_codice, bonus_descrittori, bonus_evidenze) {
 	$("#hidden_bonus_docente_id").val(bonus_docente_id);
 
