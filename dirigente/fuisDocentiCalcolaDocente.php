@@ -146,7 +146,7 @@ AND
 	
 	$totale_da_pagare = $fuis_assegnato + $totale_approvato + $clil_totale_approvato;
 	$query = "
-        REPLACE INTO fuis_docente (
+        INSERT INTO fuis_docente (
             `viaggi`, `assegnato`, 
             `clil_funzionale_ore`, `clil_con_studenti_ore`, `funzionale_ore`, `con_studenti_ore`, `sostituzioni_ore`,
             `clil_funzionale_proposto`, `clil_con_studenti_proposto`, `funzionale_proposto`, `con_studenti_proposto`, `sostituzioni_proposto`,
@@ -161,7 +161,35 @@ AND
             $clil_funzionale_approvato, $clil_con_studenti_approvato, $fuis_funzionale_approvato, $fuis_con_studenti_approvato, $fuis_sostituzioni_approvato,
             $totale_proposto, $clil_totale_proposto, $totale_approvato, $clil_totale_approvato, $totale_da_pagare,
             $localDocenteId, $__anno_scolastico_corrente_id
-        );";
+        )
+        ON DUPLICATE KEY UPDATE
+            `viaggi`=$fuis_viaggio_diaria,
+            `assegnato`=$fuis_assegnato,
+            
+            `clil_funzionale_ore`=$clil_ore_funzionale,
+            `clil_con_studenti_ore`=$clil_ore_con_studenti,
+            `funzionale_ore`=$ore_funzionali,
+            `con_studenti_ore`=$ore_con_studenti,
+            `sostituzioni_ore`=$ore_sostituzioni,
+            
+            `clil_funzionale_proposto`=$clil_funzionale_proposto,
+            `clil_con_studenti_proposto`=$clil_con_studenti_proposto,
+            `funzionale_proposto`=$fuis_funzionale_proposto,
+            `con_studenti_proposto`=$fuis_con_studenti_proposto,
+            `sostituzioni_proposto`=$fuis_sostituzioni_proposto,
+            
+            `clil_funzionale_approvato`=$clil_funzionale_approvato,
+            `clil_con_studenti_approvato`=$clil_con_studenti_approvato,
+            `funzionale_approvato`=$fuis_funzionale_approvato,
+            `con_studenti_approvato`=$fuis_con_studenti_approvato,
+            `sostituzioni_approvato`=$fuis_sostituzioni_approvato,
+            
+            `totale_proposto`=$totale_proposto,
+            `clil_totale_proposto`=$clil_totale_proposto,
+            `totale_approvato`=$totale_approvato,
+            `clil_totale_approvato`=$clil_totale_approvato,
+            `totale_da_pagare`=$totale_da_pagare,
+            ;";
 	debug($query);
 	dbExec($query);
 }

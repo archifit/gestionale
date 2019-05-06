@@ -93,6 +93,9 @@ function fuisRivisto() {
 	});
 }
 
+function fuisChiudi() {
+}
+
 function viewAttivitaPreviste(id, docente) {
 	$.post("../docente/oreDovuteReadAttivita.php", {
 			docente_id: id
