@@ -245,6 +245,10 @@ AND
 ";
 debug($query);
 $ore = dbGetFirst($query);
+// aggiornamento non genera extra
+if ($ore['ore_fatte_ore_40_aggiornamento'] >  $ore['ore_dovute_ore_40_aggiornamento']) {
+    $ore['ore_fatte_ore_40_aggiornamento'] =  $ore['ore_dovute_ore_40_aggiornamento'];
+}
 $data .= '
 	<div class="table-wrapper">
 	<table class="table table-vnocolor-index">
@@ -290,7 +294,6 @@ $data .= '
 		</tbody>
 	</table>
 	</div>
-				    
 ';
 
 // chiude il pannello delle ORE

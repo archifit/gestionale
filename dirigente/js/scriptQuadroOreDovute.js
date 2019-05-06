@@ -120,7 +120,7 @@ function viewQuadroOrario() {
 	function (dati, status) {
 		console.log(dati);
 		ore_dovute = JSON.parse(dati);
-	
+
 		$.post("../docente/oreDovuteReadDetails.php", {
 			docente_id: $("#hidden_docente_id").val(),
 			table_name: 'ore_fatte'
@@ -128,11 +128,17 @@ function viewQuadroOrario() {
 		function (dati, status) {
 			console.log(dati);
 			ore_fatte = JSON.parse(dati);
+			var ore_fatte_ore_40_aggiornamento = parseInt(ore_fatte.ore_40_aggiornamento);
+			var ore_dovute_ore_40_aggiornamento = parseInt(ore_dovute.ore_40_aggiornamento);
+			// aggiornamento non genera extra
+			if (ore_fatte_ore_40_aggiornamento > ore_dovute_ore_40_aggiornamento) {
+				ore_fatte_ore_40_aggiornamento = ore_dovute_ore_40_aggiornamento;
+			}
 			$("#fatte_ore_70_funzionali").html(getHtmlNumAndFatteVisual(ore_fatte.ore_70_funzionali,ore_dovute.ore_70_funzionali));
 			$("#fatte_ore_70_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_70_con_studenti,ore_dovute.ore_70_con_studenti));
 	
 			$("#fatte_ore_40_sostituzioni_di_ufficio").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_sostituzioni_di_ufficio,ore_dovute.ore_40_sostituzioni_di_ufficio));
-			$("#fatte_ore_40_aggiornamento").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_aggiornamento,ore_dovute.ore_40_aggiornamento));
+			$("#fatte_ore_40_aggiornamento").html(getHtmlNumAndFatteVisual(ore_fatte_ore_40_aggiornamento,ore_dovute_ore_40_aggiornamento));
 			$("#fatte_ore_40_con_studenti").html(getHtmlNumAndFatteVisual(ore_fatte.ore_40_con_studenti,ore_dovute.ore_40_con_studenti));
 			$.post("../docente/oreDovuteClilReadDetails.php", {
 				docente_id: $("#hidden_docente_id").val(),
@@ -364,87 +370,7 @@ function oreFatteClilGetRegistroAttivita(attivita_id, registro_id) {
 	$("#docente_registro_modal").modal("show");
 }
 
-function bonusRendiconto(bonus_docente_id, bonus_codice, bonus_descrittori, bonus_evidenze) {
-	$("#hidden_bonus_docente_id").val(bonus_docente_id);
-
-	$.post("../docente/bonusDocenteReadDetails.php", {
-			bonus_docente_id: bonus_docente_id
-		},
-		function (dati, status) {
-			var bonus = JSON.parse(dati);
-			$("#rendiconto_rendiconto").val(bonus.rendiconto_evidenze);
-		}
-	);
-
-	$("#myModalLabel").text(bonus_codice + ": " + bonus_descrittori);
-	$("#evidenze_text").text(bonus_evidenze);
-	$("#bonus_docente_rendiconto_modal").modal("show");
-}
-
-function bonusRegistraApprovazione(bonus_docente_id, approvato) {
-//	alert("id=" + bonus_docente_id +" val=" + approvato);
-	$.post("bonusRegistraApprovazione.php", {
-			bonus_docente_id: bonus_docente_id,
-			approvato: approvato
-		},
-		function (data, status) {
-			calcolaTotaleBonus();
-		}
-	);
-}
-
-function calculateColumn(index) {
-    var total = 0;
-    $('#table-docente-bonus tr').each(function() {
-        var value = parseInt($('td', this).eq(index).text());
-        if (!isNaN(value)) {
-            total += value;
-//        	alert('value='+value+' total='+total);
-        }
-    });
-    return total;
-}
-
-function calcolaTotaleBonus() {
-    var richiesto = 0;
-    var pendente = 0;
-    var approvato = 0;
-    $('#table-docente-bonus tr').each(function() {
-        var value = parseInt($('td', this).eq(3).text());
-        if (!isNaN(value)) {
-        	richiesto += value;
-            var $chkbox = $(this).find('input[type="checkbox"]');
-            if ($chkbox.prop('checked')) {
-            	approvato += value;
-            } else {
-            	pendente += value;
-            }
-        }
-    });
-
-	$("#bonus_richiesto").text(richiesto);
-	$("#bonus_pendente").text(pendente);
-	$("#bonus_approvato").text(approvato);
-	var perc = (approvato / richiesto) * 100;
-
-	$('#progress-bar-approvate').css('width', perc + '%').attr('aria-valuenow', perc);
-	$('#progress-bar-pendente').css('width', (100 - perc) + '%').attr('aria-valuenow', (100 - perc));
-}
-
 $(document).ready(function () {
-
-	$('#table-docente-bonus td:nth-child(1)').hide(); // nasconde la prima colonna con l'id
-
-	$('#table-docente-bonus :checkbox').change(function() {
-		var bonus_docente_id = $('td:first', $(this).parents('tr')).text();
-		var approvato = true;
-		if(this.checked != true) {
-			approvato = false;
-		}
-		bonusRegistraApprovazione(bonus_docente_id, this.checked);
-//		alert("id=" + bonus_docente_id +" val=" + approvato);
-	});
-	calcolaTotaleBonus();
 	viewAttivitaFatte();
 	viewFuis();
 });
