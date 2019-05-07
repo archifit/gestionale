@@ -52,12 +52,23 @@ foreach($resultArray as $docente) {
     $clil_funzionale = $docente['clil_funzionale_approvato'];
     $clil_con_studenti = $docente['clil_con_studenti_approvato'];
     $totale = $docente['totale_da_pagare'];
+    
+    // controlla se sono state modificate delle attivita:
+    $ultimo_controllo = $docente['ultimo_controllo'];
+    $q2 = "SELECT COUNT(ultima_modifica) from ore_fatte_attivita WHERE anno_scolastico_id = $__anno_scolastico_corrente_id AND docente_id = $local_docente_id AND ultima_modifica > '$ultimo_controllo';";
+    $numChanges = dbGetValue($q2);
+    if ($numChanges == 0) {
+        $q3 = "SELECT COUNT(ultima_modifica) from ore_fatte_attivita_clil WHERE anno_scolastico_id = $__anno_scolastico_corrente_id AND docente_id = $local_docente_id AND ultima_modifica > '$ultimo_controllo';";
+        $numChanges = dbGetValue($q3);
+    }
+    $marker = ($numChanges == 0) ? '': '&ensp;<span class="label label-danger glyphicon glyphicon-star" style="color:yellow"> '. '' .'</span>';
+
     $data .= '<tr>
     			<td>'.$local_docente_id.'</td>
-    			<td><a href="quadroDocente.php?id='.$local_docente_id.'" target="_blank">&ensp;'.$docenteCognomeNome.' </a></td>
+    			<td><a href="quadroDocente.php?id='.$local_docente_id.'" target="_blank">&ensp;'.$docenteCognomeNome.' '.$marker.' </a></td>
     			<td class="text-right viaggi">'.formatNoZero($viaggi).'</td>
     			<td class="text-right assegnato">'.formatNoZero($assegnato).'</td>
-    			<td class="text-right funzionale">'.formatNoZero($sostituzioni).'</td>
+    			<td class="text-right sostituzioni">'.formatNoZero($sostituzioni).'</td>
     			<td class="text-right funzionale">'.formatNoZero($funzionale).'</td>
     			<td class="text-right con_studenti">'.formatNoZero($con_studenti).'</td>
     			<td class="text-right clil_funzionale">'.formatNoZero($clil_funzionale).'</td>

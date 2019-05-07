@@ -62,16 +62,19 @@ function fuisDocentiReadRecords() {
 		$("#fuis_docenti_table tr").each(function() {
 			var viaggi = getFromTable($(this),"viaggi");
 			var assegnato = getFromTable($(this),"assegnato");
+			var sostituzioni = getFromTable($(this),"sostituzioni");
 			var funzionale = getFromTable($(this),"funzionale");
 			var con_studenti = getFromTable($(this),"con_studenti");
 			var clil_funzionale = getFromTable($(this),"clil_funzionale");
 			var clil_con_studenti = getFromTable($(this),"clil_con_studenti");
-			var parziale_non_clil = viaggi + assegnato + funzionale + con_studenti;
-			var parziale_clil = clil_funzionale + clil_con_studenti;
-			var parziale_complessivo = parziale_non_clil + parziale_clil;
-			if (parziale_complessivo > 0) {
-//				$(this).find(".totale").text(number_format(parziale_complessivo,2));
+			// le ore non possono essere negative quando sommo gli importi: se lo sono le azzero
+			var parziale_ore = sostituzioni + funzionale + con_studenti;
+			if (parziale_ore < 0) {
+				parziale_ore = 0;
 			}
+			var parziale_non_clil = viaggi + assegnato + parziale_ore;
+			console.log('parziale_ore=' + parziale_ore + ' parziale_non_clil=' + parziale_non_clil);
+			var parziale_clil = clil_funzionale + clil_con_studenti;
 
 			totale_non_clil += parziale_non_clil;
 			totale_clil += parziale_clil;

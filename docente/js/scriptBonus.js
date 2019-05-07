@@ -77,6 +77,20 @@ function bonusDocenteRendicontoUpdateDetails() {
 }
 
 $(document).ready(function () {
-	$('#bonus_selection_table td:nth-child(1)').hide(); // nasconde la prima colonna con l'id
-	$('#bonus_selection_table td:nth-child(2)').hide(); // nasconde la prima colonna con l'id
+//	$('#bonus_selection_table td:nth-child(1)').hide(); // nasconde la prima colonna con l'id
+//	$('#bonus_selection_table td:nth-child(2)').hide(); // nasconde la prima colonna con l'id
+	$('input:checkbox').change(function() {
+        if ($(this).is(':checked')) {
+        	console.log('checked');
+        } else {
+        	console.log('unchecked');
+        }
+		var row = $(this).closest('tr');
+		var adesioneCheckbox = row.find('input[type="checkbox"]');
+		var adesioneCorrente = adesioneCheckbox.prop('checked');
+		var idBonus = row.children().eq(0).text();
+		var idAdesione = row.children().eq(2).text();
+		console.log('Codice Adesione=' + idAdesione + ' idBonus=' + idBonus + ' checked=' + adesioneCorrente);
+
+	});
 });

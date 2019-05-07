@@ -1,13 +1,17 @@
 
 // Read records on page load
 $(document).ready(function () {
-	$('#docente').data('selectpicker').$button.focus();
+//	$('#docente').data('selectpicker').$button.focus();
 	$('#docente').data('selectpicker').$searchbox.focus();
+	$("#docente").on("changed.bs.select", 
+			function(e, clickedIndex, newValue, oldValue) {
+				var docente_id = this.value;
+				agisciComeDocente(docente_id);
+	});
+
 });
 
-function agisciComeDocente() {
-    var docente_id = $("#docente").val();
-    var docente_nome = $("#docente option:selected").text();
+function agisciComeDocente(docente_id) {
     $.post("agisciComeDocente.php", {
         docente_id: docente_id
     }, function (data, status) {

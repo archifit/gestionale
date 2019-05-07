@@ -14,63 +14,51 @@
 <div class="container-fluid" style="margin-top:60px">
 
 <?php
-	require_once '../common/header-dirigente.php';
-	require_once '../common/connect.php';
+require_once '../common/header-dirigente.php';
+require_once '../common/connect.php';
 
-	// prepara l'elenco di corsi
-	$corso_di_recuperoOptionList = '				<option value="0"></option>';
-	$query = "	SELECT
-					corso_di_recupero.id AS corso_di_recupero_id,
-					corso_di_recupero.codice AS corso_di_recupero_codice,
-					docente.nome AS docente_nome,
-					docente.cognome AS docente_cognome
-				FROM
-					corso_di_recupero corso_di_recupero
-				INNER JOIN docente docente
-				ON corso_di_recupero.docente_id = docente.id
-				WHERE
-					corso_di_recupero.anno_scolastico_id = '$__anno_scolastico_corrente_id'
-				ORDER BY
-					corso_di_recupero.codice ASC;
-			";
-	if (!$result = mysqli_query($con, $query)) {
-		exit(mysqli_error($con));
-	}
-	if(mysqli_num_rows($result) > 0) {
-		$resultArray = $result->fetch_all(MYSQLI_ASSOC);
-		foreach($resultArray as $row) {
-			$corso_di_recuperoOptionList .= '
-				<option value="'.$row['corso_di_recupero_id'].'" data-subtext="'.$row['docente_cognome'].' '.$row['docente_nome'].'">'.$row['corso_di_recupero_codice'].'</option>
-			';
-		}
-	}
+// prepara l'elenco di corsi
+$corso_di_recuperoOptionList = '				<option value="0"></option>';
+$query = "	SELECT
+				corso_di_recupero.id AS corso_di_recupero_id,
+				corso_di_recupero.codice AS corso_di_recupero_codice,
+				docente.nome AS docente_nome,
+				docente.cognome AS docente_cognome
+			FROM
+				corso_di_recupero corso_di_recupero
+			INNER JOIN docente docente
+			ON corso_di_recupero.docente_id = docente.id
+			WHERE
+				corso_di_recupero.anno_scolastico_id = '$__anno_scolastico_corrente_id'
+			ORDER BY
+				corso_di_recupero.codice ASC;
+		";
 
-	// prepara l'elenco di docenti
-	$docenteOptionList = '				<option value="0"></option>';
-	$query = "	SELECT DISTINCT
-					docente.id AS docente_id,
-					docente.cognome AS docente_cognome,
-					docente.nome AS docente_nome
-				FROM
-					docente docente
-				INNER JOIN corso_di_recupero corso_di_recupero
-				ON corso_di_recupero.docente_id = docente.id
-				WHERE
-					corso_di_recupero.anno_scolastico_id = '$__anno_scolastico_corrente_id'
-				ORDER BY
-					docente.cognome ASC;
-			";
-	if (!$result = mysqli_query($con, $query)) {
-		exit(mysqli_error($con));
-	}
-	if(mysqli_num_rows($result) > 0) {
-		$resultArray = $result->fetch_all(MYSQLI_ASSOC);
-		foreach($resultArray as $row) {
-			$docenteOptionList .= '
-				<option value="'.$row['docente_id'].'" >'.$row['docente_cognome'].' '.$row['docente_nome'].'</option>
-			';
-		}
-	}
+foreach(dbGetAll($query) as $row) {
+	$corso_di_recuperoOptionList .= '
+		<option value="'.$row['corso_di_recupero_id'].'" data-subtext="'.$row['docente_cognome'].' '.$row['docente_nome'].'">'.$row['corso_di_recupero_codice'].'</option>';
+}
+
+// prepara l'elenco di docenti
+$docenteOptionList = '				<option value="0"></option>';
+$query = "	SELECT DISTINCT
+				docente.id AS docente_id,
+				docente.cognome AS docente_cognome,
+				docente.nome AS docente_nome
+			FROM
+				docente docente
+			INNER JOIN corso_di_recupero corso_di_recupero
+			ON corso_di_recupero.docente_id = docente.id
+			WHERE
+				corso_di_recupero.anno_scolastico_id = '$__anno_scolastico_corrente_id'
+			ORDER BY
+				docente.cognome ASC;
+		";
+
+foreach(dbGetAll($query) as $row) {
+    $docenteOptionList .= '
+				<option value="'.$row['docente_id'].'" >'.$row['docente_cognome'].' '.$row['docente_nome'].'</option>';
+}
 
 ?>
 <div class="row">

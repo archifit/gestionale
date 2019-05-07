@@ -56,7 +56,6 @@ function oreFatteGetRegistroAttivita(attivita_id, registro_id) {
 function attivitaFattaRegistroUpdateDetails() {
 	console.log('hidden_registro_clil valore=' + $("#hidden_registro_clil").val());
 	if ($("#hidden_registro_clil").val() === 'clil') {
-		console.log('passo da true');
 	 	$.post("oreFatteClilUpdateRegistro.php", {
 	    	registro_id: $("#hidden_ore_fatte_registro_id").val(),
 	    	attivita_id: $("#hidden_ore_fatte_attivita_id").val(),
@@ -67,7 +66,6 @@ function attivitaFattaRegistroUpdateDetails() {
 	    });
 	    $("#docente_registro_modal").modal("hide");
 	} else {
-		console.log('passo da false');
 	 	$.post("oreFatteUpdateRegistro.php", {
 	    	registro_id: $("#hidden_ore_fatte_registro_id").val(),
 	    	attivita_id: $("#hidden_ore_fatte_attivita_id").val(),

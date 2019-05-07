@@ -188,7 +188,7 @@ AND
             `clil_totale_proposto`=$clil_totale_proposto,
             `totale_approvato`=$totale_approvato,
             `clil_totale_approvato`=$clil_totale_approvato,
-            `totale_da_pagare`=$totale_da_pagare,
+            `totale_da_pagare`=$totale_da_pagare
             ;";
 	debug($query);
 	dbExec($query);

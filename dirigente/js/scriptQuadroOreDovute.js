@@ -81,7 +81,20 @@ function fuisEmail() {
 		docente_id: $("#hidden_docente_id").val()
 	},
 	function (data, status) {
-		alert(data);
+		$.notify({
+			icon: 'glyphicon glyphicon-envelope',
+			title: '<Strong>Notifica docente</Strong></br>',
+			message: data
+		},{
+			placement: {
+				from: "top",
+				align: "center"
+			},
+			delay: 2000,
+			timer: 100,
+			mouse_over: "pause",
+			type: 'info'
+		});
 	});
 }
 
@@ -90,10 +103,43 @@ function fuisRivisto() {
 		docente_id: $("#hidden_docente_id").val()
 	},
 	function (data, status) {
+		var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+		var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+		var ultimo_controllo = localISOTime.replace('T', ' ');
+		$("#hidden_ultimo_controllo").val(ultimo_controllo);
+		viewAttivitaFatte();
+		$.notify({
+			icon: 'glyphicon glyphicon-ok',
+			title: '<Strong>FUIS</Strong></br>',
+			message: 'Revisione effettuata!' 
+		},{
+			placement: {
+				from: "top",
+				align: "center"
+			},
+			delay: 2000,
+			timer: 100,
+			mouse_over: "pause",
+			type: 'success'
+		});
 	});
 }
 
 function fuisChiudi() {
+	$.notify({
+		icon: 'glyphicon glyphicon-off',
+		title: '<Strong>Chiusura FUIS</Strong></br>',
+		message: '<Strong>Attenzione:</Strong> la funzionalità non è ancora disponibile!'
+	},{
+		placement: {
+			from: "top",
+			align: "center"
+		},
+		delay: 5000,
+		timer: 100,
+		mouse_over: "pause",
+		type: 'danger'
+	});
 }
 
 function viewAttivitaPreviste(id, docente) {
@@ -208,9 +254,11 @@ function viewFuis() {
 function viewAttivitaFatte() {
 	var id = $("#hidden_docente_id").val();
 	var nome = $("#hidden_docente_nome").val();
+	var ultimo_controllo = $("#hidden_ultimo_controllo").val();
 	
 	$.post("../docente/oreFatteReadAttivita.php", {
-		docente_id: id
+		docente_id: id,
+		ultimo_controllo: ultimo_controllo
 	},
 	function (data, status) {
 		$(".attivita_fatte_records_content").html(data);
@@ -223,7 +271,8 @@ function viewAttivitaFatte() {
 	});
 
 	$.post("../docente/oreFatteClilReadAttivita.php", {
-		docente_id: id
+		docente_id: id,
+		ultimo_controllo: ultimo_controllo
 	},
 	function (data, status) {
 		$(".attivita_fatte_clil_records_content").html(data);

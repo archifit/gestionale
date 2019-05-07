@@ -8,6 +8,7 @@ $modificabile = $__config->getOre_fatte_aperto();
 $docente_id = $__docente_id;
 if(isset($_POST['docente_id']) && isset($_POST['docente_id']) != "") {
 	$docente_id = $_POST['docente_id'];
+	$ultimo_controllo = $_POST['ultimo_controllo'];
 	$modificabile = false;
 }
 
@@ -35,6 +36,7 @@ $query = "	SELECT
 					ore_fatte_attivita_clil.data AS ore_fatte_attivita_data,
 					ore_fatte_attivita_clil.contestata AS ore_fatte_attivita_contestata,
 					ore_fatte_attivita_clil.con_studenti AS ore_fatte_attivita_con_studenti,
+					ore_fatte_attivita_clil.ultima_modifica AS ore_fatte_attivita_ultima_modifica,
 					registro_attivita_clil.id AS registro_attivita_id,
                     ore_fatte_attivita_clil_commento.commento AS ore_fatte_attivita_commento_commento
 
@@ -65,9 +67,17 @@ if(mysqli_num_rows($result) > 0) {
 	        $strikeOff = '</strike>';
 	    }
 	    
+	    // controlla se aggiornata dall'ultima modifica
+	    $marker = '';
+	    if (! $modificabile) {
+	        if ($row['ore_fatte_attivita_ultima_modifica'] > $ultimo_controllo) {
+	            $marker = '&ensp;<span class="label label-danger glyphicon glyphicon-star" style="color:yellow"> '. '' .'</span>';
+	        }
+	    }
+	    
 	    $categoria = ($row['ore_fatte_attivita_con_studenti'])? 'con studenti' : 'funzionali';
 		$data .= '<tr>
-			<td>'.$strikeOn.$categoria.$strikeOff.'</td>
+			<td>'.$strikeOn.$categoria.$strikeOff.$marker.'</td>
 			<td>'.$strikeOn.$row['ore_fatte_attivita_dettaglio'].$strikeOff;
 		if ($row['ore_fatte_attivita_contestata'] == 1) {
 		    $data .='</br><span class="text-danger"><strong>'.$row['ore_fatte_attivita_commento_commento'].'</strong></span>';

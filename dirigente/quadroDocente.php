@@ -7,6 +7,7 @@ require_once '../common/header-common.php';
 require_once '../common/style.php';
 //require_once '../common/_include_bootstrap-toggle.php';
 //require_once '../common/_include_bootstrap-select.php';
+require_once '../common/_include_bootstrap-notify.php';
 ruoloRichiesto('dirigente');
 require_once '../common/connect.php';
 if(isset($_GET)) {
@@ -16,6 +17,9 @@ if(isset($_GET)) {
     debug($query);
     $docente = dbGetFirst($query);
     $docenteCognomeNome = $docente['cognome'].' '.$docente['nome'];
+    // ultimo controllo fuis
+    $ultimo_controllo = dbGetValue("SELECT ultimo_controllo FROM fuis_docente WHERE docente_id = $docente_id AND anno_scolastico_id = $__anno_scolastico_corrente_id;");
+    debug('ultimo_controllo=' . $ultimo_controllo);
 }
 ?>
 	<title><?php echo $docenteCognomeNome; ?></title>
@@ -310,6 +314,7 @@ echo $data;
 
 <input type="hidden" id="hidden_docente_id" value="<?php echo $docente_id; ?>">
 <input type="hidden" id="hidden_docente_nome" value="<?php echo $docenteCognomeNome; ?>">
+<input type="hidden" id="hidden_ultimo_controllo" value="<?php echo $ultimo_controllo; ?>">
 
     <div class="panel panel-success">
         <div class="panel-heading">

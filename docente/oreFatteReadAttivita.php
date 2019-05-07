@@ -7,8 +7,9 @@ $modificabile = $__config->getOre_fatte_aperto();
 
 $docente_id = $__docente_id;
 if(isset($_POST['docente_id']) && isset($_POST['docente_id']) != "") {
-	$docente_id = $_POST['docente_id'];
-	$modificabile = false;
+    $docente_id = $_POST['docente_id'];
+    $ultimo_controllo = $_POST['ultimo_controllo'];
+    $modificabile = false;
 }
 
 $contestataMarker = '<span class=\'label label-danger\'>contestata</span>';
@@ -35,6 +36,7 @@ $query = "	SELECT
 					ore_fatte_attivita.dettaglio AS ore_fatte_attivita_dettaglio,
 					ore_fatte_attivita.data AS ore_fatte_attivita_data,
 					ore_fatte_attivita.contestata AS ore_fatte_attivita_contestata,
+					ore_fatte_attivita.ultima_modifica AS ore_fatte_attivita_ultima_modifica,
 					ore_previste_tipo_attivita.id AS ore_previste_tipo_attivita_id,
 					ore_previste_tipo_attivita.categoria AS ore_previste_tipo_attivita_categoria,
 					ore_previste_tipo_attivita.inserito_da_docente AS ore_previste_tipo_attivita_inserito_da_docente,
@@ -72,8 +74,16 @@ if(mysqli_num_rows($result) > 0) {
 	        $strikeOff = '</strike>';
 	    }
 	    
+	    // controlla se aggiornata dall'ultima modifica
+	    $marker = '';
+	    if (! $modificabile) {
+	        if ($row['ore_fatte_attivita_ultima_modifica'] > $ultimo_controllo) {
+	            $marker = '&ensp;<span class="label label-danger glyphicon glyphicon-star" style="color:yellow"> '. '' .'</span>';
+	        }
+	    }
+	    
 	    $data .= '<tr>
-			<td>'.$strikeOn.$row['ore_previste_tipo_attivita_categoria'].$strikeOff.'</td>
+			<td>'.$strikeOn.$row['ore_previste_tipo_attivita_categoria'].$strikeOff.$marker.'</td>
 			<td>'.$strikeOn.$row['ore_previste_tipo_attivita_nome'].$strikeOff.'</td>
 			<td>'.$strikeOn.$row['ore_fatte_attivita_dettaglio'].$strikeOff;
 		if ($row['ore_fatte_attivita_contestata'] == 1) {

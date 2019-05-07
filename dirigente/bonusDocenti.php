@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Fuis Docenti</title>
+	<title>Bonus Docenti</title>
 <?php
 require_once '../common/header-session.php';
 require_once '../common/header-common.php';

@@ -131,6 +131,10 @@ AND
 ";
     debug($query);
     $ore = dbGetFirst($query);
+    // aggiornamento non genera extra
+    if ($ore['ore_fatte_ore_40_aggiornamento'] >  $ore['ore_dovute_ore_40_aggiornamento']) {
+        $ore['ore_fatte_ore_40_aggiornamento'] =  $ore['ore_dovute_ore_40_aggiornamento'];
+    }
     
     // prende anche le ore di clil
     $query = "

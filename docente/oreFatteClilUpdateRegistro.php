@@ -14,8 +14,9 @@ if(isset($_POST)) {
 		$query = "INSERT INTO registro_attivita_clil (descrizione, studenti, ore_fatte_attivita_clil_id) VALUES('$descrizione', '$studenti', '$attivita_id')";
 	}
 	debug($query);
-
 	dbExec($query);
+
+	dbExec("UPDATE ore_fatte_attivita_clil SET ultima_modifica = CURRENT_TIMESTAMP WHERE id = $attivita_id;");
 }
 
 ?>
