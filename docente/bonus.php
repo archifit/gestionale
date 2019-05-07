@@ -47,7 +47,7 @@ require_once '../common/connect.php';
     <div class="row">
         <div class="col-md-12">
 			<div class="table-wrapper">
-				<table class="table table-bordered table-striped table-green">
+				<table class="table table-bordered table-striped table-green" id="bonus_docente_table">
 					<thead>
 						<tr>
 						<th class="text-center">Codice</th>

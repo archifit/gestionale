@@ -76,36 +76,38 @@ function bonusDocenteRendicontoUpdateDetails() {
     $("#bonus_docente_rendiconto_modal").modal("hide");
 }
 
-function aggiornaSelezione(idBonus, idAdesione) {
-	$.post("bonusAdesioniUpdate.php", {
-		adesione_id: idAdesione,
-		bonus_id: idBonus		
-    },
-    function (data, status) {
-    	console.log('aggiornaSelezione result=' + data);
-    	return data;
-    }
-);
-
-}
-
 $(document).ready(function () {
-	$('#bonus_selection_table td:nth-child(1),th:nth-child(1)').hide();
-	$('#bonus_selection_table td:nth-child(2),th:nth-child(2)').hide();
+	$('#bonus_selection_table td:nth-child(1),#bonus_selection_table th:nth-child(1)').hide();
+	$('#bonus_selection_table td:nth-child(2),#bonus_selection_table th:nth-child(2)').hide();
 	$('input:checkbox').change(function() {
 		var row = $(this).closest('tr');
 		var adesioneCheckbox = row.find('input[type="checkbox"]');
 		var adesioneCorrente = adesioneCheckbox.prop('checked');
 		var idBonus = row.children().eq(0).text();
 		var idAdesione = row.children().eq(1).text();
-		console.log('Codice Adesione=' + idAdesione + ' idBonus=' + idBonus + ' checked=' + adesioneCorrente);
+//		console.log('Codice Adesione=' + idAdesione + ' idBonus=' + idBonus + ' checked=' + adesioneCorrente);
         if ($(this).is(':checked')) {
-        	idAdesione = aggiornaSelezione(idBonus, idAdesione);
-        	row.children().eq(1).text(idAdesione);
-        	console.log('checked: inserito idAdesione=' + idAdesione + ' idBonus=' + idBonus);
+        	// bisogna attivarlo:
+        	$.post("bonusAdesioniUpdate.php", {
+        		adesione_id: idAdesione,
+        		bonus_id: idBonus		
+            },
+            function (data, status) {
+//            	console.log('inserimento: bonusAdesioniUpdate.php torna id=' + data);
+            	row.children().eq(1).html(data);
+//            	console.log('Inserito idAdesione=' + idAdesione + ' idBonus=' + idBonus + ' text=' + row.children().eq(1).text());
+            });
         } else {
-    		aggiornaSelezione(idBonus, idAdesione);
-        	console.log('unchecked: rimosso idAdesione=' + idAdesione + ' idBonus=' + idBonus);
+        	// bisogna rimuoverlo:
+        	$.post("bonusAdesioniUpdate.php", {
+        		adesione_id: idAdesione,
+        		bonus_id: idBonus		
+            },
+            function (data, status) {
+//            	console.log('rimozione: bonusAdesioniUpdate.php result data=' + data);
+            	row.children().eq(1).html(-1);
+//            	console.log('Rimosso idAdesione=' + idAdesione + ' idBonus=' + idBonus + ' text=' + row.children().eq(1).text());
+            });
         }
 	});
 });

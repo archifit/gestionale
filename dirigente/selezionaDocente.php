@@ -15,8 +15,19 @@ ruoloRichiesto('dirigente');
 
 <body >
 <?php
-	require_once '../common/header-dirigente.php';
-	require_once '../common/connect.php';
+require_once '../common/header-dirigente.php';
+require_once '../common/connect.php';
+
+// prepara l'elenco dei docenti
+$docenteOptionList = '				<option value="0"></option>';
+$query = "	SELECT * FROM docente
+			WHERE docente.attivo = true
+			ORDER BY docente.cognome, docente.nome ASC
+			;";
+foreach(dbGetAll($query) as $row) {
+    $docenteOptionList .= '
+		<option value="'.$row['id'].'" data-subtext="'.$row['username'].'">'.$row['cognome'].' '.$row['nome'].'</option>';
+}
 ?>
 
 <!-- Content Section -->
@@ -29,19 +40,6 @@ ruoloRichiesto('dirigente');
 		</div>
 	</div>
 </div>
-
-<?php
-// prepara l'elenco dei docenti
-$docenteOptionList = '				<option value="0"></option>';
-$query = "	SELECT * FROM docente
-			WHERE docente.attivo = true
-			ORDER BY docente.cognome, docente.nome ASC
-			;";
-foreach(dbGetAll($query) as $row) {
-    $docenteOptionList .= '
-		<option value="'.$row['id'].'" data-subtext="'.$row['username'].'">'.$row['cognome'].' '.$row['nome'].'</option>';
-}
-?>
 
 <div class="panel-body">
     <div class="row">
