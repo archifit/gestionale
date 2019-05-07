@@ -71,6 +71,8 @@ foreach($resultArray as $bonus_area) {
                 						<th colspan="5" class="text-center">'.$bonus_indicatore['codice'].' '.$bonus_indicatore['descrizione'].' - (max '.$bonus_indicatore['valore_massimo'].')</th>
                                     </tr>
             						<tr>
+                						<th class="text-center col-md-1">bonus_id</th>
+                						<th class="text-center col-md-1">adesione_id</th>
                 						<th class="text-center col-md-1">Codice</th>
                 						<th class="text-center col-md-4">Descrittore</th>
                 						<th class="text-center col-md-5">Evidenze</th>

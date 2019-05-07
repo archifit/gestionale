@@ -76,21 +76,36 @@ function bonusDocenteRendicontoUpdateDetails() {
     $("#bonus_docente_rendiconto_modal").modal("hide");
 }
 
+function aggiornaSelezione(idBonus, idAdesione) {
+	$.post("bonusAdesioniUpdate.php", {
+		adesione_id: idAdesione,
+		bonus_id: idBonus		
+    },
+    function (data, status) {
+    	console.log('aggiornaSelezione result=' + data);
+    	return data;
+    }
+);
+
+}
+
 $(document).ready(function () {
-//	$('#bonus_selection_table td:nth-child(1)').hide(); // nasconde la prima colonna con l'id
-//	$('#bonus_selection_table td:nth-child(2)').hide(); // nasconde la prima colonna con l'id
+	$('#bonus_selection_table td:nth-child(1),th:nth-child(1)').hide();
+	$('#bonus_selection_table td:nth-child(2),th:nth-child(2)').hide();
 	$('input:checkbox').change(function() {
-        if ($(this).is(':checked')) {
-        	console.log('checked');
-        } else {
-        	console.log('unchecked');
-        }
 		var row = $(this).closest('tr');
 		var adesioneCheckbox = row.find('input[type="checkbox"]');
 		var adesioneCorrente = adesioneCheckbox.prop('checked');
 		var idBonus = row.children().eq(0).text();
-		var idAdesione = row.children().eq(2).text();
+		var idAdesione = row.children().eq(1).text();
 		console.log('Codice Adesione=' + idAdesione + ' idBonus=' + idBonus + ' checked=' + adesioneCorrente);
-
+        if ($(this).is(':checked')) {
+        	idAdesione = aggiornaSelezione(idBonus, idAdesione);
+        	row.children().eq(1).text(idAdesione);
+        	console.log('checked: inserito idAdesione=' + idAdesione + ' idBonus=' + idBonus);
+        } else {
+    		aggiornaSelezione(idBonus, idAdesione);
+        	console.log('unchecked: rimosso idAdesione=' + idAdesione + ' idBonus=' + idBonus);
+        }
 	});
 });
