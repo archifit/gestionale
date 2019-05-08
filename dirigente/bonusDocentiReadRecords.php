@@ -54,9 +54,14 @@ foreach($resultArray as $docente) {
     $query = "SELECT SUM(valore_previsto) FROM bonus LEFT JOIN bonus_docente ON bonus.id = bonus_docente.bonus_id WHERE anno_scolastico_id = $__anno_scolastico_corrente_id AND bonus_docente.docente_id = $local_docente_id AND approvato is true;";
     $punti_approvati = dbGetValue($query);
     $importo_approvato = $importo_per_punto * $punti_approvati;
+    $query = "SELECT COUNT(id) FROM bonus_docente WHERE anno_scolastico_id = $__anno_scolastico_corrente_id AND docente_id = $local_docente_id AND ultima_modifica > ultimo_controllo;";
+    $numero_modificati = dbGetValue($query);
+    debug('docente='.$docenteCognomeNome.' numero_modificati='.$numero_modificati);
+    $marker = ($numero_modificati == 0) ? '': '&ensp;<span class="label label-danger glyphicon glyphicon-star" style="color:yellow"> '. '' .'</span>';
+    
     $data .= '<tr>
     			<td>'.$local_docente_id.'</td>
-    			<td><a href="bonusDettaglioDocente.php?id='.$local_docente_id.'" target="_blank">&ensp;'.$docenteCognomeNome.' </a></td>
+    			<td><a href="bonusDettaglioDocente.php?id='.$local_docente_id.'" target="_blank">&ensp;'.$docenteCognomeNome.' '.$marker.' </a></td>
     			<td class="text-right viaggi">'.formatNoZeroNoDecimal($punti_richiesti).'</td>
     			<td class="text-right assegnato">'.formatNoZeroNoDecimal($punti_approvati).'</td>
     			<td class="text-right funzionale">'.formatNoZero($importo_approvato).'</td>
