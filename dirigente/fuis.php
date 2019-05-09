@@ -35,18 +35,24 @@ require_once '../common/connect.php';
 		<div class="col-md-4">
 			<span class="glyphicon glyphicon-euro"></span>&emsp;<strong>Fuis</strong>
 		</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 text-right" id="fuis_totale">
+		</div>
 	</div>
 </div>
 
 <div class="panel-body">
 	<table class="table" >
-		<thead>
-			<tr>
-				<th>Totale</th>
-				<th class="col-md-4 text-right" id="fuis_totale"></th>
-			</tr>
-		</thead>
 		<tbody>
+		<!-- 
+    		<thead>
+    			<tr>
+    				<th></th>
+    				<th class="col-md-4 text-right">Fatte</th>
+    			</tr>
+    		</thead>
+    	 -->
 			<tr>
 				<td>Viaggi</td>
 				<td class="col-md-4 text-right" id="fuis_viaggi"></td>
@@ -56,29 +62,36 @@ require_once '../common/connect.php';
 				<td class="col-md-4 text-right" id="fuis_assegnato"></td>
 			</tr>
 			<tr>
-				<td>Funzionale</td>
-				<td class="col-md-4 text-right" id="fuis_funzionale"></td>
-			</tr>
-			<tr>
-				<td>Con Studenti</td>
-				<td class="col-md-4 text-right" id="fuis_con_studenti"></td>
-			</tr>
-			<tr>
-				<td>Sostituzioni</td>
-				<td class="col-md-4 text-right" id="fuis_sostituzioni"></td>
+				<td>Ore</td>
+				<td class="col-md-4 text-right" id="fuis_ore"></td>
 			</tr>
 		</tbody>
 	</table>
-    <div class="row">
-        <div class="col-md-12 text-center"><h4>CLIL</h4></div>
-    </div>
+</div>
+
+<!-- <div class="panel-footer"></div> -->
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-offset-4 col-md-4">
+
+<div class="panel panel-danger">
+<div class="panel-heading container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+			<span class="glyphicon glyphicon-euro"></span>&emsp;<strong>Fuis CLIL</strong>
+		</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 text-right" id="fuis_clil_totale">
+		</div>
+	</div>
+</div>
+
+<div class="panel-body">
 	<table class="table" >
-		<thead>
-			<tr>
-				<th>Clil Totale</th>
-				<th class="col-md-4 text-right" id="fuis_clil_totale"></th>
-			</tr>
-		</thead>
 		<tbody>
 			<tr>
 				<td>Clil Funzionale</td>
