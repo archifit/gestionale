@@ -355,6 +355,10 @@ function oreFatteControllaAttivita(attivita_id, dettaglio, ore, clilmode) {
 	        value: 'attività non concordata con DS',
 	    },
 	    {
+	        text: 'registro non compilato',
+	        value: 'registro non compilato',
+	    },
+	    {
 	        text: 'Altro (specificare)...',
 	        value: '',
 	    }

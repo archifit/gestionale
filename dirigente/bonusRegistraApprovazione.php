@@ -8,7 +8,7 @@ if(isset($_POST)) {
 	$approvato = $_POST['approvato'];
 
 	// Update details
-	$query = "UPDATE bonus_docente SET approvato = $approvato WHERE id = '$bonus_docente_id'";
+	$query = "UPDATE bonus_docente SET approvato = $approvato, ultimo_controllo = now() WHERE id = '$bonus_docente_id'";
     debug($query);
     dbExec($query);
 }

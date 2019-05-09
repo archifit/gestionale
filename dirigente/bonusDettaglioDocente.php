@@ -7,6 +7,7 @@ require_once '../common/header-common.php';
 require_once '../common/style.php';
 //require_once '../common/_include_bootstrap-toggle.php';
 //require_once '../common/_include_bootstrap-select.php';
+require_once '../common/_include_bootstrap-notify.php';
 ruoloRichiesto('dirigente');
 require_once '../common/connect.php';
 if(isset($_GET)) {
@@ -90,6 +91,8 @@ if ($__config->getBonus_rendiconto_aperto() || $__config->getBonus_adesione_aper
     SELECT
     	bonus_docente.id AS bonus_docente_id,
     	bonus_docente.approvato AS bonus_docente_approvato,
+    	bonus_docente.ultimo_controllo AS bonus_docente_ultimo_controllo,
+    	bonus_docente.ultima_modifica AS bonus_docente_ultima_modifica,
     	
     	bonus_area.codice AS bonus_area_codice,
     	bonus_area.descrizione AS bonus_area_descrizione,
@@ -127,10 +130,11 @@ if ($__config->getBonus_rendiconto_aperto() || $__config->getBonus_adesione_aper
     debug($query);
     $resultArray2 = dbGetAll($query);
     foreach($resultArray2 as $bonus) {
-            $data .= '
+        $marker = ($bonus['bonus_docente_ultima_modifica'] > $bonus['bonus_docente_ultimo_controllo']) ? '&ensp;<span class="label label-danger glyphicon glyphicon-star" style="color:yellow">.'. '' .'</span>': '';
+        $data .= '
             <tr>
-                <td class="text-left">'.$bonus['bonus_docente_id'].'</td>
-                <td class="text-left">'.$bonus['bonus_codice'].'</td>
+                <td class="text-left">'.$bonus['bonus_docente_id'].' </td>
+                <td class="text-left">'.$bonus['bonus_codice'].' '.$marker.'</td>
                 <td class="text-left">'.$bonus['bonus_descrittori'].'</td>
                 <td class="text-left">'.$bonus['bonus_valore_previsto'].'</td>
     		';
@@ -167,21 +171,17 @@ if ($__config->getBonus_rendiconto_aperto() || $__config->getBonus_adesione_aper
     </div>
                 
     <div class="panel-footer">
-        <div class="row">
-            <div class="col-md-1 text-right">Richiesto</div>
-            <div class="col-md-2 text-left" id="bonus_richiesto"></div>
-            <div class="col-md-1 text-right">Pendente</div>
-            <div class="col-md-2 text-left" id="bonus_pendente"></div>
-            <div class="col-md-1 text-right">Approvato</div>
-            <div class="col-md-2 text-left" id="bonus_approvato"></div>
-    
-            <div class="col-md-2">
-            <div class="progress progress-striped">
-              <div class="progress-bar progress-bar-success" id="progress-bar-approvate" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-              <div class="progress-bar progress-bar-warning" id="progress-bar-pendente" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            </div>
-    
+        <div class="panel-footer text-center">
+    	<div class="row">
+    		<div class="col-md-4 text-center">
+                <button onclick="bonusChiudi()" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-off"> Chiudi</button>
+    		</div>
+    		<div class="col-md-4 text-center">
+                <button onclick="bonusRivisto()" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-ok"> Rivisto</button>
+    		</div>
+       		<div class="col-md-4 text-center">
+    		</div>
+        </div>
         </div>
     
     

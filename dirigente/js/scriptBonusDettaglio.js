@@ -1,4 +1,50 @@
 
+function bonusRivisto() {
+	$.post("bonusDocenteRivisto.php", {
+		docente_id: $("#hidden_docente_id").val()
+	},
+	function (data, status) {
+		// rimuove tutti gli span della colonna 2 che sono i marker degli elementi nuovi
+		$('#table-docente-bonus td:nth-child(2)').find('span').remove();
+		
+		var tzoffset = (new Date()).getTimezoneOffset() * 60000;
+		var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+		var ultimo_controllo = localISOTime.replace('T', ' ');
+		$("#hidden_ultimo_controllo").val(ultimo_controllo);
+		$.notify({
+			icon: 'glyphicon glyphicon-ok',
+			title: '<Strong>Bonus</Strong></br>',
+			message: 'Revisione effettuata!' 
+		},{
+			placement: {
+				from: "top",
+				align: "center"
+			},
+			delay: 2000,
+			timer: 100,
+			mouse_over: "pause",
+			type: 'warning'
+		});
+	});
+}
+
+function bonusChiudi() {
+	$.notify({
+		icon: 'glyphicon glyphicon-off',
+		title: '<Strong>Chiusura Bonus</Strong></br>',
+		message: '<Strong>Attenzione:</Strong> la funzionalità non è ancora disponibile!'
+	},{
+		placement: {
+			from: "top",
+			align: "center"
+		},
+		delay: 5000,
+		timer: 100,
+		mouse_over: "pause",
+		type: 'danger'
+	});
+}
+
 function bonusRendiconto(bonus_docente_id, bonus_codice, bonus_descrittori, bonus_evidenze) {
 	$("#hidden_bonus_docente_id").val(bonus_docente_id);
 
