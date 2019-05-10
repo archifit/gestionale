@@ -2,3 +2,5 @@
 /.buildpath
 /.settings/
 /_test/
+/common/__Environment.php
+/common/__Log.php
