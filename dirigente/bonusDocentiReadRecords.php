@@ -23,7 +23,7 @@ $query = "SELECT SUM(valore_previsto) FROM bonus LEFT JOIN bonus_docente ON bonu
 $totale_valore_approvato = dbGetValue($query);
 debug('totale_valore_approvato=' . $totale_valore_approvato);
 
-$importo_totale_bonus = 50000;
+$importo_totale_bonus = 20615;
 $importo_per_punto = $importo_totale_bonus / $totale_valore_approvato;
 
 $data = '';
