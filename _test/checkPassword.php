@@ -24,6 +24,9 @@ echo passwordHash('ufficiodocenti@01');
 echo '</br>';
 echo passwordHash('docenti@01');
 echo '</br>';
+$pw = 'sdqp61ci$';
+echo $pw.'='.passwordHash($pw);
+echo '</br>';
 
 echo passwordHash('Ufficiodocenti01');
 echo '</br>';
@@ -40,6 +43,8 @@ function decryptECB($encrypted, $key) {
 $key = "MYKEYFORCRYPTINGTEXT1234";
 $crypt='j7Jnw8GLmi6NPniElOBFPQ==';
 $crypt='FaMzPGgKMr/9s/0VUazPnQ==';
+$crypt='vPdaqCc3zhadHS9b/A69dQ==';
+$crypt='POA10rVWTb8yAEXF7WIqFQ==';
 
 $decrypt = decryptECB(base64_decode($crypt), $key);
 echo $decrypt;

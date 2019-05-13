@@ -21,6 +21,6 @@ if (defined('__production_environment')) {
 	define ( 'DB_HOST', 'localhost' );
 	define ( 'DB_USER', 'Sql1102145' );
 	define ( 'DB_PASSWORD', '148t88bt31' );
-	define ( 'DB_DATABASE', 'Sql1102145_2' );
+	define ( 'DB_DATABASE', 'gestionale' );
 }
 ?>
