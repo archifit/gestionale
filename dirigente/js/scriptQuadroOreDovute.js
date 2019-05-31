@@ -377,7 +377,7 @@ function oreFatteControllaAttivita(attivita_id, dettaglio, ore, clilmode) {
 	    		    inputType: 'textarea',
 	    		    callback: function (commento) {
 	    		    	if (commento != null) {
-		    		        oreFatteAggiornaStatoAttivita(attivita_id, commento, true);
+		    		        oreFatteAggiornaStatoAttivita(attivita_id, commento, true, clilmode);
 		    		        viewAttivitaFatte();
 	    		    	}
 	    		    }

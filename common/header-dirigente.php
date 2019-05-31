@@ -35,9 +35,9 @@
   </ul>
 </div>
 <?php
-if ($__config->getBonus_rendiconto_aperto() || $__config->getBonus_adesione_aperto()) {
+// if ($__config->getBonus_rendiconto_aperto() || $__config->getBonus_adesione_aperto()) {
     echo '<a href="'.$__application_base_path.'/dirigente/bonusDocenti.php" class="btn btn-default navbar-btn btn-success" role="button"><span class="glyphicon glyphicon-list-alt"></span>&ensp;Bonus </a>';
-}
+// }
 ?>
 		</ul>
 		<ul class="nav navbar-nav navbar-right top-navbar-nav">
